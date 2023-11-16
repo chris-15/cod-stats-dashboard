@@ -17,9 +17,6 @@ async function Dashboard() {
       <div className="p-4 grid md:grid-cols-3 grid-cols-1 gap-4">
         <RecentMatches />
       </div>
-      <Link href={"/add-stats"} className="btn">
-        Add Stats
-      </Link>
     </div>
   );
 }
