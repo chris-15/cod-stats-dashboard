@@ -1,4 +1,6 @@
 function AddStatsForm() {
+
+  
   return (
     <div>
       <h2>Add Stats</h2>
@@ -54,7 +56,11 @@ function AddStatsForm() {
           <option value="win">Win</option>
           <option value="loss">Loss</option>
         </select>
-        <button type="submit" className="mt-6 btn">Submit</button>
+        <button type="submit" className="mt-6 btn">
+          Submit
+        </button>
+
+        <div className="p-2 text-red-500 font-bold">Error Message</div>
       </form>
     </div>
   );
