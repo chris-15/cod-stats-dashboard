@@ -1,7 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: ["lh3.googleusercontent.com"],
+        /* domains deprecated in nextjs14, remotePatterns is more secure */
+        /* domains: ["lh3.googleusercontent.com"], */
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'lh3.googleusercontent.com',
+            }
+        ]
     }
 }
 
