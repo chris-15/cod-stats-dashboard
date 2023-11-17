@@ -47,7 +47,7 @@ function Navbar() {
        /*  if the user session status is authenticated then render navbar for logged in user otherwise show sigin button */
         <>
           <div
-            className={`absolute z-30 right-0 top-14 bg-gray-500 p-6 shadow-lg rounded-md  flex-col gap-2 text-right min-w-[160px] ${
+            className={`absolute z-30 right-0 top-14 bg-white text-black p-6 shadow-lg rounded-md  flex-col gap-2 text-right min-w-[160px] ${
               showMenu ? "flex" : "hidden"
             } `}
             ref={menuRef}

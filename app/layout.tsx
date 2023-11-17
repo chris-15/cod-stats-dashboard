@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <NextAuthProvider>
-        <div className="mx-auto min-h-screen flex flex-col bg-[#1F1F1F] text-white">
+        <div className="mx-auto min-h-screen flex flex-col bg-gray-900 text-white p-4">
           <Navbar />
           <div className="flex-auto">
           {children}
