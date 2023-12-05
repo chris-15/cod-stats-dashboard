@@ -51,13 +51,14 @@ model User {
 model Match {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   gameMode  GameMode
   kills     Int
   deaths    Int
   win       Boolean
   time      Int?     @default(0)
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userEmail], references: [email])
+  userEmail String
 }
 
 enum GameMode {
