@@ -1,9 +1,21 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prismadb";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../auth/[...nextauth]/route";
+
 
 
 //creating/adding match statistics
 export async function POST(req: Request) {
+
+  //getting the authenticated user session
+  const session = await getServerSession(authOptions);
+
+  //if no session return the next response error  
+  if(!session) {
+    return NextResponse.json({error: "Not Authenticated"}, {status:401})
+  }
+
   const { gameMode, kills, deaths, win, time } = await req.json();
 
   // hardcoded useremail for now for testing purposes
@@ -27,6 +39,7 @@ export async function POST(req: Request) {
     console.log("Match Stats added");
     return NextResponse.json(newMatch);
   } catch (error) {
+    console.log(error)
     return NextResponse.json({ message: "Error adding stats" });
   }
 }
