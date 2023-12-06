@@ -1,11 +1,11 @@
-function AddStatsForm() {
+"use client"
 
-  
+function AddStatsForm() {
   return (
     <div>
       <h2>Add Stats</h2>
       <form className="max-w-md mx-auto p-8 rounded shadow-md bg-slate-800">
-        <label htmlFor="gameMode" className="block mt-4 text-sm font-medium">
+        <label htmlFor="gameMode" className="">
           GameMode:
         </label>
         <select
@@ -14,12 +14,25 @@ function AddStatsForm() {
           required
           className="mt-1 p-2 w-full border rounded-md text-center"
         >
-          <option value="hardpoint">Hardpoint</option>
-          <option value="control">Control</option>
-          <option value="searchAndDestroy">Search and Destroy</option>
+          <option value="Hardpoint">Hardpoint</option>
+          <option value="Control">Control</option>
+          <option value="SearchAndDestroy">Search and Destroy</option>
         </select>
 
-        <label htmlFor="kills" className="block mt-4 text-sm font-medium">
+        <label htmlFor="outcome" className="">
+          Outcome:
+        </label>
+        <select
+          id="outcome"
+          name="outcome"
+          required
+          className="mt-1 p-2 w-full border rounded-md text-center"
+        >
+          <option value="win">Win</option>
+          <option value="loss">Loss</option>
+        </select>
+
+        <label htmlFor="kills" className="">
           Kills:
         </label>
         <input
@@ -32,7 +45,7 @@ function AddStatsForm() {
           className="mt-1 p-2 w-full border rounded-md"
         ></input>
 
-        <label htmlFor="kills" className="block mt-4 text-sm font-medium">
+        <label htmlFor="deaths" className="">
           Deaths:
         </label>
         <input
@@ -44,18 +57,19 @@ function AddStatsForm() {
           min="0"
           className="mt-1 p-2 w-full border rounded-md"
         ></input>
-        <label htmlFor="outcome" className="block mt-4 text-sm font-medium">
-          Outcome:
+
+        <label htmlFor="time" className="">
+          Time:
         </label>
-        <select
-          id="outcome"
-          name="outcome"
-          required
+        <input
+          type="number"
+          id="time"
+          name="time"
+          placeholder="Use only for Hardpoint"
+          min="0"
           className="mt-1 p-2 w-full border rounded-md"
-        >
-          <option value="win">Win</option>
-          <option value="loss">Loss</option>
-        </select>
+        ></input>
+
         <button type="submit" className="mt-6 btn">
           Submit
         </button>
