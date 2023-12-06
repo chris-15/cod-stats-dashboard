@@ -1,6 +1,6 @@
 import { Match } from "@/app/types";
 
-const getMatches = async (): Promise<Match[] | null > => {
+const getMatches = async (): Promise<Match[] | null> => {
   try {
     const res = await fetch(`${process.env.NEXTAUTH_URL}/api/matches`);
 
@@ -10,13 +10,15 @@ const getMatches = async (): Promise<Match[] | null > => {
     }
   } catch (error) {
     console.log(error);
-    
   }
   return null;
 };
 
 async function RecentMatches() {
   const recentMatches = await getMatches();
+  //console.log(recentMatches)
+  
+
   return (
     <h1>
       Recent Matches
@@ -28,6 +30,7 @@ async function RecentMatches() {
               <p>{match.kills}</p>
               <p>{match.deaths}</p>
               <p>{match.time}</p>
+              {match.win === true ? <p>Win</p> : <p>Loss</p>}
             </div>
           ))}
       </div>
