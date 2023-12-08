@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     return NextResponse.json({error: "Not Authenticated"}, {status:401})
   }
 
-  const { gameMode, kills, deaths, win, time } = await req.json();
+  const { gameMode, matchMap, kills, deaths, win, time } = await req.json();
 
   // hardcoded useremail for now for testing purposes
   const userEmail = "chris.sarm15@gmail.com";
@@ -29,6 +29,7 @@ export async function POST(req: Request) {
     const newMatch = await prisma.match.create({
       data: {
         gameMode,
+        matchMap,
         kills,
         deaths,
         win,

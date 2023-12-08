@@ -3,6 +3,7 @@ export type Match = {
   createdAt: string;
   updatedAt: string;
   gameMode: string;
+  matchMap: string;
   kills: number;
   deaths: number;
   win: boolean;

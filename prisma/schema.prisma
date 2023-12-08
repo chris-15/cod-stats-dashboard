@@ -53,6 +53,7 @@ model Match {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   gameMode  GameMode
+  matchMap MatchMap
   kills     Int
   deaths    Int
   win       Boolean
@@ -65,6 +66,15 @@ enum GameMode {
   Hardpoint
   Control
   SearchAndDestroy
+}
+
+enum MatchMap {
+  Highrise
+  Invasion
+  Karachi
+  Skidrow
+  Terminal
+  SubBase
 }
 
 model VerificationToken {

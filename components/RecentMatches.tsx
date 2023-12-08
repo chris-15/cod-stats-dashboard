@@ -26,6 +26,7 @@ async function RecentMatches() {
           <thead>
             <tr>
               <th>Game Mode</th>
+              <th>Map</th>
               <th>W/L Result</th>
               <th>Kills</th>
               <th>Deaths</th>
@@ -38,6 +39,7 @@ async function RecentMatches() {
               recentMatches.map((match) => (
                 <tr className="" key={match.id}>
                   <td>{match.gameMode}</td>
+                  <td>{match.matchMap}</td>
                   {match.win === true ? <td>Win</td> : <td>Loss</td>}
                   <td>{match.kills}</td>
                   <td>{match.deaths}</td>

@@ -32,12 +32,12 @@ export async function PUT(
     return NextResponse.json({ error: "Not Authenticated" }, { status: 401 });
   }
 
-  const { gameMode, kills, deaths, win, time } = await req.json();
+  const { gameMode, matchMap, kills, deaths, win, time } = await req.json();
   const id = params.id;
   try {
     const match = await prisma.match.update({
       where: { id },
-      data: { gameMode, kills, deaths, win, time },
+      data: { gameMode, matchMap, kills, deaths, win, time },
     });
 
     return NextResponse.json(match);

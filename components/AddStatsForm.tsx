@@ -3,8 +3,18 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+const mapOptions = [
+  { value: "Highrise", label: "Highrise" },
+  { value: "Invasion", label: "Invasion" },
+  { value: "Karachi", label: "Karachi" },
+  { value: "Skidrow", label: "Skidrow" },
+  { value: "Terminal", label: "Terminal" },
+  { value: "SubBase", label: "SubBase" },
+];
+
 function AddStatsForm() {
   const [gameMode, setGameMode] = useState<string>("");
+  const [matchMap, setMatchMap] = useState<string>("");
   const [win, setWin] = useState<boolean>(false);
   const [kills, setKills] = useState<number>(0);
   const [deaths, setDeaths] = useState<number>(0);
@@ -27,13 +37,15 @@ function AddStatsForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ gameMode, win, kills, deaths, time }),
+        body: JSON.stringify({ gameMode, matchMap, win, kills, deaths, time }),
       });
-      if(res.ok) {
-        console.log(res.json())
-        router.push('/dashboard')
+      if (res.ok) {
+        console.log(res.json());
+        router.push("/dashboard");
       }
-    } catch (error) {console.log(error)}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -57,6 +69,24 @@ function AddStatsForm() {
           <option value="Hardpoint">Hardpoint</option>
           <option value="Control">Control</option>
           <option value="SearchAndDestroy">Search and Destroy</option>
+        </select>
+
+        <label htmlFor="matchMap" className="">
+          Map:
+        </label>
+        <select
+          id="matchMap"
+          name="matchMap"
+          required
+          className="mt-1 p-2 w-full border rounded-md text-center"
+          onChange={(e) => setMatchMap(e.target.value)}
+        >
+          <option value="">Select a Map</option>
+          {mapOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </select>
 
         <label htmlFor="outcome" className="">
