@@ -1,6 +1,6 @@
 import { Match } from "@/app/types";
 
-export const calcKdRatio = (matches: Match[], gameMode: string) => {
+export const calcModeKdRatio = (matches: Match[], gameMode: string) => {
   let killSum = 0;
   let deathSum = 0;
 
@@ -12,7 +12,7 @@ export const calcKdRatio = (matches: Match[], gameMode: string) => {
   });
 
   // if no deaths dont penalize kd ratio just divide by 1
-  const kdRatio = deathSum !== 0 ? killSum / deathSum : killSum / 1;
+  const kdRatio = deathSum !== 0 ? +(killSum / deathSum) : +(killSum / 1);
 
   return kdRatio.toFixed(2);
 };
@@ -28,7 +28,23 @@ export const calcWinPercentage = (matches: Match[], gameMode: string) => {
     }
   });
 
-  const winPercentage = ((winSum / totalGames) * 100).toFixed(2);
+  const winPercentage = +((winSum / totalGames) * 100).toFixed(2);
 
   return totalGames > 0 ? winPercentage : 0;
 };
+
+
+export const calcTotalKdRatio = (matches:Match[]) =>{
+  let killSum = 0;
+  let deathSum = 0;
+
+  matches.forEach((obj) => {
+      killSum += obj.kills;
+      deathSum += obj.deaths;
+  });
+
+  // if no deaths dont penalize kd ratio just divide by 1
+  const kdRatio = deathSum !== 0 ? +(killSum / deathSum) : +(killSum / 1);
+
+  return kdRatio.toFixed(2);
+}

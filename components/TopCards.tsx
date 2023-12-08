@@ -1,18 +1,20 @@
 'use client'
 import { useMatches } from "./matchesContext";
-import { calcKdRatio, calcWinPercentage } from "@/lib/utils";
+import { calcModeKdRatio, calcWinPercentage, calcTotalKdRatio } from "@/lib/utils";
 
 
 function TopCards() {
   const { matches} = useMatches();
 //console.log(matches)
-const hpKdRatio = calcKdRatio(matches, "Hardpoint")
-const controlKdRatio = calcKdRatio(matches, "Control");
-const searchKdRatio = calcKdRatio(matches, "SearchAndDestroy");
+const overalKdRatio = calcTotalKdRatio(matches)
+const hpKdRatio = calcModeKdRatio(matches, "Hardpoint")
+const controlKdRatio = calcModeKdRatio(matches, "Control");
+const searchKdRatio = calcModeKdRatio(matches, "SearchAndDestroy");
 
 const hpWinPercentage = calcWinPercentage(matches, "Hardpoint");
 const controlWinPercentage = calcWinPercentage(matches, "Control");
 const searchWinPercentage = calcWinPercentage(matches, "SearchAndDestroy");
+
 
 
   return (
@@ -26,7 +28,7 @@ const searchWinPercentage = calcWinPercentage(matches, "SearchAndDestroy");
         </div>
         <div className="flex flex-col text-center">
           <p className="text-2xl font-bold">W/L</p>
-          <p> {hpWinPercentage} %</p>
+          <p className={hpWinPercentage > 50 ? 'bg-green-500': 'bg-red-500'}> {hpWinPercentage} %</p>
         </div>
       </div>
       {/* control */}
@@ -37,7 +39,7 @@ const searchWinPercentage = calcWinPercentage(matches, "SearchAndDestroy");
         </div>
         <div className="flex flex-col text-center">
           <p className="text-2xl font-bold">W/L</p>
-          <p> {controlWinPercentage} %</p>
+          <p className={controlWinPercentage > 50 ? 'bg-green-500': 'bg-red-500'}> {controlWinPercentage} %</p>
         </div>
       </div>
       {/* search */}
@@ -48,7 +50,7 @@ const searchWinPercentage = calcWinPercentage(matches, "SearchAndDestroy");
         </div>
         <div className="flex flex-col text-center">
           <p className="text-2xl font-bold">W/L</p>
-          <p>{searchWinPercentage} %</p>
+          <p className={searchWinPercentage > 50 ? 'bg-green-500': 'bg-red-500'}>{searchWinPercentage} %</p>
         </div>
       </div>
     </div>
