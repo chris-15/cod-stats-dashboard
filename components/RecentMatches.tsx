@@ -17,24 +17,38 @@ const getMatches = async (): Promise<Match[] | null> => {
 async function RecentMatches() {
   const recentMatches = await getMatches();
   //console.log(recentMatches)
-  
 
   return (
-    <h1>
-      Recent Matches
+    <div>
+      <h1>Recent Matches</h1>
       <div>
-        {recentMatches &&
-          recentMatches.map((match) => (
-            <div className="flex gap-2" key={match.id}>
-              <p>{match.gameMode}</p>
-              <p>{match.kills}</p>
-              <p>{match.deaths}</p>
-              <p>{match.time}</p>
-              {match.win === true ? <p>Win</p> : <p>Loss</p>}
-            </div>
-          ))}
+        <table>
+          <thead>
+            <tr>
+              <th>Game Mode</th>
+              <th>W/L Result</th>
+              <th>Kills</th>
+              <th>Deaths</th>
+              <th>Time</th>
+              <th>K/D Ratio</th>
+            </tr>
+          </thead>
+          <tbody>
+            {recentMatches &&
+              recentMatches.map((match) => (
+                <tr className="" key={match.id}>
+                  <td>{match.gameMode}</td>
+                  {match.win === true ? <td>Win</td> : <td>Loss</td>}
+                  <td>{match.kills}</td>
+                  <td>{match.deaths}</td>
+                  <td>{match.gameMode === "Hardpoint" ? match.time : "N/A"}</td>
+                  <td>{(match.kills/match.deaths).toFixed(2)}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </div>
-    </h1>
+    </div>
   );
 }
 export default RecentMatches;
