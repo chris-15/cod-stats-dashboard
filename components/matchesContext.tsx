@@ -29,7 +29,7 @@ type MatchesProviderProps = {
   children: ReactNode;
 };
 
-// matches provider that manages the state for matches whichh can be used globallly within the app
+// matches provider that manages the state for matches which can be used globallly within the app
 export const MatchesProvider: React.FC<MatchesProviderProps> = ({
   children,
 }) => {
