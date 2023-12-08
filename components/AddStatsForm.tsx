@@ -1,17 +1,38 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const mapOptions = [
-  { value: "Highrise", label: "Highrise" },
-  { value: "Invasion", label: "Invasion" },
-  { value: "Karachi", label: "Karachi" },
-  { value: "Skidrow", label: "Skidrow" },
-  { value: "Terminal", label: "Terminal" },
-  { value: "SubBase", label: "SubBase" },
-];
+//setting types for the map options
+type MapOption ={
+  value: string,
+  label: string
+}
+type GameModeMaps = {
+  [gameMode: string]: MapOption[];
+}
 
+const mapOptions: GameModeMaps = {
+  Hardpoint: [
+    { value: "Invasion", label: "Invasion" },
+    { value: "Karachi", label: "Karachi" },
+    { value: "Skidrow", label: "Skidrow" },
+    { value: "Terminal", label: "Terminal" },
+    { value: "SubBase", label: "SubBase" },
+  ],
+  Control: [
+    { value: "Highrise", label: "Highrise" },
+    { value: "Invasion", label: "Invasion" },
+    { value: "Karachi", label: "Karachi" },
+  ],
+  SearchAndDestroy: [
+    { value: "Highrise", label: "Highrise" },
+    { value: "Invasion", label: "Invasion" },
+    { value: "Karachi", label: "Karachi" },
+    { value: "Skidrow", label: "Skidrow" },
+    { value: "Terminal", label: "Terminal" },
+  ],
+};
 function AddStatsForm() {
   const [gameMode, setGameMode] = useState<string>("");
   const [matchMap, setMatchMap] = useState<string>("");
@@ -22,6 +43,14 @@ function AddStatsForm() {
   const [error, setError] = useState<string>("");
 
   const router = useRouter();
+
+
+  const handleGameModeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedGameMode = e.target.value;
+    setGameMode(selectedGameMode);
+
+    setMatchMap("");
+  };
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,7 +92,7 @@ function AddStatsForm() {
           name="gameMode"
           required
           className="mt-1 p-2 w-full border rounded-md text-center"
-          onChange={(e) => setGameMode(e.target.value)}
+          onChange={handleGameModeChange}
         >
           <option value="">Select a Game Mode</option>
           <option value="Hardpoint">Hardpoint</option>
@@ -82,7 +111,8 @@ function AddStatsForm() {
           onChange={(e) => setMatchMap(e.target.value)}
         >
           <option value="">Select a Map</option>
-          {mapOptions.map((option) => (
+          {/* map filters based on which game mode is selected, different map set for each game mode */}
+          {gameMode && mapOptions[gameMode].map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>
