@@ -1,18 +1,6 @@
+"use client"
 import { Match } from "@/app/types";
-
-const getMatches = async (): Promise<Match[] | null> => {
-  try {
-    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/matches`);
-
-    if (res.ok) {
-      const matches = await res.json();
-      return matches;
-    }
-  } catch (error) {
-    console.log(error);
-  }
-  return null;
-};
+import { useMatches } from "./matchesContext";
 
 //function to convet seconds to min:secs string to display on table - may move to a helper function file if more functions arise
 const convertTime = (seconds: number) => {
@@ -21,10 +9,13 @@ const convertTime = (seconds: number) => {
   return `${mins}:${secs.toString().padStart(2, "0")}`;
 };
 
-async function RecentMatches() {
-  const recentMatches = await getMatches();
-  //console.log(recentMatches)
-  const lastTenMatches = recentMatches ? recentMatches.slice(0, 10) : [];
+function RecentMatches() {
+  //calling custom useMatch hook to get the matches
+  const { matches } = useMatches();
+  //console.log(matches)
+
+  //new array that hold last 10 matches 
+  const lastTenMatches = matches ? matches.slice(0, 10) : [];
 
   return (
     <section className="w-full max-w-[96rem] mx-auto my-4 bg-gray-800 text-white shadow-lg rounded-lg overflow-x-auto">

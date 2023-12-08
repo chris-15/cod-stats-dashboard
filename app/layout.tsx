@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { NextAuthProvider } from "@/components/Providers";
+import { MatchesProvider } from "@/components/matchesContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,15 +22,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <NextAuthProvider>
-        <div className="mx-auto min-h-screen flex flex-col bg-gray-900 text-white p-4">
-          <Navbar />
-          <div className="flex-auto">
-          {children}
+          <div className="mx-auto min-h-screen flex flex-col bg-gray-900 text-white p-4">
+            <Navbar />
+            <MatchesProvider>
+              <div className="flex-auto">{children}</div>
+              <Footer />
+            </MatchesProvider>
           </div>
-          <Footer />
-        </div>
         </NextAuthProvider>
-        
       </body>
     </html>
   );

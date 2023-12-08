@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useMatches } from "./matchesContext";
 
 //setting types for the map options
 type MapOption ={
@@ -45,6 +46,8 @@ function AddStatsForm() {
   const router = useRouter();
 
 
+  const { fetchMatches } = useMatches();
+
   const handleGameModeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedGameMode = e.target.value;
     setGameMode(selectedGameMode);
@@ -61,7 +64,7 @@ function AddStatsForm() {
     }
 
     try {
-      const res = await fetch("api/matches/", {
+      const res = await fetch("/api/matches/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +72,10 @@ function AddStatsForm() {
         body: JSON.stringify({ gameMode, matchMap, win, kills, deaths, time }),
       });
       if (res.ok) {
-        console.log(res.json());
+        //console.log(res.json());
+
+        // fetches the matches so that the dashboard is updated whenever user adds stats
+        await fetchMatches();
         router.push("/dashboard");
       }
     } catch (error) {
