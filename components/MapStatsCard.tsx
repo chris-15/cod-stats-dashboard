@@ -2,21 +2,23 @@
 import { useMatches } from "./matchesContext";
 import { calcModeKdRatio, calcModeKdByResult, calcKdByMap } from "@/lib/utils";
 
+type GameModeStatsProp = {
+  gameMode: string
+}
 
-
-function MapStatsCard() {
+function MapStatsCard({gameMode}:GameModeStatsProp) {
   const { matches } = useMatches();
 
-  const totalKdRatio = calcModeKdRatio(matches, "Hardpoint");
-  const kdByWin = calcModeKdByResult(matches, "Hardpoint", true);
-  const kdByLoss = calcModeKdByResult(matches, "Hardpoint", false);
+  const totalKdRatio = calcModeKdRatio(matches, gameMode);
+  const kdByWin = calcModeKdByResult(matches, gameMode, true);
+  const kdByLoss = calcModeKdByResult(matches, gameMode, false);
 
 
 
   return (
     <div>
       <p>
-        HP KD: <span>{totalKdRatio}</span>
+        Mode KD: <span>{totalKdRatio}</span>
       </p>
       <p>
         KD in Wins: <span> {kdByWin}</span>
