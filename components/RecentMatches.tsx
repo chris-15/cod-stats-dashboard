@@ -24,7 +24,7 @@ function RecentMatches() {
           Recent Matches
         </h2>
       </div>
-      <table className="min-w-full divide-y divide-gray-200 px-4 sm:px-6 py-4 text-xs sm:text-sm">
+      <table className="min-w-full divide-y divide-gray-200 px-4 sm:px-6 py-4 text-sm ">
         <thead>
           <tr>
             <th>Date</th>
@@ -48,7 +48,7 @@ function RecentMatches() {
                   day: "2-digit",
                 })}
               </td>
-              <td>{match.gameMode}</td>
+              <td>{match.gameMode === 'SearchAndDestroy' ? 'Search & Destroy' : match.gameMode }</td>
               <td>{match.matchMap}</td>
               {match.win === true ? (
                 <td className="text-green-500">Win</td>
