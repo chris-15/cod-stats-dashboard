@@ -1,8 +1,8 @@
 "use client"
-import { Match } from "@/app/types";
+import { TMatch } from "@/app/types";
 import { useMatches } from "./matchesContext";
 
-//function to convet seconds to min:secs string to display on table - may move to a helper function file if more functions arise
+//function to convert seconds to min:secs string to display on table - may move to a helper function file if more functions arise
 const convertTime = (seconds: number) => {
   const mins: number = Math.floor(seconds / 60);
   const secs: number = seconds % 60;
@@ -33,6 +33,7 @@ function RecentMatches() {
             <th>W/L Result</th>
             <th>Kills</th>
             <th>Deaths</th>
+            <th>Damage</th>
             <th>Time</th>
             <th>K/D Ratio</th>
           </tr>
@@ -56,6 +57,7 @@ function RecentMatches() {
               )}
               <td>{match.kills}</td>
               <td>{match.deaths}</td>
+              <td>{match.damage ? match.damage: "N/A"}</td>
               <td>
                 {match.gameMode === "Hardpoint"
                   ? convertTime(match.time)

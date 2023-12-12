@@ -40,6 +40,7 @@ function AddStatsForm() {
   const [win, setWin] = useState<boolean>(false);
   const [kills, setKills] = useState<number>(0);
   const [deaths, setDeaths] = useState<number>(0);
+  const [damage, setDamage] = useState<number>(0);
   const [time, setTime] = useState<number>(0);
   const [error, setError] = useState<string>("");
 
@@ -69,7 +70,7 @@ function AddStatsForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ gameMode, matchMap, win, kills, deaths, time }),
+        body: JSON.stringify({ gameMode, matchMap, win, kills, deaths, damage, time }),
       });
       if (res.ok) {
         //console.log(res.json());
@@ -167,6 +168,21 @@ function AddStatsForm() {
           className="mt-1 p-2 w-full border rounded-md"
           onChange={(e) => setDeaths(Number(e.target.value))}
         ></input>
+
+<label htmlFor="damage" className="">
+          Damage:
+        </label>
+        <input
+          type="number"
+          id="damage"
+          name="damage"
+          required
+          placeholder="0"
+          min="0"
+          className="mt-1 p-2 w-full border rounded-md"
+          onChange={(e) => setDamage(Number(e.target.value))}
+        ></input>
+
 
         <label htmlFor="time" className="">
           Time:

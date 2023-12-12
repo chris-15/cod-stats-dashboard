@@ -1,6 +1,6 @@
-import { Match } from "@/app/types";
+import { TMatch } from "@/app/types";
 
-export const calcModeKdRatio = (matches: Match[], gameMode: string) => {
+export const calcModeKdRatio = (matches: TMatch[], gameMode: string) => {
   let killSum = 0;
   let deathSum = 0;
 
@@ -17,7 +17,7 @@ export const calcModeKdRatio = (matches: Match[], gameMode: string) => {
   return kdRatio.toFixed(2);
 };
 
-export const calcWinPercentage = (matches: Match[], gameMode: string) => {
+export const calcWinPercentage = (matches: TMatch[], gameMode: string) => {
   let winSum = 0;
   let totalGames = 0;
   matches.forEach((obj) => {
@@ -34,7 +34,7 @@ export const calcWinPercentage = (matches: Match[], gameMode: string) => {
 };
 
 
-export const calcTotalKdRatio = (matches:Match[]) =>{
+export const calcTotalKdRatio = (matches:TMatch[]) =>{
   let killSum = 0;
   let deathSum = 0;
 

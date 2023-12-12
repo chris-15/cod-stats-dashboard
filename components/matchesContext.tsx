@@ -7,10 +7,10 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Match } from "@/app/types";
+import { TMatch } from "@/app/types";
 
 type MatchesContextType = {
-  matches: Match[];
+  matches: TMatch[];
   fetchMatches: () => Promise<void>;
 };
 //create context for matches
@@ -33,7 +33,7 @@ type MatchesProviderProps = {
 export const MatchesProvider: React.FC<MatchesProviderProps> = ({
   children,
 }) => {
-  const [matches, setMatches] = useState<Match[]>([]);
+  const [matches, setMatches] = useState<TMatch[]>([]);
 
   // fetching match data from api and setting matches state
   const fetchMatches = async () => {
@@ -41,7 +41,7 @@ export const MatchesProvider: React.FC<MatchesProviderProps> = ({
       const res = await fetch(`/api/matches`);
 
       if (res.ok) {
-        const fetchedMatches: Match[] = await res.json();
+        const fetchedMatches: TMatch[] = await res.json();
         setMatches(fetchedMatches);
         //console.log(fetchedMatches)
       }

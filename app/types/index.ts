@@ -1,4 +1,4 @@
-export type Match = {
+export type TMatch = {
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -6,6 +6,7 @@ export type Match = {
   matchMap: string;
   kills: number;
   deaths: number;
+  damage: number;
   win: boolean;
   time: number;
   userEmail: string;
