@@ -21,7 +21,7 @@ function RecentMatches() {
     <section className="w-full max-w-[96rem] mx-auto my-4 bg-gray-800 text-white shadow-lg rounded-lg overflow-x-auto">
       <div className="px-4 sm:px-6 py-4">
         <h2 className="text-lg sm:text-xl font-bold text-gray-100">
-          Recent Matches
+          Recent Matches - Quick Stats
         </h2>
       </div>
       <table className="min-w-full divide-y divide-gray-200 px-4 sm:px-6 py-4 text-sm ">
@@ -33,7 +33,7 @@ function RecentMatches() {
             <th>W/L Result</th>
             <th>Kills</th>
             <th>Deaths</th>
-            <th>Damage</th>
+            {/* <th>Damage</th> */}
            {/*  <th>Time</th> */}
             <th>K/D Ratio</th>
           </tr>
@@ -57,7 +57,7 @@ function RecentMatches() {
               )}
               <td>{match.kills}</td>
               <td>{match.deaths}</td>
-              <td>{match.damage ? match.damage: "N/A"}</td>
+              {/* <td>{match.damage ? match.damage: "N/A"}</td> */}
              {/*  <td>
                 {match.gameMode === "Hardpoint"
                   ? convertTime(match.time)
