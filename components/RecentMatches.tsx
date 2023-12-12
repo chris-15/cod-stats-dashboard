@@ -34,7 +34,7 @@ function RecentMatches() {
             <th>Kills</th>
             <th>Deaths</th>
             <th>Damage</th>
-            <th>Time</th>
+           {/*  <th>Time</th> */}
             <th>K/D Ratio</th>
           </tr>
         </thead>
@@ -58,11 +58,11 @@ function RecentMatches() {
               <td>{match.kills}</td>
               <td>{match.deaths}</td>
               <td>{match.damage ? match.damage: "N/A"}</td>
-              <td>
+             {/*  <td>
                 {match.gameMode === "Hardpoint"
                   ? convertTime(match.time)
                   : "N/A"}
-              </td>
+              </td> */}
               <td>{(match.kills / match.deaths).toFixed(2)}</td>
             </tr>
           ))}

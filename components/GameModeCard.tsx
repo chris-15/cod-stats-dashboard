@@ -17,9 +17,9 @@ function GameModeCard({ gameMode, kdRatio, winPercentage }: GameModeCardProps) {
         </div>
         <div className="flex flex-col items-center space-y-2">
           <p className="text-xl">
-            K/D: <span>{kdRatio}</span>
+            K/D: <span className="font-bold">{kdRatio}</span>
           </p>
-          <p className="text-xl ">
+          <p className="text-xl">
             Win %:{" "}
             <span
               className={
