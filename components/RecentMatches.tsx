@@ -12,7 +12,7 @@ const convertTime = (seconds: number) => {
 function RecentMatches() {
   //calling custom useMatch hook to get the matches
   const { matches } = useMatches();
-  //console.log(matches)
+  console.log(matches)
 
   //new array that hold last 10 matches 
   const lastTenMatches = matches ? matches.slice(0, 10) : [];

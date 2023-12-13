@@ -14,7 +14,6 @@ function MapStatsCard({gameMode}:GameModeStatsProp) {
   const kdByLoss = calcModeKdByResult(matches, gameMode, false);
 
 
-
   return (
     <div>
       <p>
