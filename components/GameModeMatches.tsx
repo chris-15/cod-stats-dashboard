@@ -50,7 +50,7 @@ function GameModeMatches({ gameMode }: GameModeMatchesProp) {
           {gameModeMatches.map((match) => (
             <tr className="" key={match.id}>
               <td>
-                <Link href={`/edit-match/${match.id}`}>
+                <Link href={`/edit-stats/${match.id}`}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

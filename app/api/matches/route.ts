@@ -58,7 +58,7 @@ export async function GET(req: Request) {
   try {
     const matches = await prisma.match.findMany({
       where: {
-        userEmail: userEmail,
+        userEmail: userEmail
       },
       include: {
         user: { select: { name: true } },

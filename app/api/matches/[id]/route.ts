@@ -3,20 +3,12 @@ import prisma from "@/lib/prismadb";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]/route";
 
-// get match by ID of the signed in users
+// get match by ID 
 export async function GET(
   req: Request,
   { params }: { params: { id: string } }
 ) {
-  //getting the authenticated user session
-  const session = await getServerSession(authOptions);
-
-  //if no session return the next response error
-  if (!session) {
-    return NextResponse.json({ error: "Not Authenticated" }, { status: 401 });
-  }
-
-  const userEmail = session?.user?.email as string;
+  //console.log('Match ID:', params.id);
 
   try {
     const id = params.id;
@@ -24,12 +16,12 @@ export async function GET(
     const match = await prisma.match.findUnique({
       where: {
         id: id,
-        userEmail: userEmail,
       },
     });
     return NextResponse.json(match);
   } catch (error) {
     console.log(error);
+    console.log('Error fetching match:', error);
     return NextResponse.json({ message: "Couldnt fetch" });
   }
 }
