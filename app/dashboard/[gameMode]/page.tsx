@@ -18,8 +18,9 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
     }
     return gameMode.charAt(0).toUpperCase() + gameMode.slice(1);
   }
+  
   const gameMode = capitalizeGameMode(params.gameMode)
-  console.log(gameMode);
+  //console.log(gameMode);
 
   return (
     <>

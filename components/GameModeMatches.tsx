@@ -17,7 +17,7 @@ type GameModeMatchesProp = {
 function GameModeMatches({ gameMode }: GameModeMatchesProp) {
   //calling custom useMatch hook to get the matches
   const { matches } = useMatches();
-  console.log(matches);
+ //console.log(matches);
 
   const gameModeMatches = matches.filter(
     (match) => match.gameMode === gameMode

@@ -8,16 +8,22 @@ type GameModeStatsProp = {
 
 function MapStatsCard({gameMode}:GameModeStatsProp) {
   const { matches } = useMatches();
+  //console.log(matches)
 
   const totalKdRatio = calcModeKdRatio(matches, gameMode);
   const kdByWin = calcModeKdByResult(matches, gameMode, true);
   const kdByLoss = calcModeKdByResult(matches, gameMode, false);
+  //const karachiKD = calcKdByMap(matches, gameMode, 'Karachi');
+  //console.log(karachiKD)
+  
 
 
   return (
-    <div>
+    <section>
+
+    <div className="flex flex-row justify-between px-2">
       <p>
-        Mode KD: <span>{totalKdRatio}</span>
+        {gameMode ==="SearchAndDestroy"? "S&D": gameMode } KD: <span>{totalKdRatio}</span>
       </p>
       <p>
         KD in Wins: <span> {kdByWin}</span>
@@ -26,6 +32,11 @@ function MapStatsCard({gameMode}:GameModeStatsProp) {
         KD in Losses: <span>{kdByLoss}</span>
       </p>
     </div>
+
+    <div>
+
+    </div>
+    </section>
   );
 }
 export default MapStatsCard;
