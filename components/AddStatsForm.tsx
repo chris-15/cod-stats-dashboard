@@ -88,7 +88,7 @@ function AddStatsForm() {
     <div>
       <h2>Add Stats</h2>
       <form
-        className="max-w-md mx-auto p-8 rounded shadow-md bg-slate-800"
+        className="max-w-md mx-auto p-8 rounded shadow-md bg-[#1B1B1B]"
         onSubmit={handleFormSubmit}
       >
         <label htmlFor="gameMode" className="">

@@ -35,7 +35,7 @@ function Navbar() {
   }, [showMenu]);
 
   return (
-    <div className="flex justify-between pb-4 border-b mb-4 relative">
+    <div className="flex justify-between pb-4  mb-4 relative">
       <div>
         <Link href={"/"}>
           <h1 className="text-4xl font-bold tracking-tighter">CoD Dashboard</h1>

@@ -17,7 +17,7 @@ type GameModeMatchesProp = {
 function GameModeMatches({ gameMode }: GameModeMatchesProp) {
   //calling custom useMatch hook to get the matches
   const { matches } = useMatches();
- //console.log(matches);
+  console.log(matches);
 
   const gameModeMatches = matches.filter(
     (match) => match.gameMode === gameMode
@@ -25,30 +25,30 @@ function GameModeMatches({ gameMode }: GameModeMatchesProp) {
   //console.log(gameModeMatches)
 
   return (
-    <section className="w-full max-w-[96rem] mx-auto my-4 bg-gray-800 text-white shadow-lg rounded-lg  overflow-auto max-h-[60vh]">
+    <section className="w-full max-w-[96rem] mx-auto my-4 bg-[#1B1B1B] text-white shadow-lg rounded-lg  overflow-auto max-h-[60vh] border border-[#333333]">
       <div className="px-4 sm:px-6 py-4">
         <h2 className="text-lg sm:text-xl font-bold text-gray-100">
           All Matches
         </h2>
       </div>
-      <table className="min-w-full divide-y divide-gray-200 px-4 sm:px-6 py-4 text-sm ">
-        <thead className="sticky top-0 z-10 bg-gray-800">
+      <table className="min-w-full px-4 sm:px-6 py-4 text-sm ">
+        <thead className="sticky top-0 z-10 bg-[#1B1B1B]">
           <tr>
-            <th></th>
-            <th>Date</th>
-            <th>Game Mode</th>
-            <th>Map</th>
-            <th>W/L Result</th>
-            <th>Kills</th>
-            <th>Deaths</th>
-            <th>Damage</th>
-            <th>Time</th>
-            <th>K/D Ratio</th>
+            <th className="text-center"></th>
+            <th className="text-center">Date</th>
+            <th className="text-center">Game Mode</th>
+            <th className="text-center">Map</th>
+            <th className="text-center">W/L Result</th>
+            <th className="text-center">Kills</th>
+            <th className="text-center">Deaths</th>
+            <th className="text-center">Damage</th>
+            <th className="text-center">Time</th>
+            <th className="text-center">K/D Ratio</th>
           </tr>
         </thead>
         <tbody>
           {gameModeMatches.map((match) => (
-            <tr className="" key={match.id}>
+            <tr className="text-center" key={match.id}>
               <td>
                 <Link href={`/edit-stats/${match.id}`}>
                 <svg

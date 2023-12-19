@@ -18,29 +18,29 @@ function RecentMatches() {
   const lastTenMatches = matches ? matches.slice(0, 10) : [];
 
   return (
-    <section className="w-full max-w-[96rem] mx-auto my-4 bg-gray-800 text-white shadow-lg rounded-lg overflow-x-auto">
+    <section className="w-full max-w-[96rem] mx-auto my-4 bg-[#1B1B1B] text-white shadow-lg rounded-lg overflow-x-auto border border-[#333333]">
       <div className="px-4 sm:px-6 py-4">
         <h2 className="text-lg sm:text-xl font-bold text-gray-100">
           Recent Matches - Quick Stats
         </h2>
       </div>
-      <table className="min-w-full divide-y divide-gray-200 px-4 sm:px-6 py-4 text-sm ">
+      <table className="min-w-full  px-4 sm:px-6 py-4 text-sm ">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Game Mode</th>
-            <th>Map</th>
-            <th>W/L Result</th>
-            <th>Kills</th>
-            <th>Deaths</th>
+            <th className="text-center">Date</th>
+            <th className="text-center">Game Mode</th>
+            <th className="text-center">Map</th>
+            <th className="text-center">W/L Result</th>
+            <th className="text-center">Kills</th>
+            <th className="text-center">Deaths</th>
             {/* <th>Damage</th> */}
            {/*  <th>Time</th> */}
-            <th>K/D Ratio</th>
+            <th className="text-center">K/D Ratio</th>
           </tr>
         </thead>
         <tbody>
           {lastTenMatches.map((match) => (
-            <tr className="" key={match.id}>
+            <tr className="text-center" key={match.id}>
               <td>
                 {new Date(match.createdAt).toLocaleDateString("en-US", {
                   year: "2-digit",
@@ -51,9 +51,9 @@ function RecentMatches() {
               <td>{match.gameMode === 'SearchAndDestroy' ? 'Search & Destroy' : match.gameMode }</td>
               <td>{match.matchMap}</td>
               {match.win === true ? (
-                <td className="text-green-500">Win</td>
+                <td className="text-green-500 ">Win</td>
               ) : (
-                <td className="text-red-500">Loss</td>
+                <td className="text-red-500 ">Loss</td>
               )}
               <td>{match.kills}</td>
               <td>{match.deaths}</td>
