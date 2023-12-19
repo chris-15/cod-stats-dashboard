@@ -8,30 +8,34 @@ type GameModeCardProps = {
 
 function GameModeCard({ gameMode, kdRatio, winPercentage }: GameModeCardProps) {
   return (
-    <Link href={`/dashboard/${gameMode}`}>
+    <Link
+      href={gameMode === "Overall" ? `/dashboard` : `/dashboard/${gameMode}`}
+    >
       <div className="group transition-transform transform hover:scale-105 bg-[#1B1B1B] border border-[#333333] rounded-lg py-2">
         <div className="">
-          <h2 className=" group-hover:underline text-center font-bold capitalize">
+          <h2 className=" group-hover:underline text-center font-bold capitalize text-xl mb-5 text-gray-200">
             {gameMode === "searchanddestroy" ? "Search & Destroy" : gameMode}
           </h2>
         </div>
-        <div className="flex flex-col items-center space-y-2">
-          <p className="text-2xl">
-            K/D: <span className="font-bold">{kdRatio}</span>
-          </p>
-          <p className="text-xl">
-            Win %:{" "}
-            <span
+        <div className="grid grid-cols-2 divide-x divide-gray-700 text-center">
+          <div>
+            <p className="text-lg font-semibold text-gray-300">K/D Ratio</p>
+            <p className="font-bold text-4xl text-gray-200">
+              {kdRatio}
+            </p>
+          </div>
+          <div>
+            <p className="text-lg font-semibold text-gray-300">Win %</p>
+            <p
               className={
                 winPercentage > 50
-                  ? "text-green-500 font-bold"
-                  : "text-red-500 font-bold"
+                  ? "text-green-500 font-bold text-4xl"
+                  : "text-red-500 font-bold text-4xl"
               }
             >
-              {" "}
-              {winPercentage} %
-            </span>
-          </p>
+              {winPercentage}
+            </p>
+          </div>
         </div>
       </div>
     </Link>

@@ -52,7 +52,7 @@ function Navbar() {
             } `}
             ref={menuRef}
           >
-            <div className="font-bold">{session?.user?.name}</div>
+            <div className="font-bold">{session?.user?.email}</div>
             <Link
               onClick={() => setshowMenu(false)}
               href={"/dashboard"}
@@ -66,6 +66,27 @@ function Navbar() {
               className="hover:underline"
             >
               Add Stats
+            </Link>
+            <Link
+              onClick={() => setshowMenu(false)}
+              href={"/dashboard/hardpoint"}
+              className="hover:underline"
+            >
+              Hardpoint
+            </Link>
+            <Link
+              onClick={() => setshowMenu(false)}
+              href={"/dashboard/control"}
+              className="hover:underline"
+            >
+              Control
+            </Link>
+            <Link
+              onClick={() => setshowMenu(false)}
+              href={"/dashboard/searchanddestroy"}
+              className="hover:underline"
+            >
+              S&D
             </Link>
             <button className="btn" onClick={() => signOut()}>
               Sign Out
