@@ -16,6 +16,7 @@ export const calcModeKdRatio = (matches: TMatch[], gameMode: string) => {
 
   return kdRatio.toFixed(2);
 };
+
 // calculate win percentage based on game mode
 export const calcWinPercentage = (matches: TMatch[], gameMode: string) => {
   let winSum = 0;
@@ -28,7 +29,7 @@ export const calcWinPercentage = (matches: TMatch[], gameMode: string) => {
     }
   });
 
-  const winPercentage = +((winSum / totalGames) * 100).toFixed(2);
+  const winPercentage = +((winSum / totalGames) * 100).toFixed(1);
 
   return totalGames > 0 ? winPercentage : 0;
 };
@@ -58,7 +59,7 @@ export const calcOverallWinPercentage = (matches: TMatch[]) => {
     totalGames++;
   });
 
-  const winPercentage = +((winSum / totalGames) * 100).toFixed(2);
+  const winPercentage = +((winSum / totalGames) * 100).toFixed(1);
 
   return totalGames > 0 ? winPercentage : 0;
 };

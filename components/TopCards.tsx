@@ -16,14 +16,11 @@ function TopCards() {
   const controlKdRatio = calcModeKdRatio(matches, "Control");
   const searchKdRatio = calcModeKdRatio(matches, "SearchAndDestroy");
 
-  const overallWinPercentage = Math.floor(calcOverallWinPercentage(matches));
-  const hpWinPercentage = Math.floor(calcWinPercentage(matches, "Hardpoint"));
-  const controlWinPercentage = Math.floor(
-    calcWinPercentage(matches, "Control")
-  );
-  const searchWinPercentage = Math.floor(
-    calcWinPercentage(matches, "SearchAndDestroy")
-  );
+  const overallWinPercentage = calcOverallWinPercentage(matches);
+  const hpWinPercentage = calcWinPercentage(matches, "Hardpoint");
+  const controlWinPercentage = calcWinPercentage(matches, "Control");
+
+  const searchWinPercentage = calcWinPercentage(matches, "SearchAndDestroy");
 
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4 ">

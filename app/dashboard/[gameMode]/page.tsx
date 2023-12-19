@@ -20,7 +20,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   }
   
   const gameMode = capitalizeGameMode(params.gameMode)
-  console.log(gameMode);
+  //console.log(gameMode);
 
   return (
     <>
