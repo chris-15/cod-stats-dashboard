@@ -17,7 +17,7 @@ function GameModeCard({ gameMode, kdRatio, winPercentage }: GameModeCardProps) {
             {gameMode === "searchanddestroy" ? "Search & Destroy" : gameMode}
           </h2>
         </div>
-        <div className="grid grid-cols-2 divide-x divide-gray-700 text-center">
+        <div className="grid grid-cols-2 divide-x divide-[#333333] text-center">
           <div>
             <p className="text-lg font-semibold text-gray-300">K/D Ratio</p>
             <p className="font-bold text-4xl text-gray-200">
