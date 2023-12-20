@@ -2,13 +2,8 @@
 import { TMatch } from "@/app/types";
 import { useMatches } from "./matchesContext";
 import Link from "next/link";
+import { convertTime } from "@/lib/utils";
 
-//function to convert seconds to min:secs string to display on table - may move to a helper function file if more functions arise
-const convertTime = (seconds: number) => {
-  const mins: number = Math.floor(seconds / 60);
-  const secs: number = seconds % 60;
-  return `${mins}:${secs.toString().padStart(2, "0")}`;
-};
 
 type GameModeMatchesProp = {
   gameMode: string;
@@ -17,7 +12,7 @@ type GameModeMatchesProp = {
 function GameModeMatches({ gameMode }: GameModeMatchesProp) {
   //calling custom useMatch hook to get the matches
   const { matches } = useMatches();
-  console.log(matches);
+  //console.log(matches);
 
   const gameModeMatches = matches.filter(
     (match) => match.gameMode === gameMode

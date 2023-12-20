@@ -1,13 +1,8 @@
 "use client"
 import { TMatch } from "@/app/types";
 import { useMatches } from "./matchesContext";
+import { convertTime } from "../lib/utils"
 
-//function to convert seconds to min:secs string to display on table - may move to a helper function file if more functions arise
-const convertTime = (seconds: number) => {
-  const mins: number = Math.floor(seconds / 60);
-  const secs: number = seconds % 60;
-  return `${mins}:${secs.toString().padStart(2, "0")}`;
-};
 
 function RecentMatches() {
   //calling custom useMatch hook to get the matches
