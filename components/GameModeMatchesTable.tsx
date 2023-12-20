@@ -4,12 +4,11 @@ import { useMatches } from "./matchesContext";
 import Link from "next/link";
 import { convertTime } from "@/lib/utils";
 
-
 type GameModeMatchesProp = {
   gameMode: string;
 };
 
-function GameModeMatches({ gameMode }: GameModeMatchesProp) {
+function GameModeMatchesTable({ gameMode }: GameModeMatchesProp) {
   //calling custom useMatch hook to get the matches
   const { matches } = useMatches();
   //console.log(matches);
@@ -17,7 +16,6 @@ function GameModeMatches({ gameMode }: GameModeMatchesProp) {
   const gameModeMatches = matches.filter(
     (match) => match.gameMode === gameMode
   );
-  //console.log(gameModeMatches)
 
   return (
     <section className="w-full max-w-[96rem] mx-auto my-4 bg-[#1B1B1B] text-white shadow-lg rounded-lg  overflow-auto max-h-[60vh] border border-[#333333]">
@@ -37,7 +35,8 @@ function GameModeMatches({ gameMode }: GameModeMatchesProp) {
             <th className="text-center">Kills</th>
             <th className="text-center">Deaths</th>
             <th className="text-center">Damage</th>
-            <th className="text-center">Time</th>
+            {gameMode === "Hardpoint" && <th className="text-center">Time</th>}
+
             <th className="text-center">K/D Ratio</th>
           </tr>
         </thead>
@@ -46,20 +45,20 @@ function GameModeMatches({ gameMode }: GameModeMatchesProp) {
             <tr className="text-center" key={match.id}>
               <td>
                 <Link href={`/edit-stats/${match.id}`}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
                   >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
                     />
-                </svg>
+                  </svg>
                 </Link>
               </td>
               <td>
@@ -83,11 +82,9 @@ function GameModeMatches({ gameMode }: GameModeMatchesProp) {
               <td>{match.kills}</td>
               <td>{match.deaths}</td>
               <td>{match.damage ? match.damage : "N/A"}</td>
-              <td>
-                {match.gameMode === "Hardpoint"
-                  ? convertTime(match.time)
-                  : "N/A"}
-              </td>
+              {match.gameMode === "Hardpoint" && (
+                <td>{convertTime(match.time)}</td>
+              )}
               <td>{(match.kills / match.deaths).toFixed(2)}</td>
             </tr>
           ))}
@@ -96,4 +93,4 @@ function GameModeMatches({ gameMode }: GameModeMatchesProp) {
     </section>
   );
 }
-export default GameModeMatches;
+export default GameModeMatchesTable;

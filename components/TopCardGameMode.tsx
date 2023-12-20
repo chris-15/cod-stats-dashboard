@@ -1,12 +1,12 @@
 import Link from "next/link";
 
-type GameModeCardProps = {
+type TopCardGameModeProps = {
   gameMode: string;
   kdRatio: string;
   winPercentage: number;
 };
 
-function GameModeCard({ gameMode, kdRatio, winPercentage }: GameModeCardProps) {
+function TopCardGameMode({ gameMode, kdRatio, winPercentage }: TopCardGameModeProps) {
   return (
     <Link
       href={gameMode === "Overall" ? `/dashboard` : `/dashboard/${gameMode}`}
@@ -41,4 +41,4 @@ function GameModeCard({ gameMode, kdRatio, winPercentage }: GameModeCardProps) {
     </Link>
   );
 }
-export default GameModeCard;
+export default TopCardGameMode;

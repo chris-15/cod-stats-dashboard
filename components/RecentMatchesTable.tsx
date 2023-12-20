@@ -4,7 +4,7 @@ import { useMatches } from "./matchesContext";
 import { convertTime } from "../lib/utils"
 
 
-function RecentMatches() {
+function RecentMatchesTable() {
   //calling custom useMatch hook to get the matches
   const { matches } = useMatches();
   console.log(matches)
@@ -52,12 +52,6 @@ function RecentMatches() {
               )}
               <td>{match.kills}</td>
               <td>{match.deaths}</td>
-              {/* <td>{match.damage ? match.damage: "N/A"}</td> */}
-             {/*  <td>
-                {match.gameMode === "Hardpoint"
-                  ? convertTime(match.time)
-                  : "N/A"}
-              </td> */}
               <td>{(match.kills / match.deaths).toFixed(2)}</td>
             </tr>
           ))}
@@ -66,4 +60,4 @@ function RecentMatches() {
     </section>
   );
 }
-export default RecentMatches;
+export default RecentMatchesTable;

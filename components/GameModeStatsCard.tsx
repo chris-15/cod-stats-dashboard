@@ -16,7 +16,7 @@ type GameModeStatsProp = {
   gameMode: string;
 };
 
-function ModeStatsCard({ gameMode }: GameModeStatsProp) {
+function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
   const { matches } = useMatches();
   //console.log(matches)
 
@@ -71,4 +71,4 @@ function ModeStatsCard({ gameMode }: GameModeStatsProp) {
     </section>
   );
 }
-export default ModeStatsCard;
+export default GameModeStatsCard;

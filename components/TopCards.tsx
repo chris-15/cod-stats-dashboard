@@ -6,7 +6,7 @@ import {
   calcOverallKdRatio,
   calcOverallWinPercentage,
 } from "@/lib/utils";
-import GameModeCard from "./GameModeCard";
+import TopCardGameMode from "./TopCardGameMode";
 
 function TopCards() {
   const { matches } = useMatches();
@@ -53,17 +53,17 @@ function TopCards() {
           </div>
         </div>
       </div>
-      <GameModeCard
+      <TopCardGameMode
         gameMode="hardpoint"
         kdRatio={hpKdRatio}
         winPercentage={hpWinPercentage}
       />
-      <GameModeCard
+      <TopCardGameMode
         gameMode="control"
         kdRatio={controlKdRatio}
         winPercentage={controlWinPercentage}
       />
-      <GameModeCard
+      <TopCardGameMode
         gameMode="searchanddestroy"
         kdRatio={searchKdRatio}
         winPercentage={searchWinPercentage}

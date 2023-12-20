@@ -1,5 +1,5 @@
 
-import RecentMatches from "@/components/RecentMatches";
+import RecentMatchesTable from "@/components/RecentMatchesTable";
 import TopCards from "@/components/TopCards";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]/route";
@@ -15,7 +15,7 @@ async function Dashboard() {
       <div>
         <TopCards />
         <div className="p-4">
-          <RecentMatches />
+          <RecentMatchesTable />
         </div>
       </div>
    
