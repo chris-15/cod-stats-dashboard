@@ -167,8 +167,27 @@ export const calcModeTotalDeaths =( matches: TMatch[], gameMode: string) => {
 
   return deathSum
 }
+export const calcAvgTime = (
+  matches: TMatch[],
+  gameMode: string,
+) => {
+  let timeSum = 0;
+  let totalGames = 0
 
-// calculate avgTime
+  matches.forEach((obj) => {
+    if (obj.gameMode === gameMode && obj.time) {
+      timeSum += obj.time
+      totalGames++
+    }
+  });
+
+  // if no deaths dont penalize kd ratio just divide by 1
+  const avgTime = convertTime(Math.floor(timeSum/totalGames))
+
+  return avgTime
+};
+
+// calculate avgTime by result
 export const calcAvgTimeByResult = (
   matches: TMatch[],
   gameMode: string,
@@ -217,5 +236,18 @@ export const calcSlayingEfficiency =(matches: TMatch[], gameMode: string) =>{
   const slayingEfficiency = (((killSum) / (killSum + deathSum)) * 100).toFixed(2);
   return slayingEfficiency
 
+}
+
+//calculate total map count per mode
+export const calcModeMapCount = (match: TMatch[], gameMode: string) =>{
+  let mapCount = 0;
+
+  match.forEach(obj => {
+    if(obj.gameMode === gameMode) {
+      mapCount++
+    }
+  });
+
+  return mapCount
 }
 

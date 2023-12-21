@@ -25,5 +25,18 @@ td {
   @apply px-2 sm:px-4 py-2 text-gray-200
 }
 
+section.gamemode-stats-card div p:first-child {
+  @apply text-gray-300
+}
+
+section.gamemode-stats-card div p:nth-child(2) {
+  @apply text-gray-200 text-4xl
+}
+
+
+/* section.gamemode-stats-card span.gamemode-stats-span {
+  @apply text-gray-200 text-2xl
+}  */
+
 
 /*  */

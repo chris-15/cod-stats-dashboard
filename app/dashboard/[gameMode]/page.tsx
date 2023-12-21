@@ -27,6 +27,9 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
       <Link href={"/dashboard"}>
         <p className=" font-bold text-2xl hover:underline"> {`<- Dashboard`}</p>
       </Link>
+      <h2 className="font-bold text-xl text-gray-200">
+          {gameMode === "SearchAndDestroy" ? "S&D" : gameMode}
+        </h2>
       <GameModeStatsCard gameMode={gameMode} />
       <GameModeMatchesTable gameMode={gameMode} />
     </>
