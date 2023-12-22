@@ -29,7 +29,7 @@ function GameModeMatchesTable({ gameMode }: GameModeMatchesProp) {
           <tr>
             <th className="text-center"></th>
             <th className="text-center">Date</th>
-            <th className="text-center">Game Mode</th>
+            {/* <th className="text-center">Game Mode</th> */}
             <th className="text-center">Map</th>
             <th className="text-center">W/L Result</th>
             <th className="text-center">Kills</th>
@@ -68,11 +68,11 @@ function GameModeMatchesTable({ gameMode }: GameModeMatchesProp) {
                   day: "2-digit",
                 })}
               </td>
-              <td>
+              {/* <td>
                 {match.gameMode === "SearchAndDestroy"
                   ? "Search & Destroy"
                   : match.gameMode}
-              </td>
+              </td> */}
               <td>{match.matchMap}</td>
               {match.win === true ? (
                 <td className="text-green-500">Win</td>
