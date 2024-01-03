@@ -5,13 +5,13 @@ import { useRouter } from "next/navigation";
 import { useMatches } from "./matchesContext";
 
 //setting types for the map options
-type MapOption ={
-  value: string,
-  label: string
-}
+type MapOption = {
+  value: string;
+  label: string;
+};
 type GameModeMaps = {
   [gameMode: string]: MapOption[];
-}
+};
 
 const mapOptions: GameModeMaps = {
   Hardpoint: [
@@ -46,7 +46,6 @@ function AddStatsForm() {
 
   const router = useRouter();
 
-
   const { fetchMatches } = useMatches();
 
   const handleGameModeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -70,7 +69,15 @@ function AddStatsForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ gameMode, matchMap, win, kills, deaths, damage, time }),
+        body: JSON.stringify({
+          gameMode,
+          matchMap,
+          win,
+          kills,
+          deaths,
+          damage,
+          time,
+        }),
       });
       if (res.ok) {
         //console.log(res.json());
@@ -119,11 +126,12 @@ function AddStatsForm() {
         >
           <option value="">Select a Map</option>
           {/* map filters based on which game mode is selected, different map set for each game mode */}
-          {gameMode && mapOptions[gameMode].map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
+          {gameMode &&
+            mapOptions[gameMode].map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
         </select>
 
         <label htmlFor="outcome" className="">
@@ -169,7 +177,7 @@ function AddStatsForm() {
           onChange={(e) => setDeaths(Number(e.target.value))}
         ></input>
 
-<label htmlFor="damage" className="">
+        <label htmlFor="damage" className="">
           Damage:
         </label>
         <input
@@ -183,19 +191,22 @@ function AddStatsForm() {
           onChange={(e) => setDamage(Number(e.target.value))}
         ></input>
 
-
-        <label htmlFor="time" className="">
-          Time:
-        </label>
-        <input
-          type="number"
-          id="time"
-          name="time"
-          placeholder="Use only for Hardpoint"
-          min="0"
-          className="mt-1 p-2 w-full border rounded-md"
-          onChange={(e) => setTime(Number(e.target.value))}
-        ></input>
+        {gameMode === "Hardpoint" && (
+          <>
+            <label htmlFor="time" className="">
+              Time:
+            </label>
+            <input
+              type="number"
+              id="time"
+              name="time"
+              placeholder="Time in Seconds"
+              min="0"
+              className="mt-1 p-2 w-full border rounded-md"
+              onChange={(e) => setTime(Number(e.target.value))}
+            ></input>
+          </>
+        )}
 
         <button type="submit" className="mt-6 btn">
           Submit

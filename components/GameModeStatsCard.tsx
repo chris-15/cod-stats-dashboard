@@ -170,7 +170,7 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
           <>
             <div>
               <p>Avg Time</p>
-              <p>{avgTime}</p>
+              <p>{avgTime === "NaN:NaN"? "--" : avgTime}</p>
             </div>
             <div>
               <p>Avg Time in W</p>

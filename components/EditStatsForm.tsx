@@ -36,7 +36,6 @@ const mapOptions: GameModeMaps = {
   ],
 };
 
-
 function EditStatsForm({ match }: { match: TMatch }) {
   const [gameMode, setGameMode] = useState<string>(match.gameMode);
   const [matchMap, setMatchMap] = useState<string>(match.matchMap);
@@ -59,9 +58,9 @@ function EditStatsForm({ match }: { match: TMatch }) {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if(!gameMode){
+    if (!gameMode) {
       setError("Game Mode is required");
-      return
+      return;
     }
     try {
       const res = await fetch(`/api/matches/${match.id}`, {
@@ -69,19 +68,26 @@ function EditStatsForm({ match }: { match: TMatch }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ gameMode, matchMap, win, kills, deaths, damage, time }),
+        body: JSON.stringify({
+          gameMode,
+          matchMap,
+          win,
+          kills,
+          deaths,
+          damage,
+          time,
+        }),
       });
       if (res.ok) {
         //console.log(res.json());
-        console.log("Match Updated!")
+        console.log("Match Updated!");
         await fetchMatches();
         router.push(`/dashboard/${gameMode.toLowerCase()}`);
       }
     } catch (error) {
       console.log(error);
     }
-  }
-
+  };
 
   return (
     <div>
@@ -117,7 +123,6 @@ function EditStatsForm({ match }: { match: TMatch }) {
           className="mt-1 p-2 w-full border rounded-md text-center"
           value={matchMap}
           onChange={(e) => setMatchMap(e.target.value)}
-         
         >
           <option value="">Select a Map</option>
           {/* map filters based on which game mode is selected, different map set for each game mode */}
@@ -139,7 +144,6 @@ function EditStatsForm({ match }: { match: TMatch }) {
           className="mt-1 p-2 w-full border rounded-md text-center"
           value={win ? "Win" : "Loss"}
           onChange={(e) => setWin(e.target.value === "Win")}
-          
         >
           <option value="">Did you Win or Lose?</option>
           <option value="Win">Win</option>
@@ -159,7 +163,6 @@ function EditStatsForm({ match }: { match: TMatch }) {
           className="mt-1 p-2 w-full border rounded-md"
           value={kills}
           onChange={(e) => setKills(Number(e.target.value))}
-          
         ></input>
 
         <label htmlFor="deaths" className="">
@@ -175,7 +178,6 @@ function EditStatsForm({ match }: { match: TMatch }) {
           className="mt-1 p-2 w-full border rounded-md"
           value={deaths}
           onChange={(e) => setDeaths(Number(e.target.value))}
-          
         ></input>
 
         <label htmlFor="damage" className="">
@@ -191,22 +193,25 @@ function EditStatsForm({ match }: { match: TMatch }) {
           className="mt-1 p-2 w-full border rounded-md"
           value={damage}
           onChange={(e) => setDamage(Number(e.target.value))}
-          
         ></input>
 
-        <label htmlFor="time" className="">
-          Time:
-        </label>
-        <input
-          type="number"
-          id="time"
-          name="time"
-          placeholder="Use only for Hardpoint"
-          min="0"
-          className="mt-1 p-2 w-full border rounded-md"
-          value={time}
-          onChange={(e) => setTime(Number(e.target.value))}
-        ></input>
+        {gameMode === "Hardpoint" && (
+          <>
+            <label htmlFor="time" className="">
+              Time:
+            </label>
+            <input
+              type="number"
+              id="time"
+              name="time"
+              placeholder="Use only for Hardpoint"
+              min="0"
+              className="mt-1 p-2 w-full border rounded-md"
+              value={time}
+              onChange={(e) => setTime(Number(e.target.value))}
+            ></input>
+          </>
+        )}
 
         <button type="submit" className="mt-6 btn">
           Update
