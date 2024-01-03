@@ -25,16 +25,29 @@ export const calcModeKdRatio = (matches: TMatch[], gameMode: string) => {
   return kdRatio.toFixed(2);
 };
 
+export const calcAvgKills = (matches: TMatch[], gameMode: string) => {
+  let killSum = 0;
+  matches.forEach((obj) => {
+    if(obj.gameMode === gameMode) {
+      killSum += obj.kills;
+    }
+  });
+  const avgKills = matches.length > 0 ? killSum / matches.length : 0;
+  return avgKills.toFixed(1);
+}
+
 // calculate kd ratio based on game mode of recent last 10 matches
 export const calcModeRecentKdRatio = (matches: TMatch[], gameMode: string) => {
   let killSum = 0;
   let deathSum = 0;
 
-  const filteredMatches = matches.filter(match => match.gameMode === gameMode);
+  const filteredMatches = matches.filter(
+    (match) => match.gameMode === gameMode
+  );
 
-  const numMatches= filteredMatches.length < 10 ? filteredMatches.length : 10;
+  const numMatches = filteredMatches.length < 10 ? filteredMatches.length : 10;
 
-  const recentMatches = filteredMatches.slice(0, numMatches)
+  const recentMatches = filteredMatches.slice(0, numMatches);
 
   recentMatches.forEach((obj) => {
     if (obj.gameMode === gameMode) {
@@ -42,7 +55,6 @@ export const calcModeRecentKdRatio = (matches: TMatch[], gameMode: string) => {
       deathSum += obj.deaths;
     }
   });
-
 
   // if no deaths dont penalize kd ratio just divide by 1
   const kdRatio = deathSum !== 0 ? +(killSum / deathSum) : +(killSum / 1);
@@ -143,48 +155,45 @@ export const calcKdByMap = (
 };
 
 // calculates toatl kills based on mode
-export const calcModeTotalKills =( matches: TMatch[], gameMode: string) => {
+export const calcModeTotalKills = (matches: TMatch[], gameMode: string) => {
   let killSum = 0;
 
-  matches.forEach((obj)=> {
-    if(obj.gameMode === gameMode) {
+  matches.forEach((obj) => {
+    if (obj.gameMode === gameMode) {
       killSum += obj.kills;
     }
   });
 
-  return killSum
-}
+  return killSum;
+};
 
 // calculates total deaths based on mode
-export const calcModeTotalDeaths =( matches: TMatch[], gameMode: string) => {
+export const calcModeTotalDeaths = (matches: TMatch[], gameMode: string) => {
   let deathSum = 0;
 
-  matches.forEach((obj)=> {
-    if(obj.gameMode === gameMode) {
+  matches.forEach((obj) => {
+    if (obj.gameMode === gameMode) {
       deathSum += obj.deaths;
     }
   });
 
-  return deathSum
-}
-export const calcAvgTime = (
-  matches: TMatch[],
-  gameMode: string,
-) => {
+  return deathSum;
+};
+export const calcAvgTime = (matches: TMatch[], gameMode: string) => {
   let timeSum = 0;
-  let totalGames = 0
+  let totalGames = 0;
 
   matches.forEach((obj) => {
     if (obj.gameMode === gameMode && obj.time) {
-      timeSum += obj.time
-      totalGames++
+      timeSum += obj.time;
+      totalGames++;
     }
   });
 
   // if no deaths dont penalize kd ratio just divide by 1
-  const avgTime = convertTime(Math.floor(timeSum/totalGames))
+  const avgTime = convertTime(Math.floor(timeSum / totalGames));
 
-  return avgTime
+  return avgTime;
 };
 
 // calculate avgTime by result
@@ -194,60 +203,57 @@ export const calcAvgTimeByResult = (
   isWin: boolean
 ) => {
   let timeSum = 0;
-  let totalGames = 0
+  let totalGames = 0;
 
   matches.forEach((obj) => {
     if (obj.gameMode === gameMode && obj.win === isWin && obj.time) {
-      timeSum += obj.time
-      totalGames++
+      timeSum += obj.time;
+      totalGames++;
     }
   });
 
   // if no deaths dont penalize kd ratio just divide by 1
-  const avgTime = convertTime(Math.floor(timeSum/totalGames))
+  const avgTime = convertTime(Math.floor(timeSum / totalGames));
 
-  return avgTime
+  return avgTime;
 };
 
 //calculate Highest Kill in single match
-export const calcHighestKill = ( matches: TMatch[], gameMode: string)=>{
+export const calcHighestKill = (matches: TMatch[], gameMode: string) => {
   let highestKills = 0;
 
-  for( let i = 0; i < matches.length; i++) {
-    if( matches[i].gameMode === gameMode && matches[i].kills > highestKills) {
+  for (let i = 0; i < matches.length; i++) {
+    if (matches[i].gameMode === gameMode && matches[i].kills > highestKills) {
       highestKills = matches[i].kills;
     }
   }
   return highestKills;
-
-}
+};
 
 //calculate slaying efficiency
-export const calcSlayingEfficiency =(matches: TMatch[], gameMode: string) =>{
+export const calcSlayingEfficiency = (matches: TMatch[], gameMode: string) => {
   let killSum = 0;
   let deathSum = 0;
-  matches.forEach(obj => {
-    if(obj.gameMode === gameMode) {
+  matches.forEach((obj) => {
+    if (obj.gameMode === gameMode) {
       killSum += obj.kills;
       deathSum += obj.deaths;
     }
   });
 
-  const slayingEfficiency = (((killSum) / (killSum + deathSum)) * 100).toFixed(2);
-  return slayingEfficiency
-
-}
+  const slayingEfficiency = ((killSum / (killSum + deathSum)) * 100).toFixed(2);
+  return slayingEfficiency;
+};
 
 //calculate total map count per mode
-export const calcModeMapCount = (match: TMatch[], gameMode: string) =>{
+export const calcModeMapCount = (match: TMatch[], gameMode: string) => {
   let mapCount = 0;
 
-  match.forEach(obj => {
-    if(obj.gameMode === gameMode) {
-      mapCount++
+  match.forEach((obj) => {
+    if (obj.gameMode === gameMode) {
+      mapCount++;
     }
   });
 
-  return mapCount
-}
-
+  return mapCount;
+};

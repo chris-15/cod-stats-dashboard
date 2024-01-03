@@ -190,7 +190,7 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
         </div>
         <div>
           <p>Slaying Efficiency</p>
-          <p className="">{slayingEfficiency} %</p>
+          <p className="">{slayingEfficiency === "NaN" ? "--": slayingEfficiency +' %'}</p>
         </div>
         {tab === "tab1" || tab === "tab3" ? (
           <div>

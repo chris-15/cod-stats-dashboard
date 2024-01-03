@@ -4,6 +4,8 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import GameModeStatsCard from "@/components/GameModeStatsCard";
 import GameModeMatchesTable from "@/components/GameModeMatchesTable";
+import GameModeMapStats from "@/components/GameModeMapStats";
+import { TGameMode } from "@/app/types";
 
 async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   const session = await getServerSession(authOptions);
@@ -19,7 +21,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
     return gameMode.charAt(0).toUpperCase() + gameMode.slice(1);
   }
   
-  const gameMode = capitalizeGameMode(params.gameMode)
+  const gameMode = capitalizeGameMode(params.gameMode) as TGameMode
   //console.log(gameMode);
 
   return (
@@ -31,6 +33,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
           {gameMode === "SearchAndDestroy" ? "S&D" : gameMode}
         </h2>
       <GameModeStatsCard gameMode={gameMode} />
+      <GameModeMapStats gameMode={gameMode} />
       <GameModeMatchesTable gameMode={gameMode} />
     </>
   );

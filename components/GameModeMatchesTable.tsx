@@ -4,11 +4,11 @@ import { useMatches } from "./matchesContext";
 import Link from "next/link";
 import { convertTime } from "@/lib/utils";
 
-type GameModeMatchesProp = {
+type GameModeStatsProp = {
   gameMode: string;
 };
 
-function GameModeMatchesTable({ gameMode }: GameModeMatchesProp) {
+function GameModeMatchesTable({ gameMode }: GameModeStatsProp) {
   //calling custom useMatch hook to get the matches
   const { matches } = useMatches();
   //console.log(matches);
@@ -24,18 +24,18 @@ function GameModeMatchesTable({ gameMode }: GameModeMatchesProp) {
           All Matches
         </h2>
       </div>
-      <table className="min-w-full px-4 sm:px-6 py-4 text-sm ">
+      <table className="">
         <thead className="sticky top-0 z-10 bg-[#1B1B1B]">
           <tr>
-            <th className="text-center"></th>
-            <th className="text-center">Date</th>
+            <th></th>
+            <th>Date</th>
             {/* <th className="text-center">Game Mode</th> */}
-            <th className="text-center">Map</th>
-            <th className="text-center">W/L Result</th>
-            <th className="text-center">Kills</th>
-            <th className="text-center">Deaths</th>
-            <th className="text-center">Damage</th>
-            {gameMode === "Hardpoint" && <th className="text-center">Time</th>}
+            <th>Map</th>
+            <th>W/L Result</th>
+            <th>Kills</th>
+            <th>Deaths</th>
+            <th>Damage</th>
+            {gameMode === "Hardpoint" && <th>Time</th>}
 
             <th className="text-center">K/D Ratio</th>
           </tr>

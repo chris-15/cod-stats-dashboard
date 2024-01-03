@@ -19,18 +19,18 @@ function RecentMatchesTable() {
           Recent Matches - Quick Stats
         </h2>
       </div>
-      <table className="min-w-full  px-4 sm:px-6 py-4 text-sm ">
+      <table className="">
         <thead>
           <tr>
-            <th className="text-center">Date</th>
-            <th className="text-center">Game Mode</th>
-            <th className="text-center">Map</th>
-            <th className="text-center">W/L Result</th>
-            <th className="text-center">Kills</th>
-            <th className="text-center">Deaths</th>
+            <th>Date</th>
+            <th>Game Mode</th>
+            <th>Map</th>
+            <th>W/L Result</th>
+            <th>Kills</th>
+            <th>Deaths</th>
             {/* <th>Damage</th> */}
            {/*  <th>Time</th> */}
-            <th className="text-center">K/D Ratio</th>
+            <th>K/D Ratio</th>
           </tr>
         </thead>
         <tbody>

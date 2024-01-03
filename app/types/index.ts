@@ -14,3 +14,5 @@ export type TMatch = {
     name: string;
   };
 };
+
+export type TGameMode = "Hardpoint" | "Control" | "SearchAndDestroy";
