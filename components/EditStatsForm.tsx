@@ -91,9 +91,9 @@ function EditStatsForm({ match }: { match: TMatch }) {
 
   return (
     <div>
-      <h2>Add Stats</h2>
+      <h2>Edit Stats</h2>
       <form
-        className="max-w-md mx-auto p-8 rounded shadow-md bg-[#1B1B1B]"
+        className="max-w-md mx-auto p-8 rounded shadow-md bg-[#161B22] border border-[#21262D]"
         onSubmit={handleFormSubmit}
       >
         <label htmlFor="gameMode" className="">
