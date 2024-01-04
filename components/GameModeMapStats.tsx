@@ -58,7 +58,7 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
           <tr>
             <th>Map</th>
             {gameMode === "Hardpoint" && <th>Avg Time</th>}
-            <th>K/D</th>
+            <th>K/D Ratio</th>
             <th>Win %</th>
             <th>K/D in W</th>
             <th>K/D in L</th>

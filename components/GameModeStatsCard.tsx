@@ -86,7 +86,6 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
     false
   );
 
-  console.log(timeByLoss);
   const killRecord = calcHighestKill(
     tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
     gameMode
