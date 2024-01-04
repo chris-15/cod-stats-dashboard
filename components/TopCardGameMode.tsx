@@ -11,7 +11,7 @@ function TopCardGameMode({ gameMode, kdRatio, winPercentage }: TopCardGameModePr
     <Link
       href={gameMode === "Overall" ? `/dashboard` : `/dashboard/${gameMode}`}
     >
-      <div className="group transition-transform transform hover:scale-105 bg-[#1B1B1B] border border-[#333333] rounded-lg py-2">
+      <div className="group transition-transform transform hover:scale-105 bg-[#161B22] border border-[#21262D] rounded-lg py-2">
         <div className="">
           <h2 className=" group-hover:underline text-center font-bold capitalize text-xl mb-5 text-gray-200">
             {gameMode === "searchanddestroy" ? "Search & Destroy" : gameMode}

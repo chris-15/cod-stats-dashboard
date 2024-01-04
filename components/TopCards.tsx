@@ -25,7 +25,7 @@ function TopCards() {
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4 ">
       <div>
-        <div className="bg-[#1B1B1B] border border-[#333333] rounded-lg py-2">
+        <div className="bg-[#161B22] border border-[#21262D] rounded-lg py-2">
           <div className="">
             <h2 className="text-center font-bold capitalize text-xl mb-5 text-gray-200">
               Overall

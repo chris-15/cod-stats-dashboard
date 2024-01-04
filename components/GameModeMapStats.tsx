@@ -47,7 +47,7 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
  const mapModeMatches = getMapModeMatches(gameMode, mapSets[gameMode], matches);
 
   return (
-    <section className="w-full max-w-[96rem] mx-auto my-4 bg-[#1B1B1B] text-white shadow-lg rounded-lg  overflow-auto max-h-[60vh] border border-[#333333]">
+    <section className="w-full max-w-[96rem] mx-auto my-4 bg-[#161B22] border border-[#21262D] text-white shadow-lg rounded-lg  overflow-auto max-h-[60vh]">
       <div className="px-4 sm:px-6 py-4">
         <h2 className="text-lg sm:text-xl font-bold text-gray-100">
           Map Stats
