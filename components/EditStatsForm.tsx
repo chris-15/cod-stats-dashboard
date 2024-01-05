@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { TMatch } from "@/app/types";
 import { useMatches } from "./matchesContext";
+import toast from "react-hot-toast";
 
 //setting types for the map options
 type MapOption = {
@@ -82,6 +83,7 @@ function EditStatsForm({ match }: { match: TMatch }) {
         //console.log(res.json());
         console.log("Match Updated!");
         await fetchMatches();
+        toast.success('Successfully updated match stats!')
         router.push(`/dashboard/${gameMode.toLowerCase()}`);
       }
     } catch (error) {
@@ -91,7 +93,7 @@ function EditStatsForm({ match }: { match: TMatch }) {
 
   return (
     <div>
-      <h2>Edit Stats</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Edit Stats</h2>
       <form
         className="max-w-md mx-auto p-8 rounded shadow-md bg-[#161B22] border border-[#21262D]"
         onSubmit={handleFormSubmit}
@@ -213,10 +215,11 @@ function EditStatsForm({ match }: { match: TMatch }) {
           </>
         )}
 
+<div className="flex justify-end"> 
         <button type="submit" className="mt-6 btn">
           Update
         </button>
-
+        </div>
         {error && <div className="p-2 text-red-500 font-bold">{error}</div>}
       </form>
     </div>

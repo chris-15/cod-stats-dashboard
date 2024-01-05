@@ -1,4 +1,5 @@
 import { useMatches } from "./matchesContext";
+import toast from "react-hot-toast";
 
 function MatchDeleteButton({ id }: { id: string }) {
   const { fetchMatches } = useMatches();
@@ -20,6 +21,7 @@ function MatchDeleteButton({ id }: { id: string }) {
         if (res.ok) {
           console.log("match deleted");
           await fetchMatches();
+          toast.success('Successfully deleted match!')
         }
       } catch (error) {
         console.log(error);
