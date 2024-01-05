@@ -69,7 +69,7 @@ function GameModeMatchesTable({ gameMode }: GameModeStatsProp) {
                 <td>{convertTime(match.time)}</td>
               )}
               <td>{(match.kills / match.deaths).toFixed(2)}</td>
-              <td>
+              <td className="flex justify-around items-center">
                 <Link href={`/edit-stats/${match.id}`}>
                   <span className=" text-[#58a6FF] hover:underline">Edit</span>
                 </Link>
