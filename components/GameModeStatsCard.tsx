@@ -134,7 +134,7 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
         </button>
       </div>
 
-      <div className=" text-center grid grid-cols-2 md:grid-cols-3 gap-4 lg:flex lg:justify-evenly lg:flex-wrap mt-12">
+      <div className=" text-center grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-4 xl:flex xl:justify-evenly xl:flex-wrap mt-12">
         <div className="">
           <p className="">K/D</p>
           <p className="">{totalKdRatio}</p>
