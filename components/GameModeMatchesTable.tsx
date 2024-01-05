@@ -3,6 +3,7 @@ import { TMatch } from "@/app/types";
 import { useMatches } from "./matchesContext";
 import Link from "next/link";
 import { convertTime } from "@/lib/utils";
+import MatchDeleteButton from "./MatchDeleteButton";
 
 type GameModeStatsProp = {
   gameMode: string;
@@ -72,6 +73,7 @@ function GameModeMatchesTable({ gameMode }: GameModeStatsProp) {
                 <Link href={`/edit-stats/${match.id}`}>
                   <span className=" text-[#58a6FF] hover:underline">Edit</span>
                 </Link>
+                <MatchDeleteButton id={match.id}/>
               </td>
             </tr>
           ))}
