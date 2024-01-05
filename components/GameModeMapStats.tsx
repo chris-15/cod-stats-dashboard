@@ -71,7 +71,7 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
           { mapModeMatches.map( (matches, index) =>(
             <tr className="text-center" key={index}>
               <td>{mapSets[gameMode][index]}</td>
-              {gameMode === "Hardpoint" && <td>{calcAvgTime(matches, gameMode)}</td>}
+              {gameMode === "Hardpoint" && <td>{calcAvgTime(matches, gameMode) === "NaN:NaN" ? "--" :calcAvgTime(matches, gameMode)}</td>}
               <td>{calcModeKdRatio(matches, gameMode)}</td>
               <td>{calcWinPercentage(matches, gameMode)}</td>
               <td>{calcModeKdByResult(matches,gameMode, true)}</td>
