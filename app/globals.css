@@ -18,7 +18,7 @@ label {
   @apply block mt-4 text-sm font-medium
 }
 table {
-  @apply min-w-full px-4 sm:px-6 py-4 text-sm sm:text-lg
+  @apply min-w-full px-4 sm:px-6 py-4 text-lg
 }
 th {
   @apply px-2 sm:px-4 py-2 font-medium text-gray-300 uppercase tracking-wider text-center whitespace-nowrap
@@ -28,18 +28,10 @@ td {
   @apply px-2 sm:px-4 py-2 text-gray-200
 }
 
-section.gamemode-stats-card div p:first-child {
+.gamemode-stats-card div p:first-child {
   @apply text-gray-300
 }
 
-section.gamemode-stats-card div p:nth-child(2) {
+.gamemode-stats-card div p:nth-child(2) {
   @apply text-gray-200 text-4xl
 }
-
-
-/* section.gamemode-stats-card span.gamemode-stats-span {
-  @apply text-gray-200 text-2xl
-}  */
-
-
-/*  */

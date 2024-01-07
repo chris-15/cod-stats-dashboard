@@ -100,7 +100,7 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
   );
 
   return (
-    <section className="gamemode-stats-card bg-[#161B22] border border-[#21262D] rounded-lg p-4 relative">
+    <section className=" bg-[#161B22] border border-[#21262D] rounded-lg p-4 relative">
       <div className="absolute top-0 left-0 flex space-x-2">
         <button
           className={`py-2 px-4 m-2 ${
@@ -134,7 +134,7 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
         </button>
       </div>
 
-      <div className=" text-center grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-4 xl:flex xl:justify-evenly xl:flex-wrap mt-12">
+      <div className="gamemode-stats-card  text-center grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-4 xl:flex xl:justify-evenly xl:flex-wrap mt-12">
         <div className="">
           <p className="">K/D</p>
           <p className="">{totalKdRatio}</p>
