@@ -12,6 +12,9 @@ import {
   calcSlayingEfficiency,
   calcAvgTime,
   calcModeMapCount,
+  calcAvgPlants,
+  calcAvgDefuses,
+  calcAvgDamage,
 } from "@/lib/utils";
 
 type GameModeStatsProp = {
@@ -99,6 +102,25 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
     gameMode
   );
 
+  const avgPlants = calcAvgPlants(
+    tab === "tab1" ? matches: tab === "tab2" ? recentMatches: dailyMatches, gameMode
+  );
+
+  const avgDefuses = calcAvgDefuses(  tab === "tab1" ? matches: tab === "tab2" ? recentMatches: dailyMatches, gameMode);
+
+  const totalAvgDamage = calcAvgDamage(
+    tab === "tab1" ? matches: tab === "tab2" ? recentMatches: dailyMatches, gameMode
+  );
+
+  const avgDamageW = calcAvgDamage(
+    tab === "tab1" ? matches: tab === "tab2" ? recentMatches: dailyMatches, gameMode, true
+  );
+
+  const avgDamageL = calcAvgDamage(
+    tab === "tab1" ? matches: tab === "tab2" ? recentMatches: dailyMatches, gameMode, false
+  );
+
+
   return (
     <section className=" bg-[#161B22] border border-[#21262D] rounded-lg p-4 relative">
       <div className="absolute top-0 left-0 flex space-x-2">
@@ -180,6 +202,36 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
               <p>Avg Time in L</p>
               <p className="">{timeByLoss === "NaN:NaN" ? "--" : timeByLoss}</p>
             </div>
+          </>
+        )}
+        {gameMode === "SearchAndDestroy" && (
+          <>
+          <div>
+            <p>Avg Plants</p>
+            <p>{avgPlants}</p>
+          </div>
+          <div>
+            <p>Avg Defuses</p>
+            <p>{avgDefuses}</p>
+          </div>
+          </>
+        )}
+
+        { gameMode === "Control" && (
+          <>
+          <div>
+            <p>Avg Damage</p>
+            <p>{totalAvgDamage}</p>
+          </div>
+          {/* unsure if i want to include below */}
+         {/*  <div>
+            <p>Avg Damage in W</p>
+            <p>{avgDamageW}</p>
+          </div>
+          <div>
+            <p>Avg Damage in L</p>
+            <p>{avgDamageL}</p>
+          </div> */}
           </>
         )}
 

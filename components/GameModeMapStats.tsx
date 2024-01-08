@@ -11,6 +11,7 @@ import {
   calcAvgTime,
   calcAvgPlants,
   calcAvgDefuses,
+  calcAvgDamage,
 } from "@/lib/utils";
 
 type GameModeStatsProp = {
@@ -64,12 +65,13 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
               <th>K/D in W</th>
               <th>K/D in L</th>
               {gameMode === "SearchAndDestroy" && (
-              <>
-              <th>Avg Plants</th>
-              <th>Avg Defuses</th>
-              </>
+                <>
+                  <th>Avg Plants</th>
+                  <th>Avg Defuses</th>
+                </>
               )}
-              
+              {gameMode === "Control" && <th>Avg Damage</th>}
+
               <th>Avg Kills</th>
               <th>Kill Record</th>
               <th>Map Count</th>
@@ -92,15 +94,22 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
                 <td>{calcWinPercentage(matches, gameMode)}</td>
                 <td>{calcModeKdByResult(matches, gameMode, true)}</td>
                 <td>{calcModeKdByResult(matches, gameMode, false)}</td>
-                {gameMode=== "SearchAndDestroy" && (
+                {gameMode === "SearchAndDestroy" && (
                   <>
-                  <td>
-                    {!calcAvgPlants(matches, gameMode) ? "--" :calcAvgPlants(matches, gameMode)}
-                  </td>
-                  <td>
-                    {!calcAvgDefuses(matches, gameMode) ? "--" :calcAvgDefuses(matches, gameMode)}
-                  </td>
+                    <td>
+                      {!calcAvgPlants(matches, gameMode)
+                        ? "--"
+                        : calcAvgPlants(matches, gameMode)}
+                    </td>
+                    <td>
+                      {!calcAvgDefuses(matches, gameMode)
+                        ? "--"
+                        : calcAvgDefuses(matches, gameMode)}
+                    </td>
                   </>
+                )}
+                {gameMode === "Control" && (
+                  <td>{calcAvgDamage(matches, gameMode)}</td>
                 )}
                 <td>{calcAvgKills(matches, gameMode)}</td>
                 <td>{calcHighestKill(matches, gameMode)}</td>

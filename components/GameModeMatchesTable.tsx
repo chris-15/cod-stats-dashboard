@@ -58,13 +58,8 @@ function GameModeMatchesTable({ gameMode }: GameModeStatsProp) {
                   day: "2-digit",
                 })}
               </td>
-              {/* <td>
-                {match.gameMode === "SearchAndDestroy"
-                  ? "Search & Destroy"
-                  : match.gameMode}
-              </td> */}
               <td>{match.matchMap}</td>
-              {match.win === true ? (
+              {match.win ? (
                 <td className="text-green-500">Win</td>
               ) : (
                 <td className="text-red-500">Loss</td>

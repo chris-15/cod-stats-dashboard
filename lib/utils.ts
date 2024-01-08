@@ -28,13 +28,13 @@ export const calcModeKdRatio = (matches: TMatch[], gameMode: string) => {
 export const calcAvgKills = (matches: TMatch[], gameMode: string) => {
   let killSum = 0;
   matches.forEach((obj) => {
-    if(obj.gameMode === gameMode) {
+    if (obj.gameMode === gameMode) {
       killSum += obj.kills;
     }
   });
   const avgKills = matches.length > 0 ? killSum / matches.length : 0;
   return avgKills.toFixed(1);
-}
+};
 
 // calculate kd ratio based on game mode of recent last 10 matches
 export const calcModeRecentKdRatio = (matches: TMatch[], gameMode: string) => {
@@ -258,38 +258,51 @@ export const calcModeMapCount = (match: TMatch[], gameMode: string) => {
   return mapCount;
 };
 
-// calculate avg plants
+// calculate avg plants per mode
 export const calcAvgPlants = (matches: TMatch[], gameMode: string) => {
   let plantsSum = 0;
   let totalGames = 0;
 
   matches.forEach((obj) => {
-    if (obj.gameMode === gameMode && obj.plants) {
+    if (obj.gameMode === gameMode && obj.plants !== null) {
       plantsSum += obj.plants;
       totalGames++;
     }
   });
 
-  // if no deaths dont penalize kd ratio just divide by 1
-  const avgPlants = Math.floor(plantsSum / totalGames);
+  const avgPlants = parseFloat((plantsSum / totalGames).toFixed(1));
 
   return avgPlants;
 };
 
-// calculate avg defuses
+// calculate avg defuses per mode
 export const calcAvgDefuses = (matches: TMatch[], gameMode: string) => {
   let defusesSum = 0;
   let totalGames = 0;
 
   matches.forEach((obj) => {
-    if (obj.gameMode === gameMode && obj.defuses) {
+    if (obj.gameMode === gameMode && obj.defuses !== null) {
       defusesSum += obj.defuses;
       totalGames++;
     }
   });
 
-  // if no deaths dont penalize kd ratio just divide by 1
-  const avgDefuses = Math.floor(defusesSum / totalGames);
+  const avgDefuses = parseFloat((defusesSum / totalGames).toFixed(1));
 
   return avgDefuses;
+};
+
+// calculate avg damage per mode / per match result(optional)
+export const calcAvgDamage = (matches: TMatch[], gameMode: string, isWin?: boolean) => {
+  let damageSum = 0;
+  let totalGames = 0;
+
+  matches.forEach((obj) => {
+    if (obj.gameMode === gameMode && obj.damage != null && (isWin === undefined || obj.win === isWin)) {
+      damageSum += obj.damage;
+      totalGames++;
+    }
+  });
+  const avgDamage = Math.floor(damageSum / totalGames);
+  return avgDamage;
 };
