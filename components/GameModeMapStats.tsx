@@ -4,7 +4,6 @@ import { useMatches } from "./matchesContext";
 import { TMatch, TGameMode } from "@/app/types";
 import {
   calcModeKdRatio,
-  calcModeKdByResult,
   calcAvgKills,
   calcWinPercentage,
   calcHighestKill,
@@ -92,8 +91,8 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
                 )}
                 <td>{calcModeKdRatio(matches, gameMode)}</td>
                 <td>{calcWinPercentage(matches, gameMode)}</td>
-                <td>{calcModeKdByResult(matches, gameMode, true)}</td>
-                <td>{calcModeKdByResult(matches, gameMode, false)}</td>
+                <td>{calcModeKdRatio(matches, gameMode, true)}</td>
+                <td>{calcModeKdRatio(matches, gameMode, false)}</td>
                 {gameMode === "SearchAndDestroy" && (
                   <>
                     <td>

@@ -3,11 +3,9 @@ import { useState } from "react";
 import { useMatches } from "./matchesContext";
 import {
   calcModeKdRatio,
-  calcModeKdByResult,
   calcWinPercentage,
   calcModeTotalKills,
   calcModeTotalDeaths,
-  calcAvgTimeByResult,
   calcHighestKill,
   calcSlayingEfficiency,
   calcAvgTime,
@@ -54,13 +52,13 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
     gameMode
   );
 
-  const kdByWin = calcModeKdByResult(
+  const kdByWin = calcModeKdRatio(
     tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
     gameMode,
     true
   );
 
-  const kdByLoss = calcModeKdByResult(
+  const kdByLoss = calcModeKdRatio(
     tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
     gameMode,
     false
@@ -78,12 +76,12 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
     tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
     gameMode
   );
-  const timeByWin = calcAvgTimeByResult(
+  const timeByWin = calcAvgTime(
     tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
     gameMode,
     true
   );
-  const timeByLoss = calcAvgTimeByResult(
+  const timeByLoss = calcAvgTime(
     tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
     gameMode,
     false
