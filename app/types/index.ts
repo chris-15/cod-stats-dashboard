@@ -9,6 +9,8 @@ export type TMatch = {
   damage: number;
   win: boolean;
   time: number;
+  plants: number;
+  defuses: number;
   userEmail: string;
   user: {
     name: string;

@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Not Authenticated" }, { status: 401 });
   }
 
-  const { gameMode, matchMap, kills, deaths, damage, win, time } =
+  const { gameMode, matchMap, kills, deaths, damage, win, time, plants, defuses } =
     await req.json();
 
   
@@ -34,6 +34,8 @@ export async function POST(req: Request) {
         damage,
         win,
         time,
+        plants,
+        defuses,
         userEmail,
       },
     });

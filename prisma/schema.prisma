@@ -59,6 +59,8 @@ model Match {
   damage    Int?
   win       Boolean
   time      Int?     @default(0)
+  plants    Int?
+  defuses   Int?
   user      User     @relation(fields: [userEmail], references: [email])
   userEmail String
 }

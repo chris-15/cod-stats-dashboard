@@ -43,6 +43,8 @@ function AddStatsForm() {
   const [deaths, setDeaths] = useState<number>(0);
   const [damage, setDamage] = useState<number>(0);
   const [time, setTime] = useState<number>(0);
+  const [plants, setPlants] = useState<number>(0);
+  const [defuses, setDefuses] = useState<number>(0);
   const [error, setError] = useState<string>("");
 
   const router = useRouter();
@@ -78,6 +80,8 @@ function AddStatsForm() {
           deaths,
           damage,
           time,
+          plants,
+          defuses,
         }),
       });
       if (res.ok) {
@@ -208,6 +212,38 @@ function AddStatsForm() {
               min="0"
               className="mt-1 p-2 w-full border rounded-md"
               onChange={(e) => setTime(Number(e.target.value))}
+            ></input>
+          </>
+        )}
+        {gameMode === "SearchAndDestroy" && (
+          <>
+            <label htmlFor="plants" className="">
+              Plants:
+            </label>
+            <input
+              type="number"
+              id="plants"
+              name="plants"
+              placeholder="Bombs Planted"
+              min="0"
+              className="mt-1 p-2 w-full border rounded-md"
+              onChange={(e) => setPlants(Number(e.target.value))}
+            ></input>
+          </>
+        )}
+        {gameMode === "SearchAndDestroy" && (
+          <>
+            <label htmlFor="defuses" className="">
+              Defuses:
+            </label>
+            <input
+              type="number"
+              id="defuses"
+              name="defuses"
+              placeholder="Bombs Defused"
+              min="0"
+              className="mt-1 p-2 w-full border rounded-md"
+              onChange={(e) => setDefuses(Number(e.target.value))}
             ></input>
           </>
         )}

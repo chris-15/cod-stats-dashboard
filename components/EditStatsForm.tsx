@@ -45,6 +45,8 @@ function EditStatsForm({ match }: { match: TMatch }) {
   const [deaths, setDeaths] = useState<number>(match.deaths);
   const [damage, setDamage] = useState<number>(match.damage);
   const [time, setTime] = useState<number>(match.time);
+  const [plants, setPlants] = useState<number>(match.plants);
+  const [defuses, setDefuses] = useState<number>(match.defuses);
   const [error, setError] = useState<string>("");
 
   const router = useRouter();
@@ -77,6 +79,8 @@ function EditStatsForm({ match }: { match: TMatch }) {
           deaths,
           damage,
           time,
+          plants,
+          defuses,
         }),
       });
       if (res.ok) {
@@ -211,6 +215,40 @@ function EditStatsForm({ match }: { match: TMatch }) {
               className="mt-1 p-2 w-full border rounded-md"
               value={time}
               onChange={(e) => setTime(Number(e.target.value))}
+            ></input>
+          </>
+        )}
+        {gameMode === "SearchAndDestroy" && (
+          <>
+            <label htmlFor="plants" className="">
+              Plants:
+            </label>
+            <input
+              type="number"
+              id="plants"
+              name="plants"
+              placeholder="Bombs Planted"
+              min="0"
+              className="mt-1 p-2 w-full border rounded-md"
+              value={plants}
+              onChange={(e) => setPlants(Number(e.target.value))}
+            ></input>
+          </>
+        )}
+        {gameMode === "SearchAndDestroy" && (
+          <>
+            <label htmlFor="defuses" className="">
+              Defuses:
+            </label>
+            <input
+              type="number"
+              id="defuses"
+              name="defuses"
+              placeholder="Bombs Defused"
+              min="0"
+              className="mt-1 p-2 w-full border rounded-md"
+              value={defuses}
+              onChange={(e) => setDefuses(Number(e.target.value))}
             ></input>
           </>
         )}
