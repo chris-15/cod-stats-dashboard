@@ -36,8 +36,13 @@ function GameModeMatchesTable({ gameMode }: GameModeStatsProp) {
             <th>Deaths</th>
             <th>Damage</th>
             {gameMode === "Hardpoint" && <th>Time</th>}
-            {gameMode === "SearchAndDestroy" && <th>Plants</th>}
-            {gameMode === "SearchAndDestroy" && <th>Defuses</th>}
+            {gameMode === "SearchAndDestroy" &&(
+              <>
+              <th>Plants</th>
+              <th>Defuses</th>  
+              </>
+              ) 
+            }
 
             <th className="text-center">K/D Ratio</th>
             <th>Actions</th>
@@ -71,10 +76,10 @@ function GameModeMatchesTable({ gameMode }: GameModeStatsProp) {
                 <td>{convertTime(match.time)}</td>
               )}
               {match.gameMode === "SearchAndDestroy" && (
+                <>
                 <td>{match.plants}</td>
-              )}
-               {match.gameMode === "SearchAndDestroy" && (
                 <td>{match.defuses}</td>
+                </>
               )}
               <td>{(match.kills / match.deaths).toFixed(2)}</td>
               <td className="flex justify-around items-center">

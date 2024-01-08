@@ -257,3 +257,39 @@ export const calcModeMapCount = (match: TMatch[], gameMode: string) => {
 
   return mapCount;
 };
+
+// calculate avg plants
+export const calcAvgPlants = (matches: TMatch[], gameMode: string) => {
+  let plantsSum = 0;
+  let totalGames = 0;
+
+  matches.forEach((obj) => {
+    if (obj.gameMode === gameMode && obj.plants) {
+      plantsSum += obj.plants;
+      totalGames++;
+    }
+  });
+
+  // if no deaths dont penalize kd ratio just divide by 1
+  const avgPlants = Math.floor(plantsSum / totalGames);
+
+  return avgPlants;
+};
+
+// calculate avg defuses
+export const calcAvgDefuses = (matches: TMatch[], gameMode: string) => {
+  let defusesSum = 0;
+  let totalGames = 0;
+
+  matches.forEach((obj) => {
+    if (obj.gameMode === gameMode && obj.defuses) {
+      defusesSum += obj.defuses;
+      totalGames++;
+    }
+  });
+
+  // if no deaths dont penalize kd ratio just divide by 1
+  const avgDefuses = Math.floor(defusesSum / totalGames);
+
+  return avgDefuses;
+};

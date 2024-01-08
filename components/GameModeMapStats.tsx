@@ -9,6 +9,8 @@ import {
   calcWinPercentage,
   calcHighestKill,
   calcAvgTime,
+  calcAvgPlants,
+  calcAvgDefuses,
 } from "@/lib/utils";
 
 type GameModeStatsProp = {
@@ -61,6 +63,13 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
               <th>Win %</th>
               <th>K/D in W</th>
               <th>K/D in L</th>
+              {gameMode === "SearchAndDestroy" && (
+              <>
+              <th>Avg Plants</th>
+              <th>Avg Defuses</th>
+              </>
+              )}
+              
               <th>Avg Kills</th>
               <th>Kill Record</th>
               <th>Map Count</th>
@@ -83,6 +92,16 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
                 <td>{calcWinPercentage(matches, gameMode)}</td>
                 <td>{calcModeKdByResult(matches, gameMode, true)}</td>
                 <td>{calcModeKdByResult(matches, gameMode, false)}</td>
+                {gameMode=== "SearchAndDestroy" && (
+                  <>
+                  <td>
+                    {!calcAvgPlants(matches, gameMode) ? "--" :calcAvgPlants(matches, gameMode)}
+                  </td>
+                  <td>
+                    {!calcAvgDefuses(matches, gameMode) ? "--" :calcAvgDefuses(matches, gameMode)}
+                  </td>
+                  </>
+                )}
                 <td>{calcAvgKills(matches, gameMode)}</td>
                 <td>{calcHighestKill(matches, gameMode)}</td>
                 <td>{matches.length}</td>
