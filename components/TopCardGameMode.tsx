@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Tooltip } from "react-tooltip";
 
 type TopCardGameModeProps = {
   gameMode: string;
@@ -6,9 +7,15 @@ type TopCardGameModeProps = {
   winPercentage: number;
 };
 
-function TopCardGameMode({ gameMode, kdRatio, winPercentage }: TopCardGameModeProps) {
+function TopCardGameMode({
+  gameMode,
+  kdRatio,
+  winPercentage,
+}: TopCardGameModeProps) {
   return (
     <Link
+      data-tooltip-id="topcard-tooltip-id"
+      data-tooltip-content="Click For More Stats!"
       href={gameMode === "Overall" ? `/dashboard` : `/dashboard/${gameMode}`}
     >
       <div className="group transition-transform transform hover:scale-105 bg-[#161B22] border border-[#21262D] rounded-lg py-2">
@@ -20,9 +27,7 @@ function TopCardGameMode({ gameMode, kdRatio, winPercentage }: TopCardGameModePr
         <div className="grid grid-cols-2 divide-x divide-[#333333] text-center">
           <div>
             <p className="text-lg font-semibold text-gray-300">K/D Ratio</p>
-            <p className="font-bold text-4xl text-gray-200">
-              {kdRatio}
-            </p>
+            <p className="font-bold text-4xl text-gray-200">{kdRatio}</p>
           </div>
           <div>
             <p className="text-lg font-semibold text-gray-300">Win %</p>
@@ -38,6 +43,7 @@ function TopCardGameMode({ gameMode, kdRatio, winPercentage }: TopCardGameModePr
           </div>
         </div>
       </div>
+      <Tooltip id="topcard-tooltip-id"/>
     </Link>
   );
 }

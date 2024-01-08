@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="py-3">Ranked Stats © 2023</footer>
+    <footer className="text-center mt-3">CoD Dashboard © 2023</footer>
   )
 }
 export default Footer

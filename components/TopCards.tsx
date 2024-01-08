@@ -8,6 +8,7 @@ import {
 } from "@/lib/utils";
 import TopCardGameMode from "./TopCardGameMode";
 
+
 function TopCards() {
   const { matches } = useMatches();
   //console.log(matches)
@@ -68,6 +69,7 @@ function TopCards() {
         kdRatio={searchKdRatio}
         winPercentage={searchWinPercentage}
       />
+
     </div>
   );
 }

@@ -24,7 +24,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <NextAuthProvider>
           <div className="mx-auto min-h-screen flex flex-col bg-[#0D1117] text-white p-4">
-            <Navbar />
+            <nav className="">
+              <Navbar />
+            </nav>
             <MatchesProvider>
               <div className="flex-auto">{children}</div>
               <Footer />
