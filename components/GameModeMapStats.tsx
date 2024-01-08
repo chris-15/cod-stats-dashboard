@@ -2,6 +2,7 @@
 
 import { useMatches } from "./matchesContext";
 import { TMatch, TGameMode } from "@/app/types";
+import { Tooltip } from "react-tooltip";
 import {
   calcModeKdRatio,
   calcAvgKills,
@@ -11,6 +12,7 @@ import {
   calcAvgPlants,
   calcAvgDefuses,
   calcAvgDamage,
+  calcMapScore,
 } from "@/lib/utils";
 
 type GameModeStatsProp = {
@@ -46,6 +48,23 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
     matches
   );
 
+  // calculates the best map based on each gamemode using calcmapscore
+  function calcBestMap(mapsMatchesArr: TMatch[][]) {
+    let bestMap = mapsMatchesArr[0];
+    let bestScore = calcMapScore(bestMap, gameMode);
+
+    for (let i = 0; i < mapsMatchesArr.length; i++) {
+      let score = calcMapScore(mapsMatchesArr[i], gameMode);
+      if (score > bestScore) {
+        bestScore = score;
+        bestMap = mapsMatchesArr[i];
+      }
+    }
+    return mapSets[gameMode][mapsMatchesArr.indexOf(bestMap)];
+  }
+
+  let bestMap = calcBestMap(mapModeMatches);
+
   return (
     <section className="w-full max-w-[96rem] mx-auto my-4 bg-[#161B22] border border-[#21262D] text-white shadow-lg rounded-lg  max-h-[60vh]">
       <div className="px-4 sm:px-6 py-4">
@@ -57,12 +76,14 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
         <table className="">
           <thead>
             <tr>
+              <th></th>
               <th className="sticky left-0 z-10 bg-[#161B22]">Map</th>
-              {gameMode === "Hardpoint" && <th>Avg Time</th>}
-              <th>K/D Ratio</th>
+
               <th>Win %</th>
+              <th>K/D Ratio</th>
               <th>K/D in W</th>
               <th>K/D in L</th>
+              {gameMode === "Hardpoint" && <th>Avg Time</th>}
               {gameMode === "SearchAndDestroy" && (
                 <>
                   <th>Avg Plants</th>
@@ -79,9 +100,25 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
           <tbody>
             {mapModeMatches.map((matches, index) => (
               <tr className="text-center" key={index}>
-                <td className="sticky left-0 z-10 bg-[#161B22]">
+                {mapSets[gameMode][index] === bestMap ? (
+                  <td
+                    data-tooltip-id="mapstats-tooltip-id"
+                    data-tooltip-content="This is your best map for this game mode!"
+                    className="pl-1.5 sm:p-0 text-end"
+                  >
+                    ⭐️
+                  </td>
+                ) : (
+                  <td className=" p-0 text-end "></td>
+                )}
+                <td className="sticky left-0 z-50 bg-[#161B22]">
                   {mapSets[gameMode][index]}
                 </td>
+
+                <td>{calcWinPercentage(matches, gameMode)}</td>
+                <td>{calcModeKdRatio(matches, gameMode)}</td>
+                <td>{calcModeKdRatio(matches, gameMode, true)}</td>
+                <td>{calcModeKdRatio(matches, gameMode, false)}</td>
                 {gameMode === "Hardpoint" && (
                   <td>
                     {calcAvgTime(matches, gameMode) === "NaN:NaN"
@@ -89,10 +126,6 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
                       : calcAvgTime(matches, gameMode)}
                   </td>
                 )}
-                <td>{calcModeKdRatio(matches, gameMode)}</td>
-                <td>{calcWinPercentage(matches, gameMode)}</td>
-                <td>{calcModeKdRatio(matches, gameMode, true)}</td>
-                <td>{calcModeKdRatio(matches, gameMode, false)}</td>
                 {gameMode === "SearchAndDestroy" && (
                   <>
                     <td>
@@ -118,6 +151,11 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
           </tbody>
         </table>
       </div>
+      <Tooltip
+        id="mapstats-tooltip-id"
+        place="top-start"
+        style={{ zIndex: 100 }}
+      />
     </section>
   );
 }

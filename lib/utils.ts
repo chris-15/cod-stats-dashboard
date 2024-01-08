@@ -240,3 +240,14 @@ export const calcAvgDamage = (
   const avgDamage = Math.floor(damageSum / totalGames);
   return avgDamage;
 };
+
+//function to calculate map score based on weighted win percentage and weighted kd ratio
+export const calcMapScore = (matches: TMatch[], gameMode: string) => {
+  let winWeight = 0.6;
+  let kdWeight = 0.4;
+
+  return (
+    winWeight * calcWinPercentage(matches, gameMode) +
+    kdWeight * parseFloat(calcModeKdRatio(matches, gameMode))
+  );
+};
