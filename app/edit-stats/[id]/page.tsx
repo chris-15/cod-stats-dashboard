@@ -2,7 +2,7 @@ import { TMatch } from "@/app/types";
 import EditStatsForm from "@/components/EditStatsForm";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "../../../lib/auth";
 
 const getMatch = async (id: string): Promise<TMatch | null> => {
   try {
