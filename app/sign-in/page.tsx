@@ -10,6 +10,7 @@ async function SignIn() {
     redirect('/dashboard');
   }
   return (
+
     <SignInButtons />
   )
 }

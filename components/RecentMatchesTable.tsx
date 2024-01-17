@@ -19,44 +19,47 @@ function RecentMatchesTable() {
           Recent Matches - Quick Stats
         </h2>
       </div>
-      <table className="">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Game Mode</th>
-            <th>Map</th>
-            <th>W/L Result</th>
-            <th>Kills</th>
-            <th>Deaths</th>
-            {/* <th>Damage</th> */}
-           {/*  <th>Time</th> */}
-            <th>K/D Ratio</th>
+      {
+      matches.length > 0 ? <table className="">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Game Mode</th>
+          <th>Map</th>
+          <th>W/L Result</th>
+          <th>Kills</th>
+          <th>Deaths</th>
+          {/* <th>Damage</th> */}
+         {/*  <th>Time</th> */}
+          <th>K/D Ratio</th>
+        </tr>
+      </thead>
+      <tbody>
+        {lastTenMatches.map((match) => (
+          <tr className="text-center" key={match.id}>
+            <td>
+              {new Date(match.createdAt).toLocaleDateString("en-US", {
+                year: "2-digit",
+                month: "2-digit",
+                day: "2-digit",
+              })}
+            </td>
+            <td>{match.gameMode === 'SearchAndDestroy' ? 'Search & Destroy' : match.gameMode }</td>
+            <td>{match.matchMap}</td>
+            {match.win ? (
+              <td className="text-green-500 ">Win</td>
+            ) : (
+              <td className="text-red-500 ">Loss</td>
+            )}
+            <td>{match.kills}</td>
+            <td>{match.deaths}</td>
+            <td>{(match.kills / match.deaths).toFixed(2)}</td>
           </tr>
-        </thead>
-        <tbody>
-          {lastTenMatches.map((match) => (
-            <tr className="text-center" key={match.id}>
-              <td>
-                {new Date(match.createdAt).toLocaleDateString("en-US", {
-                  year: "2-digit",
-                  month: "2-digit",
-                  day: "2-digit",
-                })}
-              </td>
-              <td>{match.gameMode === 'SearchAndDestroy' ? 'Search & Destroy' : match.gameMode }</td>
-              <td>{match.matchMap}</td>
-              {match.win ? (
-                <td className="text-green-500 ">Win</td>
-              ) : (
-                <td className="text-red-500 ">Loss</td>
-              )}
-              <td>{match.kills}</td>
-              <td>{match.deaths}</td>
-              <td>{(match.kills / match.deaths).toFixed(2)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+        ))}
+      </tbody>
+    </table> :<p className="text-center p-4">No Matches Recorded</p>
+      }
+      
     </section>
   );
 }
