@@ -206,11 +206,11 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
           <>
           <div>
             <p>Avg Plants</p>
-            <p>{avgPlants}</p>
+            <p>{avgPlants ? avgPlants: "--"}</p>
           </div>
           <div>
             <p>Avg Defuses</p>
-            <p>{avgDefuses}</p>
+            <p>{avgDefuses ? avgDefuses : "--"}</p>
           </div>
           </>
         )}
@@ -219,7 +219,7 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
           <>
           <div>
             <p>Avg Damage</p>
-            <p>{totalAvgDamage}</p>
+            <p>{totalAvgDamage ? totalAvgDamage : "--" }</p>
           </div>
           {/* unsure if i want to include below */}
          {/*  <div>
