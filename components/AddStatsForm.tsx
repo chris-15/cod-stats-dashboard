@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useMatches } from "./matchesContext";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 //setting types for the map options
 type MapOption = {
@@ -86,13 +86,11 @@ function AddStatsForm() {
       });
       if (res.ok) {
         //console.log(res.json());
-        
 
         // fetches the matches so that the dashboard is updated whenever user adds stats
         await fetchMatches();
-        toast.success('Successfully added match stats!')
+        toast.success("Successfully added match stats!");
         router.push("/dashboard");
-        
       }
     } catch (error) {
       console.log(error);
@@ -101,7 +99,7 @@ function AddStatsForm() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4 text-center" >Add Stats</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">Add Stats</h2>
       <form
         className="max-w-md mx-auto p-8 rounded shadow-md bg-[#161B22] border border-[#21262D]"
         onSubmit={handleFormSubmit}
@@ -184,20 +182,23 @@ function AddStatsForm() {
           className="mt-1 p-2 w-full border rounded-md"
           onChange={(e) => setDeaths(Number(e.target.value))}
         ></input>
-
-        <label htmlFor="damage" className="">
-          Damage:
-        </label>
-        <input
-          type="number"
-          id="damage"
-          name="damage"
-          required
-          placeholder="0"
-          min="0"
-          className="mt-1 p-2 w-full border rounded-md"
-          onChange={(e) => setDamage(Number(e.target.value))}
-        ></input>
+        {gameMode === "Control" && (
+          <>
+            <label htmlFor="damage" className="">
+              Damage:
+            </label>
+            <input
+              type="number"
+              id="damage"
+              name="damage"
+              required
+              placeholder="0"
+              min="0"
+              className="mt-1 p-2 w-full border rounded-md"
+              onChange={(e) => setDamage(Number(e.target.value))}
+            ></input>
+          </>
+        )}
 
         {gameMode === "Hardpoint" && (
           <>
@@ -247,10 +248,10 @@ function AddStatsForm() {
             ></input>
           </>
         )}
-        <div className="flex justify-end"> 
-        <button type="submit" className="mt-6 btn">
-          Submit
-        </button>
+        <div className="flex justify-end">
+          <button type="submit" className="mt-6 btn">
+            Submit
+          </button>
         </div>
 
         {error && <div className="p-2 text-red-500 font-bold">{error}</div>}

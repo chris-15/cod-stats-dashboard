@@ -87,7 +87,7 @@ function EditStatsForm({ match }: { match: TMatch }) {
         //console.log(res.json());
         console.log("Match Updated!");
         await fetchMatches();
-        toast.success('Successfully updated match stats!')
+        toast.success("Successfully updated match stats!");
         router.push(`/dashboard/${gameMode.toLowerCase()}`);
       }
     } catch (error) {
@@ -185,21 +185,24 @@ function EditStatsForm({ match }: { match: TMatch }) {
           value={deaths}
           onChange={(e) => setDeaths(Number(e.target.value))}
         ></input>
-
-        <label htmlFor="damage" className="">
-          Damage:
-        </label>
-        <input
-          type="number"
-          id="damage"
-          name="damage"
-          required
-          placeholder="0"
-          min="0"
-          className="mt-1 p-2 w-full border rounded-md"
-          value={damage}
-          onChange={(e) => setDamage(Number(e.target.value))}
-        ></input>
+        {gameMode === "Control" && (
+          <>
+            <label htmlFor="damage" className="">
+              Damage:
+            </label>
+            <input
+              type="number"
+              id="damage"
+              name="damage"
+              placeholder="0"
+              min="0"
+              className="mt-1 p-2 w-full border rounded-md"
+              value={damage}
+              onChange={(e) => setDamage(Number(e.target.value))}
+            ></input>
+  
+          </>
+        )}
 
         {gameMode === "Hardpoint" && (
           <>
@@ -253,10 +256,10 @@ function EditStatsForm({ match }: { match: TMatch }) {
           </>
         )}
 
-<div className="flex justify-end"> 
-        <button type="submit" className="mt-6 btn">
-          Update
-        </button>
+        <div className="flex justify-end">
+          <button type="submit" className="mt-6 btn">
+            Update
+          </button>
         </div>
         {error && <div className="p-2 text-red-500 font-bold">{error}</div>}
       </form>
