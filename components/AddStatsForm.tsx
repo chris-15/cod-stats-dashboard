@@ -191,7 +191,6 @@ function AddStatsForm() {
               type="number"
               id="damage"
               name="damage"
-              required
               placeholder="0"
               min="0"
               className="mt-1 p-2 w-full border rounded-md"
