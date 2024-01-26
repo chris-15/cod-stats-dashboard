@@ -19,7 +19,7 @@ function GameModeMatchesTable({ gameMode }: GameModeStatsProp) {
   );
 
   return (
-    <section className="w-full max-w-[96rem] mx-auto my-4 bg-[#161B22] border border-[#21262D] text-white shadow-lg rounded-lg  overflow-auto max-h-[60vh]">
+    <section className="w-full max-w-[96rem] mx-auto my-4 bg-[#161B22] border border-[#21262D] text-white shadow-lg rounded-lg  overflow-auto">
       <div className="px-4 sm:px-6 py-4">
         <h2 className="text-lg sm:text-xl font-bold text-gray-100">
           All Matches
