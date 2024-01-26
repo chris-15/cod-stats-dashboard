@@ -182,22 +182,19 @@ function AddStatsForm() {
           className="mt-1 p-2 w-full border rounded-md"
           onChange={(e) => setDeaths(Number(e.target.value))}
         ></input>
-        {gameMode === "Control" && (
-          <>
-            <label htmlFor="damage" className="">
-              Damage:
-            </label>
-            <input
-              type="number"
-              id="damage"
-              name="damage"
-              placeholder="0"
-              min="0"
-              className="mt-1 p-2 w-full border rounded-md"
-              onChange={(e) => setDamage(Number(e.target.value))}
-            ></input>
-          </>
-        )}
+
+        <label htmlFor="damage" className="">
+          Damage:
+        </label>
+        <input
+          type="number"
+          id="damage"
+          name="damage"
+          placeholder="0"
+          min="0"
+          className="mt-1 p-2 w-full border rounded-md"
+          onChange={(e) => setDamage(Number(e.target.value))}
+        ></input>
 
         {gameMode === "Hardpoint" && (
           <>
