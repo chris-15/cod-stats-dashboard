@@ -19,7 +19,7 @@ const mapOptions: GameModeMaps = {
     { value: "Invasion", label: "Invasion" },
     { value: "Karachi", label: "Karachi" },
     { value: "Skidrow", label: "Skidrow" },
-    { value: "Terminal", label: "Terminal" },
+    { value: "Rio", label: "Rio" },
     { value: "SubBase", label: "SubBase" },
   ],
   Control: [
@@ -31,7 +31,7 @@ const mapOptions: GameModeMaps = {
     { value: "Highrise", label: "Highrise" },
     { value: "Invasion", label: "Invasion" },
     { value: "Karachi", label: "Karachi" },
-    { value: "Skidrow", label: "Skidrow" },
+    { value: "Rio", label: "Rio" },
     { value: "Terminal", label: "Terminal" },
   ],
 };

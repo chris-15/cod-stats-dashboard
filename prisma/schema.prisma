@@ -75,6 +75,7 @@ enum MatchMap {
   Highrise
   Invasion
   Karachi
+  Rio
   Skidrow
   Terminal
   SubBase

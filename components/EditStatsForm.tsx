@@ -19,6 +19,7 @@ const mapOptions: GameModeMaps = {
   Hardpoint: [
     { value: "Invasion", label: "Invasion" },
     { value: "Karachi", label: "Karachi" },
+    { value: "Rio", label: "Rio" },
     { value: "Skidrow", label: "Skidrow" },
     { value: "Terminal", label: "Terminal" },
     { value: "SubBase", label: "SubBase" },
@@ -32,6 +33,7 @@ const mapOptions: GameModeMaps = {
     { value: "Highrise", label: "Highrise" },
     { value: "Invasion", label: "Invasion" },
     { value: "Karachi", label: "Karachi" },
+    { value: "Rio", label: "Rio" },
     { value: "Skidrow", label: "Skidrow" },
     { value: "Terminal", label: "Terminal" },
   ],
