@@ -24,7 +24,7 @@ function TopCards() {
   const searchWinPercentage = calcWinPercentage(matches, "SearchAndDestroy");
 
   return (
-    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4 ">
+    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[96rem] mx-auto">
       <div>
         <div className="bg-[#161B22] border border-[#21262D] rounded-lg py-2">
           <div className="">

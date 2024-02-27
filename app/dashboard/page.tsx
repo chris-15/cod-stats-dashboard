@@ -12,9 +12,9 @@ async function Dashboard() {
     redirect("/sign-in");
   }
   return (
-      <div>
+      <div className="px-4">
         <TopCards />
-        <div className="p-4">
+        <div className="py-4">
           <RecentMatchesTable />
         </div>
       </div>
