@@ -120,7 +120,7 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
 
 
   return (
-    <section className=" bg-[#161B22] border border-[#21262D] rounded-lg p-4 relative">
+    <section className=" bg-[#161B22] border border-[#21262D] rounded-lg p-4 relative max-w-[96rem] mx-auto">
       <div className="absolute top-0 left-0 flex space-x-2">
         <button
           className={`py-2 px-4 m-2 ${
