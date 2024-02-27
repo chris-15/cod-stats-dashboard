@@ -8,8 +8,8 @@ function RecentMatchesTable() {
   const { matches } = useMatches();
   //console.log(matches)
 
-  //new array that hold last 25 matches
-  const lastTwentyFiveMatches = matches ? matches.slice(0, 25) : [];
+  //new array that hold last 15 matches
+  const lastFifteenMatches = matches ? matches.slice(0, 15) : [];
 
   return (
     <section className="w-full max-w-[96rem] mx-auto my-4 bg-[#161B22] text-white shadow-lg rounded-lg overflow-x-auto border border-[#21262D]">
@@ -34,7 +34,7 @@ function RecentMatchesTable() {
             </tr>
           </thead>
           <tbody>
-            {lastTwentyFiveMatches.map((match) => (
+            {lastFifteenMatches.map((match) => (
               <tr className="text-center" key={match.id}>
                 <td>
                   {new Date(match.createdAt).toLocaleDateString("en-US", {
