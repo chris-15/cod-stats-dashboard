@@ -22,7 +22,9 @@ const mapOptions: GameModeMaps = {
     { value: "Rio", label: "Rio" },
     { value: "Skidrow", label: "Skidrow" },
     { value: "Terminal", label: "Terminal" },
+    { value: "SixStar", label: "SixStar" },
     { value: "SubBase", label: "SubBase" },
+    { value: "Vista", label: "Vista" },
   ],
   Control: [
     { value: "Highrise", label: "Highrise" },
@@ -34,6 +36,7 @@ const mapOptions: GameModeMaps = {
     { value: "Invasion", label: "Invasion" },
     { value: "Karachi", label: "Karachi" },
     { value: "Rio", label: "Rio" },
+    { value: "SixStar", label: "SixStar" },
     { value: "Skidrow", label: "Skidrow" },
     { value: "Terminal", label: "Terminal" },
   ],

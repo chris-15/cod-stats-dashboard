@@ -16,11 +16,11 @@ type GameModeMaps = {
 
 const mapOptions: GameModeMaps = {
   Hardpoint: [
-    { value: "Invasion", label: "Invasion" },
     { value: "Karachi", label: "Karachi" },
-    { value: "Skidrow", label: "Skidrow" },
     { value: "Rio", label: "Rio" },
+    { value: "SixStar", label: "SixStar" },
     { value: "SubBase", label: "SubBase" },
+    { value: "Vista", label: "Vista" },
   ],
   Control: [
     { value: "Highrise", label: "Highrise" },
@@ -32,7 +32,7 @@ const mapOptions: GameModeMaps = {
     { value: "Invasion", label: "Invasion" },
     { value: "Karachi", label: "Karachi" },
     { value: "Rio", label: "Rio" },
-    { value: "Terminal", label: "Terminal" },
+    { value: "SixStar", label: "SixStar" },
   ],
 };
 function AddStatsForm() {

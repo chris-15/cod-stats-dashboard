@@ -78,7 +78,9 @@ enum MatchMap {
   Rio
   Skidrow
   Terminal
+  SixStar
   SubBase
+  Vista
 }
 
 model VerificationToken {

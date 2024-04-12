@@ -20,9 +20,9 @@ type GameModeStatsProp = {
 };
 
 const mapSets: Record<TGameMode, string[]> = {
-  Hardpoint: ["Invasion", "Karachi","Rio", "Skidrow", "SubBase", "Terminal"],
+  Hardpoint: ["Invasion", "Karachi","Rio", "Skidrow", "SixStar", "SubBase", "Terminal", "Vista"],
   Control: ["Highrise", "Invasion", "Karachi"],
-  SearchAndDestroy: ["Highrise", "Invasion", "Karachi", "Rio", "Skidrow", "Terminal"],
+  SearchAndDestroy: ["Highrise", "Invasion", "Karachi", "Rio", "Skidrow", "Terminal", "SixStar"],
 };
 
 function GameModeMapStats({ gameMode }: GameModeStatsProp) {
