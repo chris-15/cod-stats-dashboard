@@ -43,7 +43,7 @@ function TopCardGameMode({
           </div>
         </div>
       </div>
-      <Tooltip id="topcard-tooltip-id"/>
+      <Tooltip id="topcard-tooltip-id" />
     </Link>
   );
 }
