@@ -100,7 +100,7 @@ function GameModeMatchesTable({ gameMode }: GameModeStatsProp) {
             </tbody>
           </table>
 
-          <div className=" text-center">
+          <div className=" text-center py-4">
           <button className="btn" onClick={handleLoadMoreMatches}>
             View More!
           </button>
