@@ -99,9 +99,13 @@ function GameModeMatchesTable({ gameMode }: GameModeStatsProp) {
               ))}
             </tbody>
           </table>
+
+          <div className=" text-center">
           <button className="btn" onClick={handleLoadMoreMatches}>
-            Load More Matches!
+            View More!
           </button>
+
+          </div>
         </div>
       ) : (
         <p className="text-center p-4">No Matches Recorded</p>
