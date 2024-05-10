@@ -25,17 +25,17 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   //console.log(gameMode);
 
   return (
-    <>
+    <div className="">
       <Link href={"/dashboard"}>
-        <p className=" font-bold text-xl hover:underline"> {`<- Dashboard`}</p>
+        <p className=""> {`<- Dashboard`}</p>
       </Link>
-      <h2 className="font-bold text-4xl text-gray-200 mt-4 mb-6 text-center">
+      <h2 className="">
           {gameMode === "SearchAndDestroy" ? "Search And Destroy" : gameMode}
         </h2>
       <GameModeStatsCard gameMode={gameMode} />
       <GameModeMapStats gameMode={gameMode} />
       <GameModeMatchesTable gameMode={gameMode} />
-    </>
+    </div>
   );
 }
 export default GameModeStatsPage;

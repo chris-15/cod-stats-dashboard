@@ -35,7 +35,7 @@ function Navbar() {
   }, [showMenu]);
 
   return (
-    <div className="flex justify-between pb-4  mb-4 relative">
+    <div className="flex justify-between p-4 relative ">
       <div>
         <Link href={status === "authenticated"? "/dashboard ": "/"}>
           <h1 className="text-4xl font-bold tracking-tighter">CoD Dashboard</h1>
@@ -92,10 +92,11 @@ function Navbar() {
               Sign Out
             </button>
           </div>
+
           <div className="flex gap-2 items-center">
             <Link
               href={"/add-stats"}
-              className="hidden md:flex gap-2 items-center mr-6"
+              className="hidden sm:flex gap-2 items-center mr-6"
             >
               <span>
                 <svg

@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 
 function SignInButtons() {
   return (
-    <section className="flex justify-center items-center min-h-[calc(100vh-180px)]">
+    <section className="flex justify-center items-center">
       <div className="p-8">
         <h1 className="text-center text-4xl font-bold mb-4">
           Sign in / Sign Up

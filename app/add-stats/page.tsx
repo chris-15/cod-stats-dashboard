@@ -8,10 +8,10 @@ async function AddStats() {
   if(!session) {
     redirect('/sign-in')
   }
-  console.log(session)
+  //console.log(session)
 
   return (
-    <div>
+    <div className="">
       <AddStatsForm />
     </div>
   );

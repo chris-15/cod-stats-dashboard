@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { NextAuthProvider } from "@/components/Providers";
 import { MatchesProvider } from "@/components/matchesContext";
 import { Toaster } from "react-hot-toast";
+import { SideBar } from "@/components/SideBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,15 +24,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <NextAuthProvider>
-          <div className="mx-auto min-h-screen flex flex-col bg-[#0D1117] text-white p-4">
-            <nav className="">
-              <Navbar />
-            </nav>
-            <MatchesProvider>
-              <div className="flex-auto">{children}</div>
-              <Footer />
-            </MatchesProvider>
-          </div>
+          {/* mx-auto min-h-screen bg-[#0D1117] text-white py-4 pr-4 */}
+
+          <MatchesProvider>
+            <div className="">
+              <div className="">
+                <div className="">{children}</div>
+              </div>
+            </div>
+          </MatchesProvider>
           <Toaster />
         </NextAuthProvider>
       </body>

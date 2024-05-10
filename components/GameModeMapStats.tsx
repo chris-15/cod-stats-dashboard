@@ -83,18 +83,18 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
   let bestMap = calcBestMap(mapModeMatches);
 
   return (
-    <section className="w-full max-w-[96rem] mx-auto my-4 bg-[#161B22] border border-[#21262D] text-white shadow-lg rounded-lg">
-      <div className="px-4 sm:px-6 py-4">
-        <h2 className="text-lg sm:text-xl font-bold text-gray-100">
+    <section className="">
+      <div className="">
+        <h2 className="">
           Map Stats
         </h2>
       </div>
-      <div className="overflow-auto ">
+      <div className="">
         <table className="">
           <thead>
             <tr>
               <th></th>
-              <th className="sticky left-0 z-10 bg-[#161B22]">Map</th>
+              <th className="">Map</th>
 
               <th>Win %</th>
               <th>K/D Ratio</th>
@@ -121,14 +121,14 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
                   <td
                     data-tooltip-id="mapstats-tooltip-id"
                     data-tooltip-content="This is your best map for this game mode!"
-                    className="pl-1.5 sm:p-0 text-end"
+                    className=""
                   >
                     ⭐️
                   </td>
                 ) : (
-                  <td className=" p-0 text-end "></td>
+                  <td className=""></td>
                 )}
-                <td className="sticky left-0 z-50 bg-[#161B22]">
+                <td className="">
                   {mapSets[gameMode][index]}
                 </td>
 

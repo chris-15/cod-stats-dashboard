@@ -23,23 +23,23 @@ function TopCards() {
   const searchWinPercentage = calcWinPercentage(matches, "SearchAndDestroy");
 
   return (
-    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[96rem] mx-auto">
+    <div className="">
       <div>
-        <div className="bg-[#161B22] border border-[#21262D] rounded-lg py-2">
+        <div className="">
           <div className="">
-            <h2 className="text-center font-bold capitalize text-xl mb-5 text-gray-200">
+            <h2 className="">
               Overall
             </h2>
           </div>
-          <div className="grid grid-cols-2 divide-x divide-[#333333] text-center">
+          <div className="">
             <div>
-              <p className="text-lg font-semibold text-gray-300">K/D Ratio</p>
-              <p className="font-bold text-4xl text-gray-200">
+              <p className="">K/D Ratio</p>
+              <p className="">
                 {overallKdRatio}
               </p>
             </div>
             <div>
-              <p className="text-lg font-semibold text-gray-300">Win %</p>
+              <p className="">Win %</p>
               <p
                 className={
                   overallWinPercentage > 50

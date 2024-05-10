@@ -28,16 +28,16 @@ function GameModeMatchesTable({ gameMode }: GameModeStatsProp) {
   };
 
   return (
-    <section className="w-full max-w-[96rem] mx-auto my-4 bg-[#161B22] border border-[#21262D] text-white shadow-lg rounded-lg  overflow-auto">
-      <div className="px-4 sm:px-6 py-4">
-        <h2 className="text-lg sm:text-xl font-bold text-gray-100">
+    <section className="">
+      <div className="">
+        <h2 className="">
           All Matches
         </h2>
       </div>
       {gameModeMatches.length > 0 ? (
         <div>
           <table className="">
-            <thead className="sticky top-0 z-10 bg-[#161B22]">
+            <thead className="">
               <tr>
                 <th>Date</th>
                 {/* <th className="text-center">Game Mode</th> */}
