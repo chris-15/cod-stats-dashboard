@@ -1,8 +1,6 @@
-"use client";
-
 import { useMatches } from "./matchesContext";
 import { TMatch, TGameMode, TMatchQuery } from "@/app/types";
-import { Tooltip } from "react-tooltip";
+
 import {
   calcModeKdRatio,
   calcAvgKills,
@@ -163,11 +161,7 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
           </tbody>
         </table>
       </div>
-      <Tooltip
-        id="mapstats-tooltip-id"
-        place="top-start"
-        style={{ zIndex: 100 }}
-      />
+  
     </section>
   );
 }

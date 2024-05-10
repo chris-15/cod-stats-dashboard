@@ -1,8 +1,9 @@
-import { useMatches } from "./matchesContext";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 function MatchDeleteButton({ id }: { id: string }) {
-  const { fetchMatches } = useMatches();
+
+  const router = useRouter();
 
   const handleDelete = async () => {
     const confirmed = window.confirm(
@@ -20,8 +21,9 @@ function MatchDeleteButton({ id }: { id: string }) {
 
         if (res.ok) {
           console.log("match deleted");
-          await fetchMatches();
-          toast.success('Successfully deleted match!')
+          toast.success('Successfully deleted match!');
+          router.refresh();
+          
         }
       } catch (error) {
         console.log(error);
