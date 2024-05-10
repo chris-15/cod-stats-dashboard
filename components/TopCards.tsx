@@ -1,5 +1,5 @@
-"use client";
 import { useMatches } from "./matchesContext";
+import { getMatches } from "@/server/queries";
 import {
   calcModeKdRatio,
   calcWinPercentage,
@@ -8,9 +8,9 @@ import {
 } from "@/lib/utils";
 import TopCardGameMode from "./TopCardGameMode";
 
-function TopCards() {
-  const { matches } = useMatches();
-  //console.log(matches)
+async function TopCards() {
+  const matches = await getMatches();
+
   const overallKdRatio = calcOverallKdRatio(matches);
   const hpKdRatio = calcModeKdRatio(matches, "Hardpoint");
   const controlKdRatio = calcModeKdRatio(matches, "Control");
@@ -27,16 +27,12 @@ function TopCards() {
       <div>
         <div className="">
           <div className="">
-            <h2 className="">
-              Overall
-            </h2>
+            <h2 className="">Overall</h2>
           </div>
           <div className="">
             <div>
               <p className="">K/D Ratio</p>
-              <p className="">
-                {overallKdRatio}
-              </p>
+              <p className="">{overallKdRatio}</p>
             </div>
             <div>
               <p className="">Win %</p>

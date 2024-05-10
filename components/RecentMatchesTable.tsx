@@ -1,12 +1,16 @@
-"use client";
-import { TMatch } from "@/app/types";
-import { useMatches } from "./matchesContext";
+import { TMatch, TMatchQuery } from "@/app/types";
+//import { useMatches } from "./matchesContext";
 import { convertTime } from "../lib/utils";
+import { getMatches } from "@/server/queries";
+import { unstable_noStore as noStore} from "next/cache";
 
-function RecentMatchesTable() {
+async function RecentMatchesTable( ) {
   //calling custom useMatch hook to get the matches
-  const { matches } = useMatches();
-  //console.log(matches)
+  //const { matches } = useMatches();
+  //noStore()
+
+
+  const matches = await getMatches();
 
   //new array that hold last 15 matches
   const lastFifteenMatches = matches ? matches.slice(0, 15) : [];
@@ -14,14 +18,12 @@ function RecentMatchesTable() {
   return (
     <section className="">
       <div className="">
-        <h2 className="">
-          Recent Matches - Quick Stats
-        </h2>
+        <h2 className="">Recent Matches - Quick Stats</h2>
       </div>
       {matches.length > 0 ? (
         <table className="">
           <thead>
-            <tr>
+            <tr> 
               <th>Date</th>
               <th>Game Mode</th>
               <th>Map</th>

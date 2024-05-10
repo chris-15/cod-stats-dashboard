@@ -1,4 +1,4 @@
-import { TMatch } from "@/app/types";
+import { TMatch, TMatchQuery } from "@/app/types";
 
 //function to convert seconds to min:secs string to display on table
 export const convertTime = (seconds: number) => {
@@ -9,7 +9,7 @@ export const convertTime = (seconds: number) => {
 
 // calculate kd ratio based on game mode / per match result(optional)
 export const calcModeKdRatio = (
-  matches: TMatch[],
+  matches: TMatchQuery[],
   gameMode: string,
   isWin?: boolean
 ) => {
@@ -33,7 +33,7 @@ export const calcModeKdRatio = (
 };
 
 //calculate avg kills per gamemode
-export const calcAvgKills = (matches: TMatch[], gameMode: string) => {
+export const calcAvgKills = (matches: TMatchQuery[], gameMode: string) => {
   let killSum = 0;
   matches.forEach((obj) => {
     if (obj.gameMode === gameMode) {
@@ -45,7 +45,7 @@ export const calcAvgKills = (matches: TMatch[], gameMode: string) => {
 };
 
 // calculate win percentage based on game mode
-export const calcWinPercentage = (matches: TMatch[], gameMode: string) => {
+export const calcWinPercentage = (matches: TMatchQuery[], gameMode: string) => {
   let winSum = 0;
   let totalGames = 0;
   matches.forEach((obj) => {
@@ -62,7 +62,7 @@ export const calcWinPercentage = (matches: TMatch[], gameMode: string) => {
 };
 
 // calculate kd ratio accross all modes
-export const calcOverallKdRatio = (matches: TMatch[]) => {
+export const calcOverallKdRatio = (matches: TMatchQuery[]) => {
   let killSum = 0;
   let deathSum = 0;
 
@@ -78,7 +78,7 @@ export const calcOverallKdRatio = (matches: TMatch[]) => {
 };
 
 //calculate overall win percentage
-export const calcOverallWinPercentage = (matches: TMatch[]) => {
+export const calcOverallWinPercentage = (matches: TMatchQuery[]) => {
   let winSum = 0;
   let totalGames = 0;
   matches.forEach((obj) => {
@@ -93,7 +93,7 @@ export const calcOverallWinPercentage = (matches: TMatch[]) => {
 };
 
 // calculates toatl kills based on mode
-export const calcModeTotalKills = (matches: TMatch[], gameMode: string) => {
+export const calcModeTotalKills = (matches: TMatchQuery[], gameMode: string) => {
   let killSum = 0;
 
   matches.forEach((obj) => {
@@ -106,7 +106,7 @@ export const calcModeTotalKills = (matches: TMatch[], gameMode: string) => {
 };
 
 // calculates total deaths based on mode
-export const calcModeTotalDeaths = (matches: TMatch[], gameMode: string) => {
+export const calcModeTotalDeaths = (matches: TMatchQuery[], gameMode: string) => {
   let deathSum = 0;
 
   matches.forEach((obj) => {
@@ -145,7 +145,7 @@ export const calcAvgTime = (
 };
 
 //calculate Highest Kill in single match
-export const calcHighestKill = (matches: TMatch[], gameMode: string) => {
+export const calcHighestKill = (matches: TMatchQuery[], gameMode: string) => {
   let highestKills = 0;
 
   for (let i = 0; i < matches.length; i++) {
@@ -157,7 +157,7 @@ export const calcHighestKill = (matches: TMatch[], gameMode: string) => {
 };
 
 //calculate slaying efficiency
-export const calcSlayingEfficiency = (matches: TMatch[], gameMode: string) => {
+export const calcSlayingEfficiency = (matches: TMatchQuery[], gameMode: string) => {
   let killSum = 0;
   let deathSum = 0;
   matches.forEach((obj) => {
@@ -172,7 +172,7 @@ export const calcSlayingEfficiency = (matches: TMatch[], gameMode: string) => {
 };
 
 //calculate total map count per mode
-export const calcModeMapCount = (match: TMatch[], gameMode: string) => {
+export const calcModeMapCount = (match: TMatchQuery[], gameMode: string) => {
   let mapCount = 0;
 
   match.forEach((obj) => {
@@ -185,7 +185,7 @@ export const calcModeMapCount = (match: TMatch[], gameMode: string) => {
 };
 
 // calculate avg plants per mode
-export const calcAvgPlants = (matches: TMatch[], gameMode: string) => {
+export const calcAvgPlants = (matches: TMatchQuery[], gameMode: string) => {
   let plantsSum = 0;
   let totalGames = 0;
 
@@ -202,7 +202,7 @@ export const calcAvgPlants = (matches: TMatch[], gameMode: string) => {
 };
 
 // calculate avg defuses per mode
-export const calcAvgDefuses = (matches: TMatch[], gameMode: string) => {
+export const calcAvgDefuses = (matches: TMatchQuery[], gameMode: string) => {
   let defusesSum = 0;
   let totalGames = 0;
 
@@ -220,7 +220,7 @@ export const calcAvgDefuses = (matches: TMatch[], gameMode: string) => {
 
 // calculate avg damage per mode / per match result(optional)
 export const calcAvgDamage = (
-  matches: TMatch[],
+  matches: TMatchQuery[],
   gameMode: string,
   isWin?: boolean
 ) => {
@@ -242,7 +242,7 @@ export const calcAvgDamage = (
 };
 
 //function to calculate map score based on weighted win percentage and weighted kd ratio
-export const calcMapScore = (matches: TMatch[], gameMode: string) => {
+export const calcMapScore = (matches: TMatchQuery[], gameMode: string) => {
   let winWeight = 0.6;
   let kdWeight = 0.4;
 

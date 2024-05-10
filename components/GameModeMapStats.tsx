@@ -1,7 +1,7 @@
 "use client";
 
 import { useMatches } from "./matchesContext";
-import { TMatch, TGameMode } from "@/app/types";
+import { TMatch, TGameMode, TMatchQuery } from "@/app/types";
 import { Tooltip } from "react-tooltip";
 import {
   calcModeKdRatio,
@@ -66,7 +66,7 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
   );
 
   // calculates the best map based on each gamemode using calcmapscore
-  function calcBestMap(mapsMatchesArr: TMatch[][]) {
+  function calcBestMap(mapsMatchesArr: TMatchQuery[][]) {
     let bestMap = mapsMatchesArr[0];
     let bestScore = calcMapScore(bestMap, gameMode);
 

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Tooltip } from "react-tooltip";
 
 type TopCardGameModeProps = {
   gameMode: string;
@@ -14,8 +13,6 @@ function TopCardGameMode({
 }: TopCardGameModeProps) {
   return (
     <Link
-      data-tooltip-id="topcard-tooltip-id"
-      data-tooltip-content="Click For More Stats!"
       href={gameMode === "Overall" ? `/dashboard` : `/dashboard/${gameMode}`}
     >
       <div className="">
@@ -43,7 +40,6 @@ function TopCardGameMode({
           </div>
         </div>
       </div>
-      <Tooltip id="topcard-tooltip-id" />
     </Link>
   );
 }

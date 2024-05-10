@@ -4,6 +4,9 @@ import TopCards from "@/components/TopCards";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../lib/auth";
 import { redirect } from "next/navigation";
+import { getMatches } from "@/server/queries";
+
+//export const dynamic = "force-dynamic";
 
 
 async function Dashboard() {
@@ -11,10 +14,14 @@ async function Dashboard() {
   if (!session) {
     redirect("/sign-in");
   }
+
+  const matches = await getMatches();
+
+
   return (
   
     <div className="">
-        <TopCards />
+       <TopCards /> 
         <div className="">
         <RecentMatchesTable />
         </div>
