@@ -26,13 +26,12 @@ async function EditStats({ params }: { params: { id: string } }) {
   if (!session) {
     redirect("/sign-in");
   }
-  //console.log(session)
-
+ 
   const id = params.id;
  // console.log(id);
 
   const match = await getMatch(id);
-  console.log(match)
+  //console.log(session, match)
   return (
     <div>{match ? <EditStatsForm match={match} /> : "No Match Found"} </div>
   );

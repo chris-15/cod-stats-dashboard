@@ -49,8 +49,6 @@ function AddStatsForm() {
 
   const router = useRouter();
 
-  const { fetchMatches } = useMatches();
-
   const handleGameModeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedGameMode = e.target.value;
     setGameMode(selectedGameMode);
@@ -86,9 +84,6 @@ function AddStatsForm() {
       });
       if (res.ok) {
         //console.log(res.json());
-
-        // fetches the matches so that the dashboard is updated whenever user adds stats
-       // await fetchMatches();
         toast.success("Successfully added match stats!");
         router.push("/dashboard");
         router.refresh();

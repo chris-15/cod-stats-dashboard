@@ -55,7 +55,7 @@ function EditStatsForm({ match }: { match: TMatch }) {
   const [error, setError] = useState<string>("");
 
   const router = useRouter();
-  const { fetchMatches } = useMatches();
+ 
 
   const handleGameModeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedGameMode = e.target.value;
@@ -91,9 +91,9 @@ function EditStatsForm({ match }: { match: TMatch }) {
       if (res.ok) {
         //console.log(res.json());
         console.log("Match Updated!");
-        await fetchMatches();
         toast.success("Successfully updated match stats!");
         router.push(`/dashboard/${gameMode.toLowerCase()}`);
+        router.refresh();
       }
     } catch (error) {
       console.log(error);
