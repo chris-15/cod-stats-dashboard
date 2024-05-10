@@ -17,6 +17,7 @@ import {
 
 type GameModeStatsProp = {
   gameMode: TGameMode;
+  matches: TMatchQuery[];
 };
 
 const mapSets: Record<TGameMode, string[]> = {
@@ -42,13 +43,11 @@ const mapSets: Record<TGameMode, string[]> = {
   ],
 };
 
-function GameModeMapStats({ gameMode }: GameModeStatsProp) {
-  const { matches } = useMatches();
-
+function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
   const getMapModeMatches = (
     gameMode: string,
     mapSet: string[],
-    matches: TMatch[]
+    matches: TMatchQuery[]
   ) => {
     const gameModeMatches = matches.filter(
       (match) => match.gameMode === gameMode
@@ -85,9 +84,7 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
   return (
     <section className="">
       <div className="">
-        <h2 className="">
-          Map Stats
-        </h2>
+        <h2 className="">Map Stats</h2>
       </div>
       <div className="">
         <table className="">
@@ -128,9 +125,7 @@ function GameModeMapStats({ gameMode }: GameModeStatsProp) {
                 ) : (
                   <td className=""></td>
                 )}
-                <td className="">
-                  {mapSets[gameMode][index]}
-                </td>
+                <td className="">{mapSets[gameMode][index]}</td>
 
                 <td>{calcWinPercentage(matches, gameMode)}</td>
                 <td>{calcModeKdRatio(matches, gameMode)}</td>

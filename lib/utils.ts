@@ -1,7 +1,10 @@
 import { TMatch, TMatchQuery } from "@/app/types";
 
 //function to convert seconds to min:secs string to display on table
-export const convertTime = (seconds: number) => {
+export const convertTime = (seconds: number | null) => {
+  if (seconds === null) {
+    return "--";
+  }
   const mins: number = Math.floor(seconds / 60);
   const secs: number = seconds % 60;
   return `${mins}:${secs.toString().padStart(2, "0")}`;
@@ -93,7 +96,10 @@ export const calcOverallWinPercentage = (matches: TMatchQuery[]) => {
 };
 
 // calculates toatl kills based on mode
-export const calcModeTotalKills = (matches: TMatchQuery[], gameMode: string) => {
+export const calcModeTotalKills = (
+  matches: TMatchQuery[],
+  gameMode: string
+) => {
   let killSum = 0;
 
   matches.forEach((obj) => {
@@ -106,7 +112,10 @@ export const calcModeTotalKills = (matches: TMatchQuery[], gameMode: string) => 
 };
 
 // calculates total deaths based on mode
-export const calcModeTotalDeaths = (matches: TMatchQuery[], gameMode: string) => {
+export const calcModeTotalDeaths = (
+  matches: TMatchQuery[],
+  gameMode: string
+) => {
   let deathSum = 0;
 
   matches.forEach((obj) => {
@@ -120,7 +129,7 @@ export const calcModeTotalDeaths = (matches: TMatchQuery[], gameMode: string) =>
 
 //calc avg time / per match result (optional)
 export const calcAvgTime = (
-  matches: TMatch[],
+  matches: TMatchQuery[],
   gameMode: string,
   isWin?: boolean
 ) => {
@@ -157,7 +166,10 @@ export const calcHighestKill = (matches: TMatchQuery[], gameMode: string) => {
 };
 
 //calculate slaying efficiency
-export const calcSlayingEfficiency = (matches: TMatchQuery[], gameMode: string) => {
+export const calcSlayingEfficiency = (
+  matches: TMatchQuery[],
+  gameMode: string
+) => {
   let killSum = 0;
   let deathSum = 0;
   matches.forEach((obj) => {

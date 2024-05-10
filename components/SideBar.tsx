@@ -47,7 +47,7 @@ export function SideBar() {
   const { status, data: session } = useSession();
 
   const pathname = usePathname();
-  console.log(pathname);
+  //console.log(pathname);
 
   return (
     <div className="h-screen w-64 flex flex-col justify-between bg-slate-400 shadow-lg p-4 sticky top-0 ">

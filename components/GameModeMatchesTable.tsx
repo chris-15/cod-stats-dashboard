@@ -1,6 +1,6 @@
 "use client";
-import { TMatch } from "@/app/types";
-import { useMatches } from "./matchesContext";
+import { TMatch, TMatchQuery } from "@/app/types";
+
 import Link from "next/link";
 import { convertTime } from "@/lib/utils";
 import MatchDeleteButton from "./MatchDeleteButton";
@@ -8,13 +8,10 @@ import { useState } from "react";
 
 type GameModeStatsProp = {
   gameMode: string;
+  matches: TMatchQuery[];
 };
 
-function GameModeMatchesTable({ gameMode }: GameModeStatsProp) {
-  //calling custom useMatch hook to get the matches
-  const { matches } = useMatches();
-  //console.log(matches);
-
+function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
   const [visbileMatches, setVisibleMatches] = useState<number>(15);
 
   //filter matches on gamemode and slice to show 15 matches at a time
@@ -30,9 +27,7 @@ function GameModeMatchesTable({ gameMode }: GameModeStatsProp) {
   return (
     <section className="">
       <div className="">
-        <h2 className="">
-          All Matches
-        </h2>
+        <h2 className="">All Matches</h2>
       </div>
       {gameModeMatches.length > 0 ? (
         <div>
@@ -101,10 +96,9 @@ function GameModeMatchesTable({ gameMode }: GameModeStatsProp) {
           </table>
 
           <div className=" text-center py-4">
-          <button className="btn" onClick={handleLoadMoreMatches}>
-            View More!
-          </button>
-
+            <button className="btn" onClick={handleLoadMoreMatches}>
+              View More!
+            </button>
           </div>
         </div>
       ) : (

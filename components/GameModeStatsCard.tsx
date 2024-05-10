@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { useMatches } from "./matchesContext";
 import {
   calcModeKdRatio,
   calcWinPercentage,
@@ -14,19 +13,21 @@ import {
   calcAvgDefuses,
   calcAvgDamage,
 } from "@/lib/utils";
+import { TMatch, TMatchQuery } from "@/app/types";
 
-type GameModeStatsProp = {
+type GameModeStatsProps = {
   gameMode: string;
+  matches: TMatchQuery[];
 };
 
-function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
-  const { matches } = useMatches();
-
+function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
   //sets state for tab for the card
   const [tab, setTab] = useState("tab1");
 
   //filter to get the gamemodes matches
-  const filteredMatches = matches.filter((match) => match.gameMode === gameMode);
+  const filteredMatches = matches.filter(
+    (match) => match.gameMode === gameMode
+  );
   //if user doesnt have 10 matches then just use matches data
   const numMatches = filteredMatches.length < 10 ? filteredMatches.length : 10;
   // get last 10 recent matches
@@ -101,23 +102,31 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
   );
 
   const avgPlants = calcAvgPlants(
-    tab === "tab1" ? matches: tab === "tab2" ? recentMatches: dailyMatches, gameMode
+    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
+    gameMode
   );
 
-  const avgDefuses = calcAvgDefuses(  tab === "tab1" ? matches: tab === "tab2" ? recentMatches: dailyMatches, gameMode);
+  const avgDefuses = calcAvgDefuses(
+    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
+    gameMode
+  );
 
   const totalAvgDamage = calcAvgDamage(
-    tab === "tab1" ? matches: tab === "tab2" ? recentMatches: dailyMatches, gameMode
+    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
+    gameMode
   );
 
   const avgDamageW = calcAvgDamage(
-    tab === "tab1" ? matches: tab === "tab2" ? recentMatches: dailyMatches, gameMode, true
+    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
+    gameMode,
+    true
   );
 
   const avgDamageL = calcAvgDamage(
-    tab === "tab1" ? matches: tab === "tab2" ? recentMatches: dailyMatches, gameMode, false
+    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
+    gameMode,
+    false
   );
-
 
   return (
     <section className="">
@@ -189,7 +198,7 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
           <>
             <div>
               <p>Avg Time</p>
-              <p>{avgTime === "NaN:NaN"? "--" : avgTime}</p>
+              <p>{avgTime === "NaN:NaN" ? "--" : avgTime}</p>
             </div>
             <div>
               <p>Avg Time in W</p>
@@ -204,25 +213,25 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
         )}
         {gameMode === "SearchAndDestroy" && (
           <>
-          <div>
-            <p>Avg Plants</p>
-            <p>{avgPlants ? avgPlants: "--"}</p>
-          </div>
-          <div>
-            <p>Avg Defuses</p>
-            <p>{avgDefuses ? avgDefuses : "--"}</p>
-          </div>
+            <div>
+              <p>Avg Plants</p>
+              <p>{avgPlants ? avgPlants : "--"}</p>
+            </div>
+            <div>
+              <p>Avg Defuses</p>
+              <p>{avgDefuses ? avgDefuses : "--"}</p>
+            </div>
           </>
         )}
 
-        { gameMode === "Control" && (
+        {gameMode === "Control" && (
           <>
-          <div>
-            <p>Avg Damage</p>
-            <p>{totalAvgDamage ? totalAvgDamage : "--" }</p>
-          </div>
-          {/* unsure if i want to include below */}
-         {/*  <div>
+            <div>
+              <p>Avg Damage</p>
+              <p>{totalAvgDamage ? totalAvgDamage : "--"}</p>
+            </div>
+            {/* unsure if i want to include below */}
+            {/*  <div>
             <p>Avg Damage in W</p>
             <p>{avgDamageW}</p>
           </div>
@@ -239,7 +248,9 @@ function GameModeStatsCard({ gameMode }: GameModeStatsProp) {
         </div>
         <div>
           <p>Slaying Efficiency</p>
-          <p className="">{slayingEfficiency === "NaN" ? "--": slayingEfficiency +' %'}</p>
+          <p className="">
+            {slayingEfficiency === "NaN" ? "--" : slayingEfficiency + " %"}
+          </p>
         </div>
         {tab === "tab1" || tab === "tab3" ? (
           <div>

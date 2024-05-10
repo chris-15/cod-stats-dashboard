@@ -6,12 +6,15 @@ import GameModeStatsCard from "@/components/GameModeStatsCard";
 import GameModeMatchesTable from "@/components/GameModeMatchesTable";
 import GameModeMapStats from "@/components/GameModeMapStats";
 import { TGameMode } from "@/app/types";
+import { getMatches } from "@/server/queries";
 
 async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   const session = await getServerSession(authOptions);
   if (!session) {
     redirect("/sign-in");
   }
+
+  const matches = await getMatches();
   
   //function to make sure params given to props are in the correct format
   function capitalizeGameMode(gameMode: string) {
@@ -32,9 +35,9 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
       <h2 className="">
           {gameMode === "SearchAndDestroy" ? "Search And Destroy" : gameMode}
         </h2>
-      <GameModeStatsCard gameMode={gameMode} />
-      <GameModeMapStats gameMode={gameMode} />
-      <GameModeMatchesTable gameMode={gameMode} />
+      <GameModeStatsCard gameMode={gameMode} matches={matches} />
+      <GameModeMapStats gameMode={gameMode} matches={matches}/>
+      <GameModeMatchesTable gameMode={gameMode} matches={matches} />
     </div>
   );
 }
