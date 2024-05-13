@@ -38,10 +38,10 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
                 {/* <th className="text-center">Game Mode</th> */}
                 <th>Map</th>
                 <th>W/L Result</th>
-                <th>Kills</th>
+               {/*  <th>Kills</th>
                 <th>Deaths</th>
-                <th>Damage</th>
-                {gameMode === "Hardpoint" && <th>Time</th>}
+                <th>Damage</th> */}
+                {/* {gameMode === "Hardpoint" && <th>Time</th>} */}
                 {gameMode === "SearchAndDestroy" && (
                   <>
                     <th>Plants</th>
@@ -69,7 +69,7 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
                   ) : (
                     <td className="text-red-500">Loss</td>
                   )}
-                  <td>{match.kills}</td>
+                  {/* <td>{match.kills}</td>
                   <td>{match.deaths}</td>
                   <td>{match.damage ? match.damage : "N/A"}</td>
                   {match.gameMode === "Hardpoint" && (
@@ -80,7 +80,7 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
                       <td>{match.plants}</td>
                       <td>{match.defuses}</td>
                     </>
-                  )}
+                  )} */}
                   <td>{(match.kills / match.deaths).toFixed(2)}</td>
                   <td className="flex justify-around items-center">
                     <Link href={`/edit-stats/${match.id}`}>
@@ -89,6 +89,11 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
                       </span>
                     </Link>
                     <MatchDeleteButton id={match.id} />
+                    <Link href={`/dashboard/${gameMode.toLowerCase()}/${match.id}`}>
+                      <span className=" text-[#58a6FF] hover:underline">
+                        More Details
+                      </span>
+                    </Link>
                   </td>
                 </tr>
               ))}

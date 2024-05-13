@@ -1,6 +1,6 @@
 import "server-only";
 import prisma from "@/lib/prismadb";
-import { TMatchQuery } from "@/app/types";
+import { TMatchQuery, TMatch } from "@/app/types";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
@@ -25,4 +25,19 @@ export async function getMatches(): Promise<TMatchQuery[]> {
   if (!matches) throw new Error("Image not found ");
 
   return matches;
+}
+
+export async function getMatchById(id:string){
+  const session = await getServerSession(authOptions);
+  if(!session) throw new Error("Unauthorized");
+  
+  const match = await prisma.match.findUnique({
+    where: {
+      id: id,
+    }
+  })
+  if(!match) throw new Error("No Match Found")
+  if(session.user?.email !=  match.userEmail) throw new Error("Unuthorized")
+
+return match
 }
