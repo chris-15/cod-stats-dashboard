@@ -25,7 +25,7 @@ export default function DashboardLayout({
                 <Navbar />
               </div>
 
-              <div className="grid grid-cols-1 w-full ">{children}</div>
+              <div className=" ">{children}</div>
             </div>
           </div>
         </MatchesProvider>
