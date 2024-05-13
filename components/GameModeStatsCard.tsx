@@ -25,19 +25,19 @@ function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
   const [tab, setTab] = useState("tab1");
 
   //filter to get the gamemodes matches
-  const filteredMatches = matches.filter(
+  /* const filteredMatches = matches.filter(
     (match) => match.gameMode === gameMode
-  );
+  ); */
   //if user doesnt have 10 matches then just use matches data
-  const numMatches = filteredMatches.length < 10 ? filteredMatches.length : 10;
+  const numMatches = matches.length < 10 ? matches.length : 10;
   // get last 10 recent matches
-  const recentMatches = filteredMatches.slice(0, numMatches);
+  const recentMatches = matches.slice(0, numMatches);
 
   //filter to get daily matches
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const dailyMatches = filteredMatches.filter((match) => {
+  const dailyMatches = matches.filter((match) => {
     const todaysMatchDate = new Date(match.createdAt);
     todaysMatchDate.setHours(0, 0, 0, 0); // doing this because you only want to compare dates not timestamps
     return todaysMatchDate.getTime() === today.getTime();
@@ -45,86 +45,69 @@ function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
 
   // all the stat calculations below- depending on which tab is selected
   const totalKdRatio = calcModeKdRatio(
-    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode
+    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches
   );
   const winPercentage = calcWinPercentage(
-    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode
+    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches
   );
 
   const kdByWin = calcModeKdRatio(
     tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode,
     true
   );
 
   const kdByLoss = calcModeKdRatio(
     tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode,
     false
   );
 
   const totalKills = calcModeTotalKills(
-    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode
+    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches
   );
   const totalDeaths = calcModeTotalDeaths(
-    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode
+    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches
   );
   const avgTime = calcAvgTime(
-    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode
+    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches
   );
   const timeByWin = calcAvgTime(
     tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode,
     true
   );
   const timeByLoss = calcAvgTime(
     tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode,
     false
   );
 
   const killRecord = calcHighestKill(
-    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode
+    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches
   );
   const slayingEfficiency = calcSlayingEfficiency(
-    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode
+    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches
   );
   const mapCount = calcModeMapCount(
-    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode
+    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches
   );
 
   const avgPlants = calcAvgPlants(
-    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode
+    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches
   );
 
   const avgDefuses = calcAvgDefuses(
-    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode
+    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches
   );
 
   const totalAvgDamage = calcAvgDamage(
-    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode
+    tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches
   );
 
   const avgDamageW = calcAvgDamage(
     tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode,
     true
   );
 
   const avgDamageL = calcAvgDamage(
     tab === "tab1" ? matches : tab === "tab2" ? recentMatches : dailyMatches,
-    gameMode,
     false
   );
 

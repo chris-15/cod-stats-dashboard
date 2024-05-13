@@ -6,7 +6,7 @@ import GameModeStatsCard from "@/components/GameModeStatsCard";
 import GameModeMatchesTable from "@/components/GameModeMatchesTable";
 import GameModeMapStats from "@/components/GameModeMapStats";
 import { TGameMode } from "@/app/types";
-import { getMatches } from "@/server/queries";
+import { getMatches, getMatchesByMode } from "@/server/queries";
 
 async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   const session = await getServerSession(authOptions);
@@ -14,18 +14,18 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
     redirect("/sign-in");
   }
 
-  const matches = await getMatches();
-  
   //function to make sure params given to props are in the correct format
   function capitalizeGameMode(gameMode: string) {
-    if (gameMode === 'searchanddestroy') {
-      return 'SearchAndDestroy';
+    if (gameMode === "searchanddestroy") {
+      return "SearchAndDestroy";
     }
     return gameMode.charAt(0).toUpperCase() + gameMode.slice(1);
   }
-  
-  const gameMode = capitalizeGameMode(params.gameMode) as TGameMode
+
+  const gameMode = capitalizeGameMode(params.gameMode) as TGameMode;
   //console.log(gameMode);
+
+  const matches = await getMatchesByMode(gameMode);
 
   return (
     <div className="">
@@ -33,10 +33,10 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
         <p className=""> {`<- Dashboard`}</p>
       </Link>
       <h2 className="">
-          {gameMode === "SearchAndDestroy" ? "Search And Destroy" : gameMode}
-        </h2>
+        {gameMode === "SearchAndDestroy" ? "Search And Destroy" : gameMode}
+      </h2>
       <GameModeStatsCard gameMode={gameMode} matches={matches} />
-      <GameModeMapStats gameMode={gameMode} matches={matches}/>
+      <GameModeMapStats gameMode={gameMode} matches={matches} />
       <GameModeMatchesTable gameMode={gameMode} matches={matches} />
     </div>
   );

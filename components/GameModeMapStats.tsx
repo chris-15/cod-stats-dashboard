@@ -125,43 +125,38 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
                 )}
                 <td className="">{mapSets[gameMode][index]}</td>
 
-                <td>{calcWinPercentage(matches, gameMode)}</td>
-                <td>{calcModeKdRatio(matches, gameMode)}</td>
-                <td>{calcModeKdRatio(matches, gameMode, true)}</td>
-                <td>{calcModeKdRatio(matches, gameMode, false)}</td>
+                <td>{calcWinPercentage(matches)}</td>
+                <td>{calcModeKdRatio(matches)}</td>
+                <td>{calcModeKdRatio(matches, true)}</td>
+                <td>{calcModeKdRatio(matches, false)}</td>
                 {gameMode === "Hardpoint" && (
                   <td>
-                    {calcAvgTime(matches, gameMode) === "NaN:NaN"
+                    {calcAvgTime(matches) === "NaN:NaN"
                       ? "--"
-                      : calcAvgTime(matches, gameMode)}
+                      : calcAvgTime(matches)}
                   </td>
                 )}
                 {gameMode === "SearchAndDestroy" && (
                   <>
                     <td>
-                      {!calcAvgPlants(matches, gameMode)
-                        ? "--"
-                        : calcAvgPlants(matches, gameMode)}
+                      {!calcAvgPlants(matches) ? "--" : calcAvgPlants(matches)}
                     </td>
                     <td>
-                      {!calcAvgDefuses(matches, gameMode)
+                      {!calcAvgDefuses(matches)
                         ? "--"
-                        : calcAvgDefuses(matches, gameMode)}
+                        : calcAvgDefuses(matches)}
                     </td>
                   </>
                 )}
-                {gameMode === "Control" && (
-                  <td>{calcAvgDamage(matches, gameMode)}</td>
-                )}
-                <td>{calcAvgKills(matches, gameMode)}</td>
-                <td>{calcHighestKill(matches, gameMode)}</td>
+                {gameMode === "Control" && <td>{calcAvgDamage(matches)}</td>}
+                <td>{calcAvgKills(matches)}</td>
+                <td>{calcHighestKill(matches)}</td>
                 <td>{matches.length}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-  
     </section>
   );
 }

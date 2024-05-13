@@ -10,20 +10,13 @@ export const convertTime = (seconds: number | null) => {
   return `${mins}:${secs.toString().padStart(2, "0")}`;
 };
 
-// calculate kd ratio based on game mode / per match result(optional)
-export const calcModeKdRatio = (
-  matches: TMatchQuery[],
-  gameMode: string,
-  isWin?: boolean
-) => {
+// calculate kd ratio / per match result(optional)
+export const calcModeKdRatio = (matches: TMatchQuery[], isWin?: boolean) => {
   let killSum = 0;
   let deathSum = 0;
 
   matches.forEach((obj) => {
-    if (
-      obj.gameMode === gameMode &&
-      (isWin === undefined || obj.win === isWin)
-    ) {
+    if (isWin === undefined || obj.win === isWin) {
       killSum += obj.kills;
       deathSum += obj.deaths;
     }
@@ -35,28 +28,24 @@ export const calcModeKdRatio = (
   return kdRatio.toFixed(2);
 };
 
-//calculate avg kills per gamemode
-export const calcAvgKills = (matches: TMatchQuery[], gameMode: string) => {
+//calculate avg kills
+export const calcAvgKills = (matches: TMatchQuery[]) => {
   let killSum = 0;
   matches.forEach((obj) => {
-    if (obj.gameMode === gameMode) {
-      killSum += obj.kills;
-    }
+    killSum += obj.kills;
   });
   const avgKills = matches.length > 0 ? killSum / matches.length : 0;
   return avgKills.toFixed(1);
 };
 
 // calculate win percentage based on game mode
-export const calcWinPercentage = (matches: TMatchQuery[], gameMode: string) => {
+export const calcWinPercentage = (matches: TMatchQuery[]) => {
   let winSum = 0;
   let totalGames = 0;
   matches.forEach((obj) => {
-    if (obj.gameMode === gameMode) {
-      // + operator turns obj.win = true => obj.win = 1
-      winSum += +obj.win;
-      totalGames++;
-    }
+    // + operator turns obj.win = true => obj.win = 1
+    winSum += +obj.win;
+    totalGames++;
   });
 
   const winPercentage = +((winSum / totalGames) * 100).toFixed(1);
@@ -95,53 +84,35 @@ export const calcOverallWinPercentage = (matches: TMatchQuery[]) => {
   return totalGames > 0 ? winPercentage : 0;
 };
 
-// calculates toatl kills based on mode
-export const calcModeTotalKills = (
-  matches: TMatchQuery[],
-  gameMode: string
-) => {
+// calculates total kills
+export const calcModeTotalKills = (matches: TMatchQuery[]) => {
   let killSum = 0;
 
   matches.forEach((obj) => {
-    if (obj.gameMode === gameMode) {
-      killSum += obj.kills;
-    }
+    killSum += obj.kills;
   });
 
   return killSum;
 };
 
 // calculates total deaths based on mode
-export const calcModeTotalDeaths = (
-  matches: TMatchQuery[],
-  gameMode: string
-) => {
+export const calcModeTotalDeaths = (matches: TMatchQuery[]) => {
   let deathSum = 0;
 
   matches.forEach((obj) => {
-    if (obj.gameMode === gameMode) {
-      deathSum += obj.deaths;
-    }
+    deathSum += obj.deaths;
   });
 
   return deathSum;
 };
 
 //calc avg time / per match result (optional)
-export const calcAvgTime = (
-  matches: TMatchQuery[],
-  gameMode: string,
-  isWin?: boolean
-) => {
+export const calcAvgTime = (matches: TMatchQuery[], isWin?: boolean) => {
   let timeSum = 0;
   let totalGames = 0;
 
   matches.forEach((obj) => {
-    if (
-      obj.gameMode === gameMode &&
-      obj.time &&
-      (isWin === undefined || obj.win === isWin)
-    ) {
+    if (obj.time && (isWin === undefined || obj.win === isWin)) {
       timeSum += obj.time;
       totalGames++;
     }
@@ -154,11 +125,11 @@ export const calcAvgTime = (
 };
 
 //calculate Highest Kill in single match
-export const calcHighestKill = (matches: TMatchQuery[], gameMode: string) => {
+export const calcHighestKill = (matches: TMatchQuery[]) => {
   let highestKills = 0;
 
   for (let i = 0; i < matches.length; i++) {
-    if (matches[i].gameMode === gameMode && matches[i].kills > highestKills) {
+    if (matches[i].kills > highestKills) {
       highestKills = matches[i].kills;
     }
   }
@@ -166,43 +137,36 @@ export const calcHighestKill = (matches: TMatchQuery[], gameMode: string) => {
 };
 
 //calculate slaying efficiency
-export const calcSlayingEfficiency = (
-  matches: TMatchQuery[],
-  gameMode: string
-) => {
+export const calcSlayingEfficiency = (matches: TMatchQuery[]) => {
   let killSum = 0;
   let deathSum = 0;
   matches.forEach((obj) => {
-    if (obj.gameMode === gameMode) {
-      killSum += obj.kills;
-      deathSum += obj.deaths;
-    }
+    killSum += obj.kills;
+    deathSum += obj.deaths;
   });
 
   const slayingEfficiency = ((killSum / (killSum + deathSum)) * 100).toFixed(2);
   return slayingEfficiency;
 };
 
-//calculate total map count per mode
-export const calcModeMapCount = (match: TMatchQuery[], gameMode: string) => {
+//calculate total map count
+export const calcModeMapCount = (match: TMatchQuery[]) => {
   let mapCount = 0;
 
   match.forEach((obj) => {
-    if (obj.gameMode === gameMode) {
-      mapCount++;
-    }
+    mapCount++;
   });
 
   return mapCount;
 };
 
 // calculate avg plants per mode
-export const calcAvgPlants = (matches: TMatchQuery[], gameMode: string) => {
+export const calcAvgPlants = (matches: TMatchQuery[]) => {
   let plantsSum = 0;
   let totalGames = 0;
 
   matches.forEach((obj) => {
-    if (obj.gameMode === gameMode && obj.plants !== null) {
+    if (obj.plants !== null) {
       plantsSum += obj.plants;
       totalGames++;
     }
@@ -214,12 +178,12 @@ export const calcAvgPlants = (matches: TMatchQuery[], gameMode: string) => {
 };
 
 // calculate avg defuses per mode
-export const calcAvgDefuses = (matches: TMatchQuery[], gameMode: string) => {
+export const calcAvgDefuses = (matches: TMatchQuery[]) => {
   let defusesSum = 0;
   let totalGames = 0;
 
   matches.forEach((obj) => {
-    if (obj.gameMode === gameMode && obj.defuses !== null) {
+    if (obj.defuses !== null) {
       defusesSum += obj.defuses;
       totalGames++;
     }
@@ -231,20 +195,12 @@ export const calcAvgDefuses = (matches: TMatchQuery[], gameMode: string) => {
 };
 
 // calculate avg damage per mode / per match result(optional)
-export const calcAvgDamage = (
-  matches: TMatchQuery[],
-  gameMode: string,
-  isWin?: boolean
-) => {
+export const calcAvgDamage = (matches: TMatchQuery[], isWin?: boolean) => {
   let damageSum = 0;
   let totalGames = 0;
 
   matches.forEach((obj) => {
-    if (
-      obj.gameMode === gameMode &&
-      obj.damage != null &&
-      (isWin === undefined || obj.win === isWin)
-    ) {
+    if (obj.damage != null && (isWin === undefined || obj.win === isWin)) {
       damageSum += obj.damage;
       totalGames++;
     }
@@ -259,7 +215,7 @@ export const calcMapScore = (matches: TMatchQuery[], gameMode: string) => {
   let kdWeight = 0.4;
 
   return (
-    winWeight * calcWinPercentage(matches, gameMode) +
-    kdWeight * parseFloat(calcModeKdRatio(matches, gameMode))
+    winWeight * calcWinPercentage(matches) +
+    kdWeight * parseFloat(calcModeKdRatio(matches))
   );
 };
