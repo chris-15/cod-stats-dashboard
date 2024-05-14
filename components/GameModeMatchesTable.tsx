@@ -90,7 +90,7 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
                     </Link>
                     <MatchDeleteButton id={match.id} />
 
-                    <Link href={`/dashboard/${gameMode.toLowerCase()}/${match.id}`}>
+                    <Link href={`/dashboard/${gameMode.toLowerCase()}/match/${match.id}`}>
                       <span className=" text-[#58a6FF] hover:underline">
                         More Details
                       </span>
