@@ -9,7 +9,7 @@ import { SideBar } from "@/components/SideBar";
 export default function DashboardLayout({
     children, // will be a page or nested layout
   }: {
-    children: React.ReactNode
+    children: React.ReactNode;
   }) {
     return (
         <NextAuthProvider>
@@ -25,7 +25,8 @@ export default function DashboardLayout({
                 <Navbar />
               </div>
 
-              <div className=" ">{children}</div>
+              <div className=" ">{children}
+              </div>
             </div>
           </div>
         </MatchesProvider>

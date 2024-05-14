@@ -89,11 +89,13 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
                       </span>
                     </Link>
                     <MatchDeleteButton id={match.id} />
+
                     <Link href={`/dashboard/${gameMode.toLowerCase()}/${match.id}`}>
                       <span className=" text-[#58a6FF] hover:underline">
                         More Details
                       </span>
                     </Link>
+
                   </td>
                 </tr>
               ))}
