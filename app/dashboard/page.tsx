@@ -20,9 +20,9 @@ async function Dashboard() {
 
   return (
   
-    <div className="">
+    <div className="p-4">
        <TopCards /> 
-        <div className="">
+        <div className="flex items-center justify-center">
         <RecentMatchesTable />
         </div>
       </div>
