@@ -6,8 +6,13 @@
   box-sizing: border-box;
 }
 
+body {
+  @apply bg-black text-white
+}
+
 
 dialog {
   max-width: 100vw;
   max-height: 100vh;
 }
+
