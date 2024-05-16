@@ -43,30 +43,30 @@ export default async function GameModeMatchId({
   const performanceDescriptions = {
     win: {
       goodKd: {
-        high: "You were the star of the match, delivering both high kills and damage. Your performance was instrumental in securing the victory.",
-        low: "You demonstrated a strategic playstyle, securing key kills even with low overall damage. Your precision played a crucial role in the team's victory.",
+        highDamage: "You were the star of the match, delivering both high kills and damage. Your performance was instrumental in securing the victory.",
+        lowDamage: "You demonstrated a strategic playstyle, securing key kills even with low overall damage. Your precision played a crucial role in the team's victory.",
       },
       badKd: {
-        high: "Despite a lower kill count, your high damage output disrupted the enemy team and contributed to the win. Your aggressive playstyle created opportunities for your team.",
-        low: "You won the match, but there's potential for you to contribute more in terms of kills and damage. Remember, every bit of damage counts towards the team's success.",
+        highDamage: "Despite a lower kill count, your high damage output disrupted the enemy team and contributed to the win. Your aggressive playstyle created opportunities for your team.",
+        lowDamage: "You won the match, but there's potential for you to contribute more in terms of kills and damage. Remember, every bit of damage counts towards the team's success.",
       },
       evenKd: {
-        high: "You had a balanced kill-death ratio and high damage, contributing to the team's victory. Your balanced playstyle was effective.",
-        low: "You won the match with a balanced kill-death ratio, but your damage was on the lower side. A bit more aggression could enhance your impact.",
+        highDamage: "You had a balanced kill-death ratio and high damage, contributing to the team's victory. Your balanced playstyle was effective.",
+        lowDamage: "You won the match with a balanced kill-death ratio, but your damage was on the lower side. A bit more aggression could enhance your impact.",
       },
     },
     loss: {
       goodKd: {
-        high: "Even in defeat, your performance stood out with high kills and damage. You fought hard, and your efforts kept the team in the game.",
-        low: "Despite the loss, your kill count was impressive. However, increasing your damage output could turn future games in your favor.",
+        highDamage: "Even in defeat, your performance stood out with high kills and damage. You fought hard, and your efforts kept the team in the game.",
+        lowDamage: "Despite the loss, your kill count was impressive. However, increasing your damage output could turn future games in your favor.",
       },
       badKd: {
-        high: "You dealt a lot of damage but couldn't secure enough kills. Converting that damage into eliminations could change the outcome of the match.",
-        low: "The match didn't go as planned, and there's room for improvement in both kills and damage. Keep practicing, and you'll see better results.",
+        highDamage: "You dealt a lot of damage but couldn't secure enough kills. Converting that damage into eliminations could change the outcome of the match.",
+        lowDamage: "The match didn't go as planned, and there's room for improvement in both kills and damage. Keep practicing, and you'll see better results.",
       },
       evenKd: {
-        high: "Despite the loss, your balanced kill-death ratio and high damage show potential. Keep up the pressure in future matches.",
-        low: "You maintained a balanced kill-death ratio, but the low damage output couldn't turn the tide. Try to focus on dealing more damage in the next match.",
+        highDamage: "Despite the loss, your balanced kill-death ratio and high damage show potential. Keep up the pressure in future matches.",
+        lowDamage: "You maintained a balanced kill-death ratio, but the low damage output couldn't turn the tide. Try to focus on dealing more damage in the next match.",
       },
     },
   };
@@ -74,30 +74,30 @@ export default async function GameModeMatchId({
   const titles = {
     win: {
       goodKd: {
-        high: "Outstanding Victory!",
-        low: "Tactical Victory!",
+        highDamage: "Outstanding Victory!",
+        lowDamage: "Tactical Victory!",
       },
       badKd: {
-        high: "Strategic Victory!",
-        low: "Hard-fought Victory!",
+        highDamage: "Strategic Victory!",
+        lowDamage: "Hard-fought Victory!",
       },
       evenKd: {
-        high: "Balanced Powerhouse!",
-        low: "Steady Winner!",
+        highDamage: "Balanced Powerhouse!",
+        lowDamage: "Steady Winner!",
       },
     },
     loss: {
       goodKd: {
-        high: "Valiant Effort!",
-        low: "Unlucky!",
+        highDamage: "Valiant Effort!",
+        lowDamage: "Unlucky!",
       },
       badKd: {
-        high: "So Close!",
-        low: "Better Luck Next Time!",
+        highDamage: "So Close!",
+        lowDamage: "Better Luck Next Time!",
       },
       evenKd: {
-        high: "Close Call!",
-        low: "Steady Struggle!",
+        highDamage: "Close Call!",
+        lowDamage: "Steady Struggle!",
       },
     },
   };
@@ -108,11 +108,12 @@ export default async function GameModeMatchId({
     damage: number | null,
     matchResult: boolean
   ) {
+    /* 1.1 kd considered good?  possibly?*/
     const kdRating =
-      kills / deaths > 1 ? "goodKd" : kills / deaths < 1 ? "badKd" : "evenKd";
+      kills / deaths >= 1 ? "goodKd" : kills / deaths < 1 ? "badKd" : "evenKd";
 
     const damageRating =
-      damage !== null && damage >= kills * damage ? "high" : "low";
+      damage !== null && damage >= kills * 150 ? "highDamage" : "lowDamage";
 
     const result = matchResult ? "win" : "loss";
 
@@ -149,6 +150,9 @@ export default async function GameModeMatchId({
                 </p>
                 <p className="text-gray-500 dark:text-gray-400 mb-1">
                   Damage: {match.damage}
+                </p>
+                <p className="text-gray-500 dark:text-gray-400 mb-1">
+                  Avg Damage per Kill: { match.damage && (match.damage / match.kills).toFixed(2)}
                 </p>
                 {match.gameMode === "Hardpoint" && (
                   <p className="text-gray-500 dark:text-gray-400 mb-1">
