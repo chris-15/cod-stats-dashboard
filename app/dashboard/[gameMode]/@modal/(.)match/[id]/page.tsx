@@ -1,10 +1,12 @@
 import { authOptions } from "@/lib/auth";
-import { getMatchById } from "@/server/queries";
+import { deleteMatch, getMatchById } from "@/server/queries";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 import { Modal } from "./modal";
 import Image from "next/image";
 import { MatchMap } from "@prisma/client";
+import { convertTime } from "@/lib/utils";
+import Link from "next/link";
 
 export default async function GameModeMatchId({
   params: { id: id },
@@ -148,12 +150,24 @@ export default async function GameModeMatchId({
                 <p className="text-gray-500 dark:text-gray-400 mb-1">
                   Damage: {match.damage}
                 </p>
-                <p className="text-gray-500 dark:text-gray-400 mb-1">
-                  Time: {match.time}
-                </p>
+                {match.gameMode === "Hardpoint" && (
+                  <p className="text-gray-500 dark:text-gray-400 mb-1">
+                    Time: {convertTime(match.time)}
+                  </p>
+                )}
                 <p className="text-gray-500 dark:text-gray-400 mb-1">
                   KD Ratio: {(match.kills / match.deaths).toFixed(2)}
                 </p>
+                {match.gameMode === "SearchAndDestroy" && (
+                  <>
+                    <p className="text-gray-500 dark:text-gray-400 mb-1">
+                      Plants: {match.plants}
+                    </p>
+                    <p className="text-gray-500 dark:text-gray-400 mb-1">
+                      Defuses: {match.defuses}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -183,6 +197,29 @@ export default async function GameModeMatchId({
               Match Played on: {match.createdAt.toLocaleDateString()} at{" "}
               {match.createdAt.toLocaleTimeString()}
             </p>
+            {match.updatedAt.getTime() !== match.createdAt.getTime() && (
+              <p>
+                Match Updated on: {match.updatedAt.toLocaleDateString()} at{" "}
+                {match.updatedAt.toLocaleTimeString()}
+              </p>
+            )}
+
+            <div className="flex space-x-4 items-center">
+              <Link href={`/edit-stats/${match.id}`}>
+                <span className=" text-[#58a6FF] hover:underline">Edit</span>
+              </Link>
+              <form
+                action={async () => {
+                  "use server";
+
+                  await deleteMatch(match.id);
+                }}
+              >
+                <button type="submit" className=" bg-red-500 p-2 rounded-lg">
+                  Delete
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

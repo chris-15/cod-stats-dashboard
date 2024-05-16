@@ -38,16 +38,16 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
                 {/* <th className="text-center">Game Mode</th> */}
                 <th>Map</th>
                 <th>W/L Result</th>
-               {/*  <th>Kills</th>
+                {/*  <th>Kills</th>
                 <th>Deaths</th>
                 <th>Damage</th> */}
                 {/* {gameMode === "Hardpoint" && <th>Time</th>} */}
-                {gameMode === "SearchAndDestroy" && (
+                {/* {gameMode === "SearchAndDestroy" && (
                   <>
                     <th>Plants</th>
                     <th>Defuses</th>
                   </>
-                )}
+                )} */}
 
                 <th className="text-center">K/D Ratio</th>
                 <th>Actions</th>
@@ -82,20 +82,16 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
                     </>
                   )} */}
                   <td>{(match.kills / match.deaths).toFixed(2)}</td>
-                  <td className="flex justify-around items-center">
-                    <Link href={`/edit-stats/${match.id}`}>
-                      <span className=" text-[#58a6FF] hover:underline">
-                        Edit
-                      </span>
-                    </Link>
-                    <MatchDeleteButton id={match.id} />
-
-                    <Link href={`/dashboard/${gameMode.toLowerCase()}/match/${match.id}`}>
+                  <td className="">
+                    <Link
+                      href={`/dashboard/${gameMode.toLowerCase()}/match/${
+                        match.id
+                      }`}
+                    >
                       <span className=" text-[#58a6FF] hover:underline">
                         More Details
                       </span>
                     </Link>
-
                   </td>
                 </tr>
               ))}

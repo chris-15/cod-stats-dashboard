@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { TMatch } from "@/app/types";
-import { useMatches } from "./matchesContext";
 import toast from "react-hot-toast";
 
 //setting types for the map options

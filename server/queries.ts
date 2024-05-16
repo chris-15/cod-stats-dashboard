@@ -3,6 +3,8 @@ import prisma from "@/lib/prismadb";
 import { TMatchQuery, TMatch, TGameMode } from "@/app/types";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
+
 
 export async function getMatches(): Promise<TMatchQuery[]> {
   const session = await getServerSession(authOptions);
@@ -64,4 +66,21 @@ export async function getMatchesByMode(gameMode:TGameMode) {
   if (!matches) throw new Error("Matches not found ");
 
   return matches;
+}
+
+//delete by match id
+// delete match by id
+export async function deleteMatch(id:string) {
+  //getting the authenticated user session
+  const session = await getServerSession(authOptions);
+
+  //if no session return the next response error
+  if (!session) throw new Error("Unauthorized");
+
+  const deletedMatch = await prisma.match.delete({
+    where: {id},
+  })
+  //console.log("match deleted!")
+
+  redirect('/dashboard')
 }

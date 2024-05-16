@@ -1,5 +1,6 @@
 import { authOptions } from "@/lib/auth";
-import { getMatchById } from "@/server/queries";
+import { convertTime } from "@/lib/utils";
+import { deleteMatch, getMatchById } from "@/server/queries";
 import { getServerSession } from "next-auth/next";
 import Image from "next/image";
 import { redirect } from "next/navigation";
@@ -126,65 +127,87 @@ export default async function GameModeMatchId({
 
   return (
     <>
-   
-    <a href={`/dashboard/${match.gameMode.toLowerCase()}`}>
+      <a href={`/dashboard/${match.gameMode.toLowerCase()}`}>
         <p className=""> {`<- ${match.gameMode}`}</p>
       </a>
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-6xl max-h-screen mx-auto py-6 px-4 sm:px-6 lg:px-8 rounded-lg">
-      <div className="space-y-6">
-        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
-          <h2 className="text-2xl font-bold mb-4">Match Stats</h2>
-          <div className="mt-6">
-            {/* <h3 className="text-lg font-medium mb-2">Top Performers</h3> */}
-            <div>
-              <p className="text-gray-500 dark:text-gray-400 mb-1">
-                Match Result: {match.win ? "Win" : "Loss"}
-              </p>
-              <p className="text-gray-500 dark:text-gray-400 mb-1">
-                Kills: {match.kills}{" "}
-              </p>
-              <p className="text-gray-500 dark:text-gray-400 mb-1">
-                Deaths: {match.deaths}
-              </p>
-              <p className="text-gray-500 dark:text-gray-400 mb-1">
-                Damage: {match.damage}
-              </p>
-              <p className="text-gray-500 dark:text-gray-400 mb-1">
-                Time: {match.time}
-              </p>
-              <p className="text-gray-500 dark:text-gray-400 mb-1">
-                KD Ratio: {(match.kills / match.deaths).toFixed(2)}
-              </p>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-6xl max-h-screen mx-auto py-6 px-4 sm:px-6 lg:px-8 rounded-lg">
+        <div className="space-y-6">
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
+            <h2 className="text-2xl font-bold mb-4">Match Stats</h2>
+            <div className="mt-6">
+              {/* <h3 className="text-lg font-medium mb-2">Top Performers</h3> */}
+              <div>
+                <p className="text-gray-500 dark:text-gray-400 mb-1">
+                  Match Result: {match.win ? "Win" : "Loss"}
+                </p>
+                <p className="text-gray-500 dark:text-gray-400 mb-1">
+                  Kills: {match.kills}{" "}
+                </p>
+                <p className="text-gray-500 dark:text-gray-400 mb-1">
+                  Deaths: {match.deaths}
+                </p>
+                <p className="text-gray-500 dark:text-gray-400 mb-1">
+                  Damage: {match.damage}
+                </p>
+                {match.gameMode === "Hardpoint" && (
+                  <p className="text-gray-500 dark:text-gray-400 mb-1">
+                    Time: {convertTime(match.time)}
+                  </p>
+                )}
+                <p className="text-gray-500 dark:text-gray-400 mb-1">
+                  KD Ratio: {(match.kills / match.deaths).toFixed(2)}
+                </p>
+                {match.gameMode === "SearchAndDestroy" && (
+                  <>
+                    <p className="text-gray-500 dark:text-gray-400 mb-1">
+                      Plants: {match.plants}
+                    </p>
+                    <p className="text-gray-500 dark:text-gray-400 mb-1">
+                      Defuses: {match.defuses}
+                    </p>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
+            <p className="text-gray-500 dark:text-gray-400 mb-2">
+              Match Summary
+            </p>
+            <h3 className="text-2xl font-bold mb-2">{title}</h3>
+            <p className="text-gray-500 dark:text-gray-400">{performance}</p>
+          </div>
+        </div>
+
+        <div className="space-y-6 order-first lg:order-last">
+          <Image
+            alt="Match Image"
+            className="rounded-lg shadow-lg"
+            height={500}
+            src={mapImages[match.matchMap]}
+            style={{
+              objectFit: "contain",
+            }}
+            width={800}
+          />
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
+            <p>Map: {match.matchMap}</p>
+            <p>
+              Match Played on: {match.createdAt.toLocaleDateString()} at{" "}
+              {match.createdAt.toLocaleTimeString()}
+            </p>
+            <div >
+              <form action={async() =>{
+                'use server';
+
+                await deleteMatch(match.id)
+              }}> 
+              <button type="submit" className=" bg-red-500 p-2 rounded-lg">Delete</button>
+              </form>
             </div>
           </div>
         </div>
-        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
-          <p className="text-gray-500 dark:text-gray-400 mb-2">Match Summary</p>
-          <h3 className="text-2xl font-bold mb-2">{title}</h3>
-          <p className="text-gray-500 dark:text-gray-400">{performance}</p>
-        </div>
       </div>
-
-      <div className="space-y-6 order-first lg:order-last">
-        <Image
-          alt="Match Image"
-          className="rounded-lg shadow-lg"
-          height={500}
-          src={mapImages[match.matchMap]}
-          style={{
-            objectFit: "contain",
-          }}
-          width={800}
-        />
-        <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
-          <p>Map: {match.matchMap}</p>
-          <p>
-            Match Played on: {match.createdAt.toLocaleDateString()} at{" "}
-            {match.createdAt.toLocaleTimeString()}
-          </p>
-        </div>
-      </div>
-    </div>
     </>
   );
 }
