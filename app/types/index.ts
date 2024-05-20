@@ -37,3 +37,7 @@ export type TMatchQuery = {
 };
 
 export type TGameMode = "Hardpoint" | "Control" | "SearchAndDestroy";
+
+export type BarChartProps = {
+  matches: TMatchQuery[];
+};
