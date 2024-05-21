@@ -51,32 +51,33 @@ async function TopCards() {
   const searchWinPercentage = calcWinByMode(matches, "SearchAndDestroy");
 
   return (
-    <div className=" grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-[96rem] ">
-      <div>
+    <div className="grid gap-4 md:grid-cols-2 md:gap-8 xl:grid-cols-4">
+
+      <div className="border rounded-lg py-2">
         <div className="">
-          <div className="">
-            <h2 className="">Overall</h2>
+          <h2 className="text-center font-bold capitalize text-xl mb-5">Overall</h2>
+        </div>
+
+        <div className="grid grid-cols-2 divide-x divide-white text-center">
+          <div>
+            <p className="text-lg font-semibold text-gray-300">K/D Ratio</p>
+            <p className="font-bold text-4xl text-gray-200">{overallKdRatio}</p>
           </div>
-          <div className="">
-            <div>
-              <p className="">K/D Ratio</p>
-              <p className="">{overallKdRatio}</p>
-            </div>
-            <div>
-              <p className="">Win %</p>
-              <p
-                className={
-                  overallWinPercentage > 50
-                    ? "text-green-500 font-bold text-4xl"
-                    : "text-red-500 font-bold text-4xl"
-                }
-              >
-                {overallWinPercentage}
-              </p>
-            </div>
+          <div>
+            <p className="text-lg font-semibold text-gray-300">Win %</p>
+            <p
+              className={
+                overallWinPercentage > 50
+                  ? "text-green-500 font-bold text-4xl"
+                  : "text-red-500 font-bold text-4xl"
+              }
+            >
+              {overallWinPercentage}
+            </p>
           </div>
         </div>
       </div>
+
       <TopCardGameMode
         gameMode="hardpoint"
         kdRatio={hpKdRatio}

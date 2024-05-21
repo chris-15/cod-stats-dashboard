@@ -15,19 +15,20 @@ function TopCardGameMode({
     <Link
       href={gameMode === "Overall" ? `/dashboard` : `/dashboard/${gameMode}`}
     >
-      <div className="">
+      <div className="border rounded-lg py-2">
         <div className="">
-          <h2 className=" ">
+          <h2 className="text-center font-bold capitalize text-xl mb-5 ">
             {gameMode === "searchanddestroy" ? "Search & Destroy" : gameMode}
           </h2>
         </div>
-        <div className="">
+
+        <div className="grid grid-cols-2 divide-x divide-white text-center">
           <div>
-            <p className="">K/D Ratio</p>
-            <p className="">{kdRatio}</p>
+            <p className="text-lg font-semibold text-gray-300">K/D Ratio</p>
+            <p className="font-bold text-4xl text-gray-200">{kdRatio}</p>
           </div>
           <div>
-            <p className="">Win %</p>
+            <p className="text-lg font-semibold text-gray-300">Win %</p>
             <p
               className={
                 winPercentage > 50

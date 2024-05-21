@@ -38,8 +38,6 @@ function gameModeCount(match: TMatchQuery[], gameMode: string) {
   return modeCount;
 }
 
-
-
 async function Dashboard() {
   const session = await getServerSession(authOptions);
   if (!session) {
@@ -58,16 +56,13 @@ async function Dashboard() {
     { name: "S&D", value: gameModeCount(matches, "SearchAndDestroy") },
   ];
 
-
   return (
     <div className="p-4">
       <TopCards />
-      {/* */}
-      <div className="grid gap-4 grid-cols1 ">
-        
+      <div className="grid gap-4 grid-cols1 mt-4 ">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <ModeBarChart data={modeCountData} />
-          <MapBarChart data={mapCountData}/>
+          <MapBarChart data={mapCountData} />
         </div>
         <RecentMatchesTable />
       </div>
