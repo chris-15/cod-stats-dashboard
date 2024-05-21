@@ -1,28 +1,18 @@
 "use client";
 
 import { BarChartProps, TMatchQuery } from "@/app/types";
-import { Bar } from "react-chartjs-2";
 
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
+  BarChart,
+  Bar,
+  Rectangle,
+  XAxis,
+  YAxis,
+  CartesianGrid,
   Tooltip,
   Legend,
-} from "chart.js";
-
-
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+  ResponsiveContainer,
+} from "recharts";
 
 function gameModeCount(match: TMatchQuery[], gameMode: string) {
   let modeCount = 0;
@@ -37,52 +27,30 @@ function gameModeCount(match: TMatchQuery[], gameMode: string) {
 }
 
 function ModeBarChart({ matches }: BarChartProps) {
-  const hardpointCount = gameModeCount(matches, "Hardpoint");
-  const controlCount = gameModeCount(matches, "Control");
-  const searchCount = gameModeCount(matches, "SearchAndDestroy");
-
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: "top" as const,
-        labels: {
-          font: {
-            size: 14,
-          },
-          color: '#333',
-        },
-      },
-      title: {
-        display: true,
-        text: "Game Mode Count",
-        font: {
-          size: 20,
-        },
-      },
-      tooltip: {
-        enabled: true,
-      },
-    }, 
-    
-  };
-
-  const labels = ["Hardpoint", "Control", "Search and Destroy"];
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: "Count",
-        data: [hardpointCount, controlCount, searchCount],
-        backgroundColor: ["rgba(255, 99, 132, 0.5)", "rgba(75, 192, 192, 0.5)", "rgba(255, 206, 86, 0.5)"],
-      },
-    ],
-  };
-
+  const data = [
+    { mode: "Hardpoint", count: gameModeCount(matches, "Hardpoint") },
+    { mode: "Control", count: gameModeCount(matches, "Control") },
+    { mode: "S&D", count: gameModeCount(matches, "SearchAndDestroy") },
+  ];
   return (
-    <div className="w-full overflow-auto">
-      <Bar options={options} data={data} />
+    <div className="border">
+       <h2 className="text-center pt-4">Match Count by Game Mode</h2>
+      <ResponsiveContainer minHeight={300} maxHeight={300}>
+        <BarChart
+          data={data}
+          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+        >
+          <CartesianGrid strokeDasharray="2" />
+          <XAxis dataKey="mode" />
+          <YAxis />
+          <Tooltip />
+          <Bar
+            dataKey="count"
+            fill="#8884d8"
+            activeBar={<Rectangle fill="pink" stroke="blue" />}
+          />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 }

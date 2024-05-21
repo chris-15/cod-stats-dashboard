@@ -1,28 +1,21 @@
-'use client'
+"use client";
+
 import { BarChartProps, TMatchQuery } from "@/app/types";
-import { Bar } from "react-chartjs-2";
+
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
+  BarChart,
+  Bar,
+  Rectangle,
+  XAxis,
+  YAxis,
+  CartesianGrid,
   Tooltip,
   Legend,
-} from "chart.js";
+  ResponsiveContainer,
+} from "recharts";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-//for each match
 function calcMapCount(match: TMatchQuery[]) {
-  let mapCounts: { [key: string]: number} = {};
+  let mapCounts: { [key: string]: number } = {};
 
   match.forEach((obj) => {
     mapCounts[obj.matchMap]
@@ -30,59 +23,38 @@ function calcMapCount(match: TMatchQuery[]) {
       : (mapCounts[obj.matchMap] = 1);
   });
 
-  let sortedMapCounts: { [key: string]: number } = {};
-  Object.keys(mapCounts).sort().forEach((key) => {
-    sortedMapCounts[key] = mapCounts[key];
-  });
+  let sortedMapCounts = Object.keys(mapCounts)
+    .sort()
+    .map((key) => ({ name: key, value: mapCounts[key] }));
 
   return sortedMapCounts;
 }
 
 function MapBarChart({ matches }: BarChartProps) {
-  const mapCounts = calcMapCount(matches);
-  /*   console.log(Object.keys(mapCounts)) */
-
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: "top" as const,
-        labels: {
-          font: {
-            size: 14,
-          },
-          color: "#333",
-        },
-      },
-      title: {
-        display: true,
-        text: "Map Count",
-        font: {
-          size: 20,
-        },
-      },
-      tooltip: {
-        enabled: true,
-      },
-    },
-  };
-
-  const labels = Object.keys(mapCounts).sort()
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: "Count",
-        data: Object.values(mapCounts),
-        backgroundColor: ["rgba(255, 99, 132, 0.5)"],
-      },
-    ],
-  };
+  console.log(calcMapCount(matches));
+  const data = calcMapCount(matches).filter(
+    (match) => match.name != "Skidrow" && match.name != "Terminal"
+  );
 
   return (
-    <div className="w-full overflow-auto">
-      <Bar options={options} data={data} />
+    <div className="border">
+      <h2 className="text-center pt-4">Match Count by Map</h2>
+      <ResponsiveContainer minHeight={300} maxHeight={300}>
+        <BarChart
+          data={data}
+          margin={{ top: 5, right: 30, left: 20, bottom: 50}}
+        >
+          <CartesianGrid strokeDasharray="2" />
+          <XAxis dataKey="name" angle={-45} textAnchor="end" />
+          <YAxis />
+          <Tooltip />
+          <Bar
+            dataKey="value"
+            fill="#8884d8"
+            activeBar={<Rectangle fill="pink" stroke="blue" />}
+          />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 }
