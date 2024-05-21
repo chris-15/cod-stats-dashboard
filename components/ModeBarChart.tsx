@@ -14,24 +14,20 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-function gameModeCount(match: TMatchQuery[], gameMode: string) {
-  let modeCount = 0;
+type TData = {
+  name: string;
+  value: number;
+};
 
-  match.forEach((obj) => {
-    if (obj.gameMode === gameMode) {
-      modeCount++;
-    }
-  });
+type MapBarChartProps = {
+  data: TData[];
+};
 
-  return modeCount;
-}
 
-function ModeBarChart({ matches }: BarChartProps) {
-  const data = [
-    { mode: "Hardpoint", count: gameModeCount(matches, "Hardpoint") },
-    { mode: "Control", count: gameModeCount(matches, "Control") },
-    { mode: "S&D", count: gameModeCount(matches, "SearchAndDestroy") },
-  ];
+
+
+function ModeBarChart({ data }:MapBarChartProps) {
+ 
   return (
     <div className="border">
        <h2 className="text-center pt-4">Match Count by Game Mode</h2>
@@ -41,11 +37,11 @@ function ModeBarChart({ matches }: BarChartProps) {
           margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="2" />
-          <XAxis dataKey="mode" />
+          <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
           <Bar
-            dataKey="count"
+            dataKey="value"
             fill="#8884d8"
             activeBar={<Rectangle fill="pink" stroke="blue" />}
           />

@@ -14,27 +14,18 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-function calcMapCount(match: TMatchQuery[]) {
-  let mapCounts: { [key: string]: number } = {};
+type TData = {
+  name: string;
+  value: number;
+};
 
-  match.forEach((obj) => {
-    mapCounts[obj.matchMap]
-      ? mapCounts[obj.matchMap]++
-      : (mapCounts[obj.matchMap] = 1);
-  });
+type MapBarChartProps = {
+  data: TData[];
+};
 
-  let sortedMapCounts = Object.keys(mapCounts)
-    .sort()
-    .map((key) => ({ name: key, value: mapCounts[key] }));
 
-  return sortedMapCounts;
-}
+function MapBarChart({ data }:MapBarChartProps) {
 
-function MapBarChart({ matches }: BarChartProps) {
-  console.log(calcMapCount(matches));
-  const data = calcMapCount(matches).filter(
-    (match) => match.name != "Skidrow" && match.name != "Terminal"
-  );
 
   return (
     <div className="border">
