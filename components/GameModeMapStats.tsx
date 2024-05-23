@@ -42,6 +42,7 @@ const mapSets: Record<TGameMode, string[]> = {
 };
 
 function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
+
   const getMapModeMatches = (
     gameMode: string,
     mapSet: string[],
@@ -80,12 +81,12 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
   let bestMap = calcBestMap(mapModeMatches);
 
   return (
-    <section className="">
-      <div className="">
+    <section className="w-full border shadow-lg rounded-lg">
+      <div className=" ">
         <h2 className="">Map Stats</h2>
       </div>
       <div className="">
-        <table className="">
+        <table className="w-full">
           <thead>
             <tr>
               <th></th>

@@ -51,7 +51,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
  const mapCountData = calcMapCount(matches, gameMode);
 
   return (
-    <div className="">
+    <div className="p-4">
       <Link href={"/dashboard"}>
         <p className=""> {`<- Dashboard`}</p>
       </Link>
@@ -59,8 +59,10 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
         {gameMode === "SearchAndDestroy" ? "Search And Destroy" : gameMode}
       </h2>
       <GameModeStatsCard gameMode={gameMode} matches={matches} />
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
       <GameModeMapStats gameMode={gameMode} matches={matches} />
       <MapBarChart data={mapCountData} />
+      </div>
       <GameModeMatchesTable gameMode={gameMode} matches={matches} />
     </div>
   );

@@ -112,8 +112,8 @@ function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
   );
 
   return (
-    <section className="">
-      <div className="">
+    <section className="border rounded-lg p-4 relative">
+      <div className="absolute top-0 left-0 flex space-x-2">
         <button
           className={`py-2 px-4 m-2 ${
             tab === "tab1"
@@ -146,7 +146,7 @@ function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
         </button>
       </div>
 
-      <div className="">
+      <div className="text-center grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-4 xl:flex xl:justify-evenly xl:flex-wrap mt-12">
         <div className="">
           <p className="">K/D</p>
           <p className="">{totalKdRatio}</p>

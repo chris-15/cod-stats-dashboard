@@ -25,13 +25,13 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
   };
 
   return (
-    <section className="">
+    <section className="border">
       <div className="">
         <h2 className="">All Matches</h2>
       </div>
       {gameModeMatches.length > 0 ? (
         <div>
-          <table className="">
+          <table className="w-full">
             <thead className="">
               <tr>
                 <th>Date</th>
@@ -97,12 +97,13 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
               ))}
             </tbody>
           </table>
-
-          <div className=" text-center py-4">
+          <div className="text-center py-4">
             <button className="btn" onClick={handleLoadMoreMatches}>
               View More!
             </button>
           </div>
+
+          
         </div>
       ) : (
         <p className="text-center p-4">No Matches Recorded</p>
