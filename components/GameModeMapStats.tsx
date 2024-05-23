@@ -106,7 +106,7 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
 
               <th>Avg Kills</th>
               <th>Kill Record</th>
-              <th>Map Count</th>
+              {/* <th>Map Count</th> */}
             </tr>
           </thead>
           <tbody>
@@ -151,7 +151,7 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
                 {gameMode === "Control" && <td>{calcAvgDamage(matches)}</td>}
                 <td>{calcAvgKills(matches)}</td>
                 <td>{calcHighestKill(matches)}</td>
-                <td>{matches.length}</td>
+                {/* <td>{matches.length}</td> */}
               </tr>
             ))}
           </tbody>
