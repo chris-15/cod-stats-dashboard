@@ -1,7 +1,5 @@
 "use client";
 
-import { BarChartProps, TMatchQuery } from "@/app/types";
-
 import {
   BarChart,
   Bar,

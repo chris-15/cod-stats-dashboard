@@ -56,7 +56,6 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
       return gameModeMatches.filter((match) => match.matchMap === map);
     });
   };
-
   const mapModeMatches = getMapModeMatches(
     gameMode,
     mapSets[gameMode],
