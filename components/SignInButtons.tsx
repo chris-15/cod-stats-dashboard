@@ -6,18 +6,18 @@ import { signIn } from "next-auth/react";
 
 function SignInButtons() {
   return (
-    <section className="flex justify-center items-center">
-      <div className="p-8">
-        <h1 className="text-center text-4xl font-bold mb-4">
-          Sign in / Sign Up
+    <section className="flex justify-center items-center h-screen">
+      <div className="mx-4 w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+        <h1 className="text-center text-4xl font-bold mb-4 text-gray-900">
+         Welcome Back!
         </h1>
         <p className="text-center text-sm mb-4 text-[#8b949e]">
-          You can use your Google account to sign in or create a new account.
+          Sign in to your account to continue.
         </p>
-        <div className="mt-4 p-4 flex flex-col items-center justify-center gap-4">
+        <div className="flex justify-center">
           <button
             onClick={() => signIn("google")}
-            className="flex items-center border p-4 rounded-full gap-4 hover:bg-[#161B22] transition"
+            className=" inline-flex h-10 items-center justify-center rounded-md border border-gray-20 px-4 text-sm font-medium shadow-sm transition-colors hover:bg-gray-100 text-gray-900"
           >
             <span>
               <Image
@@ -27,7 +27,7 @@ function SignInButtons() {
                 alt="google-logo"
               />
             </span>
-            Sign In / Sign Up with Google
+            Sign In with Google
           </button>
         </div>
       </div>
