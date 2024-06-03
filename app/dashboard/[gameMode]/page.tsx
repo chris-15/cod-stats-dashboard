@@ -8,7 +8,7 @@ import GameModeMapStats from "@/components/GameModeMapStats";
 import { TGameMode, TMatchQuery } from "@/app/types";
 import { getMatches, getMatchesByMode } from "@/server/queries";
 import MapBarChart from "@/components/MapBarChart";
-
+import KdBarChart from "@/components/KdBarChart";
 
 async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   const session = await getServerSession(authOptions);
@@ -62,9 +62,12 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
         <GameModeMapStats gameMode={gameMode} matches={matches} />
         <MapBarChart data={mapCountData} />
       </div>
-      {/* <KdBarChart matches={matches}/> */}
+      
+      <KdBarChart matches={matches}/>
+
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-        <div className="grid grid-cols-2">
+        <GameModeMatchesTable gameMode={gameMode} matches={matches} />
+        <div className="grid grid-cols-2 order-first xl:order-none">
           <div>
             Top 10 Kills
             <TopKills matches={matches} gameMode={gameMode} />
@@ -74,7 +77,6 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
             <TopDamage matches={matches} gameMode={gameMode} />
           </div>
         </div>
-        <GameModeMatchesTable gameMode={gameMode} matches={matches} />
       </div>
     </div>
   );
@@ -93,24 +95,24 @@ function TopKills({ matches, gameMode }: topTenProps) {
 
   return (
     <div className="">
-    {topTenMatches.map((match, index) => (
-      <div
-        key={match.id}
-        className=""
-      >
-        <Link href={`/dashboard/${gameMode.toLowerCase()}/match/${match.id}`} className="flex items-center justify-between px-4 py-3 rounded-lg">
-          <div>
-            <h4 className="font-medium">{match.matchMap}</h4>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              Total Kills: {match.kills}
-            </p>
-          </div>
+      {topTenMatches.map((match, index) => (
+        <div key={match.id} className="">
+          <Link
+            href={`/dashboard/${gameMode.toLowerCase()}/match/${match.id}`}
+            className="flex items-center justify-between px-4 py-3 rounded-lg"
+          >
+            <div>
+              <h4 className="font-medium">{match.matchMap}</h4>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Total Kills: {match.kills}
+              </p>
+            </div>
 
-          <div className="w-6 h-6 text-primary">{index + 1}</div>
-        </Link>
-      </div>
-    ))}
-  </div>
+            <div className="w-6 h-6 text-primary">{index + 1}</div>
+          </Link>
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -124,11 +126,11 @@ function TopDamage({ matches, gameMode }: topTenProps) {
   return (
     <div className=" ">
       {topTenMatches.map((match, index) => (
-        <div
-          key={match.id}
-          className=""
-        >
-          <Link href={`/dashboard/${gameMode.toLowerCase()}/match/${match.id}`} className="flex items-center justify-between px-4 py-3 rounded-lg">
+        <div key={match.id} className="">
+          <Link
+            href={`/dashboard/${gameMode.toLowerCase()}/match/${match.id}`}
+            className="flex items-center justify-between px-4 py-3 rounded-lg"
+          >
             <div>
               <h4 className="font-medium">{match.matchMap}</h4>
               <p className="text-sm text-gray-500 dark:text-gray-400">
