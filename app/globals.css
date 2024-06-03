@@ -16,3 +16,13 @@ dialog {
   max-height: 100vh;
 }
 
+table {
+  @apply min-w-full px-4 sm:px-6 py-4 text-lg
+}
+th {
+  @apply px-2 sm:px-4 py-2 font-medium text-gray-300 uppercase tracking-wider text-center whitespace-nowrap
+}
+
+td {
+  @apply px-2 sm:px-4 py-2 text-gray-200
+}

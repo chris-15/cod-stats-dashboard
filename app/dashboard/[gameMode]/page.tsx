@@ -9,6 +9,7 @@ import { TGameMode, TMatchQuery } from "@/app/types";
 import { getMatches, getMatchesByMode } from "@/server/queries";
 import MapBarChart from "@/components/MapBarChart";
 import KdBarChart from "@/components/KdBarChart";
+import { getNumberSuffix } from "@/lib/utils";
 
 async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   const session = await getServerSession(authOptions);
@@ -57,17 +58,18 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
       <h2 className="">
         {gameMode === "SearchAndDestroy" ? "Search And Destroy" : gameMode}
       </h2>
-      <GameModeStatsCard gameMode={gameMode} matches={matches} />
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-        <GameModeMapStats gameMode={gameMode} matches={matches} />
-        <MapBarChart data={mapCountData} />
-      </div>
       
-      <KdBarChart matches={matches}/>
+      <div className=" grid grid-cols-1">
 
+      <GameModeStatsCard gameMode={gameMode} matches={matches} />
+      <GameModeMapStats gameMode={gameMode} matches={matches} />
+
+
+     
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-        <GameModeMatchesTable gameMode={gameMode} matches={matches} />
-        <div className="grid grid-cols-2 order-first xl:order-none">
+      
+
+        <div className="grid grid-cols-2 ">
           <div>
             Top 10 Kills
             <TopKills matches={matches} gameMode={gameMode} />
@@ -77,7 +79,16 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
             <TopDamage matches={matches} gameMode={gameMode} />
           </div>
         </div>
+        <div>
+          <MapBarChart data={mapCountData} />
+          <KdBarChart matches={matches} />
+        </div>
+
       </div>
+
+        <GameModeMatchesTable gameMode={gameMode} matches={matches} />
+      </div>
+      
     </div>
   );
 }
@@ -108,7 +119,7 @@ function TopKills({ matches, gameMode }: topTenProps) {
               </p>
             </div>
 
-            <div className="w-6 h-6 text-primary">{index + 1}</div>
+            <div className="w-6 h-6 text-primary">{getNumberSuffix(index + 1)}</div>
           </Link>
         </div>
       ))}
@@ -138,10 +149,11 @@ function TopDamage({ matches, gameMode }: topTenProps) {
               </p>
             </div>
 
-            <div className="w-6 h-6 text-primary">{index + 1}</div>
+            <div className="w-6 h-6 text-primary">{getNumberSuffix(index + 1)}</div>
           </Link>
         </div>
       ))}
     </div>
   );
 }
+
