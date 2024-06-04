@@ -13,7 +13,7 @@ async function RecentMatchesTable( ) {
   const lastFifteenMatches = matches ? matches.slice(0, 15) : [];
 
   return (
-    <section className="w-full border border-[#444444] rounded-lg bg-[#1A1D21] p-4 overflow-x-auto">
+    <section className="w-full border border-[#444444] rounded-lg bg-secondary-bg p-4 overflow-x-auto">
       <div className="">
         <h2 className="">Recent Matches - Quick Stats</h2>
       </div>
@@ -50,9 +50,9 @@ async function RecentMatchesTable( ) {
                 </td>
                 <td className=""> {match.matchMap}</td>
                 {match.win ? (
-                  <td className="text-green-500 ">Win</td>
+                  <td className="text-[#b0ff34]  ">Win</td>
                 ) : (
-                  <td className="text-red-500 ">Loss</td>
+                  <td className="text-[#ff4d4d] ">Loss</td>
                 )}
                 {/* <td>{match.kills}</td>
                 <td>{match.deaths}</td> */}

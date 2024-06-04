@@ -50,7 +50,7 @@ export function SideBar() {
   //console.log(pathname);
 
   return (
-    <div className="h-screen w-64 flex flex-col justify-between shadow-lg p-4 sticky top-0 bg-[#1A1D21] border-r border-[#444444] text-white">
+    <div className="h-screen w-64 flex flex-col justify-between shadow-lg p-4 sticky top-0 bg-secondary-bg border-r border-[#444444] text-white">
       <div className="">
         <div className=" flex flex-col space-y-10">
           {/* Header */}

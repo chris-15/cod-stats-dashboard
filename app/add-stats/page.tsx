@@ -11,7 +11,7 @@ async function AddStats() {
   //console.log(session)
 
   return (
-    <div className="">
+    <div className="p-4">
       <AddStatsForm />
     </div>
   );

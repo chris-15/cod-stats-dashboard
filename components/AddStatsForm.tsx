@@ -93,65 +93,70 @@ function AddStatsForm() {
   };
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4 text-center">Add Stats</h2>
-      <form
-        className="max-w-md mx-auto p-8 rounded shadow-md bg-[#161B22] border border-[#21262D]"
-        onSubmit={handleFormSubmit}
-      >
-        <label htmlFor="gameMode" className="">
-          GameMode:
-        </label>
-        <select
-          id="gameMode"
-          name="gameMode"
-          required
-          className="mt-1 p-2 w-full border rounded-md text-center"
-          onChange={handleGameModeChange}
-        >
-          <option value="">Select a Game Mode</option>
-          <option value="Hardpoint">Hardpoint</option>
-          <option value="Control">Control</option>
-          <option value="SearchAndDestroy">Search and Destroy</option>
-        </select>
+    <div className="max-w-md mx-auto p-8 shadow-md bg-secondary-bg border border-[#444444] rounded-lg ">
+      <h2 className="text-2xl font-bold mb-4 text-center">
+        Add Your Match Statistics
+      </h2>
+      <form className="space-y-4" onSubmit={handleFormSubmit}>
+        <div className="">
+          <label htmlFor="gameMode" className="">
+            GameMode:
+          </label>
+          <select
+            id="gameMode"
+            name="gameMode"
+            required
+            className="mt-1 p-2 w-full border rounded-md text-center"
+            onChange={handleGameModeChange}
+          >
+            <option value="">Select a Game Mode</option>
+            <option value="Hardpoint">Hardpoint</option>
+            <option value="Control">Control</option>
+            <option value="SearchAndDestroy">Search and Destroy</option>
+          </select>
+        </div>
 
-        <label htmlFor="matchMap" className="">
-          Map:
-        </label>
-        <select
-          id="matchMap"
-          name="matchMap"
-          required
-          className="mt-1 p-2 w-full border rounded-md text-center"
-          onChange={(e) => setMatchMap(e.target.value)}
-        >
-          <option value="">Select a Map</option>
-          {/* map filters based on which game mode is selected, different map set for each game mode */}
-          {gameMode &&
-            mapOptions[gameMode].map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-        </select>
+        <div className="">
+          <label htmlFor="matchMap" className="">
+            Map:
+          </label>
+          <select
+            id="matchMap"
+            name="matchMap"
+            required
+            className="mt-1 p-2 w-full border rounded-md text-center"
+            onChange={(e) => setMatchMap(e.target.value)}
+          >
+            <option value="">Select a Map</option>
+            {/* map filters based on which game mode is selected, different map set for each game mode */}
+            {gameMode &&
+              mapOptions[gameMode].map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+          </select>
+        </div>
 
-        <label htmlFor="outcome" className="">
-          Outcome:
-        </label>
-        <select
-          id="outcome"
-          name="outcome"
-          required
-          className="mt-1 p-2 w-full border rounded-md text-center"
-          onChange={(e) => setWin(e.target.value === "Win")}
-        >
-          <option value="">Did you Win or Lose?</option>
-          <option value="Win">Win</option>
-          <option value="Loss">Loss</option>
-        </select>
+        <div className="">
+          <label htmlFor="outcome" className="">
+            Outcome:
+          </label>
+          <select
+            id="outcome"
+            name="outcome"
+            required
+            className="mt-1 p-2 w-full border rounded-md text-center"
+            onChange={(e) => setWin(e.target.value === "Win")}
+          >
+            <option value="">Did you Win or Lose?</option>
+            <option value="Win">Win</option>
+            <option value="Loss">Loss</option>
+          </select>
+        </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <div>
+          <div className="space-y-2">
             <label htmlFor="kills" className="">
               Kills:
             </label>
@@ -167,7 +172,7 @@ function AddStatsForm() {
             ></input>
           </div>
 
-          <div>
+          <div className="space-y-2">
             <label htmlFor="deaths" className="">
               Deaths:
             </label>
@@ -184,6 +189,7 @@ function AddStatsForm() {
           </div>
         </div>
 
+        <div className="space-y-2">
         <label htmlFor="damage" className="">
           Damage:
         </label>
@@ -196,9 +202,10 @@ function AddStatsForm() {
           className="mt-1 p-2 w-full border rounded-md"
           onChange={(e) => setDamage(Number(e.target.value))}
         ></input>
+        </div>
 
         {gameMode === "Hardpoint" && (
-          <>
+          <div className="space-y-2">
             <label htmlFor="time" className="">
               Time:
             </label>
@@ -211,11 +218,11 @@ function AddStatsForm() {
               className="mt-1 p-2 w-full border rounded-md"
               onChange={(e) => setTime(Number(e.target.value))}
             ></input>
-          </>
+          </div>
         )}
         {gameMode === "SearchAndDestroy" && (
           <div className="grid grid-cols-2 gap-4">
-            <div>
+            <div className="space-y-2">
               <label htmlFor="plants" className="">
                 Plants:
               </label>
@@ -230,7 +237,7 @@ function AddStatsForm() {
               ></input>
             </div>
 
-            <div>
+            <div className="space-y-2">
               <label htmlFor="defuses" className="">
                 Defuses:
               </label>

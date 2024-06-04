@@ -29,7 +29,7 @@ type MapBarChartProps = {
 function ModeBarChart({ data }:MapBarChartProps) {
  
   return (
-    <div className="border border-[#444444] rounded-lg  bg-[#1A1D21]">
+    <div className="border border-[#444444] rounded-lg  bg-secondary-bg">
        <h2 className="text-center pt-4">Match Count by Game Mode</h2>
       <ResponsiveContainer minHeight={300} maxHeight={300}>
         <BarChart
@@ -39,7 +39,7 @@ function ModeBarChart({ data }:MapBarChartProps) {
           <CartesianGrid strokeDasharray="2" />
           <XAxis dataKey="name" />
           <YAxis />
-          <Tooltip />
+          <Tooltip contentStyle={ { backgroundColor: "#16181c" } } />
           <Bar
             dataKey="value"
             fill="#b0ff34"

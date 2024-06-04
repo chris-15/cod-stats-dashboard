@@ -95,7 +95,7 @@ function KdBarChart({ matches }: KDBarChartProps) {
           <CartesianGrid strokeDasharray="2" />
           <XAxis dataKey="name" angle={-55} textAnchor="end" />
           <YAxis />
-          <Tooltip />
+          <Tooltip contentStyle={ { backgroundColor: "#16181c" } } />
           <Bar dataKey="kd" fill="#82ca9d" activeBar={<Rectangle fill="pink" stroke="blue" />}/>
           <Bar dataKey="kdW" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />}/>
           <Bar dataKey="kdL" fill="#ffc658" activeBar={<Rectangle fill="pink" stroke="blue" />} />
