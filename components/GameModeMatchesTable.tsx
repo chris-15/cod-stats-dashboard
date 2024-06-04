@@ -98,7 +98,7 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
             </tbody>
           </table>
           <div className="text-center py-4">
-            <button className="btn" onClick={handleLoadMoreMatches}>
+            <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md " onClick={handleLoadMoreMatches}>
               View More!
             </button>
           </div>
