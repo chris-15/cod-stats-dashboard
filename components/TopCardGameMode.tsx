@@ -15,9 +15,9 @@ function TopCardGameMode({
     <Link
       href={gameMode === "Overall" ? `/dashboard` : `/dashboard/${gameMode}`}
     >
-      <div className="border border-[#444444] rounded-lg py-2 bg-secondary-bg">
+      <div className="group transition-transform transform hover:scale-105 border border-[#444444] rounded-lg py-2 bg-secondary-bg">
         <div className="">
-          <h2 className="text-center font-bold capitalize text-xl mb-5 ">
+          <h2 className="group-hover:underline text-center font-bold capitalize text-xl mb-5 ">
             {gameMode === "searchanddestroy" ? "Search & Destroy" : gameMode}
           </h2>
         </div>
