@@ -24,6 +24,18 @@ type MapBarChartProps = {
 };
 
 
+const CustomTooltip = ({ active, payload, label }:any) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="bg-[#16181c] p-4 rounded-lg text-[#b0ff34] border">
+        <p className="">{`${label}`}</p>
+        <p className="">{`Count: ${payload[0].value}`}</p>
+      </div>
+    );
+  }
+
+  return null;
+};
 
 
 function ModeBarChart({ data }:MapBarChartProps) {
@@ -39,7 +51,7 @@ function ModeBarChart({ data }:MapBarChartProps) {
           <CartesianGrid strokeDasharray="2" />
           <XAxis dataKey="name" />
           <YAxis />
-          <Tooltip contentStyle={ { backgroundColor: "#16181c" } } />
+          <Tooltip content={<CustomTooltip />} />
           <Bar
             dataKey="value"
             fill="#b0ff34"

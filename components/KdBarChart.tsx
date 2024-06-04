@@ -87,6 +87,22 @@ function KdBarChart({ matches }: KDBarChartProps) {
 
   const data = (getKdData(matches));
 
+  const CustomTooltip = ({ active, payload, label }:any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-[#16181c] p-4 rounded-lg">
+         
+          <p className="text-[#b0ff34]">{`K/D: ${payload[0].value}`}</p>
+          <p className="text-[#AC4FC6]">{`K/D in W: ${payload[1].value}`}</p>
+          <p className="text-[#FFA400]">{`K/D in L: ${payload[2].value}`}</p>
+         
+        </div>
+      );
+    }
+  
+    return null;
+  };
+
   return (
     <div className="bg-secondary-bg border border-[#444444] rounded-lg">
       <h2 className="text-center pt-4">KD by Result by Map</h2>
@@ -95,10 +111,10 @@ function KdBarChart({ matches }: KDBarChartProps) {
           <CartesianGrid strokeDasharray="2" />
           <XAxis dataKey="name" angle={-55} textAnchor="end" />
           <YAxis />
-          <Tooltip contentStyle={ { backgroundColor: "#16181c" } } />
-          <Bar dataKey="kd" fill="#82ca9d" activeBar={<Rectangle fill="pink" stroke="blue" />}/>
-          <Bar dataKey="kdW" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />}/>
-          <Bar dataKey="kdL" fill="#ffc658" activeBar={<Rectangle fill="pink" stroke="blue" />} />
+          <Tooltip content={<CustomTooltip />} />
+          <Bar dataKey="kd" fill="#b0ff34" activeBar={<Rectangle fill="pink" stroke="blue" />}/>
+          <Bar dataKey="kdW" fill="#AC4FC6" activeBar={<Rectangle fill="pink" stroke="blue" />}/>
+          <Bar dataKey="kdL" fill="#FFA400" activeBar={<Rectangle fill="pink" stroke="blue" />} />
         </BarChart>
       </ResponsiveContainer>
     </div>

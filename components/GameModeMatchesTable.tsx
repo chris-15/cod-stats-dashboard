@@ -65,9 +65,9 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
                   </td>
                   <td>{match.matchMap}</td>
                   {match.win ? (
-                    <td className="text-green-500">Win</td>
+                    <td className="text-[#b0ff34]">Win</td>
                   ) : (
-                    <td className="text-red-500">Loss</td>
+                    <td className="text-[#ff4d4d]">Loss</td>
                   )}
                   {/* <td>{match.kills}</td>
                   <td>{match.deaths}</td>
@@ -88,7 +88,7 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
                         match.id
                       }`}
                     >
-                      <span className=" text-[#58a6FF] hover:underline">
+                      <span className=" text-[#b0ff34] hover:underline">
                         More Details
                       </span>
                     </Link>
@@ -96,9 +96,10 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
                 </tr>
               ))}
             </tbody>
+            
           </table>
           <div className="text-center py-4">
-            <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md " onClick={handleLoadMoreMatches}>
+            <button className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2" onClick={handleLoadMoreMatches}>
               View More!
             </button>
           </div>
