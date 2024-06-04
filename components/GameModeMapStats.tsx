@@ -81,8 +81,8 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
 
   return (
     <section className="w-full bg-secondary-bg border border-[#444444] rounded-lg overflow-auto">
-      <div className=" ">
-        <h2 className="">Map Stats</h2>
+      <div className=" px-4 sm:px-6 py-4">
+        <h2 className="text-lg sm:text-xl font-bold ">Map Stats</h2>
       </div>
       <div className="">
         <table className="w-full">

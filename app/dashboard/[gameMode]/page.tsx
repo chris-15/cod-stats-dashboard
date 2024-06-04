@@ -26,7 +26,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   }
 
   const gameMode = capitalizeGameMode(params.gameMode) as TGameMode;
-  //console.log(gameMode);
+ 
 
   const matches = await getMatchesByMode(gameMode);
 
@@ -47,15 +47,15 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
     return sortedMapCounts;
   }
 
-  // console.log(calcMapCount(matches, gameMode))
+
   const mapCountData = calcMapCount(matches, gameMode);
 
   return (
     <div className="p-4">
-      <Link href={"/dashboard"}>
+      <Link href={"/dashboard"} className="flex md:hidden font-bold text-xl hover:underline">
         <p className=""> {`<- Dashboard`}</p>
       </Link>
-      <h2 className="text-center">
+      <h2 className="text-center font-bold text-4xl mt-4 mb-6">
         {gameMode === "SearchAndDestroy" ? "Search And Destroy" : gameMode}
       </h2>
 
@@ -66,11 +66,11 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           <div className="grid grid-cols-2 bg-secondary-bg border border-[#444444] rounded-lg divide-x divide-[#444444] ">
             <div>
-              <h3 className="text-center pt-4">Top 10 Kills</h3>
+              <h3 className="text-center pt-4 text-lg sm:text-xl font-bold">Top 10 Kills</h3>
               <TopKills matches={matches} gameMode={gameMode} />
             </div>
             <div>
-            <h3 className="text-center pt-4">Top 10 Damage</h3>
+            <h3 className="text-center pt-4 text-lg sm:text-xl font-bold">Top 10 Damage</h3>
               <TopDamage matches={matches} gameMode={gameMode} />
             </div>
           </div>
