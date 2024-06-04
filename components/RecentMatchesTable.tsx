@@ -13,7 +13,7 @@ async function RecentMatchesTable( ) {
   const lastFifteenMatches = matches ? matches.slice(0, 15) : [];
 
   return (
-    <section className="w-full border rounded-lg p-4 overflow-x-auto">
+    <section className="w-full border border-[#444444] rounded-lg bg-[#1A1D21] p-4 overflow-x-auto">
       <div className="">
         <h2 className="">Recent Matches - Quick Stats</h2>
       </div>

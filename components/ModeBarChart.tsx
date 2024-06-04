@@ -29,7 +29,7 @@ type MapBarChartProps = {
 function ModeBarChart({ data }:MapBarChartProps) {
  
   return (
-    <div className="border">
+    <div className="border border-[#444444] rounded-lg  bg-[#1A1D21]">
        <h2 className="text-center pt-4">Match Count by Game Mode</h2>
       <ResponsiveContainer minHeight={300} maxHeight={300}>
         <BarChart
@@ -42,7 +42,7 @@ function ModeBarChart({ data }:MapBarChartProps) {
           <Tooltip />
           <Bar
             dataKey="value"
-            fill="#8884d8"
+            fill="#b0ff34"
             activeBar={<Rectangle fill="pink" stroke="blue" />}
           />
         </BarChart>

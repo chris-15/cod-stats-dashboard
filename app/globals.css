@@ -4,10 +4,11 @@
 
 /*
 ·    Primary background color: #212529 (a dark gray-blue)
-·    Secondary background color: #333333 (a dark gray)
+·    Secondary background color: #1A1D21 (a dark gray)
 ·    Accent color: #4CAF50 (a bright green-blue)
 ·    Text color: #FFFFFF (white) or #AAAAAA (light gray)
 ·    Hover effect: #3A3D41 (a dark gray-blue) 
+text-[#AAAAAA]
  */
 
 * {
@@ -15,7 +16,7 @@
 }
 
 body {
-  @apply bg-[#212529] text-[#AAAAAA]
+  @apply bg-[#212529] text-white
 }
 
 
