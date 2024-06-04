@@ -92,7 +92,8 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
               <th className="">Map</th>
 
               <th>Win %</th>
-              {/* <th>K/D Ratio</th>
+              <th>K/D Ratio</th>
+              {/* 
               <th>K/D in W</th>
               <th>K/D in L</th> */}
               {gameMode === "Hardpoint" && <th>Avg Time</th>}
@@ -126,7 +127,8 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
                 <td className="">{mapSets[gameMode][index]}</td>
 
                 <td>{calcWinPercentage(matches)}</td>
-                {/* <td>{calcModeKdRatio(matches)}</td>
+                <td>{calcModeKdRatio(matches)}</td>
+                {/* 
                 <td>{calcModeKdRatio(matches, true)}</td>
                 <td>{calcModeKdRatio(matches, false)}</td> */}
                 {gameMode === "Hardpoint" && (
