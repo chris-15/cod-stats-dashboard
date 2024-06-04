@@ -26,8 +26,8 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
 
   return (
     <section className="bg-secondary-bg border border-[#444444] rounded-lg overflow-x-auto">
-      <div className="">
-        <h2 className="">All Matches</h2>
+      <div className="px-4 sm:px-6 py-4">
+        <h2 className="text-lg sm:text-xl font-bold ">All Matches</h2>
       </div>
       {gameModeMatches.length > 0 ? (
         <div>
