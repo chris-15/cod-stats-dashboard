@@ -77,7 +77,7 @@ export async function deleteMatch(id:string) {
   //if no session return the next response error
   if (!session) throw new Error("Unauthorized");
 
-  const deletedMatch = await prisma.match.delete({
+  await prisma.match.delete({
     where: {id},
   })
   //console.log("match deleted!")

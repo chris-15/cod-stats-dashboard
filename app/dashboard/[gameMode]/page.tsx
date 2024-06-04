@@ -100,7 +100,7 @@ type topTenProps = {
 };
 
 function TopKills({ matches, gameMode }: topTenProps) {
-  const sortedMatches = matches.sort((a, b) => b.kills - a.kills);
+  const sortedMatches = [...matches].sort((a, b) => b.kills - a.kills);
 
   const topTenMatches = sortedMatches.slice(0, 10);
 
@@ -128,7 +128,7 @@ function TopKills({ matches, gameMode }: topTenProps) {
 }
 
 function TopDamage({ matches, gameMode }: topTenProps) {
-  const sortedMatches = matches.sort(
+  const sortedMatches = [...matches].sort(
     (a, b) => (b.damage || 0) - (a.damage || 0)
   );
 

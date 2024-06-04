@@ -150,33 +150,39 @@ function AddStatsForm() {
           <option value="Loss">Loss</option>
         </select>
 
-        <label htmlFor="kills" className="">
-          Kills:
-        </label>
-        <input
-          type="number"
-          id="kills"
-          name="kills"
-          required
-          placeholder="0"
-          min="0"
-          className="mt-1 p-2 w-full border rounded-md"
-          onChange={(e) => setKills(Number(e.target.value))}
-        ></input>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label htmlFor="kills" className="">
+              Kills:
+            </label>
+            <input
+              type="number"
+              id="kills"
+              name="kills"
+              required
+              placeholder="0"
+              min="0"
+              className="mt-1 p-2 w-full border rounded-md"
+              onChange={(e) => setKills(Number(e.target.value))}
+            ></input>
+          </div>
 
-        <label htmlFor="deaths" className="">
-          Deaths:
-        </label>
-        <input
-          type="number"
-          id="deaths"
-          name="deaths"
-          required
-          placeholder="0"
-          min="0"
-          className="mt-1 p-2 w-full border rounded-md"
-          onChange={(e) => setDeaths(Number(e.target.value))}
-        ></input>
+          <div>
+            <label htmlFor="deaths" className="">
+              Deaths:
+            </label>
+            <input
+              type="number"
+              id="deaths"
+              name="deaths"
+              required
+              placeholder="0"
+              min="0"
+              className="mt-1 p-2 w-full border rounded-md"
+              onChange={(e) => setDeaths(Number(e.target.value))}
+            ></input>
+          </div>
+        </div>
 
         <label htmlFor="damage" className="">
           Damage:
@@ -208,37 +214,39 @@ function AddStatsForm() {
           </>
         )}
         {gameMode === "SearchAndDestroy" && (
-          <>
-            <label htmlFor="plants" className="">
-              Plants:
-            </label>
-            <input
-              type="number"
-              id="plants"
-              name="plants"
-              placeholder="Bombs Planted"
-              min="0"
-              className="mt-1 p-2 w-full border rounded-md"
-              onChange={(e) => setPlants(Number(e.target.value))}
-            ></input>
-          </>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="plants" className="">
+                Plants:
+              </label>
+              <input
+                type="number"
+                id="plants"
+                name="plants"
+                placeholder="Bombs Planted"
+                min="0"
+                className="mt-1 p-2 w-full border rounded-md"
+                onChange={(e) => setPlants(Number(e.target.value))}
+              ></input>
+            </div>
+
+            <div>
+              <label htmlFor="defuses" className="">
+                Defuses:
+              </label>
+              <input
+                type="number"
+                id="defuses"
+                name="defuses"
+                placeholder="Bombs Defused"
+                min="0"
+                className="mt-1 p-2 w-full border rounded-md"
+                onChange={(e) => setDefuses(Number(e.target.value))}
+              ></input>
+            </div>
+          </div>
         )}
-        {gameMode === "SearchAndDestroy" && (
-          <>
-            <label htmlFor="defuses" className="">
-              Defuses:
-            </label>
-            <input
-              type="number"
-              id="defuses"
-              name="defuses"
-              placeholder="Bombs Defused"
-              min="0"
-              className="mt-1 p-2 w-full border rounded-md"
-              onChange={(e) => setDefuses(Number(e.target.value))}
-            ></input>
-          </>
-        )}
+
         <div className="flex justify-end">
           <button type="submit" className="mt-6 btn">
             Submit

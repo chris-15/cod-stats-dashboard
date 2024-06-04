@@ -26,3 +26,15 @@ th {
 td {
   @apply px-2 sm:px-4 py-2 text-gray-200
 }
+
+select {
+  @apply text-black
+}
+
+input {
+  @apply text-black
+}
+
+.btn {
+  @apply bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md w-full
+}

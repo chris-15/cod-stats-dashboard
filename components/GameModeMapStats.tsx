@@ -88,7 +88,7 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
         <table className="w-full">
           <thead>
             <tr>
-              <th></th>
+              {/* <th></th> */}
               <th className="">Map</th>
 
               <th>Win %</th>
@@ -112,7 +112,7 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
           <tbody>
             {mapModeMatches.map((matches, index) => (
               <tr className="text-center" key={index}>
-                {mapSets[gameMode][index] === bestMap ? (
+                {/* {mapSets[gameMode][index] === bestMap ? (
                   <td
                     data-tooltip-id="mapstats-tooltip-id"
                     data-tooltip-content="This is your best map for this game mode!"
@@ -122,7 +122,7 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
                   </td>
                 ) : (
                   <td className=""></td>
-                )}
+                )} */}
                 <td className="">{mapSets[gameMode][index]}</td>
 
                 <td>{calcWinPercentage(matches)}</td>

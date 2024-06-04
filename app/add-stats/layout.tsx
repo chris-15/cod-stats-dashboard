@@ -23,7 +23,7 @@ export default function AddStatsLayout({
             <Navbar />
           </div>
 
-          <div className="grid grid-cols-1 w-full text-blue-600">{children}</div>
+          <div className="grid grid-cols-1 w-full">{children}</div>
         </div>
       </div>
       <Toaster />
