@@ -33,7 +33,7 @@ async function EditStats({ params }: { params: { id: string } }) {
   const match = await getMatch(id);
   //console.log(session, match)
   return (
-    <div>{match ? <EditStatsForm match={match} /> : "No Match Found"} </div>
+    <div className="p-4">{match ? <EditStatsForm match={match} /> : "No Match Found"} </div>
   );
 }
 export default EditStats;

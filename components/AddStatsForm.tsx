@@ -98,7 +98,7 @@ function AddStatsForm() {
         Add Your Match Statistics
       </h2>
       <form className="space-y-4" onSubmit={handleFormSubmit}>
-        <div className="">
+        <div className="space-y-2">
           <label htmlFor="gameMode" className="">
             GameMode:
           </label>
@@ -116,7 +116,7 @@ function AddStatsForm() {
           </select>
         </div>
 
-        <div className="">
+        <div className="space-y-2">
           <label htmlFor="matchMap" className="">
             Map:
           </label>
@@ -138,7 +138,7 @@ function AddStatsForm() {
           </select>
         </div>
 
-        <div className="">
+        <div className="space-y-2">
           <label htmlFor="outcome" className="">
             Outcome:
           </label>

@@ -22,7 +22,9 @@ export default function EditStatsLayout({
             <Navbar />
           </div>
 
-          <div className="grid grid-cols-1 w-full">{children}</div>
+          <div className="grid place-items-center h-full">
+            <div className="grid grid-cols-1 w-full">{children}</div>
+          </div>
         </div>
       </div>
       <Toaster />
