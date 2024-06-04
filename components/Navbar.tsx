@@ -36,11 +36,11 @@ function Navbar() {
 
   return (
     <div className="flex justify-between p-4 relative ">
-      <div>
+      <div className="text-white">
         <Link href={status === "authenticated"? "/dashboard ": "/"}>
           <h1 className="text-4xl font-bold tracking-tighter">CoD Dashboard</h1>
         </Link>
-        <p className="text-sm">Your Call of Duty Ranked Stats Hub </p>
+        <p className="text-sm ">Your Call of Duty Ranked Stats Hub </p>
       </div>
 
       {status === "authenticated" ? (

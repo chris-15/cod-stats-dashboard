@@ -2,12 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+·    Primary background color: #212529 (a dark gray-blue)
+·    Secondary background color: #333333 (a dark gray)
+·    Accent color: #4CAF50 (a bright green-blue)
+·    Text color: #FFFFFF (white) or #AAAAAA (light gray)
+·    Hover effect: #3A3D41 (a dark gray-blue) 
+ */
+
 * {
   box-sizing: border-box;
 }
 
 body {
-  @apply bg-black text-white
+  @apply bg-[#212529] text-[#AAAAAA]
 }
 
 
@@ -36,5 +44,5 @@ input {
 }
 
 .btn {
-  @apply bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md w-full
+  @apply bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md w-full hover:underline hover:underline-offset-2
 }

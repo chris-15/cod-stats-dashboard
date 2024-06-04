@@ -50,7 +50,7 @@ export function SideBar() {
   //console.log(pathname);
 
   return (
-    <div className="h-screen w-64 flex flex-col justify-between bg-slate-400 shadow-lg p-4 sticky top-0 ">
+    <div className="h-screen w-64 flex flex-col justify-between shadow-lg p-4 sticky top-0 bg-[#1A1D21] border-r border-[#444444] text-white">
       <div className="">
         <div className=" flex flex-col space-y-10">
           {/* Header */}
@@ -63,7 +63,7 @@ export function SideBar() {
                 CoD Dashboard
               </h1>
             </Link>
-            <p className="text-sm">Your Call of Duty Ranked Stats Hub </p>
+            <p className="text-sm ">Your Call of Duty Ranked Stats Hub </p>
           </div>
 
           {/* Items */}
@@ -75,8 +75,8 @@ export function SideBar() {
                 <Link
                   key={item.path}
                   href={item.path}
-                  className={`flex items-center space-x-2 p-2 hover:bg-slate-200 rounded-lg cursor-pointer hover:text-blue-500 ${
-                    pathname === item.path ? `bg-slate-200 text-blue-500 ` : ``
+                  className={`flex items-center space-x-2 p-2 hover:bg-[#b0ff34] rounded-lg cursor-pointer hover:text-[#333333] ${
+                    pathname === item.path ? `bg-[#b0ff34] text-[#333333] ` : ``
                   }`}
                 >
                   <Icon size={30} />
