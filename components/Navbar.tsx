@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { HiPlusCircle } from "react-icons/hi";
 
 function Navbar() {
   const { status, data: session } = useSession();
@@ -34,60 +36,62 @@ function Navbar() {
     };
   }, [showMenu]);
 
+  type TNavBarItems = {
+    name: string;
+    path: string;
+  };
+
+  const navBarItems: TNavBarItems[] = [
+    {
+      name: "Dashboard",
+      path: "/dashboard",
+    },
+    {
+      name: "Add Stats",
+      path: "/add-stats",
+    },
+    {
+      name: "Hardpoint",
+      path: "/dashboard/hardpoint",
+    },
+    {
+      name: "Control",
+      path: "/dashboard/control",
+    },
+    {
+      name: "S&D",
+      path: "/dashboard/searchanddestroy",
+    },
+  ];
+
+  const pathname = usePathname();
+
   return (
     <div className="flex justify-between p-4 relative ">
       <div className="text-white">
-        <Link href={status === "authenticated"? "/dashboard ": "/"}>
+        <Link href={status === "authenticated" ? "/dashboard " : "/"}>
           <h1 className="text-4xl font-bold tracking-tighter">CoD Dashboard</h1>
         </Link>
         <p className="text-sm ">Your Call of Duty Ranked Stats Hub </p>
       </div>
 
       {status === "authenticated" ? (
-       /*  if the user session status is authenticated then render navbar for logged in user otherwise show sigin button */
+        /*  if the user session status is authenticated then render navbar for logged in user otherwise show sigin button */
         <>
           <div
-            className={`absolute z-30 right-0 top-14 bg-white text-black p-6 shadow-lg rounded-md  flex-col gap-2 text-right min-w-[160px] ${
+            className={`absolute z-30 right-5 top-14 bg-[#212529] text-white border-2 p-6 shadow-lg rounded-md  flex-col gap-2 text-right min-w-[160px] ${
               showMenu ? "flex" : "hidden"
             } `}
             ref={menuRef}
           >
             <div className="font-bold">{session?.user?.email}</div>
-            <Link
-              onClick={() => setshowMenu(false)}
-              href={"/dashboard"}
-              className="hover:underline"
-            >
-              Dashboard
-            </Link>
-            <Link
-              onClick={() => setshowMenu(false)}
-              href={"/add-stats"}
-              className="hover:underline"
-            >
-              Add Stats
-            </Link>
-            <Link
-              onClick={() => setshowMenu(false)}
-              href={"/dashboard/hardpoint"}
-              className="hover:underline"
-            >
-              Hardpoint
-            </Link>
-            <Link
-              onClick={() => setshowMenu(false)}
-              href={"/dashboard/control"}
-              className="hover:underline"
-            >
-              Control
-            </Link>
-            <Link
-              onClick={() => setshowMenu(false)}
-              href={"/dashboard/searchanddestroy"}
-              className="hover:underline"
-            >
-              S&D
-            </Link>
+            {navBarItems.map((item) => {
+              return (
+                <Link key={item.path} href={item.path} className={`hover:underline ${pathname === item.path ? `underline text-[#b0ff34]` : ''} `} onClick={() => setshowMenu(false)}>
+                  <p>{item.name}</p>
+                </Link>
+              )
+            })}
             <button className="btn" onClick={() => signOut()}>
               Sign Out
             </button>
@@ -99,20 +103,7 @@ function Navbar() {
               className="hidden sm:flex gap-2 items-center mr-6"
             >
               <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+               <HiPlusCircle size={30} />
               </span>
               <span className="hover:underline">Add Stats</span>
             </Link>
