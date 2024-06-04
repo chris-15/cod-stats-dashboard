@@ -89,7 +89,7 @@ function KdBarChart({ matches }: KDBarChartProps) {
 
   return (
     <div className="bg-secondary-bg border border-[#444444] rounded-lg">
-      <h2>KD by Result by Map</h2>
+      <h2 className="text-center pt-4">KD by Result by Map</h2>
       <ResponsiveContainer minHeight={300} maxHeight={300}>
         <BarChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 50}}>
           <CartesianGrid strokeDasharray="2" />

@@ -55,40 +55,34 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
       <Link href={"/dashboard"}>
         <p className=""> {`<- Dashboard`}</p>
       </Link>
-      <h2 className="">
+      <h2 className="text-center">
         {gameMode === "SearchAndDestroy" ? "Search And Destroy" : gameMode}
       </h2>
-      
-      <div className=" grid grid-cols-1">
 
-      <GameModeStatsCard gameMode={gameMode} matches={matches} />
-      <GameModeMapStats gameMode={gameMode} matches={matches} />
+      <div className=" grid grid-cols-1 space-y-4">
+        <GameModeStatsCard gameMode={gameMode} matches={matches} />
+        <GameModeMapStats gameMode={gameMode} matches={matches} />
 
-
-     
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-      
-
-        <div className="grid grid-cols-2 bg-secondary-bg border border-[#444444] rounded-lg">
-          <div>
-            Top 10 Kills
-            <TopKills matches={matches} gameMode={gameMode} />
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 bg-secondary-bg border border-[#444444] rounded-lg  ">
+            <div>
+              <h3 className="text-center pt-4">Top 10 Kills</h3>
+              <TopKills matches={matches} gameMode={gameMode} />
+            </div>
+            <div>
+            <h3 className="text-center pt-4">Top 10 Damage</h3>
+              <TopDamage matches={matches} gameMode={gameMode} />
+            </div>
           </div>
-          <div>
-            Top 10 Damage
-            <TopDamage matches={matches} gameMode={gameMode} />
+
+          <div className="space-y-4">
+            <MapBarChart data={mapCountData} />
+            <KdBarChart matches={matches} />
           </div>
         </div>
-        <div>
-          <MapBarChart data={mapCountData} />
-          <KdBarChart matches={matches} />
-        </div>
-
-      </div>
 
         <GameModeMatchesTable gameMode={gameMode} matches={matches} />
       </div>
-      
     </div>
   );
 }
@@ -110,16 +104,18 @@ function TopKills({ matches, gameMode }: topTenProps) {
         <div key={match.id} className="">
           <Link
             href={`/dashboard/${gameMode.toLowerCase()}/match/${match.id}`}
-            className="flex items-center justify-between px-4 py-3 rounded-lg"
+            className="flex items-center justify-between px-4 py-3 rounded-lg "
           >
             <div>
-              <h4 className="font-medium">{match.matchMap}</h4>
+              <h4 className="font-medium hover:underline">{match.matchMap}</h4>
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 Total Kills: {match.kills}
               </p>
             </div>
 
-            <div className="w-6 h-6 text-primary">{getNumberSuffix(index + 1)}</div>
+            <div className="w-6 h-6 text-primary">
+              {getNumberSuffix(index + 1)}
+            </div>
           </Link>
         </div>
       ))}
@@ -149,11 +145,12 @@ function TopDamage({ matches, gameMode }: topTenProps) {
               </p>
             </div>
 
-            <div className="w-6 h-6 text-primary">{getNumberSuffix(index + 1)}</div>
+            <div className="w-6 h-6 text-primary">
+              {getNumberSuffix(index + 1)}
+            </div>
           </Link>
         </div>
       ))}
     </div>
   );
 }
-
