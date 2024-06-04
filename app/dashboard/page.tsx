@@ -60,7 +60,7 @@ async function Dashboard() {
     <div className="p-4">
       <TopCards />
       <div className="grid gap-4 grid-cols1 mt-4 ">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           <ModeBarChart data={modeCountData} />
           <MapBarChart data={mapCountData} />
         </div>

@@ -90,8 +90,8 @@ function KdBarChart({ matches }: KDBarChartProps) {
   const CustomTooltip = ({ active, payload, label }:any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-[#16181c] p-4 rounded-lg">
-         
+        <div className="bg-[#16181c] p-4 rounded-lg border">
+         <p>{`${label}`}</p>
           <p className="text-[#b0ff34]">{`K/D: ${payload[0].value}`}</p>
           <p className="text-[#AC4FC6]">{`K/D in W: ${payload[1].value}`}</p>
           <p className="text-[#FFA400]">{`K/D in L: ${payload[2].value}`}</p>

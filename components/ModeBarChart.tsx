@@ -27,9 +27,9 @@ type MapBarChartProps = {
 const CustomTooltip = ({ active, payload, label }:any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-[#16181c] p-4 rounded-lg text-[#b0ff34] border">
+      <div className="bg-[#16181c] p-4 rounded-lg  border">
         <p className="">{`${label}`}</p>
-        <p className="">{`Count: ${payload[0].value}`}</p>
+        <p className="text-[#b0ff34]">{`Count: ${payload[0].value}`}</p>
       </div>
     );
   }
