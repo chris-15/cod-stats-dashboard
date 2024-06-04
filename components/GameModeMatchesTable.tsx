@@ -25,7 +25,7 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
   };
 
   return (
-    <section className="border overflow-x-auto">
+    <section className="bg-secondary-bg border border-[#444444] rounded-lg overflow-x-auto">
       <div className="">
         <h2 className="">All Matches</h2>
       </div>

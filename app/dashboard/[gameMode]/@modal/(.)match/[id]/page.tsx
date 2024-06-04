@@ -132,42 +132,41 @@ export default async function GameModeMatchId({
 
   return (
     <Modal>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl max-h-screen mx-auto py-6 px-4 sm:px-6 lg:px-8 bg-gray-800 rounded-lg overflow-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl max-h-screen mx-auto py-6 px-4 sm:px-6 lg:px-8 bg-[#212529] rounded-lg overflow-auto">
         <div className="space-y-6">
-          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
+          <div className="bg-secondary-bg rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-bold mb-4">Match Stats</h2>
             <div className="mt-6">
-              {/* <h3 className="text-lg font-medium mb-2">Top Performers</h3> */}
-              <div>
-                <p className="text-gray-500 dark:text-gray-400 mb-1">
+              <div className="text-[#AAAAAA]">
+                <p className=" mb-1">
                   Match Result: {match.win ? "Win" : "Loss"}
                 </p>
-                <p className="text-gray-500 dark:text-gray-400 mb-1">
+                <p className=" mb-1">
                   Kills: {match.kills}{" "}
                 </p>
-                <p className="text-gray-500 dark:text-gray-400 mb-1">
+                <p className=" mb-1">
                   Deaths: {match.deaths}
                 </p>
-                <p className="text-gray-500 dark:text-gray-400 mb-1">
+                <p className=" mb-1">
                   Damage: {match.damage}
                 </p>
-                <p className="text-gray-500 dark:text-gray-400 mb-1">
+                <p className=" mb-1">
                   Avg Damage per Kill: { match.damage && (match.damage / match.kills).toFixed(2)}
                 </p>
                 {match.gameMode === "Hardpoint" && (
-                  <p className="text-gray-500 dark:text-gray-400 mb-1">
+                  <p className=" mb-1">
                     Time: {convertTime(match.time)}
                   </p>
                 )}
-                <p className="text-gray-500 dark:text-gray-400 mb-1">
+                <p className=" mb-1">
                   KD Ratio: {(match.kills / match.deaths).toFixed(2)}
                 </p>
                 {match.gameMode === "SearchAndDestroy" && (
                   <>
-                    <p className="text-gray-500 dark:text-gray-400 mb-1">
+                    <p className=" mb-1">
                       Plants: {match.plants}
                     </p>
-                    <p className="text-gray-500 dark:text-gray-400 mb-1">
+                    <p className=" mb-1">
                       Defuses: {match.defuses}
                     </p>
                   </>
@@ -175,12 +174,12 @@ export default async function GameModeMatchId({
               </div>
             </div>
           </div>
-          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
-            <p className="text-gray-500 dark:text-gray-400 mb-2">
+          <div className="bg-secondary-bg rounded-lg shadow-lg p-6">
+            <p className="mb-2">
               Match Summary
             </p>
             <h3 className="text-2xl font-bold mb-2">{title}</h3>
-            <p className="text-gray-500 dark:text-gray-400">{performance}</p>
+            <p className="text-[#AAAAAA]">{performance}</p>
           </div>
         </div>
 
@@ -195,7 +194,7 @@ export default async function GameModeMatchId({
             }}
             width={800}
           />
-          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
+          <div className="bg-secondary-bg rounded-lg shadow-lg p-6">
             <p>Map: {match.matchMap}</p>
             <p>
               Match Played on: {match.createdAt.toLocaleDateString()} at{" "}

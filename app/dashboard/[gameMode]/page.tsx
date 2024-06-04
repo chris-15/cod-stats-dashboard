@@ -69,7 +69,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
       
 
-        <div className="grid grid-cols-2 ">
+        <div className="grid grid-cols-2 bg-secondary-bg border border-[#444444] rounded-lg">
           <div>
             Top 10 Kills
             <TopKills matches={matches} gameMode={gameMode} />

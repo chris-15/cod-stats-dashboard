@@ -80,7 +80,7 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
   let bestMap = calcBestMap(mapModeMatches);
 
   return (
-    <section className="w-full border shadow-lg rounded-lg overflow-auto">
+    <section className="w-full bg-secondary-bg border border-[#444444] rounded-lg overflow-auto">
       <div className=" ">
         <h2 className="">Map Stats</h2>
       </div>

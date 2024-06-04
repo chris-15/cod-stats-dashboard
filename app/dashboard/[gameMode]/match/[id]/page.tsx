@@ -130,9 +130,10 @@ export default async function GameModeMatchId({
       <a href={`/dashboard/${match.gameMode.toLowerCase()}`}>
         <p className=""> {`<- ${match.gameMode}`}</p>
       </a>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-6xl max-h-screen mx-auto py-6 px-4 sm:px-6 lg:px-8 rounded-lg">
+      
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-6xl  mx-auto py-6 px-4 sm:px-6 lg:px-8 rounded-lg">
         <div className="space-y-6">
-          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
+          <div className="bg-secondary-bg rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-bold mb-4">Match Stats</h2>
             <div className="mt-6">
               {/* <h3 className="text-lg font-medium mb-2">Top Performers</h3> */}
@@ -170,7 +171,7 @@ export default async function GameModeMatchId({
               </div>
             </div>
           </div>
-          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
+          <div className="bg-secondary-bg rounded-lg shadow-lg p-6">
             <p className="text-gray-500 dark:text-gray-400 mb-2">
               Match Summary
             </p>
@@ -190,7 +191,7 @@ export default async function GameModeMatchId({
             }}
             width={800}
           />
-          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-6">
+          <div className="bg-secondary-bg rounded-lg shadow-lg p-6">
             <p>Map: {match.matchMap}</p>
             <p>
               Match Played on: {match.createdAt.toLocaleDateString()} at{" "}
@@ -208,6 +209,7 @@ export default async function GameModeMatchId({
           </div>
         </div>
       </div>
+      
     </>
   );
 }
