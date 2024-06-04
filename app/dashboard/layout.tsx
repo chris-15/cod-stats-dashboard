@@ -10,7 +10,6 @@ export default function DashboardLayout({
 }) {
   return (
     <NextAuthProvider>
-      {/* mx-auto min-h-screen bg-[#0D1117] text-white py-4 pr-4 */}
 
       <div className="flex">
         <div className="hidden md:block">

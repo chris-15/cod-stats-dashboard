@@ -21,8 +21,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className}`}>
         <NextAuthProvider>
-          {/* mx-auto min-h-screen bg-[#0D1117] text-white py-4 pr-4 */}
-
           <div className="">
             <div className="">
               <div className="">{children}</div>
