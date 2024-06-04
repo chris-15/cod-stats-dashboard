@@ -64,7 +64,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
         <GameModeMapStats gameMode={gameMode} matches={matches} />
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-          <div className="grid grid-cols-2 bg-secondary-bg border border-[#444444] rounded-lg  ">
+          <div className="grid grid-cols-2 bg-secondary-bg border border-[#444444] rounded-lg divide-x divide-[#444444] ">
             <div>
               <h3 className="text-center pt-4">Top 10 Kills</h3>
               <TopKills matches={matches} gameMode={gameMode} />
@@ -75,7 +75,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="flex flex-col justify-between space-y-4">
             <MapBarChart data={mapCountData} />
             <KdBarChart matches={matches} />
           </div>
@@ -101,13 +101,13 @@ function TopKills({ matches, gameMode }: topTenProps) {
   return (
     <div className="">
       {topTenMatches.map((match, index) => (
-        <div key={match.id} className="">
+        <div key={match.id} className="top-ten-item border-b border-[#444444]">
           <Link
             href={`/dashboard/${gameMode.toLowerCase()}/match/${match.id}`}
-            className="flex items-center justify-between px-4 py-3 rounded-lg "
+            className="flex items-center justify-between px-4 py-3 rounded-lg"
           >
             <div>
-              <h4 className="font-medium hover:underline">{match.matchMap}</h4>
+              <h4 className="font-medium hover:underline hover:text-[#b0ff34]">{match.matchMap}</h4>
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 Total Kills: {match.kills}
               </p>
@@ -133,13 +133,13 @@ function TopDamage({ matches, gameMode }: topTenProps) {
   return (
     <div className=" ">
       {topTenMatches.map((match, index) => (
-        <div key={match.id} className="">
+        <div key={match.id} className="top-ten-item border-b border-[#444444]">
           <Link
             href={`/dashboard/${gameMode.toLowerCase()}/match/${match.id}`}
             className="flex items-center justify-between px-4 py-3 rounded-lg"
           >
             <div>
-              <h4 className="font-medium">{match.matchMap}</h4>
+              <h4 className="font-medium hover:underline hover:text-[#b0ff34]">{match.matchMap}</h4>
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 Total Damage: {match.damage}
               </p>
