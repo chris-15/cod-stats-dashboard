@@ -45,14 +45,14 @@ function MapBarChart({ data }:MapBarChartProps) {
           data={data}
           margin={{ top: 5, right: 30, left: 20, bottom: 50}}
         >
-          <CartesianGrid strokeDasharray="2" />
-          <XAxis dataKey="name" angle={-45} textAnchor="end" />
-          <YAxis />
+          <CartesianGrid strokeDasharray="2" stroke="#D1D5DB" vertical={false} />
+          <XAxis dataKey="name" angle={-45} textAnchor="end" stroke="white" />
+          <YAxis stroke="white"  />
           <Tooltip content={<CustomTooltip />} />
           <Bar
             dataKey="value"
             fill="#b0ff34"
-            activeBar={<Rectangle fill="pink" stroke="blue" />}
+            activeBar={<Rectangle stroke="black" />}
           />
         </BarChart>
       </ResponsiveContainer>

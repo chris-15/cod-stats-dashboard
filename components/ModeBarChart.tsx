@@ -48,14 +48,14 @@ function ModeBarChart({ data }:MapBarChartProps) {
           data={data}
           margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
         >
-          <CartesianGrid strokeDasharray="2" />
-          <XAxis dataKey="name" />
-          <YAxis />
+          <CartesianGrid strokeDasharray="2" stroke="#D1D5DB" vertical={false} />
+          <XAxis dataKey="name" stroke="white"/>
+          <YAxis stroke="white"/>
           <Tooltip content={<CustomTooltip />} />
           <Bar
             dataKey="value"
             fill="#b0ff34"
-            activeBar={<Rectangle fill="pink" stroke="blue" />}
+            activeBar={<Rectangle stroke="black" />}
           />
         </BarChart>
       </ResponsiveContainer>

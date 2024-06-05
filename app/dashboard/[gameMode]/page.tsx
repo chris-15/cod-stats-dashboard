@@ -26,7 +26,6 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   }
 
   const gameMode = capitalizeGameMode(params.gameMode) as TGameMode;
- 
 
   const matches = await getMatchesByMode(gameMode);
 
@@ -47,12 +46,14 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
     return sortedMapCounts;
   }
 
-
   const mapCountData = calcMapCount(matches, gameMode);
 
   return (
     <div className="p-4">
-      <Link href={"/dashboard"} className="flex md:hidden font-bold text-xl hover:underline">
+      <Link
+        href={"/dashboard"}
+        className="flex md:hidden font-bold text-xl hover:underline"
+      >
         <p className=""> {`<- Dashboard`}</p>
       </Link>
       <h2 className="text-center font-bold text-4xl mt-4 mb-6">
@@ -66,16 +67,20 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           <div className="grid grid-cols-2 bg-secondary-bg border border-[#444444] rounded-lg divide-x divide-[#444444] ">
             <div>
-              <h3 className="text-center pt-4 text-lg sm:text-xl font-bold">Top 10 Kills</h3>
+              <h3 className="text-center pt-4 text-lg sm:text-xl font-bold">
+                Top 10 Kills
+              </h3>
               <TopKills matches={matches} gameMode={gameMode} />
             </div>
             <div>
-            <h3 className="text-center pt-4 text-lg sm:text-xl font-bold">Top 10 Damage</h3>
+              <h3 className="text-center pt-4 text-lg sm:text-xl font-bold">
+                Top 10 Damage
+              </h3>
               <TopDamage matches={matches} gameMode={gameMode} />
             </div>
           </div>
 
-          <div className="flex flex-col justify-between space-y-4">
+          <div className="flex flex-col justify-between space-y-4 xl:space-y-2">
             <MapBarChart data={mapCountData} />
             <KdBarChart matches={matches} />
           </div>
@@ -107,9 +112,11 @@ function TopKills({ matches, gameMode }: topTenProps) {
             className="flex items-center justify-between px-4 py-3 rounded-lg group transition-transform transform hover:scale-105 "
           >
             <div>
-              <h4 className="font-medium group-hover:underline group-hover:text-[#b0ff34]">Total Kills: {match.kills}</h4>
+              <h4 className="font-medium group-hover:underline group-hover:text-[#b0ff34]">
+                Total Kills: {match.kills}
+              </h4>
               <p className=" font-bold text-sm text-gray-400 group-hover:text-[#b0ff34] ">
-              {match.matchMap}
+                {match.matchMap}
               </p>
             </div>
 
@@ -139,9 +146,10 @@ function TopDamage({ matches, gameMode }: topTenProps) {
             className="flex items-center justify-between px-4 py-3 rounded-lg group transition-transform transform hover:scale-105 "
           >
             <div>
-              <h4 className="font-medium group-hover:underline group-hover:text-[#b0ff34]">Total Damage: {match.damage}</h4>
+              <h4 className="font-medium group-hover:underline group-hover:text-[#b0ff34]">
+                Total Damage: {match.damage}
+              </h4>
               <p className="font-bold text-sm text-gray-400  group-hover:text-[#b0ff34] ">
-                
                 {match.matchMap}
               </p>
             </div>

@@ -60,11 +60,11 @@ async function TopCards() {
 
         <div className="grid grid-cols-2 divide-x divide-[#444444] text-center">
           <div>
-            <p className="text-lg font-semibold text-[#AAAAAA] ">K/D Ratio</p>
+            <p className="text-lg font-semibold text-gray-300">K/D Ratio</p>
             <p className="font-bold text-4xl  ">{overallKdRatio}</p>
           </div>
           <div>
-            <p className="text-lg font-semibold text-[#AAAAAA] ">Win %</p>
+            <p className="text-lg font-semibold text-gray-300 ">Win %</p>
             <p
               className={
                 overallWinPercentage > 50
