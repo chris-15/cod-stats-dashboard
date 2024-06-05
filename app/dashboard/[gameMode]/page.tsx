@@ -107,9 +107,9 @@ function TopKills({ matches, gameMode }: topTenProps) {
             className="flex items-center justify-between px-4 py-3 rounded-lg group transition-transform transform hover:scale-105 "
           >
             <div>
-              <h4 className="font-medium group-hover:underline group-hover:text-[#b0ff34]">{match.matchMap}</h4>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Total Kills: {match.kills}
+              <h4 className="font-medium group-hover:underline group-hover:text-[#b0ff34]">Total Kills: {match.kills}</h4>
+              <p className=" font-bold text-sm text-gray-400 group-hover:text-[#b0ff34] ">
+              {match.matchMap}
               </p>
             </div>
 
@@ -139,9 +139,10 @@ function TopDamage({ matches, gameMode }: topTenProps) {
             className="flex items-center justify-between px-4 py-3 rounded-lg group transition-transform transform hover:scale-105 "
           >
             <div>
-              <h4 className="font-medium group-hover:underline group-hover:text-[#b0ff34]">{match.matchMap}</h4>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Total Damage: {match.damage}
+              <h4 className="font-medium group-hover:underline group-hover:text-[#b0ff34]">Total Damage: {match.damage}</h4>
+              <p className="font-bold text-sm text-gray-400  group-hover:text-[#b0ff34] ">
+                
+                {match.matchMap}
               </p>
             </div>
 
