@@ -113,7 +113,7 @@ function TopKills({ matches, gameMode }: topTenProps) {
           >
             <div>
               <h4 className="font-medium group-hover:underline group-hover:text-[#b0ff34]">
-                Total Kills: {match.kills}
+                Kills: {match.kills}
               </h4>
               <p className=" font-bold text-sm text-gray-400 group-hover:text-[#b0ff34] ">
                 {match.matchMap}
@@ -147,7 +147,7 @@ function TopDamage({ matches, gameMode }: topTenProps) {
           >
             <div>
               <h4 className="font-medium group-hover:underline group-hover:text-[#b0ff34]">
-                Total Damage: {match.damage}
+                Damage: {match.damage}
               </h4>
               <p className="font-bold text-sm text-gray-400  group-hover:text-[#b0ff34] ">
                 {match.matchMap}
