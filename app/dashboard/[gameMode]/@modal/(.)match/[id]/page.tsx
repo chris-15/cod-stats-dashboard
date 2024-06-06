@@ -43,30 +43,42 @@ export default async function GameModeMatchId({
   const performanceDescriptions = {
     win: {
       goodKd: {
-        highDamage: "You were the star of the match, delivering both high kills and damage. Your performance was instrumental in securing the victory.",
-        lowDamage: "You demonstrated a strategic playstyle, securing key kills even with low overall damage. Your precision played a crucial role in the team's victory.",
+        highDamage:
+          "You were the star of the match, delivering both high kills and damage. Your performance was instrumental in securing the victory.",
+        lowDamage:
+          "You demonstrated a strategic playstyle, securing key kills even with low overall damage. Your precision played a crucial role in the team's victory.",
       },
       badKd: {
-        highDamage: "Despite a lower kill count, your high damage output disrupted the enemy team and contributed to the win. Your aggressive playstyle created opportunities for your team.",
-        lowDamage: "You won the match, but there's potential for you to contribute more in terms of kills and damage. Remember, every bit of damage counts towards the team's success.",
+        highDamage:
+          "Despite a lower kill count, your high damage output disrupted the enemy team and contributed to the win. Your aggressive playstyle created opportunities for your team.",
+        lowDamage:
+          "You won the match, but there's potential for you to contribute more in terms of kills and damage. Remember, every bit of damage counts towards the team's success.",
       },
       evenKd: {
-        highDamage: "You had a balanced kill-death ratio and high damage, contributing to the team's victory. Your balanced playstyle was effective.",
-        lowDamage: "You won the match with a balanced kill-death ratio, but your damage was on the lower side. A bit more aggression could enhance your impact.",
+        highDamage:
+          "You had a balanced kill-death ratio and high damage, contributing to the team's victory. Your balanced playstyle was effective.",
+        lowDamage:
+          "You won the match with a balanced kill-death ratio, but your damage was on the lower side. A bit more aggression could enhance your impact.",
       },
     },
     loss: {
       goodKd: {
-        highDamage: "Even in defeat, your performance stood out with high kills and damage. You fought hard, and your efforts kept the team in the game.",
-        lowDamage: "Despite the loss, your kill count was impressive. However, increasing your damage output could turn future games in your favor.",
+        highDamage:
+          "Even in defeat, your performance stood out with high kills and damage. You fought hard, and your efforts kept the team in the game.",
+        lowDamage:
+          "Despite the loss, your kill count was impressive. However, increasing your damage output could turn future games in your favor.",
       },
       badKd: {
-        highDamage: "You dealt a lot of damage but couldn't secure enough kills. Converting that damage into eliminations could change the outcome of the match.",
-        lowDamage: "The match didn't go as planned, and there's room for improvement in both kills and damage. Keep practicing, and you'll see better results.",
+        highDamage:
+          "You dealt a lot of damage but couldn't secure enough kills. Converting that damage into eliminations could change the outcome of the match.",
+        lowDamage:
+          "The match didn't go as planned, and there's room for improvement in both kills and damage. Keep practicing, and you'll see better results.",
       },
       evenKd: {
-        highDamage: "Despite the loss, your balanced kill-death ratio and high damage show potential. Keep up the pressure in future matches.",
-        lowDamage: "You maintained a balanced kill-death ratio, but the low damage output couldn't turn the tide. Try to focus on dealing more damage in the next match.",
+        highDamage:
+          "Despite the loss, your balanced kill-death ratio and high damage show potential. Keep up the pressure in future matches.",
+        lowDamage:
+          "You maintained a balanced kill-death ratio, but the low damage output couldn't turn the tide. Try to focus on dealing more damage in the next match.",
       },
     },
   };
@@ -139,35 +151,48 @@ export default async function GameModeMatchId({
             <div className="mt-6">
               <div className="text-[#AAAAAA]">
                 <p className=" mb-1">
-                  Match Result: {match.win ? "Win" : "Loss"}
+                  Match Result:{" "}
+                  <span className="text-white">
+                    {match.win ? "Win" : "Loss"}
+                  </span>
                 </p>
                 <p className=" mb-1">
-                  Kills: {match.kills}{" "}
+                  Kills: <span className="text-white">{match.kills}</span>
                 </p>
                 <p className=" mb-1">
-                  Deaths: {match.deaths}
+                  Deaths: <span className="text-white">{match.deaths}</span>
                 </p>
                 <p className=" mb-1">
-                  Damage: {match.damage}
+                  Damage: <span className="text-white">{match.damage}</span>
                 </p>
                 <p className=" mb-1">
-                  Avg Damage per Kill: { match.damage && (match.damage / match.kills).toFixed(2)}
+                  Avg Damage per Kill:{" "}
+                  <span className="text-white">
+                    {match.damage && (match.damage / match.kills).toFixed(2)}
+                  </span>
                 </p>
                 {match.gameMode === "Hardpoint" && (
                   <p className=" mb-1">
-                    Time: {convertTime(match.time)}
+                    Time:{" "}
+                    <span className="text-white">
+                      {convertTime(match.time)}
+                    </span>
                   </p>
                 )}
                 <p className=" mb-1">
-                  KD Ratio: {(match.kills / match.deaths).toFixed(2)}
+                  KD Ratio:{" "}
+                  <span className="text-white">
+                    {(match.kills / match.deaths).toFixed(2)}
+                  </span>
                 </p>
                 {match.gameMode === "SearchAndDestroy" && (
                   <>
                     <p className=" mb-1">
-                      Plants: {match.plants}
+                      Plants: <span className="text-white">{match.plants}</span>
                     </p>
                     <p className=" mb-1">
-                      Defuses: {match.defuses}
+                      Defuses:{" "}
+                      <span className="text-white">{match.defuses}</span>
                     </p>
                   </>
                 )}
@@ -175,9 +200,7 @@ export default async function GameModeMatchId({
             </div>
           </div>
           <div className="bg-secondary-bg rounded-lg shadow-lg p-6">
-            <p className="mb-2">
-              Match Summary
-            </p>
+            <p className="mb-2">Match Summary</p>
             <h3 className="text-2xl font-bold mb-2">{title}</h3>
             <p className="text-[#AAAAAA]">{performance}</p>
           </div>
@@ -194,11 +217,11 @@ export default async function GameModeMatchId({
             }}
             width={800}
           />
-          <div className="bg-secondary-bg rounded-lg shadow-lg p-6">
-            <p>Map: {match.matchMap}</p>
-            <p>
-              Match Played on: {match.createdAt.toLocaleDateString()} at{" "}
-              {match.createdAt.toLocaleTimeString()}
+          <div className="bg-secondary-bg rounded-lg shadow-lg p-6 space-y-1 text-[#AAAAAA]">
+          <p>Map: <span className="text-white">{match.matchMap}</span></p>
+          <p>
+              Match Played on: <span className="text-white">{match.createdAt.toLocaleDateString()} at{" "}
+              {match.createdAt.toLocaleTimeString()}</span>
             </p>
             {match.updatedAt.getTime() !== match.createdAt.getTime() && (
               <p>
@@ -218,7 +241,7 @@ export default async function GameModeMatchId({
                   await deleteMatch(match.id);
                 }}
               >
-                <button type="submit" className=" bg-red-500 p-2 rounded-lg">
+                <button type="submit" className="text-white bg-[#ff4d4d] p-2 rounded-lg hover:underline hover:font-bold">
                   Delete
                 </button>
               </form>

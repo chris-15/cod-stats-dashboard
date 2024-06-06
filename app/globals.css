@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-·    Primary background color: #212529 (a dark gray-blue)
-·    Secondary background color: #1A1D21 (a dark gray)
-·    Accent color: #4CAF50 (a bright green-blue)
-·    Text color: #FFFFFF (white) or #AAAAAA (light gray)
-·    Hover effect: #3A3D41 (a dark gray-blue) 
-text-[#AAAAAA]
- */
 
 * {
   box-sizing: border-box;
