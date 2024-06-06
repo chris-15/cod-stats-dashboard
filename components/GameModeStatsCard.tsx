@@ -122,7 +122,7 @@ function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
           }`}
           onClick={() => setTab("tab1")}
         >
-          Total
+          <span className="hover:bg-gray-200 hover:bg-opacity-25 rounded-lg px-2 hover:py-1">Total</span>
         </button>
         <button
           className={`py-2 px-4 m-2 ${
@@ -132,7 +132,7 @@ function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
           }`}
           onClick={() => setTab("tab2")}
         >
-          Last 10 Matches
+          <span className="hover:text-white hover:bg-gray-200 hover:bg-opacity-25 rounded-lg px-2 hover:py-1">Last 10 Matches</span>
         </button>
         <button
           className={`py-2 px-4 m-2 ${
@@ -142,11 +142,11 @@ function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
           }`}
           onClick={() => setTab("tab3")}
         >
-          Daily
+          <span className="hover:text-white hover:bg-gray-200 hover:bg-opacity-25 rounded-lg px-2 hover:py-1">Daily</span>
         </button>
       </div>
 
-      <div className="text-center grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-4 xl:flex xl:justify-evenly xl:flex-wrap mt-12">
+      <div className="text-center grid grid-cols-2 md:grid-cols-3 gap-4 xl:grid-cols-4 2xl:flex 2xl:justify-evenly 2xl:flex-wrap mt-12">
         <div className="">
           <p className="">K/D</p>
           <p className="">{totalKdRatio}</p>
