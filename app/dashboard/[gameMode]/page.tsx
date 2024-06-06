@@ -50,44 +50,61 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
 
   return (
     <div className="p-4">
-      <Link
-        href={"/dashboard"}
-        className="flex md:hidden font-bold text-xl hover:underline"
-      >
-        <p className=""> {`<- Dashboard`}</p>
-      </Link>
-      <h2 className="text-center font-bold text-4xl mt-4 mb-6">
-        {gameMode === "SearchAndDestroy" ? "Search And Destroy" : gameMode}
-      </h2>
+      {matches.length > 0 ? (
+        <>
+          <Link
+            href={"/dashboard"}
+            className="flex md:hidden font-bold text-xl hover:underline"
+          >
+            <p className=""> {`<- Dashboard`}</p>
+          </Link>
+          <h2 className="text-center font-bold text-4xl mt-4 mb-6">
+            {gameMode === "SearchAndDestroy" ? "Search And Destroy" : gameMode}
+          </h2>
 
-      <div className=" grid grid-cols-1 space-y-4">
-        <GameModeStatsCard gameMode={gameMode} matches={matches} />
-        <GameModeMapStats gameMode={gameMode} matches={matches} />
+          <div className=" grid grid-cols-1 space-y-4">
+            <GameModeStatsCard gameMode={gameMode} matches={matches} />
+            <GameModeMapStats gameMode={gameMode} matches={matches} />
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-          <div className="grid grid-cols-2 bg-secondary-bg border border-[#444444] rounded-lg divide-x divide-[#444444] ">
-            <div>
-              <h3 className="text-center pt-4 text-lg sm:text-xl font-bold">
-                Top 10 Kills
-              </h3>
-              <TopKills matches={matches} gameMode={gameMode} />
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 bg-secondary-bg border border-[#444444] rounded-lg divide-x divide-[#444444] ">
+                <div>
+                  <h3 className="text-center pt-4 text-lg sm:text-xl font-bold">
+                    Top 10 Kills
+                  </h3>
+                  <TopKills matches={matches} gameMode={gameMode} />
+                </div>
+                <div>
+                  <h3 className="text-center pt-4 text-lg sm:text-xl font-bold">
+                    Top 10 Damage
+                  </h3>
+                  <TopDamage matches={matches} gameMode={gameMode} />
+                </div>
+              </div>
+
+              <div className="flex flex-col justify-between space-y-4 xl:space-y-2">
+                <MapBarChart data={mapCountData} />
+                <KdBarChart matches={matches} />
+              </div>
             </div>
-            <div>
-              <h3 className="text-center pt-4 text-lg sm:text-xl font-bold">
-                Top 10 Damage
-              </h3>
-              <TopDamage matches={matches} gameMode={gameMode} />
-            </div>
-          </div>
 
-          <div className="flex flex-col justify-between space-y-4 xl:space-y-2">
-            <MapBarChart data={mapCountData} />
-            <KdBarChart matches={matches} />
+            <GameModeMatchesTable gameMode={gameMode} matches={matches} />
           </div>
-        </div>
-
-        <GameModeMatchesTable gameMode={gameMode} matches={matches} />
-      </div>
+        </>
+      ) : (
+        <>
+          <Link
+            href={"/dashboard"}
+            className="flex md:hidden font-bold text-xl hover:underline"
+          >
+            <p className=""> {`<- Dashboard`}</p>
+          </Link>
+          <h2 className="text-center font-bold text-4xl mt-4 mb-6">
+            {gameMode === "SearchAndDestroy" ? "Search And Destroy" : gameMode}
+          </h2>
+          <p className="text-center p-4">No Matches Recorded</p>
+        </>
+      )}
     </div>
   );
 }

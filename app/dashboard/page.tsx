@@ -61,8 +61,12 @@ async function Dashboard() {
       <TopCards />
       <div className="grid gap-4 grid-cols1 mt-4 ">
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-          <ModeBarChart data={modeCountData} />
-          <MapBarChart data={mapCountData} />
+          {matches.length > 0 && (
+            <>
+              <ModeBarChart data={modeCountData} />
+              <MapBarChart data={mapCountData} />
+            </>
+          )}
         </div>
         <RecentMatchesTable />
       </div>
