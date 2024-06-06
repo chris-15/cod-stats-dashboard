@@ -102,6 +102,17 @@ function KdBarChart({ matches }: KDBarChartProps) {
     return null;
   };
 
+  function renderLegendText(value:string):string {
+    const labels: {[key:string]:string} = {
+      'kd': 'K/D Ratio',
+      'kdW': 'K/D Ratio in Win',
+      'kdL': 'K/D Ratio in Loss'
+    };
+  
+    return labels[value] || value;
+  }
+
+
   return (
     <div className="bg-secondary-bg border border-[#444444] rounded-lg">
       <h2 className="text-center pt-4">KD by Result by Map</h2>
@@ -111,7 +122,7 @@ function KdBarChart({ matches }: KDBarChartProps) {
           <XAxis dataKey="name" angle={-55} textAnchor="end" stroke="white"  />
           <YAxis stroke="white"  />
           <Tooltip content={<CustomTooltip />} />
-          <Legend verticalAlign="top"/>
+          <Legend verticalAlign="top" formatter={renderLegendText}/>
           <Bar dataKey="kd" fill="#b0ff34" activeBar={<Rectangle stroke="black" />}/>
           <Bar dataKey="kdW" fill="#AC4FC6" activeBar={<Rectangle stroke="black" />}/>
           <Bar dataKey="kdL" fill="#FFA400" activeBar={<Rectangle stroke="black" />} />
