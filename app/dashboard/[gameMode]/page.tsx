@@ -10,6 +10,7 @@ import { getMatches, getMatchesByMode } from "@/server/queries";
 import MapBarChart from "@/components/MapBarChart";
 import KdBarChart from "@/components/KdBarChart";
 import { getNumberSuffix } from "@/lib/utils";
+import { FaTrophy } from "react-icons/fa";
 
 async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   const session = await getServerSession(authOptions);
@@ -132,13 +133,29 @@ function TopKills({ matches, gameMode }: topTenProps) {
               <h4 className="font-medium group-hover:underline group-hover:text-[#b0ff34]">
                 Kills: {match.kills}
               </h4>
-              <p className=" font-bold text-sm text-gray-400 group-hover:text-[#b0ff34] ">
-                {match.matchMap}
+              <p className=" text-sm text-gray-400  group-hover:text-[#b0ff34] ">
+                {match.matchMap}:{" "}
+                {match.createdAt.toLocaleDateString("en-US", {
+                  year: "2-digit",
+                  month: "2-digit",
+                  day: "2-digit",
+                })}
               </p>
             </div>
 
-            <div className="w-6 h-6 text-primary">
-              {getNumberSuffix(index + 1)}
+            <div
+              className={
+                index === 0
+                  ? ` w-16 bg-gold rounded-full p-1 text-[#333333] flex items-center justify-center space-x-2 `
+                  : index === 1
+                  ? ` w-16 bg-silver rounded-full p-1 text-[#333333] flex items-center justify-center space-x-2 `
+                  : index === 2
+                  ? ` w-16 bg-bronze rounded-full p-1 text-[#333333] flex items-center justify-center space-x-2 `
+                  : ``
+              }
+            >
+              <FaTrophy className={index < 3 ? `` : `hidden`} />
+              <p>{getNumberSuffix(index + 1)} </p>
             </div>
           </Link>
         </div>
@@ -166,13 +183,29 @@ function TopDamage({ matches, gameMode }: topTenProps) {
               <h4 className="font-medium group-hover:underline group-hover:text-[#b0ff34]">
                 Damage: {match.damage}
               </h4>
-              <p className="font-bold text-sm text-gray-400  group-hover:text-[#b0ff34] ">
-                {match.matchMap}
+              <p className=" text-sm text-gray-400  group-hover:text-[#b0ff34] ">
+                {match.matchMap}:{" "}
+                {match.createdAt.toLocaleDateString("en-US", {
+                  year: "2-digit",
+                  month: "2-digit",
+                  day: "2-digit",
+                })}
               </p>
             </div>
 
-            <div className="w-6 h-6 text-primary">
-              {getNumberSuffix(index + 1)}
+            <div
+              className={
+                index === 0
+                  ? ` w-16 bg-gold rounded-full p-1 text-[#333333] flex items-center justify-center space-x-2 `
+                  : index === 1
+                  ? ` w-16 bg-silver rounded-full p-1 text-[#333333] flex items-center justify-center  space-x-2 `
+                  : index === 2
+                  ? ` w-16 bg-bronze rounded-full p-1 text-[#333333] flex items-center justify-center  space-x-2 `
+                  : ``
+              }
+            >
+              <FaTrophy className={index < 3 ? `` : `hidden`} />
+              <p>{getNumberSuffix(index + 1)} </p>
             </div>
           </Link>
         </div>

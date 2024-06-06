@@ -18,6 +18,9 @@ const config: Config = {
     extend: {
       colors: {
         "secondary-bg": "#16181c",
+        'gold': '#FFD033',
+        'silver': '#C0C0C0',
+        'bronze': '#CD853F',
       },
     },
   },
