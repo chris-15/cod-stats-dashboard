@@ -147,71 +147,9 @@ export default async function GameModeMatchId({
         <p className=""> {`<- ${match.gameMode}`}</p>
       </Link>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-6xl  mx-auto py-6 px-4 sm:px-6 lg:px-8 rounded-lg">
-        <div className="space-y-6">
-          {/* match stats */}
-          <div className="bg-secondary-bg rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-bold mb-4">Match Stats</h2>
-            <div className="mt-6">
-              <div className="text-[#AAAAAA]">
-                <p className=" mb-1">
-                  Match Result:{" "}
-                  <span className="text-white">
-                    {match.win ? "Win" : "Loss"}
-                  </span>
-                </p>
-                <p className=" mb-1">
-                  Kills: <span className="text-white">{match.kills}</span>
-                </p>
-                <p className=" mb-1">
-                  Deaths: <span className="text-white">{match.deaths}</span>
-                </p>
-                <p className=" mb-1">
-                  Damage: <span className="text-white">{match.damage}</span>
-                </p>
-                <p className=" mb-1">
-                  Avg Damage per Kill:{" "}
-                  <span className="text-white">
-                    {match.damage && (match.damage / match.kills).toFixed(2)}
-                  </span>
-                </p>
-                {match.gameMode === "Hardpoint" && (
-                  <p className=" mb-1">
-                    Time:{" "}
-                    <span className="text-white">
-                      {convertTime(match.time)}
-                    </span>
-                  </p>
-                )}
-                <p className=" mb-1">
-                  KD Ratio:{" "}
-                  <span className="text-white">
-                    {(match.kills / match.deaths).toFixed(2)}
-                  </span>
-                </p>
-                {match.gameMode === "SearchAndDestroy" && (
-                  <>
-                    <p className=" mb-1">
-                      Plants: <span className="text-white">{match.plants}</span>
-                    </p>
-                    <p className=" mb-1">
-                      Defuses:{" "}
-                      <span className="text-white">{match.defuses}</span>
-                    </p>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-          {/* match summary */}
-          <div className="bg-secondary-bg rounded-lg shadow-lg p-6">
-            <p className="text-[#AAAAAA] mb-2">Match Summary</p>
-            <h3 className="text-2xl font-bold mb-2">{title}</h3>
-            <p className="text-[#AAAAAA]">{performance}</p>
-          </div>
-        </div>
-
-        <div className="space-y-6 order-first lg:order-last">
+      <div className="grid grid-cols-1 gap-4 max-w-4xl  mx-auto py-6 px-4 sm:px-6 lg:px-8 rounded-lg">
+        {/* image */}
+        <div className="">
           <Image
             alt="Match Image"
             className="rounded-lg shadow-lg"
@@ -220,9 +158,13 @@ export default async function GameModeMatchId({
             style={{
               objectFit: "contain",
             }}
-            width={800}
+            width={896}
           />
-          <div className="bg-secondary-bg rounded-lg shadow-lg p-6 space-y-1 text-[#AAAAAA]">
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          {/* map time details */}
+          <div className="bg-secondary-bg rounded-lg shadow-lg p-6 space-y-4 text-[#AAAAAA]">
             <p>
               Map: <span className="text-white">{match.matchMap}</span>
             </p>
@@ -235,8 +177,12 @@ export default async function GameModeMatchId({
             </p>
             {match.updatedAt.getTime() !== match.createdAt.getTime() && (
               <p>
-                Match Updated on: {match.updatedAt.toLocaleDateString()} at{" "}
-                {match.updatedAt.toLocaleTimeString()}
+                Match Updated on:
+                <span className="text-white">
+                  {" "}
+                  {match.updatedAt.toLocaleDateString()} at{" "}
+                  {match.updatedAt.toLocaleTimeString()}
+                </span>
               </p>
             )}
             <div className="flex space-x-4 items-center">
@@ -259,6 +205,70 @@ export default async function GameModeMatchId({
                 </button>
               </form>
             </div>
+          </div>
+          {/* match stats */}
+          <div>
+            <div className="bg-secondary-bg rounded-lg shadow-lg p-6">
+              <h2 className="text-2xl font-bold mb-4">Match Stats</h2>
+              <div className="mt-6">
+                <div className="text-[#AAAAAA]">
+                  <p className=" mb-1">
+                    Match Result:{" "}
+                    <span className="text-white">
+                      {match.win ? "Win" : "Loss"}
+                    </span>
+                  </p>
+                  <p className=" mb-1">
+                    Kills: <span className="text-white">{match.kills}</span>
+                  </p>
+                  <p className=" mb-1">
+                    Deaths: <span className="text-white">{match.deaths}</span>
+                  </p>
+                  <p className=" mb-1">
+                    Damage: <span className="text-white">{match.damage}</span>
+                  </p>
+                  <p className=" mb-1">
+                    Avg Damage per Kill:{" "}
+                    <span className="text-white">
+                      {match.damage && (match.damage / match.kills).toFixed(2)}
+                    </span>
+                  </p>
+                  {match.gameMode === "Hardpoint" && (
+                    <p className=" mb-1">
+                      Time:{" "}
+                      <span className="text-white">
+                        {convertTime(match.time)}
+                      </span>
+                    </p>
+                  )}
+                  <p className=" mb-1">
+                    KD Ratio:{" "}
+                    <span className="text-white">
+                      {(match.kills / match.deaths).toFixed(2)}
+                    </span>
+                  </p>
+                  {match.gameMode === "SearchAndDestroy" && (
+                    <>
+                      <p className=" mb-1">
+                        Plants:{" "}
+                        <span className="text-white">{match.plants}</span>
+                      </p>
+                      <p className=" mb-1">
+                        Defuses:{" "}
+                        <span className="text-white">{match.defuses}</span>
+                      </p>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* match summary */}
+          <div className="bg-secondary-bg rounded-lg shadow-lg p-6 lg:order-first">
+            <p className="text-[#AAAAAA] mb-2">Match Summary</p>
+            <h3 className="text-2xl font-bold mb-2">{title}</h3>
+            <p className="text-[#AAAAAA]">{performance}</p>
           </div>
         </div>
       </div>
