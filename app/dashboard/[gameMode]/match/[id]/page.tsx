@@ -148,6 +148,56 @@ export default async function GameModeMatchId({
       </Link>
 
       <div className="grid grid-cols-1 gap-4 max-w-4xl  mx-auto py-6 px-4 sm:px-6 lg:px-8 rounded-lg">
+        {/* map time details */}
+        <div className=" text-[#AAAAAA] space-y-2">
+          <h2 className="text-white text-4xl text-center font-bold">
+            {match.matchMap}
+          </h2>
+
+          <div className="flex justify-between items-center ">
+  
+            <p>
+            <span className="text-white">
+              {match.createdAt.toLocaleDateString()} at{" "}
+              {match.createdAt.toLocaleTimeString()}
+            </span>
+          </p>
+          {match.updatedAt.getTime() !== match.createdAt.getTime() && (
+            <p className="">
+              Updated:
+              <span className="text-white">
+                {" "}
+                {match.updatedAt.toLocaleDateString()} at{" "}
+                {match.updatedAt.toLocaleTimeString()}
+              </span>
+            </p>
+          )}
+            
+
+          
+          <div className="flex space-x-4 items-center">
+            <Link href={`/edit-stats/${match.id}`}>
+              <span className=" text-[#58a6FF] hover:underline">Edit</span>
+            </Link>
+
+            <form
+              action={async () => {
+                "use server";
+
+                await deleteMatch(match.id);
+              }}
+            >
+              <button
+                type="submit"
+                className=" text-white bg-[#ff4d4d] p-2 rounded-lg hover:underline hover:font-bold"
+              >
+                Delete
+              </button>
+            </form>
+          </div>
+          </div>
+        </div>
+
         {/* image */}
         <div className="">
           <Image
@@ -162,50 +212,7 @@ export default async function GameModeMatchId({
           />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-          {/* map time details */}
-          <div className="bg-secondary-bg rounded-lg shadow-lg p-6 space-y-4 text-[#AAAAAA]">
-            <p>
-              Map: <span className="text-white">{match.matchMap}</span>
-            </p>
-            <p>
-              Match Played on:{" "}
-              <span className="text-white">
-                {match.createdAt.toLocaleDateString()} at{" "}
-                {match.createdAt.toLocaleTimeString()}
-              </span>
-            </p>
-            {match.updatedAt.getTime() !== match.createdAt.getTime() && (
-              <p>
-                Match Updated on:
-                <span className="text-white">
-                  {" "}
-                  {match.updatedAt.toLocaleDateString()} at{" "}
-                  {match.updatedAt.toLocaleTimeString()}
-                </span>
-              </p>
-            )}
-            <div className="flex space-x-4 items-center">
-              <Link href={`/edit-stats/${match.id}`}>
-                <span className=" text-[#58a6FF] hover:underline">Edit</span>
-              </Link>
-
-              <form
-                action={async () => {
-                  "use server";
-
-                  await deleteMatch(match.id);
-                }}
-              >
-                <button
-                  type="submit"
-                  className=" text-white bg-[#ff4d4d] p-2 rounded-lg hover:underline hover:font-bold"
-                >
-                  Delete
-                </button>
-              </form>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* match stats */}
           <div>
             <div className="bg-secondary-bg rounded-lg shadow-lg p-6">
