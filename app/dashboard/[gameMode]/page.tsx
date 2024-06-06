@@ -82,7 +82,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
                 </div>
               </div>
 
-              <div className="flex flex-col justify-between space-y-4 xl:space-y-2">
+              <div className="hidden xs:flex flex-col justify-between space-y-4 xl:space-y-2">
                 <MapBarChart data={mapCountData} />
                 <KdBarChart matches={matches} />
               </div>

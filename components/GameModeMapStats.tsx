@@ -81,7 +81,7 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
 
   return (
     <section className="w-full bg-secondary-bg border border-[#444444] rounded-lg overflow-auto">
-      <div className=" px-4 sm:px-6 py-4">
+      <div className=" px-4 sm:px-6 py-4 sticky left-0">
         <h2 className="text-lg sm:text-xl font-bold ">Map Stats</h2>
       </div>
       <div className="">
@@ -89,13 +89,13 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
           <thead>
             <tr>
               {/* <th></th> */}
-              <th className="">Map</th>
+              <th className="sticky left-0 bg-secondary-bg">Map</th>
 
               <th>Win %</th>
               <th>K/D Ratio</th>
-              {/* 
-              <th>K/D in W</th>
-              <th>K/D in L</th> */}
+              
+              <th className="xs:hidden">K/D in W</th>
+              <th className="xs:hidden">K/D in L</th>
               {gameMode === "Hardpoint" && <th>Avg Time</th>}
               {gameMode === "SearchAndDestroy" && (
                 <>
@@ -107,7 +107,7 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
 
               <th>Avg Kills</th>
               <th>Kill Record</th>
-              {/* <th>Map Count</th> */}
+              <th className="xs:hidden">Map Count</th>
             </tr>
           </thead>
           <tbody>
@@ -124,13 +124,13 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
                 ) : (
                   <td className=""></td>
                 )} */}
-                <td className="">{mapSets[gameMode][index]}</td>
+                <td className="sticky left-0 bg-secondary-bg">{mapSets[gameMode][index]}</td>
 
                 <td>{calcWinPercentage(matches)}</td>
                 <td>{calcModeKdRatio(matches)}</td>
-                {/* 
-                <td>{calcModeKdRatio(matches, true)}</td>
-                <td>{calcModeKdRatio(matches, false)}</td> */}
+                
+                <td className="xs:hidden">{calcModeKdRatio(matches, true)}</td>
+                <td className="xs:hidden">{calcModeKdRatio(matches, false)}</td>
                 {gameMode === "Hardpoint" && (
                   <td>
                     {calcAvgTime(matches) === "NaN:NaN"
@@ -153,7 +153,7 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
                 {gameMode === "Control" && <td>{calcAvgDamage(matches)}</td>}
                 <td>{calcAvgKills(matches)}</td>
                 <td>{calcHighestKill(matches)}</td>
-                {/* <td>{matches.length}</td> */}
+                <td className="xs:hidden">{matches.length}</td>
               </tr>
             ))}
           </tbody>

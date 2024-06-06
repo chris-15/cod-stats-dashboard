@@ -14,8 +14,8 @@ async function RecentMatchesTable( ) {
 
   return (
     <section className="w-full border border-[#444444] rounded-lg bg-secondary-bg p-4 overflow-x-auto">
-      <div className="">
-        <h2 className="">Recent Matches - Quick Stats</h2>
+      <div className="px-4 sm:px-6 py-4 sticky left-0">
+        <h2 className="text-lg sm:text-xl font-bold">Recent Matches</h2>
       </div>
       {matches.length > 0 ? (
         <div>

@@ -153,6 +153,7 @@ export default async function GameModeMatchId({
           <h2 className="text-white text-4xl text-center font-bold">
             {match.matchMap}
           </h2>
+          
 
           <div className="flex justify-between items-center ">
   
@@ -219,6 +220,9 @@ export default async function GameModeMatchId({
               <h2 className="text-2xl font-bold mb-4">Match Stats</h2>
               <div className="mt-6">
                 <div className="text-[#AAAAAA]">
+                  <p className=" mb-1">
+                  Game Mode: <span className="text-white">{match.gameMode === "SearchAndDestroy" ? "S&D" : match.gameMode}</span>
+                  </p>
                   <p className=" mb-1">
                     Match Result:{" "}
                     <span className="text-white">
