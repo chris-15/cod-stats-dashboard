@@ -127,7 +127,7 @@ function TopKills({ matches, gameMode }: topTenProps) {
         <div key={match.id} className="top-ten-item border-b border-[#444444]">
           <Link
             href={`/dashboard/${gameMode.toLowerCase()}/match/${match.id}`}
-            className="flex items-center justify-between px-4 py-3 rounded-lg group transition-transform transform hover:scale-105 "
+            className="flex items-center justify-between px-4 py-3 rounded-lg group transition-transform transform hover:scale-105 h-28 xs:h-auto"
           >
             <div>
               <h4 className="font-medium group-hover:underline group-hover:text-[#b0ff34]">
@@ -177,7 +177,7 @@ function TopDamage({ matches, gameMode }: topTenProps) {
         <div key={match.id} className="top-ten-item border-b border-[#444444]">
           <Link
             href={`/dashboard/${gameMode.toLowerCase()}/match/${match.id}`}
-            className="flex items-center justify-between px-4 py-3 rounded-lg group transition-transform transform hover:scale-105 "
+            className="flex items-center justify-between px-4 py-3 rounded-lg group transition-transform transform hover:scale-105 h-28 xs:h-auto"
           >
             <div>
               <h4 className="font-medium group-hover:underline group-hover:text-[#b0ff34]">
@@ -196,7 +196,7 @@ function TopDamage({ matches, gameMode }: topTenProps) {
             <div
               className={
                 index === 0
-                  ? ` w-16 bg-gold rounded-full p-1 text-[#333333] flex items-center justify-center space-x-2 `
+                  ? ` w-16 bg-gold rounded-full p-1 text-[#333333] flex items-center space-x-2 `
                   : index === 1
                   ? ` w-16 bg-silver rounded-full p-1 text-[#333333] flex items-center justify-center  space-x-2 `
                   : index === 2

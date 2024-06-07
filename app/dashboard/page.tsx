@@ -64,7 +64,9 @@ async function Dashboard() {
           {matches.length > 0 && (
             <>
               <ModeBarChart data={modeCountData} />
+              <div className="hidden xs:block">
               <MapBarChart data={mapCountData} />
+              </div>
             </>
           )}
         </div>

@@ -132,7 +132,7 @@ function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
           }`}
           onClick={() => setTab("tab2")}
         >
-          <span className="hover:text-white hover:bg-gray-200 hover:bg-opacity-25 rounded-lg px-2 hover:py-1">Last 10 Matches</span>
+          <span className="hover:text-white hover:bg-gray-200 hover:bg-opacity-25 rounded-lg px-2 hover:py-1">Last 10</span>
         </button>
         <button
           className={`py-2 px-4 m-2 ${
