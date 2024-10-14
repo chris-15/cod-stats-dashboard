@@ -112,7 +112,7 @@ export default function Home() {
               </p>
             </div>
             <Link
-              href="/signup"
+              href="/sign-in"
               className="inline-flex items-center bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-3 px-8 rounded-lg text-lg transition duration-300 hover:underline hover:underline-offset-2"
             >
               Sign Up Now
