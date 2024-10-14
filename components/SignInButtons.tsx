@@ -9,10 +9,10 @@ function SignInButtons() {
     <section className="flex justify-center items-center h-screen">
       <div className="mx-4 w-full max-w-md  p-6 bg-secondary-bg border border-[#444444] rounded-lg ">
         <h1 className="text-center text-4xl font-bold mb-4 ">
-         Welcome to CoD Dashboard
+          Welcome to CoD Dashboard
         </h1>
         <p className="text-center text-sm mb-6 text-[#AAAAAA]">
-        Sign in to your account or create a new one to get started.
+          Sign in to your account or create a new one to get started.
         </p>
         <div className="flex justify-center">
           <button
@@ -30,10 +30,11 @@ function SignInButtons() {
             Sign In with Google
           </button>
         </div>
-        <p className="text-center text-xs mt-4 text-[#AAAAAA]">Don't have an account? One will be created automatically when you sign in.</p>
-
+        <p className="text-center text-xs mt-4 text-[#AAAAAA]">
+          Don't have an account? One will be created automatically when you sign
+          in.
+        </p>
       </div>
-      
     </section>
   );
 }
