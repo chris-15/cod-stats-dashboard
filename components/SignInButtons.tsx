@@ -31,7 +31,7 @@ function SignInButtons() {
           </button>
         </div>
         <p className="text-center text-xs mt-4 text-[#AAAAAA]">
-          Don't have an account? One will be created automatically when you sign
+          Don&apos;t have an account? One will be created automatically when you sign
           in.
         </p>
       </div>
