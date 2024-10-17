@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { HiPlusCircle } from "react-icons/hi";
+import { LuMenu } from "react-icons/lu";
 
 function Navbar() {
   const { status, data: session } = useSession();
@@ -79,7 +80,7 @@ function Navbar() {
         /*  if the user session status is authenticated then render navbar for logged in user otherwise show sigin button */
         <>
           <div
-            className={`absolute z-30 right-5 top-14 bg-[#212529] text-white border-2 p-6 shadow-lg rounded-md  flex-col gap-2 text-right min-w-[160px] ${
+            className={`absolute z-30 right-12 top-14 bg-[#212529] text-white border-2 p-6 shadow-lg rounded-md  flex-col gap-2 text-right min-w-[160px] ${
               showMenu ? "flex" : "hidden"
             } `}
             ref={menuRef}
@@ -99,27 +100,16 @@ function Navbar() {
                 </Link>
               );
             })}
+
             <button className="btn" onClick={() => signOut()}>
               Sign Out
             </button>
           </div>
 
           <div className="flex gap-2 items-center">
-            <Link
-              href={"/add-stats"}
-              className="hidden sm:flex gap-2 items-center mr-6"
-            >
-              <span>
-                <HiPlusCircle size={30} />
-              </span>
-              <span className="hover:underline">Add Stats</span>
-            </Link>
-            <Image
-              src={session?.user?.image || ""}
-              width={36}
-              height={36}
-              alt="Profile-picture"
-              className="rounded-full cursor-pointer hover:scale-110 transition "
+            <LuMenu
+              size={30}
+              className="rounded-full cursor-pointer hover:scale-110 transition"
               onClick={() => setshowMenu((prev) => !prev)}
             />
           </div>
