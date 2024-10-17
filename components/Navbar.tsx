@@ -87,10 +87,17 @@ function Navbar() {
             <div className="font-bold">{session?.user?.email}</div>
             {navBarItems.map((item) => {
               return (
-                <Link key={item.path} href={item.path} className={`hover:underline ${pathname === item.path ? `underline text-[#b0ff34]` : ''} `} onClick={() => setshowMenu(false)}>
+                <Link
+                  key={item.path}
+                  href={item.path}
+                  className={`hover:underline ${
+                    pathname === item.path ? `underline text-[#b0ff34]` : ""
+                  } `}
+                  onClick={() => setshowMenu(false)}
+                >
                   <p>{item.name}</p>
                 </Link>
-              )
+              );
             })}
             <button className="btn" onClick={() => signOut()}>
               Sign Out
@@ -103,7 +110,7 @@ function Navbar() {
               className="hidden sm:flex gap-2 items-center mr-6"
             >
               <span>
-               <HiPlusCircle size={30} />
+                <HiPlusCircle size={30} />
               </span>
               <span className="hover:underline">Add Stats</span>
             </Link>
