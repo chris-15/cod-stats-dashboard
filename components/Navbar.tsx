@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { HiPlusCircle } from "react-icons/hi";
-import { LuMenu } from "react-icons/lu";
+import { LuMenu, LuX } from "react-icons/lu";
 
 function Navbar() {
   const { status, data: session } = useSession();
@@ -107,11 +107,18 @@ function Navbar() {
           </div>
 
           <div className="flex gap-2 items-center">
-            <LuMenu
-              size={30}
-              className="rounded-full cursor-pointer hover:scale-110 transition"
-              onClick={() => setshowMenu((prev) => !prev)}
-            />
+            {showMenu ? (
+              <LuX
+                size={30}
+                className="rounded-full cursor-pointer hover:scale-110 transition"
+              />
+            ) : (
+              <LuMenu
+                size={30}
+                className="rounded-full cursor-pointer hover:scale-110 transition"
+                onClick={() => setshowMenu((prev) => !prev)}
+              />
+            )}
           </div>
         </>
       ) : (
