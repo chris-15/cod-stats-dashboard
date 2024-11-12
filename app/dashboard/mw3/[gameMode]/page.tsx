@@ -68,12 +68,14 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
 
   const mapCountData = calcMapCount(matches, gameMode);
 
+
+
   return (
     <div className="p-4">
       {matches.length > 0 ? (
         <>
           <Link
-            href={"/dashboard"}
+            href={"/dashboard/mw3"}
             className="flex md:hidden font-bold text-xl hover:underline"
           >
             <p className=""> {`<- Dashboard`}</p>
@@ -120,7 +122,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
       ) : (
         <>
           <Link
-            href={"/dashboard"}
+            href={"/dashboard/mw3"}
             className="flex md:hidden font-bold text-xl hover:underline"
           >
             <p className=""> {`<- Dashboard`}</p>

@@ -36,7 +36,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   if (!session) {
     redirect("/sign-in");
   }
-
+  
   //function to make sure params given to props are in the correct format
   function capitalizeGameMode(gameMode: string) {
     if (gameMode === "searchanddestroy") {
@@ -48,6 +48,8 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   const gameMode = capitalizeGameMode(params.gameMode) as TGameMode;
 
   const matches = await getBoSixMatchesByMode(gameMode);
+
+
 
   function calcMapCount(match: TMatchQuery[], gameMode: string) {
     let mapCounts: { [key: string]: number } = {};
@@ -73,7 +75,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
       {matches.length > 0 ? (
         <>
           <Link
-            href={"/dashboard"}
+            href={"/dashboard/bo6"}
             className="flex md:hidden font-bold text-xl hover:underline"
           >
             <p className=""> {`<- Dashboard`}</p>
@@ -120,7 +122,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
       ) : (
         <>
           <Link
-            href={"/dashboard"}
+            href={"/dashboard/bo6"}
             className="flex md:hidden font-bold text-xl hover:underline"
           >
             <p className=""> {`<- Dashboard`}</p>
