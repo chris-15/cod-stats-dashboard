@@ -24,7 +24,7 @@ export default function DashboardLayout({
           </div>
         </div>
         <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 ">
-          <MobileNav />
+          <MobileNav game="mw3" />
         </div>
       </div>
       <Toaster />

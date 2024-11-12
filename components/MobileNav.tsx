@@ -5,18 +5,16 @@ import { useSession, signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export function MobileNav() {
-  const { status, data: session } = useSession();
+type TMobileNavItems = {
+  name: string;
+  path: string;
+};
 
-  type TMobileNavItems = {
-    name: string;
-    path: string;
-  };
-
-  const navBarItems: TMobileNavItems[] = [
+const navConfigs: Record<string, TMobileNavItems[]> = {
+  mw3: [
     {
       name: "Dashboard",
-      path: "/dashboard",
+      path: "/dashboard/mw3",
     },
     {
       name: "Add Stats",
@@ -24,17 +22,47 @@ export function MobileNav() {
     },
     {
       name: "Hardpoint",
-      path: "/dashboard/hardpoint",
+      path: "/dashboard/mw3/hardpoint",
     },
     {
       name: "Control",
-      path: "/dashboard/control",
+      path: "/dashboard/mw3/control",
     },
     {
       name: "S&D",
-      path: "/dashboard/searchanddestroy",
+      path: "/dashboard/mw3/searchanddestroy",
     },
-  ];
+  ],
+  bo6: [
+    {
+      name: "Dashboard",
+      path: "/dashboard/bo6",
+    },
+    {
+      name: "Add Stats",
+      path: "/add-stats",
+    },
+    {
+      name: "Hardpoint",
+      path: "/dashboard/bo6/hardpoint",
+    },
+    {
+      name: "Control",
+      path: "/dashboard/bo6/control",
+    },
+    {
+      name: "S&D",
+      path: "/dashboard/bo6/searchanddestroy",
+    },
+  ],
+};
+
+type MobileNavProps = {
+  game: keyof typeof navConfigs;
+};
+
+export function MobileNav({ game: game = "bo6" }: MobileNavProps) {
+  const { status, data: session } = useSession();
 
   const pathname = usePathname();
 
@@ -55,6 +83,8 @@ export function MobileNav() {
     return () => window.removeEventListener("scroll", controlNavbar);
   }, [lastScrollY]);
 
+  const activeItmes = navConfigs[game];
+
   return status === "authenticated" ? (
     <nav
       className={`h-16 px-4 pt-2 text-gray-400 bg-[#212529] transition-all duration-300 ${
@@ -62,12 +92,18 @@ export function MobileNav() {
       }`}
     >
       <div className="flex justify-around items-center bg-secondary-bg h-12 rounded-lg">
-        {navBarItems.map((item) => (
+        {activeItmes.map((item) => (
           <Link
             key={item.path}
             href={item.path}
             className={`hover:underline  text-sm ${
-              pathname === item.path ? `underline text-[#b0ff34]` : ""
+              pathname === item.path
+                ? game === "mw3"
+                  ? "underline text-[#b0ff34]"
+                  : "underline text-[#ff9900]"
+                : game === "mw3"
+                ? ""
+                : ""
             } `}
           >
             <p>{item.name}</p>
