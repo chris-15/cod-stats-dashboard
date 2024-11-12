@@ -1,19 +1,31 @@
 import Link from "next/link";
 
 type TopCardGameModeProps = {
+  game: string;
   gameMode: string;
   kdRatio: string;
   winPercentage: number;
 };
 
+// gameMode === "Overall" ? `/dashboard` : `/dashboard/${gameMode}`
+
 function TopCardGameMode({
+  game,
   gameMode,
   kdRatio,
   winPercentage,
 }: TopCardGameModeProps) {
   return (
     <Link
-      href={gameMode === "Overall" ? `/dashboard` : `/dashboard/${gameMode}`}
+      href={
+        game === "mw3"
+          ? gameMode === "Overall"
+            ? `/dashboard/mw3`
+            : `/dashboard/mw3/${gameMode}`
+          : gameMode === "Overall"
+          ? `/dashboard/bo6`
+          : `/dashboard/bo6/${gameMode}`
+      }
     >
       <div className="group transition-transform transform hover:scale-105 border border-[#444444] rounded-lg py-2 bg-secondary-bg">
         <div className="">

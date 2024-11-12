@@ -3,7 +3,7 @@ import { calcOverallKdRatio, calcOverallWinPercentage } from "@/lib/utils";
 import TopCardGameMode from "./TopCardGameMode";
 import { TMatchQuery } from "@/app/types";
 
-async function TopCards({matches}: {matches: TMatchQuery[]}) {
+async function TopCards({matches, game}: {matches: TMatchQuery[], game: string}) {
 
 
   const calcKd = (matches: TMatchQuery[], gameMode: string) => {
@@ -79,16 +79,19 @@ async function TopCards({matches}: {matches: TMatchQuery[]}) {
       </div>
 
       <TopCardGameMode
+        game={game}
         gameMode="hardpoint"
         kdRatio={hpKdRatio}
         winPercentage={hpWinPercentage}
       />
       <TopCardGameMode
+        game={game}
         gameMode="control"
         kdRatio={controlKdRatio}
         winPercentage={controlWinPercentage}
       />
       <TopCardGameMode
+        game={game}
         gameMode="searchanddestroy"
         kdRatio={searchKdRatio}
         winPercentage={searchWinPercentage}
