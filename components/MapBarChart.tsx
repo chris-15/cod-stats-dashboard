@@ -38,8 +38,7 @@ function MapBarChart({ data }:MapBarChartProps) {
 
 
   return (
-    <div className="border border-[#444444] rounded-lg bg-secondary-bg">
-      <h2 className="text-center pt-4">Match Count by Map</h2>
+    
       <ResponsiveContainer minHeight={300} maxHeight={300}>
         <BarChart
           data={data}
@@ -56,7 +55,6 @@ function MapBarChart({ data }:MapBarChartProps) {
           />
         </BarChart>
       </ResponsiveContainer>
-    </div>
   );
 }
 

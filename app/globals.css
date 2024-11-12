@@ -2,15 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-
 * {
   box-sizing: border-box;
 }
 
 body {
-  @apply bg-[#212529] text-white
+  @apply bg-[#212529] text-white;
 }
-
 
 dialog {
   max-width: 100vw;
@@ -18,35 +16,73 @@ dialog {
 }
 
 table {
-  @apply min-w-full px-4 sm:px-6 py-4 border-collapse
+  @apply min-w-full px-4 sm:px-6 py-4 border-collapse;
 }
 
 thead tr {
-  @apply border-b-2 border-[#444444]
+  @apply border-b-2 border-[#444444];
 }
 
 th {
-  @apply px-2 sm:px-4 pb-4 font-medium uppercase tracking-wider text-center whitespace-nowrap
+  @apply px-2 sm:px-4 pb-4 font-medium uppercase tracking-wider text-center whitespace-nowrap;
 }
 
 td {
-  @apply px-2 sm:px-4 py-2  border-t border-[#444444]
+  @apply px-2 sm:px-4 py-2  border-t border-[#444444];
 }
 
-
 select {
-  @apply text-black
+  @apply text-black;
 }
 
 input {
-  @apply text-black
+  @apply text-black;
 }
 
 .btn {
-  @apply bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md w-full hover:underline hover:underline-offset-2
+  @apply bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md w-full hover:underline hover:underline-offset-2;
 }
 
 .top-ten-item:last-child {
-  @apply border-b-0
+  @apply border-b-0;
 }
 
+.loader {
+  width: 64px;
+  height: 64px;
+  border: 5px solid #fff;
+  border-bottom-color: #b0ff34;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.small-loader {
+  width: 38px;
+  height: 38px;
+  border: 5px solid #fff;
+  border-bottom-color: #b0ff34;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

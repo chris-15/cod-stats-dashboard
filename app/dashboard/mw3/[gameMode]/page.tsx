@@ -1,7 +1,8 @@
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../../lib/auth";
+import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import GameModeStatsCard from "@/components/GameModeStatsCard";
 import GameModeMatchesTable from "@/components/GameModeMatchesTable";
 import GameModeMapStats from "@/components/GameModeMapStats";
@@ -11,6 +12,24 @@ import MapBarChart from "@/components/MapBarChart";
 import KdBarChart from "@/components/KdBarChart";
 import { getNumberSuffix } from "@/lib/utils";
 import { FaTrophy } from "react-icons/fa";
+
+const KdBarChartComponent = dynamic(() => import("@/components/KdBarChart"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex justify-center items-center p-4">
+      <span className="small-loader"></span>
+    </div>
+  ),
+});
+
+const MapBarChartComponent = dynamic(() => import("@/components/MapBarChart"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex justify-center items-center p-4">
+      <span className="small-loader"></span>
+    </div>
+  ),
+});
 
 async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   const session = await getServerSession(authOptions);
@@ -84,8 +103,14 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
               </div>
 
               <div className="hidden xs:flex flex-col justify-between space-y-4 xl:space-y-2">
-                <MapBarChart data={mapCountData} />
-                <KdBarChart matches={matches} />
+                <div className="border border-[#444444] rounded-lg bg-secondary-bg hidden xs:block">
+                  <h2 className="text-center pt-4">Match Count by Map</h2>
+                  <MapBarChartComponent data={mapCountData} />
+                </div>
+                <div className="bg-secondary-bg border border-[#444444] rounded-lg">
+                  <h2 className="text-center pt-4">KD by Result by Map</h2>
+                  <KdBarChartComponent matches={matches} />
+                </div>
               </div>
             </div>
 
@@ -126,7 +151,7 @@ function TopKills({ matches, gameMode }: topTenProps) {
       {topTenMatches.map((match, index) => (
         <div key={match.id} className="top-ten-item border-b border-[#444444]">
           <Link
-            href={`/dashboard/${gameMode.toLowerCase()}/match/${match.id}`}
+            href={`/dashboard/mw3/${gameMode.toLowerCase()}/match/${match.id}`}
             className="flex items-center justify-between px-4 py-3 rounded-lg group transition-transform transform hover:scale-105 h-28 xs:h-auto"
           >
             <div>
@@ -176,7 +201,7 @@ function TopDamage({ matches, gameMode }: topTenProps) {
       {topTenMatches.map((match, index) => (
         <div key={match.id} className="top-ten-item border-b border-[#444444]">
           <Link
-            href={`/dashboard/${gameMode.toLowerCase()}/match/${match.id}`}
+            href={`/dashboard/mw3/${gameMode.toLowerCase()}/match/${match.id}`}
             className="flex items-center justify-between px-4 py-3 rounded-lg group transition-transform transform hover:scale-105 h-28 xs:h-auto"
           >
             <div>

@@ -85,50 +85,61 @@ function KdBarChart({ matches }: KDBarChartProps) {
     return sortedMapKds;
   }
 
-  const data = (getKdData(matches));
+  const data = getKdData(matches);
 
-  const CustomTooltip = ({ active, payload, label }:any) => {
+  const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-[#16181c] p-2 rounded-lg border">
-         <p>{`${label}`}</p>
+          <p>{`${label}`}</p>
           <p className="text-[#b0ff34]">{`K/D: ${payload[0].value}`}</p>
           <p className="text-[#AC4FC6]">{`K/D in W: ${payload[1].value}`}</p>
           <p className="text-[#FFA400]">{`K/D in L: ${payload[2].value}`}</p>
         </div>
       );
     }
-  
+
     return null;
   };
 
-  function renderLegendText(value:string):string {
-    const labels: {[key:string]:string} = {
-      'kd': 'K/D Ratio',
-      'kdW': 'K/D Ratio in Win',
-      'kdL': 'K/D Ratio in Loss'
+  function renderLegendText(value: string): string {
+    const labels: { [key: string]: string } = {
+      kd: "K/D Ratio",
+      kdW: "K/D Ratio in Win",
+      kdL: "K/D Ratio in Loss",
     };
-  
+
     return labels[value] || value;
   }
 
-
   return (
-    <div className="bg-secondary-bg border border-[#444444] rounded-lg">
-      <h2 className="text-center pt-4">KD by Result by Map</h2>
-      <ResponsiveContainer minHeight={300} maxHeight={350}>
-        <BarChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 50}}>
-          <CartesianGrid strokeDasharray="2" stroke="#D1D5DB" vertical={false}  />
-          <XAxis dataKey="name" angle={-55} textAnchor="end" stroke="white"  />
-          <YAxis stroke="white"  />
-          <Tooltip content={<CustomTooltip />} />
-          <Legend verticalAlign="top" formatter={renderLegendText}/>
-          <Bar dataKey="kd" fill="#b0ff34" activeBar={<Rectangle stroke="black" />}/>
-          <Bar dataKey="kdW" fill="#AC4FC6" activeBar={<Rectangle stroke="black" />}/>
-          <Bar dataKey="kdL" fill="#FFA400" activeBar={<Rectangle stroke="black" />} />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
+    <ResponsiveContainer minHeight={300} maxHeight={350}>
+      <BarChart
+        data={data}
+        margin={{ top: 5, right: 30, left: 20, bottom: 50 }}
+      >
+        <CartesianGrid strokeDasharray="2" stroke="#D1D5DB" vertical={false} />
+        <XAxis dataKey="name" angle={-55} textAnchor="end" stroke="white" />
+        <YAxis stroke="white" />
+        <Tooltip content={<CustomTooltip />} />
+        <Legend verticalAlign="top" formatter={renderLegendText} />
+        <Bar
+          dataKey="kd"
+          fill="#b0ff34"
+          activeBar={<Rectangle stroke="black" />}
+        />
+        <Bar
+          dataKey="kdW"
+          fill="#AC4FC6"
+          activeBar={<Rectangle stroke="black" />}
+        />
+        <Bar
+          dataKey="kdL"
+          fill="#FFA400"
+          activeBar={<Rectangle stroke="black" />}
+        />
+      </BarChart>
+    </ResponsiveContainer>
   );
 }
 export default KdBarChart;

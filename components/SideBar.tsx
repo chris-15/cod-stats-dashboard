@@ -18,7 +18,7 @@ type TSidebarItems = {
 const sidebarItems: TSidebarItems[] = [
   {
     name: "Dashboard",
-    path: "/dashboard",
+    path: "/dashboard/mw3",
     icon: HiHome,
   },
   {
@@ -28,17 +28,17 @@ const sidebarItems: TSidebarItems[] = [
   },
   {
     name: "Hardpoint",
-    path: "/dashboard/hardpoint",
+    path: "/dashboard/mw3/hardpoint",
     icon: HiChartSquareBar,
   },
   {
     name: "Control",
-    path: "/dashboard/control",
+    path: "/dashboard/mw3/control",
     icon: HiChartSquareBar,
   },
   {
     name: "S&D",
-    path: "/dashboard/searchanddestroy",
+    path: "/dashboard/mw3/searchanddestroy",
     icon: HiChartSquareBar,
   },
 ];
