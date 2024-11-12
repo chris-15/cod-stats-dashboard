@@ -43,6 +43,10 @@ input {
   @apply bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md w-full hover:underline hover:underline-offset-2;
 }
 
+.btn-bo6 {
+  @apply bg-sidebar-active-bo6 hover:bg-sidebar-active-bo6/80 text-[#333333] font-medium py-2 px-4 rounded-md w-full hover:underline hover:underline-offset-2;
+}
+
 .top-ten-item:last-child {
   @apply border-b-0;
 }

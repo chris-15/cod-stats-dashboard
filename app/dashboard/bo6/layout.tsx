@@ -18,7 +18,7 @@ export default function DashboardLayout({
           </div>
           <div className="flex flex-col flex-1">
             <div className="md:hidden">
-              <Navbar />
+              <Navbar game="bo6" />
             </div>
             <div className="flex-1 pb-16 sm:pb-0">{children}</div>
           </div>

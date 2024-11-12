@@ -8,7 +8,71 @@ import { usePathname } from "next/navigation";
 import { HiPlusCircle } from "react-icons/hi";
 import { LuMenu, LuX } from "react-icons/lu";
 
-function Navbar() {
+type TNavBarItems = {
+  name: string;
+  path: string;
+};
+
+const navConfigs: Record<string, TNavBarItems[]> = {
+  mw3: [
+    {
+      name: "Dashboard",
+      path: "/dashboard/mw3",
+    },
+    {
+      name: "Add Stats",
+      path: "/add-stats",
+    },
+    {
+      name: "Hardpoint",
+      path: "/dashboard/mw3/hardpoint",
+    },
+    {
+      name: "Control",
+      path: "/dashboard/mw3/control",
+    },
+    {
+      name: "S&D",
+      path: "/dashboard/mw3/searchanddestroy",
+    },
+    {
+      name: "Black Ops 6",
+      path: "/dashboard/bo6",
+    },
+  ],
+  bo6: [
+    {
+      name: "Dashboard",
+      path: "/dashboard/bo6",
+    },
+    {
+      name: "Add Stats",
+      path: "/add-stats",
+    },
+    {
+      name: "Hardpoint",
+      path: "/dashboard/bo6/hardpoint",
+    },
+    {
+      name: "Control",
+      path: "/dashboard/bo6/control",
+    },
+    {
+      name: "S&D",
+      path: "/dashboard/bo6/searchanddestroy",
+    },
+    {
+      name: "Modern Warfare 3",
+      path: "/dashboard/mw3",
+    },
+  ],
+};
+
+type NavBarProps = {
+  game: keyof typeof navConfigs;
+};
+
+function Navbar({ game = "bo6" }: NavBarProps) {
   const { status, data: session } = useSession();
   //sets state for the Menu Pop Up
   const [showMenu, setshowMenu] = useState(false);
@@ -37,35 +101,9 @@ function Navbar() {
     };
   }, [showMenu]);
 
-  type TNavBarItems = {
-    name: string;
-    path: string;
-  };
-
-  const navBarItems: TNavBarItems[] = [
-    {
-      name: "Dashboard",
-      path: "/dashboard",
-    },
-    {
-      name: "Add Stats",
-      path: "/add-stats",
-    },
-    {
-      name: "Hardpoint",
-      path: "/dashboard/hardpoint",
-    },
-    {
-      name: "Control",
-      path: "/dashboard/control",
-    },
-    {
-      name: "S&D",
-      path: "/dashboard/searchanddestroy",
-    },
-  ];
-
   const pathname = usePathname();
+
+  const activeItems = navConfigs[game];
 
   return (
     <div className="flex justify-between p-4 relative ">
@@ -86,13 +124,19 @@ function Navbar() {
             ref={menuRef}
           >
             <div className="font-bold">{session?.user?.email}</div>
-            {navBarItems.map((item) => {
+            {activeItems.map((item) => {
               return (
                 <Link
                   key={item.path}
                   href={item.path}
                   className={`hover:underline ${
-                    pathname === item.path ? `underline text-[#b0ff34]` : ""
+                    pathname === item.path
+                      ? game === "mw3"
+                        ? "underline text-[#b0ff34]"
+                        : "underline text-[#ff9900]"
+                      : game === "mw3"
+                      ? ""
+                      : ""
                   } `}
                   onClick={() => setshowMenu(false)}
                 >
@@ -101,7 +145,10 @@ function Navbar() {
               );
             })}
 
-            <button className="btn" onClick={() => signOut()}>
+            <button
+              className={game === "mw3" ? `btn` : `btn-bo6`}
+              onClick={() => signOut()}
+            >
               Sign Out
             </button>
           </div>
