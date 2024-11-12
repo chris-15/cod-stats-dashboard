@@ -3,8 +3,8 @@ import { calcOverallKdRatio, calcOverallWinPercentage } from "@/lib/utils";
 import TopCardGameMode from "./TopCardGameMode";
 import { TMatchQuery } from "@/app/types";
 
-async function TopCards() {
-  const matches = await getMatches();
+async function TopCards({matches}: {matches: TMatchQuery[]}) {
+
 
   const calcKd = (matches: TMatchQuery[], gameMode: string) => {
     let killSum = 0;

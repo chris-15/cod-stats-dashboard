@@ -7,7 +7,7 @@ import GameModeStatsCard from "@/components/GameModeStatsCard";
 import GameModeMatchesTable from "@/components/GameModeMatchesTable";
 import GameModeMapStats from "@/components/GameModeMapStats";
 import { TGameMode, TMatchQuery } from "@/app/types";
-import { getMatches, getMatchesByMode } from "@/server/queries";
+import { getMatches, getBoSixMatchesByMode } from "@/server/queries";
 import MapBarChart from "@/components/MapBarChart";
 import KdBarChart from "@/components/KdBarChart";
 import { getNumberSuffix } from "@/lib/utils";
@@ -47,7 +47,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
 
   const gameMode = capitalizeGameMode(params.gameMode) as TGameMode;
 
-  const matches = await getMatchesByMode(gameMode);
+  const matches = await getBoSixMatchesByMode(gameMode);
 
   function calcMapCount(match: TMatchQuery[], gameMode: string) {
     let mapCounts: { [key: string]: number } = {};
@@ -105,7 +105,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
               <div className="hidden xs:flex flex-col justify-between space-y-4 xl:space-y-2">
                 <div className="border border-[#444444] rounded-lg bg-secondary-bg hidden xs:block">
                   <h2 className="text-center pt-4">Match Count by Map</h2>
-                  <MapBarChartComponent data={mapCountData} fill="#b0ff34" />
+                  <MapBarChartComponent data={mapCountData} fill="#ff9900" />
                 </div>
                 <div className="bg-secondary-bg border border-[#444444] rounded-lg">
                   <h2 className="text-center pt-4">KD by Result by Map</h2>

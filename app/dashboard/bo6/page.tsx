@@ -3,7 +3,7 @@ import TopCards from "@/components/TopCards";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { getMatches } from "@/server/queries";
+import { getBoSixMatches } from "@/server/queries";
 import ModeBarChart from "@/components/ModeBarChart";
 import MapBarChart from "@/components/MapBarChart";
 import { TMatchQuery } from "../../types";
@@ -17,7 +17,7 @@ const ModeBarChartComponent = dynamic(
     ssr: false,
     loading: () => (
       <div className="flex justify-center items-center p-4">
-        <span className="small-loader"></span>
+        <span className="small-loader-bo6"></span>
       </div>
     ),
   }
@@ -27,7 +27,7 @@ const MapBarChartComponent = dynamic(() => import("@/components/MapBarChart"), {
   ssr: false,
   loading: () => (
     <div className="flex justify-center items-center p-4">
-      <span className="small-loader"></span>
+      <span className="small-loader-bo6"></span>
     </div>
   ),
 });
@@ -66,7 +66,8 @@ async function Dashboard() {
     redirect("/sign-in");
   }
 
-  const matches = await getMatches();
+  const matches = await getBoSixMatches();
+  console.log(matches)
 
   const mapCountData = calcMapCount(matches).filter(
     (match) => match.name != "Skidrow" && match.name != "Terminal"
@@ -88,11 +89,11 @@ async function Dashboard() {
               <>
                 <div className="border border-[#444444] rounded-lg  bg-secondary-bg">
                   <h2 className="text-center pt-4">Match Count by Game Mode</h2>
-                  <ModeBarChartComponent data={modeCountData} fill="#b0ff34" />
+                  <ModeBarChartComponent data={modeCountData} fill="#ff9900" />
                 </div>
                 <div className="border border-[#444444] rounded-lg bg-secondary-bg hidden xs:block">
                   <h2 className="text-center pt-4">Match Count by Map</h2>
-                  <MapBarChartComponent data={mapCountData} fill="#b0ff34" />
+                  <MapBarChartComponent data={mapCountData} fill="#ff9900" />
                 </div>
               </>
             )}

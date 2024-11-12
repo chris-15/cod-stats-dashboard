@@ -22,6 +22,7 @@ type TData = {
 
 type MapBarChartProps = {
   data: TData[];
+  fill: string
 };
 
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -37,7 +38,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-function ModeBarChart({ data }: MapBarChartProps) {
+function ModeBarChart({ data, fill }: MapBarChartProps) {
   return (
   
       <ResponsiveContainer minHeight={300} maxHeight={300}>
@@ -55,7 +56,7 @@ function ModeBarChart({ data }: MapBarChartProps) {
           <Tooltip content={<CustomTooltip />} />
           <Bar
             dataKey="value"
-            fill="#b0ff34"
+            fill={fill}
             activeBar={<Rectangle stroke="black" />}
           />
         </BarChart>

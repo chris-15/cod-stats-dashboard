@@ -46,9 +46,27 @@ model User {
   accounts      Account[]
   sessions      Session[]
   matches       Match[]
+  boSixMatches  BoSixMatch[]
 }
 
 model Match {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  gameMode  GameMode
+  matchMap MatchMap
+  kills     Int
+  deaths    Int
+  damage    Int?
+  win       Boolean
+  time      Int?     @default(0)
+  plants    Int?
+  defuses   Int?
+  user      User     @relation(fields: [userEmail], references: [email])
+  userEmail String
+}
+
+model BoSixMatch {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -4,10 +4,8 @@ import { convertTime } from "../lib/utils";
 import { getMatches } from "@/server/queries";
 import { unstable_noStore as noStore} from "next/cache";
 
-async function RecentMatchesTable( ) {
+async function RecentMatchesTable( {matches}: {matches: TMatchQuery[]} ) {
 
-
-  const matches = await getMatches();
 
   //new array that hold last 15 matches
   const lastFifteenMatches = matches ? matches.slice(0, 15) : [];
