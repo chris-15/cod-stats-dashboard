@@ -255,7 +255,7 @@ function AddStatsForm() {
         )}
 
         <div className="flex justify-end">
-          <button type="submit" className="mt-6 btn">
+          <button type="submit" className="mt-6 btn-bo6">
             Submit
           </button>
         </div>
