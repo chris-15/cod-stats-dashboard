@@ -176,7 +176,7 @@ export default async function GameModeMatchId({
             
 
           
-          <div className="flex space-x-4 items-center">
+          {/* <div className="flex space-x-4 items-center">
             <Link href={`/edit-stats/${match.id}`}>
               <span className=" text-[#58a6FF] hover:underline">Edit</span>
             </Link>
@@ -195,7 +195,7 @@ export default async function GameModeMatchId({
                 Delete
               </button>
             </form>
-          </div>
+          </div> */}
           </div>
         </div>
 
@@ -205,7 +205,7 @@ export default async function GameModeMatchId({
             alt="Match Image"
             className="rounded-lg shadow-lg"
             height={500}
-            src={mapImages[match.matchMap]}
+            src={mapImages[match.matchMap as keyof typeof mapImages]}
             style={{
               objectFit: "contain",
             }}

@@ -88,7 +88,7 @@ export function SideBar({ game = "bo6" }: SideBarProps) {
 
   const activeItems = navConfigs[game];
 
-  //console.log("Game prop:", game);
+  //console.log(pathname)
 
   return (
     <div className="h-screen w-64 flex flex-col justify-between shadow-lg p-4 sticky top-0 bg-secondary-bg border-r border-[#444444] text-white">
@@ -112,6 +112,7 @@ export function SideBar({ game = "bo6" }: SideBarProps) {
             {activeItems?.map((item) => {
               // must declar item.icon as Icon, because IconType is returns a react element
               const Icon = item.icon;
+             
 
               return (
                 <Link
