@@ -21,7 +21,7 @@ export default function Home() {
         >
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
             Elevate Your Game with{" "}
-            <span className="text-[#b0ff34]">CoD Dashboard</span>
+            <span className="text-bo6-theme">CoD Dashboard</span>
           </h1>
           <p className="text-xl text-gray-300 mb-8">
             Your personal performance tracker for Call of Duty. Analyze your
@@ -29,7 +29,7 @@ export default function Home() {
           </p>
           <Link
             href="/dashboard"
-            className="inline-flex items-center bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-3 px-8 rounded-lg text-lg transition duration-300 hover:underline hover:underline-offset-2"
+            className="inline-flex items-center bg-bo6-theme hover:bg-bo6-theme/80 text-[#333333] font-medium py-3 px-8 rounded-lg text-lg transition duration-300 hover:underline hover:underline-offset-2"
           >
             View My Stats
             <LuChevronRight className=" ml-1"></LuChevronRight>
@@ -89,7 +89,7 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-[#343a40] p-6 rounded-lg"
               >
-                <feature.icon className="w-12 h-12 mb-4 text-[#b0ff34]" />
+                <feature.icon className="w-12 h-12 mb-4 text-bo6-theme" />
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
                 <p className="text-gray-300">{feature.description}</p>
               </motion.div>
@@ -112,7 +112,7 @@ export default function Home() {
             </div>
             <Link
               href="/sign-in"
-              className="inline-flex items-center bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-3 px-8 rounded-lg text-lg transition duration-300 hover:underline hover:underline-offset-2"
+              className="inline-flex items-center bg-bo6-theme hover:bg-bo6-theme/80  text-[#333333] font-medium py-3 px-8 rounded-lg text-lg transition duration-300 hover:underline hover:underline-offset-2"
             >
               Sign Up Now
               <LuChevronRight className="ml-1" />
