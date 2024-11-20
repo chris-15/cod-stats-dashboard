@@ -13,25 +13,25 @@ type GameModeMaps = {
   [gameMode: string]: MapOption[];
 };
 
+//adujusted so you can only select maps for bo6 since mw3 rannked is no longer available
 const mapOptions: GameModeMaps = {
   Hardpoint: [
-    { value: "Karachi", label: "Karachi" },
-    { value: "Rio", label: "Rio" },
-    { value: "SixStar", label: "SixStar" },
-    { value: "SubBase", label: "SubBase" },
-    { value: "Vista", label: "Vista" },
+    { value: "Protocol", label: "Protocol" },
+    { value: "RedCard", label: "RedCard" },
+    { value: "Rewind", label: "Rewind" },
+    { value: "Skyline", label: "Skyline" },
+    { value: "Vault", label: "Vault" },
   ],
   Control: [
-    { value: "Highrise", label: "Highrise" },
-    { value: "Invasion", label: "Invasion" },
-    { value: "Karachi", label: "Karachi" },
+    { value: "Protocol", label: "Protocol" },
+    { value: "Vault", label: "Vault" },
   ],
   SearchAndDestroy: [
-    { value: "Highrise", label: "Highrise" },
-    { value: "Invasion", label: "Invasion" },
-    { value: "Karachi", label: "Karachi" },
-    { value: "Rio", label: "Rio" },
-    { value: "SixStar", label: "SixStar" },
+    { value: "Protocol", label: "Protocol" },
+    { value: "RedCard", label: "RedCard" },
+    { value: "Rewind", label: "Rewind" },
+    { value: "Skyline", label: "Skyline" },
+    { value: "Vault", label: "Vault" },
   ],
 };
 function AddStatsForm() {
@@ -84,7 +84,7 @@ function AddStatsForm() {
       if (res.ok) {
         //console.log(res.json());
         toast.success("Successfully added match stats!");
-        router.push("/dashboard");
+        router.push("/dashboard/bo6");
         router.refresh();
       }
     } catch (error) {

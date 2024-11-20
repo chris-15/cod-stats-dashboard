@@ -99,6 +99,11 @@ enum MatchMap {
   SixStar
   SubBase
   Vista
+  Protocol
+  RedCard
+  Rewind
+  Skyline
+  Vault
 }
 
 model VerificationToken {

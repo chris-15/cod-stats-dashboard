@@ -120,8 +120,9 @@ export default async function GameModeMatchId({
     const kdRating =
       kills / deaths > 1 ? "goodKd" : kills / deaths < 1 ? "badKd" : "evenKd";
 
+    //bo6 health points are 100 per life
     const damageRating =
-      damage !== null && damage >= kills * 150 ? "highDamage" : "lowDamage";
+      damage !== null && damage >= kills * 100 ? "highDamage" : "lowDamage";
 
     const result = matchResult ? "win" : "loss";
 
@@ -153,49 +154,45 @@ export default async function GameModeMatchId({
           <h2 className="text-white text-4xl text-center font-bold">
             {match.matchMap}
           </h2>
-          
 
           <div className="flex justify-between items-center ">
-  
             <p>
-            <span className="text-white">
-              {match.createdAt.toLocaleDateString()} at{" "}
-              {match.createdAt.toLocaleTimeString()}
-            </span>
-          </p>
-          {match.updatedAt.getTime() !== match.createdAt.getTime() && (
-            <p className="">
-              Updated:
               <span className="text-white">
-                {" "}
-                {match.updatedAt.toLocaleDateString()} at{" "}
-                {match.updatedAt.toLocaleTimeString()}
+                {match.createdAt.toLocaleDateString()} at{" "}
+                {match.createdAt.toLocaleTimeString()}
               </span>
             </p>
-          )}
-            
+            {match.updatedAt.getTime() !== match.createdAt.getTime() && (
+              <p className="">
+                Updated:
+                <span className="text-white">
+                  {" "}
+                  {match.updatedAt.toLocaleDateString()} at{" "}
+                  {match.updatedAt.toLocaleTimeString()}
+                </span>
+              </p>
+            )}
 
-          
-          <div className="flex space-x-4 items-center">
-            <Link href={`/edit-stats/${match.id}`}>
-              <span className=" text-[#58a6FF] hover:underline">Edit</span>
-            </Link>
+            <div className="flex space-x-4 items-center">
+              <Link href={`/edit-stats/${match.id}`}>
+                <span className=" text-[#58a6FF] hover:underline">Edit</span>
+              </Link>
 
-            <form
-              action={async () => {
-                "use server";
+              <form
+                action={async () => {
+                  "use server";
 
-                await deleteMatch(match.id);
-              }}
-            >
-              <button
-                type="submit"
-                className=" text-white bg-[#ff4d4d] p-2 rounded-lg hover:underline hover:font-bold"
+                  await deleteMatch(match.id);
+                }}
               >
-                Delete
-              </button>
-            </form>
-          </div>
+                <button
+                  type="submit"
+                  className=" text-white bg-[#ff4d4d] p-2 rounded-lg hover:underline hover:font-bold"
+                >
+                  Delete
+                </button>
+              </form>
+            </div>
           </div>
         </div>
 
@@ -221,7 +218,12 @@ export default async function GameModeMatchId({
               <div className="mt-6">
                 <div className="text-[#AAAAAA]">
                   <p className=" mb-1">
-                  Game Mode: <span className="text-white">{match.gameMode === "SearchAndDestroy" ? "S&D" : match.gameMode}</span>
+                    Game Mode:{" "}
+                    <span className="text-white">
+                      {match.gameMode === "SearchAndDestroy"
+                        ? "S&D"
+                        : match.gameMode}
+                    </span>
                   </p>
                   <p className=" mb-1">
                     Match Result:{" "}

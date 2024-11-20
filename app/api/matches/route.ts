@@ -25,7 +25,8 @@ export async function POST(req: Request) {
   }
 
   try {
-    const newMatch = await prisma.match.create({
+    // adjusted so you can only create matches for bo6 since mw3 rannked is no longer available
+    const newMatch = await prisma.boSixMatch.create({
       data: {
         gameMode,
         matchMap,
