@@ -128,7 +128,7 @@ export async function getBoSixMatchById(id:string){
   if(!match) throw new Error("No Match Found")
   if(session.user?.email !=  match.userEmail) throw new Error("Unuthorized")
 
-return match
+return match as TMatchQuery
 };
 
 //get matches by game mode for bosix matches
@@ -169,5 +169,5 @@ export async function deleteBoSixMatch(id:string) {
   })
   //console.log("match deleted!")
 
-  redirect('/dashboard')
+  redirect('/dashboard/bo6')
 }

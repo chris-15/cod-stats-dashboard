@@ -116,7 +116,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
               </div>
             </div>
 
-            <GameModeMatchesTable gameMode={gameMode} matches={matches} />
+            <GameModeMatchesTable gameMode={gameMode} matches={matches} game="bo6" />
           </div>
         </>
       ) : (

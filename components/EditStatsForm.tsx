@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { TMatch } from "@/app/types";
+import { TMatch, TMatchQuery } from "@/app/types";
 import toast from "react-hot-toast";
 
 //setting types for the map options
@@ -14,43 +14,38 @@ type GameModeMaps = {
   [gameMode: string]: MapOption[];
 };
 
+//adujusted so you can only select maps for bo6 since mw3 rannked is no longer available
 const mapOptions: GameModeMaps = {
   Hardpoint: [
-    { value: "Invasion", label: "Invasion" },
-    { value: "Karachi", label: "Karachi" },
-    { value: "Rio", label: "Rio" },
-    { value: "Skidrow", label: "Skidrow" },
-    { value: "Terminal", label: "Terminal" },
-    { value: "SixStar", label: "SixStar" },
-    { value: "SubBase", label: "SubBase" },
-    { value: "Vista", label: "Vista" },
+    { value: "Protocol", label: "Protocol" },
+    { value: "RedCard", label: "RedCard" },
+    { value: "Rewind", label: "Rewind" },
+    { value: "Skyline", label: "Skyline" },
+    { value: "Vault", label: "Vault" },
   ],
   Control: [
-    { value: "Highrise", label: "Highrise" },
-    { value: "Invasion", label: "Invasion" },
-    { value: "Karachi", label: "Karachi" },
+    { value: "Protocol", label: "Protocol" },
+    { value: "Vault", label: "Vault" },
   ],
   SearchAndDestroy: [
-    { value: "Highrise", label: "Highrise" },
-    { value: "Invasion", label: "Invasion" },
-    { value: "Karachi", label: "Karachi" },
-    { value: "Rio", label: "Rio" },
-    { value: "SixStar", label: "SixStar" },
-    { value: "Skidrow", label: "Skidrow" },
-    { value: "Terminal", label: "Terminal" },
+    { value: "Protocol", label: "Protocol" },
+    { value: "RedCard", label: "RedCard" },
+    { value: "Rewind", label: "Rewind" },
+    { value: "Skyline", label: "Skyline" },
+    { value: "Vault", label: "Vault" },
   ],
 };
 
-function EditStatsForm({ match }: { match: TMatch }) {
+function EditStatsForm({ match }: { match: TMatchQuery }) {
   const [gameMode, setGameMode] = useState<string>(match.gameMode);
   const [matchMap, setMatchMap] = useState<string>(match.matchMap);
   const [win, setWin] = useState<boolean>(match.win);
   const [kills, setKills] = useState<number>(match.kills);
   const [deaths, setDeaths] = useState<number>(match.deaths);
-  const [damage, setDamage] = useState<number>(match.damage);
-  const [time, setTime] = useState<number>(match.time);
-  const [plants, setPlants] = useState<number>(match.plants);
-  const [defuses, setDefuses] = useState<number>(match.defuses);
+  const [damage, setDamage] = useState<number>(match.damage ?? 0);
+  const [time, setTime] = useState<number>(match.time ?? 0 );
+  const [plants, setPlants] = useState<number>(match.plants ?? 0);
+  const [defuses, setDefuses] = useState<number>(match.defuses ?? 0);
   const [error, setError] = useState<string>("");
 
   const router = useRouter();
@@ -90,7 +85,7 @@ function EditStatsForm({ match }: { match: TMatch }) {
         //console.log(res.json());
         console.log("Match Updated!");
         toast.success("Successfully updated match stats!");
-        router.push(`/dashboard/${gameMode.toLowerCase()}`);
+        router.push(`/dashboard/bo6/${gameMode.toLowerCase()}`);
         router.refresh();
       }
     } catch (error) {

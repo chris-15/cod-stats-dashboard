@@ -3,6 +3,8 @@ import prisma from "@/lib/prismadb";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../../../lib/auth"
 
+//updated to only allow changes to bo6 matches
+
 // get match by ID 
 export async function GET(
   req: Request,
@@ -43,7 +45,7 @@ export async function PUT(
     await req.json();
   const id = params.id;
   try {
-    const match = await prisma.match.update({
+    const match = await prisma.boSixMatch.update({
       where: { id },
       data: { gameMode, matchMap, kills, deaths, damage, win, time, plants, defuses },
     });
@@ -69,7 +71,7 @@ export async function DELETE(
 
   const id = params.id;
   try {
-    const match = await prisma.match.delete({
+    const match = await prisma.boSixMatch.delete({
       where: { id },
     });
 
@@ -78,3 +80,5 @@ export async function DELETE(
     return NextResponse.json({ message: "Error deleting" });
   }
 }
+
+

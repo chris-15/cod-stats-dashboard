@@ -9,9 +9,10 @@ import { useState } from "react";
 type GameModeStatsProp = {
   gameMode: string;
   matches: TMatchQuery[];
+  game: string;
 };
 
-function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
+function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
   const [visbileMatches, setVisibleMatches] = useState<number>(15);
 
   //filter matches on gamemode and slice to show 15 matches at a time
@@ -84,9 +85,9 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
                   <td>{(match.kills / match.deaths).toFixed(2)}</td>
                   <td className="">
                     <Link
-                      href={`/dashboard/${gameMode.toLowerCase()}/match/${
-                        match.id
-                      }`}
+                      href={`/dashboard/${
+                        game === "mw3" ? "mw3" : "bo6"
+                      }/${gameMode.toLowerCase()}/match/${match.id}`}
                     >
                       <span className=" text-[#b0ff34] hover:underline">
                         More Details
@@ -96,15 +97,15 @@ function GameModeMatchesTable({ gameMode, matches }: GameModeStatsProp) {
                 </tr>
               ))}
             </tbody>
-            
           </table>
           <div className="text-center py-4">
-            <button className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2" onClick={handleLoadMoreMatches}>
+            <button
+              className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2"
+              onClick={handleLoadMoreMatches}
+            >
               View More!
             </button>
           </div>
-
-          
         </div>
       ) : (
         <p className="text-center p-4">No Matches Recorded</p>
