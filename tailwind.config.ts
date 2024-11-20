@@ -21,6 +21,7 @@ const config: Config = {
         'gold': '#FFD033',
         'silver': '#C0C0C0',
         'bronze': '#CD853F',
+        'bo6-theme': '#ff9900',
         'sidebar-active-mw3': '#b0ff34',
         'sidebar-active-bo6': '#ff9900',
         'sidebar-hover-mw3': '#b0ff34',

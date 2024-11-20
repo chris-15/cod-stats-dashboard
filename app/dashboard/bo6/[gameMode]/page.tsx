@@ -153,14 +153,14 @@ function TopKills({ matches, gameMode }: topTenProps) {
       {topTenMatches.map((match, index) => (
         <div key={match.id} className="top-ten-item border-b border-[#444444]">
           <Link
-            href={`/dashboard/mw3/${gameMode.toLowerCase()}/match/${match.id}`}
+            href={`/dashboard/bo6/${gameMode.toLowerCase()}/match/${match.id}`}
             className="flex items-center justify-between px-4 py-3 rounded-lg group transition-transform transform hover:scale-105 h-28 xs:h-auto"
           >
             <div>
-              <h4 className="font-medium group-hover:underline group-hover:text-[#b0ff34]">
+              <h4 className="font-medium group-hover:underline group-hover:text-bo6-theme">
                 Kills: {match.kills}
               </h4>
-              <p className=" text-sm text-gray-400  group-hover:text-[#b0ff34] ">
+              <p className=" text-sm text-gray-400  group-hover:text-bo6-theme ">
                 {match.matchMap}:{" "}
                 {match.createdAt.toLocaleDateString("en-US", {
                   year: "2-digit",
@@ -203,14 +203,14 @@ function TopDamage({ matches, gameMode }: topTenProps) {
       {topTenMatches.map((match, index) => (
         <div key={match.id} className="top-ten-item border-b border-[#444444]">
           <Link
-            href={`/dashboard/mw3/${gameMode.toLowerCase()}/match/${match.id}`}
+            href={`/dashboard/bo6/${gameMode.toLowerCase()}/match/${match.id}`}
             className="flex items-center justify-between px-4 py-3 rounded-lg group transition-transform transform hover:scale-105 h-28 xs:h-auto"
           >
             <div>
-              <h4 className="font-medium group-hover:underline group-hover:text-[#b0ff34]">
+              <h4 className="font-medium group-hover:underline group-hover:text-bo6-theme">
                 Damage: {match.damage}
               </h4>
-              <p className=" text-sm text-gray-400  group-hover:text-[#b0ff34] ">
+              <p className=" text-sm text-gray-400  group-hover:text-bo6-theme ">
                 {match.matchMap}:{" "}
                 {match.createdAt.toLocaleDateString("en-US", {
                   year: "2-digit",

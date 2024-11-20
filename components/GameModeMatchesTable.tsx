@@ -89,7 +89,7 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
                         game === "mw3" ? "mw3" : "bo6"
                       }/${gameMode.toLowerCase()}/match/${match.id}`}
                     >
-                      <span className=" text-[#b0ff34] hover:underline">
+                      <span className={game === 'mw3'?`text-[#b0ff34] hover:underline`: `text-bo6-theme hover:underline`}>
                         More Details
                       </span>
                     </Link>
@@ -99,12 +99,12 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
             </tbody>
           </table>
           <div className="text-center py-4">
-            <button
+            { matches.length > 15 && <button
               className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2"
               onClick={handleLoadMoreMatches}
             >
               View More!
-            </button>
+            </button>}
           </div>
         </div>
       ) : (
