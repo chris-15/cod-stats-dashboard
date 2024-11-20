@@ -24,6 +24,7 @@ const mapOptions: GameModeMaps = {
   ],
   Control: [
     { value: "Protocol", label: "Protocol" },
+    { value: "Rewind", label: "Rewind" },
     { value: "Vault", label: "Vault" },
   ],
   SearchAndDestroy: [

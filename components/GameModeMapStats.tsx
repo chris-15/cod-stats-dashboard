@@ -1,4 +1,3 @@
-
 import { TMatch, TGameMode, TMatchQuery } from "@/app/types";
 
 import {
@@ -16,6 +15,7 @@ import {
 type GameModeStatsProp = {
   gameMode: TGameMode;
   matches: TMatchQuery[];
+  game: string;
 };
 
 const mapSets: Record<TGameMode, string[]> = {
@@ -41,8 +41,12 @@ const mapSets: Record<TGameMode, string[]> = {
   ],
 };
 
-function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
-
+const bo6MapSets: Record<TGameMode, string[]> = {
+  Hardpoint: ["Protocol", "RedCard", "Rewind", "Skyline", "Vault"],
+  Control: ["Protocol", "Rewind", "Vault"],
+  SearchAndDestroy: ["Protocol", "RedCard", "Rewind", "Skyline", "Vault"],
+};
+function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
   const getMapModeMatches = (
     gameMode: string,
     mapSet: string[],
@@ -56,9 +60,16 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
       return gameModeMatches.filter((match) => match.matchMap === map);
     });
   };
+
   const mapModeMatches = getMapModeMatches(
     gameMode,
     mapSets[gameMode],
+    matches
+  );
+
+  const bo6MapModeMatches = getMapModeMatches(
+    gameMode,
+    bo6MapSets[gameMode],
     matches
   );
 
@@ -93,7 +104,7 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
 
               <th>Win %</th>
               <th>K/D Ratio</th>
-              
+
               <th className="xs:hidden">K/D in W</th>
               <th className="xs:hidden">K/D in L</th>
               {gameMode === "Hardpoint" && <th>Avg Time</th>}
@@ -111,26 +122,33 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
             </tr>
           </thead>
           <tbody>
-            {mapModeMatches.map((matches, index) => (
+            {game === "bo6"? 
+            bo6MapModeMatches.map((matches, index) => (
               <tr className="text-center" key={index}>
                 {/* {mapSets[gameMode][index] === bestMap ? (
-                  <td
-                    data-tooltip-id="mapstats-tooltip-id"
-                    data-tooltip-content="This is your best map for this game mode!"
-                    className=""
-                  >
-                    ⭐️
-                  </td>
-                ) : (
-                  <td className=""></td>
-                )} */}
-                <td className="sticky left-0 bg-secondary-bg">{mapSets[gameMode][index]}</td>
+              <td
+                data-tooltip-id="mapstats-tooltip-id"
+                data-tooltip-content="This is your best map for this game mode!"
+                className=""
+              >
+                ⭐️
+              </td>
+            ) : (
+              <td className=""></td>
+            )} */}
+                <td className="sticky left-0 bg-secondary-bg">
+                  {bo6MapSets[gameMode][index]}
+                </td>
 
                 <td>{calcWinPercentage(matches)}</td>
                 <td>{calcModeKdRatio(matches)}</td>
-                
-                <td className="xs:hidden">{calcModeKdRatio(matches, true)}</td>
-                <td className="xs:hidden">{calcModeKdRatio(matches, false)}</td>
+
+                <td className="xs:hidden">
+                  {calcModeKdRatio(matches, true)}
+                </td>
+                <td className="xs:hidden">
+                  {calcModeKdRatio(matches, false)}
+                </td>
                 {gameMode === "Hardpoint" && (
                   <td>
                     {calcAvgTime(matches) === "NaN:NaN"
@@ -141,7 +159,9 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
                 {gameMode === "SearchAndDestroy" && (
                   <>
                     <td>
-                      {!calcAvgPlants(matches) ? "--" : calcAvgPlants(matches)}
+                      {!calcAvgPlants(matches)
+                        ? "--"
+                        : calcAvgPlants(matches)}
                     </td>
                     <td>
                       {!calcAvgDefuses(matches)
@@ -150,12 +170,70 @@ function GameModeMapStats({ gameMode, matches }: GameModeStatsProp) {
                     </td>
                   </>
                 )}
-                {gameMode === "Control" && <td>{calcAvgDamage(matches)}</td>}
+                {gameMode === "Control" && (
+                  <td>{calcAvgDamage(matches)}</td>
+                )}
                 <td>{calcAvgKills(matches)}</td>
                 <td>{calcHighestKill(matches)}</td>
                 <td className="xs:hidden">{matches.length}</td>
               </tr>
-            ))}
+            ))
+              : mapModeMatches.map((matches, index) => (
+                  <tr className="text-center" key={index}>
+                    {/* {mapSets[gameMode][index] === bestMap ? (
+                  <td
+                    data-tooltip-id="mapstats-tooltip-id"
+                    data-tooltip-content="This is your best map for this game mode!"
+                    className=""
+                  >
+                    ⭐️
+                  </td>
+                ) : (
+                  <td className=""></td>
+                )} */}
+                    <td className="sticky left-0 bg-secondary-bg">
+                      {mapSets[gameMode][index]}
+                    </td>
+
+                    <td>{calcWinPercentage(matches)}</td>
+                    <td>{calcModeKdRatio(matches)}</td>
+
+                    <td className="xs:hidden">
+                      {calcModeKdRatio(matches, true)}
+                    </td>
+                    <td className="xs:hidden">
+                      {calcModeKdRatio(matches, false)}
+                    </td>
+                    {gameMode === "Hardpoint" && (
+                      <td>
+                        {calcAvgTime(matches) === "NaN:NaN"
+                          ? "--"
+                          : calcAvgTime(matches)}
+                      </td>
+                    )}
+                    {gameMode === "SearchAndDestroy" && (
+                      <>
+                        <td>
+                          {!calcAvgPlants(matches)
+                            ? "--"
+                            : calcAvgPlants(matches)}
+                        </td>
+                        <td>
+                          {!calcAvgDefuses(matches)
+                            ? "--"
+                            : calcAvgDefuses(matches)}
+                        </td>
+                      </>
+                    )}
+                    {gameMode === "Control" && (
+                      <td>{calcAvgDamage(matches)}</td>
+                    )}
+                    <td>{calcAvgKills(matches)}</td>
+                    <td>{calcHighestKill(matches)}</td>
+                    <td className="xs:hidden">{matches.length}</td>
+                  </tr>
+                ))
+             }
           </tbody>
         </table>
       </div>

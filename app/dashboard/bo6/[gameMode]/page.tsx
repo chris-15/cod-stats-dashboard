@@ -86,7 +86,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
 
           <div className=" grid grid-cols-1 space-y-4">
             <GameModeStatsCard gameMode={gameMode} matches={matches} />
-            <GameModeMapStats gameMode={gameMode} matches={matches} />
+            <GameModeMapStats gameMode={gameMode} matches={matches} game="bo6" />
 
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
               <div className="grid grid-cols-2 bg-secondary-bg border border-[#444444] rounded-lg divide-x divide-[#444444] ">

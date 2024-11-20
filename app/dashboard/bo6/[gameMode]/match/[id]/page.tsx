@@ -20,13 +20,13 @@ export default async function GameModeMatchId({
   const match = await getBoSixMatchById(matchId);
   const mapImages = {
     Protocol:
-      "https://utfs.io/f/211e55aa-e30d-4a7c-b3c6-bb292f21eb2e-ewvcet.jpeg",
+      "https://utfs.io/f/g0j2nElFVrus8wZCXNDDZXVfb9JnyAaEwWHYLigBkSvetxMO",
     RedCard:
-      "https://utfs.io/f/edae0bda-acc7-4e7a-8316-f7b43ba3cb3b-n9gwg5.jpeg",
+      "https://utfs.io/f/g0j2nElFVrusl8crIkTv4NcXE3wFjT1gHVZSQz59oOrnG2Pa",
     Rewind:
-      "https://utfs.io/f/5f72c810-7f18-4811-ad2b-5077bd0078e8-3lu2zl.jpeg",
-    Skyline: "https://utfs.io/f/64f2610a-2466-4b6f-ac0f-eb38cb89022f-1qm0.webp",
-    Vault: "https://utfs.io/f/db0224e4-893a-4974-b6ce-19466cf8a297-nnbmah.jpeg",
+      "https://utfs.io/f/g0j2nElFVrusZR73l0cqTvVfrciOM8GgNbsy2x7o30DPtemR",
+    Skyline: "https://utfs.io/f/g0j2nElFVruswHLllWOfO9o1egZTj52BNhktAH0bDSqWRsvQ",
+    Vault: "https://utfs.io/f/g0j2nElFVrusyqrQlPL1zm7ZQcS8jf2DOXueAJwVlrbLgCM0",
   };
 
   const performanceDescriptions = {

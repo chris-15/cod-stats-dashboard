@@ -67,7 +67,7 @@ async function Dashboard() {
   }
 
   const matches = await getBoSixMatches();
-  console.log(matches)
+  //console.log(matches)
 
   const mapCountData = calcMapCount(matches).filter(
     (match) => match.name != "Skidrow" && match.name != "Terminal"
