@@ -27,7 +27,8 @@ export default async function GameModeMatchId({
       "https://utfs.io/f/g0j2nElFVrusl8crIkTv4NcXE3wFjT1gHVZSQz59oOrnG2Pa",
     Rewind:
       "https://utfs.io/f/g0j2nElFVrusZR73l0cqTvVfrciOM8GgNbsy2x7o30DPtemR",
-    Skyline: "https://utfs.io/f/g0j2nElFVruswHLllWOfO9o1egZTj52BNhktAH0bDSqWRsvQ",
+    Skyline:
+      "https://utfs.io/f/g0j2nElFVruswHLllWOfO9o1egZTj52BNhktAH0bDSqWRsvQ",
     Vault: "https://utfs.io/f/g0j2nElFVrusyqrQlPL1zm7ZQcS8jf2DOXueAJwVlrbLgCM0",
   };
 
@@ -209,15 +210,20 @@ export default async function GameModeMatchId({
             width={800}
           />
           <div className="bg-secondary-bg rounded-lg shadow-lg p-6 space-y-1 text-[#AAAAAA]">
-          <p>Map: <span className="text-white">{match.matchMap}</span></p>
-          <p>
-              Match Played on: <span className="text-white">{match.createdAt.toLocaleDateString()} at{" "}
-              {match.createdAt.toLocaleTimeString()}</span>
+            <p>
+              Map: <span className="text-white">{match.matchMap}</span>
+            </p>
+            <p>
+              Match Played on:{" "}
+              <span className="text-white">
+                {match.createdAt.toLocaleDateString("en-us")} at{" "}
+                {match.createdAt.toLocaleTimeString("en-us")}
+              </span>
             </p>
             {match.updatedAt.getTime() !== match.createdAt.getTime() && (
               <p>
-                Match Updated on: {match.updatedAt.toLocaleDateString()} at{" "}
-                {match.updatedAt.toLocaleTimeString()}
+                Match Updated on: {match.updatedAt.toLocaleDateString("en-us")}{" "}
+                at {match.updatedAt.toLocaleTimeString("en-us")}
               </p>
             )}
 
@@ -232,7 +238,10 @@ export default async function GameModeMatchId({
                   await deleteBoSixMatch(match.id);
                 }}
               >
-                <button type="submit" className="text-white bg-[#ff4d4d] p-2 rounded-lg hover:underline hover:font-bold">
+                <button
+                  type="submit"
+                  className="text-white bg-[#ff4d4d] p-2 rounded-lg hover:underline hover:font-bold"
+                >
                   Delete
                 </button>
               </form>

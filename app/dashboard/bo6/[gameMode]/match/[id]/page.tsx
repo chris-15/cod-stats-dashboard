@@ -25,7 +25,8 @@ export default async function GameModeMatchId({
       "https://utfs.io/f/g0j2nElFVrusl8crIkTv4NcXE3wFjT1gHVZSQz59oOrnG2Pa",
     Rewind:
       "https://utfs.io/f/g0j2nElFVrusZR73l0cqTvVfrciOM8GgNbsy2x7o30DPtemR",
-    Skyline: "https://utfs.io/f/g0j2nElFVruswHLllWOfO9o1egZTj52BNhktAH0bDSqWRsvQ",
+    Skyline:
+      "https://utfs.io/f/g0j2nElFVruswHLllWOfO9o1egZTj52BNhktAH0bDSqWRsvQ",
     Vault: "https://utfs.io/f/g0j2nElFVrusyqrQlPL1zm7ZQcS8jf2DOXueAJwVlrbLgCM0",
   };
 
@@ -150,8 +151,8 @@ export default async function GameModeMatchId({
           <div className="flex justify-between items-center ">
             <p>
               <span className="text-white">
-                {match.createdAt.toLocaleDateString()} at{" "}
-                {match.createdAt.toLocaleTimeString()}
+                {match.createdAt.toLocaleDateString("en-us")} at{" "}
+                {match.createdAt.toLocaleTimeString("en-us")}
               </span>
             </p>
             {match.updatedAt.getTime() !== match.createdAt.getTime() && (
@@ -159,8 +160,8 @@ export default async function GameModeMatchId({
                 Updated:
                 <span className="text-white">
                   {" "}
-                  {match.updatedAt.toLocaleDateString()} at{" "}
-                  {match.updatedAt.toLocaleTimeString()}
+                  {match.updatedAt.toLocaleDateString("en-us")} at{" "}
+                  {match.updatedAt.toLocaleTimeString("en-us")}
                 </span>
               </p>
             )}
@@ -194,7 +195,7 @@ export default async function GameModeMatchId({
             alt="Match Image"
             className="rounded-lg shadow-lg"
             height={500}
-            src={mapImages[match.matchMap as keyof typeof mapImages] }
+            src={mapImages[match.matchMap as keyof typeof mapImages]}
             style={{
               objectFit: "contain",
             }}

@@ -218,15 +218,20 @@ export default async function GameModeMatchId({
             width={800}
           />
           <div className="bg-secondary-bg rounded-lg shadow-lg p-6 space-y-1 text-[#AAAAAA]">
-          <p>Map: <span className="text-white">{match.matchMap}</span></p>
-          <p>
-              Match Played on: <span className="text-white">{match.createdAt.toLocaleDateString()} at{" "}
-              {match.createdAt.toLocaleTimeString()}</span>
+            <p>
+              Map: <span className="text-white">{match.matchMap}</span>
+            </p>
+            <p>
+              Match Played on:{" "}
+              <span className="text-white">
+                {match.createdAt.toLocaleDateString("en-us")} at{" "}
+                {match.createdAt.toLocaleTimeString("en-us")}
+              </span>
             </p>
             {match.updatedAt.getTime() !== match.createdAt.getTime() && (
               <p>
-                Match Updated on: {match.updatedAt.toLocaleDateString()} at{" "}
-                {match.updatedAt.toLocaleTimeString()}
+                Match Updated on: {match.updatedAt.toLocaleDateString("en-us")}{" "}
+                at {match.updatedAt.toLocaleTimeString("en-us")}
               </p>
             )}
 

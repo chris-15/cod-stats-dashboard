@@ -153,30 +153,26 @@ export default async function GameModeMatchId({
           <h2 className="text-white text-4xl text-center font-bold">
             {match.matchMap}
           </h2>
-          
 
           <div className="flex justify-between items-center ">
-  
             <p>
-            <span className="text-white">
-              {match.createdAt.toLocaleDateString()} at{" "}
-              {match.createdAt.toLocaleTimeString()}
-            </span>
-          </p>
-          {match.updatedAt.getTime() !== match.createdAt.getTime() && (
-            <p className="">
-              Updated:
               <span className="text-white">
-                {" "}
-                {match.updatedAt.toLocaleDateString()} at{" "}
-                {match.updatedAt.toLocaleTimeString()}
+                {match.createdAt.toLocaleDateString("en-us")} at{" "}
+                {match.createdAt.toLocaleTimeString("en-us")}
               </span>
             </p>
-          )}
-            
+            {match.updatedAt.getTime() !== match.createdAt.getTime() && (
+              <p className="">
+                Updated:
+                <span className="text-white">
+                  {" "}
+                  {match.updatedAt.toLocaleDateString("en-us")} at{" "}
+                  {match.updatedAt.toLocaleTimeString("en-us")}
+                </span>
+              </p>
+            )}
 
-          
-          {/* <div className="flex space-x-4 items-center">
+            {/* <div className="flex space-x-4 items-center">
             <Link href={`/edit-stats/${match.id}`}>
               <span className=" text-[#58a6FF] hover:underline">Edit</span>
             </Link>
@@ -221,7 +217,12 @@ export default async function GameModeMatchId({
               <div className="mt-6">
                 <div className="text-[#AAAAAA]">
                   <p className=" mb-1">
-                  Game Mode: <span className="text-white">{match.gameMode === "SearchAndDestroy" ? "S&D" : match.gameMode}</span>
+                    Game Mode:{" "}
+                    <span className="text-white">
+                      {match.gameMode === "SearchAndDestroy"
+                        ? "S&D"
+                        : match.gameMode}
+                    </span>
                   </p>
                   <p className=" mb-1">
                     Match Result:{" "}
