@@ -157,8 +157,8 @@ export default async function GameModeMatchId({
           <div className="flex justify-between items-center ">
             <p>
               <span className="text-white">
-                {match.createdAt.toLocaleDateString("en-us")} at{" "}
-                {match.createdAt.toLocaleTimeString("en-us")}
+                {new Date(match.createdAt).toLocaleDateString("en-us")} at{" "}
+                {new Date(match.createdAt).toLocaleTimeString("en-us")}
               </span>
             </p>
             {match.updatedAt.getTime() !== match.createdAt.getTime() && (
@@ -166,8 +166,8 @@ export default async function GameModeMatchId({
                 Updated:
                 <span className="text-white">
                   {" "}
-                  {match.updatedAt.toLocaleDateString("en-us")} at{" "}
-                  {match.updatedAt.toLocaleTimeString("en-us")}
+                  {new Date(match.updatedAt).toLocaleDateString("en-us")} at{" "}
+                  {new Date(match.updatedAt).toLocaleTimeString("en-us")}
                 </span>
               </p>
             )}

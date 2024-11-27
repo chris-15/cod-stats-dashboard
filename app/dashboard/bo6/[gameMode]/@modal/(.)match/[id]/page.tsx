@@ -216,14 +216,14 @@ export default async function GameModeMatchId({
             <p>
               Match Played on:{" "}
               <span className="text-white">
-                {match.createdAt.toLocaleDateString("en-us")} at{" "}
-                {match.createdAt.toLocaleTimeString("en-us")}
+                {new Date(match.createdAt).toLocaleDateString("en-us")} at{" "}
+                {new Date(match.createdAt).toLocaleTimeString("en-us")}
               </span>
             </p>
             {match.updatedAt.getTime() !== match.createdAt.getTime() && (
               <p>
-                Match Updated on: {match.updatedAt.toLocaleDateString("en-us")}{" "}
-                at {match.updatedAt.toLocaleTimeString("en-us")}
+                Match Updated on: {new Date(match.updatedAt).toLocaleDateString("en-us")}{" "}
+                at {new Date(match.updatedAt).toLocaleTimeString("en-us")}
               </p>
             )}
 
