@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth/next";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import DisplayDateTime from "@/components/DisplayDateTime";
 
 export default async function GameModeMatchId({
   params: { id: id },
@@ -151,8 +152,8 @@ export default async function GameModeMatchId({
           <div className="flex justify-between items-center ">
             <p>
               <span className="text-white">
-                {new Date(match.createdAt).toLocaleDateString("en-us")} at{" "}
-                {new Date(match.createdAt).toLocaleTimeString("en-us")}
+                {match.createdAt.toLocaleDateString("en-us")} at{" "}
+                <DisplayDateTime match={match} createdAt={true} />
               </span>
             </p>
             {match.updatedAt.getTime() !== match.createdAt.getTime() && (
@@ -160,8 +161,8 @@ export default async function GameModeMatchId({
                 Updated:
                 <span className="text-white">
                   {" "}
-                  {new Date(match.updatedAt).toLocaleDateString("en-us")} at{" "}
-                  {new Date(match.updatedAt).toLocaleTimeString("en-us")}
+                  {match.updatedAt.toLocaleDateString("en-us")} at{" "}
+                  <DisplayDateTime match={match} createdAt={false} />
                 </span>
               </p>
             )}
