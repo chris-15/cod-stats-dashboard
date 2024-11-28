@@ -136,7 +136,7 @@ export default async function GameModeMatchId({
   return (
     <>
       <Link
-        href={`/dashboard/${match.gameMode.toLowerCase()}`}
+        href={`/dashboard/bo6/${match.gameMode.toLowerCase()}`}
         className="flex md:hidden font-bold text-xl hover:underline px-4"
       >
         <p className=""> {`<- ${match.gameMode}`}</p>
