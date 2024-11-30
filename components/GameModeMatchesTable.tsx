@@ -106,18 +106,16 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
               </tbody>
             </table>
 
-            {
+            {visbileMatches < matches.length && (
               <div className="text-center py-4">
-                {matches.length > 15 && (
-                  <button
-                    className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2"
-                    onClick={handleLoadMoreMatches}
-                  >
-                    View More!
-                  </button>
-                )}
+                <button
+                  className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2"
+                  onClick={handleLoadMoreMatches}
+                >
+                  View More!
+                </button>
               </div>
-            }
+            )}
           </div>
         ) : (
           <p className="text-center p-4">No Matches Recorded</p>
@@ -133,7 +131,7 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
           <>
             {gameModeMatches.map((match) => (
               <div
-                className="bg-secondary-bg p-4 rounded-lg sm:hidden gap-4"
+                className="bg-secondary-bg p-4 rounded-lg sm:hidden gap-4 group transiton-transform transform ease-out duration-300  hover:scale-105"
                 key={match.id}
               >
                 <div className="flex justify-between items-center mb-2">
@@ -159,23 +157,40 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
                     : match.gameMode}
                 </div>
                 <div className=" text-gray-400">{match.matchMap}</div>
-                <div className="mt-2 text-right">
-                  <span className="text-white font-mono">
+                <div className="mt-2 flex justify-between items-center">
+                  <div className="">
+                    <Link className="group-hover:underline:text-bo5-theme"
+                      href={`/dashboard/${
+                        game === "mw3" ? "mw3" : "bo6"
+                      }/${gameMode.toLowerCase()}/match/${match.id}`}
+                    >
+                      <span
+                        className={
+                          game === "mw3"
+                            ? `text-[#b0ff34] hover:underline`
+                            : `text-bo6-theme hover:underline`
+                        }
+                      >
+                        More Details
+                      </span>
+                    </Link>
+                  </div>
+                  <span className="text-white  font-mono">
                     K/D: {(match.kills / match.deaths).toFixed(2)}
                   </span>
                 </div>
               </div>
             ))}
             {visbileMatches < matches.length && (
-                <div className="text-center py-4">
-                  <button
-                    className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2"
-                    onClick={handleLoadMoreMatches}
-                  >
-                    View More!
-                  </button>
-                </div>
-              )}
+              <div className="text-center py-4">
+                <button
+                  className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2"
+                  onClick={handleLoadMoreMatches}
+                >
+                  View More!
+                </button>
+              </div>
+            )}
           </>
         ) : (
           <p className="text-center p-4">No Matches Recorded</p>
