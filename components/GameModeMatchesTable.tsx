@@ -26,51 +26,52 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
   };
 
   return (
-    <section className="bg-secondary-bg border border-[#444444] rounded-lg overflow-x-auto">
-      <div className="px-4 sm:px-6 py-4 sticky left-0">
-        <h2 className="text-lg sm:text-xl font-bold ">All Matches</h2>
-      </div>
-      {gameModeMatches.length > 0 ? (
-        <div>
-          <table className="w-full">
-            <thead className="">
-              <tr>
-                <th>Date</th>
-                {/* <th className="text-center">Game Mode</th> */}
-                <th>Map</th>
-                <th>W/L Result</th>
-                {/*  <th>Kills</th>
+    <>
+      <section className="hidden sm:table bg-secondary-bg border border-[#444444] rounded-lg overflow-x-auto">
+        <div className="px-4 sm:px-6 py-4 sticky left-0">
+          <h2 className="text-lg sm:text-xl font-bold ">All Matches</h2>
+        </div>
+        {gameModeMatches.length > 0 ? (
+          <div>
+            <table className="w-full">
+              <thead className="">
+                <tr>
+                  <th>Date</th>
+                  {/* <th className="text-center">Game Mode</th> */}
+                  <th>Map</th>
+                  <th>W/L Result</th>
+                  {/*  <th>Kills</th>
                 <th>Deaths</th>
                 <th>Damage</th> */}
-                {/* {gameMode === "Hardpoint" && <th>Time</th>} */}
-                {/* {gameMode === "SearchAndDestroy" && (
+                  {/* {gameMode === "Hardpoint" && <th>Time</th>} */}
+                  {/* {gameMode === "SearchAndDestroy" && (
                   <>
                     <th>Plants</th>
                     <th>Defuses</th>
                   </>
                 )} */}
 
-                <th className="text-center">K/D Ratio</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {gameModeMatches.map((match) => (
-                <tr className="text-center" key={match.id}>
-                  <td>
-                    {new Date(match.createdAt).toLocaleDateString("en-US", {
-                      year: "2-digit",
-                      month: "2-digit",
-                      day: "2-digit",
-                    })}
-                  </td>
-                  <td>{match.matchMap}</td>
-                  {match.win ? (
-                    <td className="text-[#b0ff34]">Win</td>
-                  ) : (
-                    <td className="text-[#ff4d4d]">Loss</td>
-                  )}
-                  {/* <td>{match.kills}</td>
+                  <th className="text-center">K/D Ratio</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {gameModeMatches.map((match) => (
+                  <tr className="text-center" key={match.id}>
+                    <td>
+                      {new Date(match.createdAt).toLocaleDateString("en-US", {
+                        year: "2-digit",
+                        month: "2-digit",
+                        day: "2-digit",
+                      })}
+                    </td>
+                    <td>{match.matchMap}</td>
+                    {match.win ? (
+                      <td className="text-[#b0ff34]">Win</td>
+                    ) : (
+                      <td className="text-[#ff4d4d]">Loss</td>
+                    )}
+                    {/* <td>{match.kills}</td>
                   <td>{match.deaths}</td>
                   <td>{match.damage ? match.damage : "N/A"}</td>
                   {match.gameMode === "Hardpoint" && (
@@ -82,35 +83,103 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
                       <td>{match.defuses}</td>
                     </>
                   )} */}
-                  <td>{(match.kills / match.deaths).toFixed(2)}</td>
-                  <td className="">
-                    <Link
-                      href={`/dashboard/${
-                        game === "mw3" ? "mw3" : "bo6"
-                      }/${gameMode.toLowerCase()}/match/${match.id}`}
-                    >
-                      <span className={game === 'mw3'?`text-[#b0ff34] hover:underline`: `text-bo6-theme hover:underline`}>
-                        More Details
-                      </span>
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="text-center py-4">
-            { matches.length > 15 && <button
-              className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2"
-              onClick={handleLoadMoreMatches}
-            >
-              View More!
-            </button>}
+                    <td>{(match.kills / match.deaths).toFixed(2)}</td>
+                    <td className="">
+                      <Link
+                        href={`/dashboard/${
+                          game === "mw3" ? "mw3" : "bo6"
+                        }/${gameMode.toLowerCase()}/match/${match.id}`}
+                      >
+                        <span
+                          className={
+                            game === "mw3"
+                              ? `text-[#b0ff34] hover:underline`
+                              : `text-bo6-theme hover:underline`
+                          }
+                        >
+                          More Details
+                        </span>
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <div className="text-center py-4">
+              {matches.length > 15 && (
+                <button
+                  className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2"
+                  onClick={handleLoadMoreMatches}
+                >
+                  View More!
+                </button>
+              )}
+            </div>
           </div>
+        ) : (
+          <p className="text-center p-4">No Matches Recorded</p>
+        )}
+      </section>
+
+      <section className="grid grid-cols-1 gap-4 sm:hidden">
+        <div className="px-4 sm:px-6 pt-4">
+          <h2 className="text-lg sm:text-xl font-bold">Recent Matches</h2>
         </div>
-      ) : (
-        <p className="text-center p-4">No Matches Recorded</p>
-      )}
-    </section>
+
+        {gameModeMatches.length > 0 ? (
+          <>
+            {gameModeMatches.map((match) => (
+              <div
+                className="bg-secondary-bg p-4 rounded-lg sm:hidden gap-4"
+                key={match.id}
+              >
+                <div className="flex justify-between items-center mb-2">
+                  <div className=" text-gray-300">
+                    {new Date(match.createdAt).toLocaleDateString("en-us", {
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </div>
+                  <div
+                    className={`text-sm font-semibold px-2 py-1 rounded ${
+                      match.win
+                        ? "bg-[#b0ff34] text-black"
+                        : "bg-[#ff4d4d] text-black"
+                    }`}
+                  >
+                    {match.win ? "WIN" : "LOSS"}
+                  </div>
+                </div>
+                <div className="text-lg font-semibold text-white">
+                  {match.gameMode === "SearchAndDestroy"
+                    ? "Search & Destroy"
+                    : match.gameMode}
+                </div>
+                <div className=" text-gray-400">{match.matchMap}</div>
+                <div className="mt-2 text-right">
+                  <span className="text-white font-mono">
+                    K/D: {(match.kills / match.deaths).toFixed(2)}
+                  </span>
+                </div>
+              </div>
+            ))}
+            <div className="text-center py-4">
+              {matches.length > 15 && (
+                <button
+                  className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2"
+                  onClick={handleLoadMoreMatches}
+                >
+                  View More!
+                </button>
+              )}
+            </div>
+          </>
+        ) : (
+          <p className="text-center p-4">No Matches Recorded</p>
+        )}
+      </section>
+    </>
   );
 }
 export default GameModeMatchesTable;

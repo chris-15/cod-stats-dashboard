@@ -107,6 +107,7 @@ async function Dashboard() {
             <div className="px-4 sm:px-6 pt-4">
               <h2 className="text-lg sm:text-xl font-bold">Recent Matches</h2>
             </div>
+            
             {lastFifteenMatches.map((match) => (
               <div className=" bg-secondary-bg p-4 rounded-lg" key={match.id}>
                 <div className="flex justify-between items-center mb-2">
@@ -119,8 +120,8 @@ async function Dashboard() {
                   <div
                     className={`text-sm font-semibold px-2 py-1 rounded ${
                       match.win
-                        ? "bg-green-500 text-white"
-                        : "bg-red-500 text-white"
+                        ? "bg-[#b0ff34] text-black"
+                        : "bg-[#ff4d4d] text-black"
                     }`}
                   >
                     {match.win ? "WIN" : "LOSS"}
