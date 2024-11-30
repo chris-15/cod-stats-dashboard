@@ -106,16 +106,18 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
               </tbody>
             </table>
 
-            <div className="text-center py-4">
-              {matches.length > 15 && (
-                <button
-                  className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2"
-                  onClick={handleLoadMoreMatches}
-                >
-                  View More!
-                </button>
-              )}
-            </div>
+            {
+              <div className="text-center py-4">
+                {matches.length > 15 && (
+                  <button
+                    className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2"
+                    onClick={handleLoadMoreMatches}
+                  >
+                    View More!
+                  </button>
+                )}
+              </div>
+            }
           </div>
         ) : (
           <p className="text-center p-4">No Matches Recorded</p>
@@ -164,16 +166,16 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
                 </div>
               </div>
             ))}
-            <div className="text-center py-4">
-              {matches.length > 15 && (
-                <button
-                  className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2"
-                  onClick={handleLoadMoreMatches}
-                >
-                  View More!
-                </button>
+            {visbileMatches < matches.length && (
+                <div className="text-center py-4">
+                  <button
+                    className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2"
+                    onClick={handleLoadMoreMatches}
+                  >
+                    View More!
+                  </button>
+                </div>
               )}
-            </div>
           </>
         ) : (
           <p className="text-center p-4">No Matches Recorded</p>
