@@ -3,6 +3,7 @@ import { TMatch, TMatchQuery } from "@/app/types";
 import { convertTime } from "../lib/utils";
 import { getMatches } from "@/server/queries";
 import { unstable_noStore as noStore} from "next/cache";
+import DisplayDate from "./DisplayDate";
 
 async function RecentMatchesTable( {matches}: {matches: TMatchQuery[]} ) {
 
@@ -34,11 +35,7 @@ async function RecentMatchesTable( {matches}: {matches: TMatchQuery[]} ) {
             {matches.map((match) => (
               <tr className="text-center" key={match.id}>
                 <td className="">
-                  {new Date(match.createdAt).toLocaleDateString("en-US", {
-                    year: "2-digit",
-                    month: "2-digit",
-                    day: "2-digit",
-                  })}
+                  <DisplayDate match={match} createdAt={true} />
                 </td>
                 <td className="">
                   {match.gameMode === "SearchAndDestroy"
