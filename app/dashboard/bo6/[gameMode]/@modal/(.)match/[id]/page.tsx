@@ -7,6 +7,7 @@ import Image from "next/image";
 import { convertTime } from "@/lib/utils";
 import Link from "next/link";
 import DisplayDateTime from "@/components/DisplayDateTime";
+import DisplayDate from "@/components/DisplayDate";
 
 export default async function GameModeMatchId({
   params: { id: id },
@@ -217,13 +218,13 @@ export default async function GameModeMatchId({
             <p>
               Match Played on:{" "}
               <span className="text-white">
-                {match.createdAt.toLocaleDateString("en-us")} at{" "}
+                <DisplayDate match={match} createdAt={true} /> at{" "}
                 <DisplayDateTime match={match} createdAt={true} />
               </span>
             </p>
             {match.updatedAt.getTime() !== match.createdAt.getTime() && (
               <p>
-                Match Updated on: {match.updatedAt.toLocaleDateString("en-us")}{" "}
+                Match Updated on: <DisplayDate match={match} createdAt={false} />{" "}
                 at <DisplayDateTime match={match} createdAt={true} />
               </p>
             )}

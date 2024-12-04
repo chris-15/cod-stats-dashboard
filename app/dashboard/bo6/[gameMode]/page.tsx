@@ -12,6 +12,7 @@ import MapBarChart from "@/components/MapBarChart";
 import KdBarChart from "@/components/KdBarChart";
 import { getNumberSuffix } from "@/lib/utils";
 import { FaTrophy } from "react-icons/fa";
+import DisplayDate from "@/components/DisplayDate";
 
 const KdBarChartComponent = dynamic(() => import("@/components/KdBarChart"), {
   ssr: false,
@@ -162,11 +163,7 @@ function TopKills({ matches, gameMode }: topTenProps) {
               </h4>
               <p className=" text-sm text-gray-400  group-hover:text-bo6-theme ">
                 {match.matchMap}:{" "}
-                {match.createdAt.toLocaleDateString("en-US", {
-                  year: "2-digit",
-                  month: "2-digit",
-                  day: "2-digit",
-                })}
+                <DisplayDate match={match} createdAt={true} />
               </p>
             </div>
 
@@ -212,11 +209,7 @@ function TopDamage({ matches, gameMode }: topTenProps) {
               </h4>
               <p className=" text-sm text-gray-400  group-hover:text-bo6-theme ">
                 {match.matchMap}:{" "}
-                {match.createdAt.toLocaleDateString("en-US", {
-                  year: "2-digit",
-                  month: "2-digit",
-                  day: "2-digit",
-                })}
+                <DisplayDate match={match} createdAt={true} />
               </p>
             </div>
 

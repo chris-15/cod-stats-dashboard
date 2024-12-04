@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import DisplayDateTime from "@/components/DisplayDateTime";
+import DisplayDate from "@/components/DisplayDate";
 
 export default async function GameModeMatchId({
   params: { id: id },
@@ -152,7 +153,7 @@ export default async function GameModeMatchId({
           <div className="flex justify-between items-center ">
             <p>
               <span className="text-white">
-                {match.createdAt.toLocaleDateString("en-us")} at{" "}
+                <DisplayDate match={match} createdAt={true} /> at{" "}
                 <DisplayDateTime match={match} createdAt={true} />
               </span>
             </p>
@@ -161,7 +162,7 @@ export default async function GameModeMatchId({
                 Updated:
                 <span className="text-white">
                   {" "}
-                  {match.updatedAt.toLocaleDateString("en-us")} at{" "}
+                  <DisplayDate match={match} createdAt={false} /> at{" "}
                   <DisplayDateTime match={match} createdAt={false} />
                 </span>
               </p>
