@@ -99,6 +99,7 @@ enum MatchMap {
   SixStar
   SubBase
   Vista
+  Hacienda
   Protocol
   RedCard
   Rewind

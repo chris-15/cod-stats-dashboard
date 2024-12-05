@@ -16,6 +16,7 @@ type GameModeMaps = {
 //adujusted so you can only select maps for bo6 since mw3 rannked is no longer available
 const mapOptions: GameModeMaps = {
   Hardpoint: [
+    { value: "Hacienda", label: "Hacienda" },
     { value: "Protocol", label: "Protocol" },
     { value: "RedCard", label: "RedCard" },
     { value: "Rewind", label: "Rewind" },
@@ -23,11 +24,12 @@ const mapOptions: GameModeMaps = {
     { value: "Vault", label: "Vault" },
   ],
   Control: [
+    { value: "Hacienda", label: "Hacienda" },
     { value: "Protocol", label: "Protocol" },
-    { value: "Rewind", label: "Rewind" },
     { value: "Vault", label: "Vault" },
   ],
   SearchAndDestroy: [
+    { value: "Hacienda", label: "Hacienda" },
     { value: "Protocol", label: "Protocol" },
     { value: "RedCard", label: "RedCard" },
     { value: "Rewind", label: "Rewind" },
