@@ -48,7 +48,7 @@ function AddStatsForm() {
   const [plants, setPlants] = useState<number>(0);
   const [defuses, setDefuses] = useState<number>(0);
   const [error, setError] = useState<string>("");
-  const [buttonDisable, setButtonDisable] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -67,7 +67,7 @@ function AddStatsForm() {
       return;
     }
 
-    setButtonDisable(true);
+    setIsSubmitting(true);
 
     try {
       const res = await fetch("/api/matches/", {
@@ -264,9 +264,9 @@ function AddStatsForm() {
           <button
             type="submit"
             className="mt-6 btn-bo6"
-            disabled={buttonDisable}
+            disabled={isSubmitting}
           >
-            Submit
+            {isSubmitting ? "Submitting..." : "Submit"}
           </button>
         </div>
 
