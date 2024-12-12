@@ -48,6 +48,7 @@ function AddStatsForm() {
   const [plants, setPlants] = useState<number>(0);
   const [defuses, setDefuses] = useState<number>(0);
   const [error, setError] = useState<string>("");
+  const [buttonDisable, setButtonDisable] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -65,6 +66,8 @@ function AddStatsForm() {
       setError("Game Mode is required");
       return;
     }
+
+    setButtonDisable(true);
 
     try {
       const res = await fetch("/api/matches/", {
@@ -193,18 +196,18 @@ function AddStatsForm() {
         </div>
 
         <div className="space-y-2">
-        <label htmlFor="damage" className="">
-          Damage:
-        </label>
-        <input
-          type="number"
-          id="damage"
-          name="damage"
-          placeholder="0"
-          min="0"
-          className="mt-1 p-2 w-full border rounded-md"
-          onChange={(e) => setDamage(Number(e.target.value))}
-        ></input>
+          <label htmlFor="damage" className="">
+            Damage:
+          </label>
+          <input
+            type="number"
+            id="damage"
+            name="damage"
+            placeholder="0"
+            min="0"
+            className="mt-1 p-2 w-full border rounded-md"
+            onChange={(e) => setDamage(Number(e.target.value))}
+          ></input>
         </div>
 
         {gameMode === "Hardpoint" && (
@@ -258,7 +261,11 @@ function AddStatsForm() {
         )}
 
         <div className="flex justify-end">
-          <button type="submit" className="mt-6 btn-bo6">
+          <button
+            type="submit"
+            className="mt-6 btn-bo6"
+            disabled={buttonDisable}
+          >
             Submit
           </button>
         </div>
