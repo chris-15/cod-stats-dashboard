@@ -21,18 +21,16 @@ async function RecentMatchesTable({ matches }: { matches: TMatchQuery[] }) {
     }
 
     return currentWinStreak > currentLossStreak
-    ? `${currentWinStreak} Win Streak`
-    : `${currentLossStreak} Loss Streak`;
+      ? `${currentWinStreak} Win Streak`
+      : `${currentLossStreak} Loss Streak`;
   };
   return (
     <section className="w-full border border-[#444444] rounded-lg bg-secondary-bg p-4 overflow-x-auto hidden sm:block">
       <div className="px-4 sm:px-6 py-4 sticky left-0">
         <div className="flex justify-between items-center">
-        <h2 className="text-lg sm:text-xl font-bold">Recent Matches</h2>
-        <p> {calcWinStreak(matches)}</p>
+          <h2 className="text-lg sm:text-xl font-bold">Recent Matches</h2>
+          <p> {calcWinStreak([...matches].reverse())}</p>
         </div>
-       
-          
       </div>
       {matches.length > 0 ? (
         <div>
