@@ -11,6 +11,8 @@ import { Suspense } from "react";
 import Loading from "./loading";
 import dynamic from "next/dynamic";
 
+// chart components are loaded dynamically, only loaded when needed in the browser rather than server-side
+// provides loading state while component loads
 const ModeBarChartComponent = dynamic(
   () => import("@/components/ModeBarChart"),
   {
