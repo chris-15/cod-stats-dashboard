@@ -93,7 +93,10 @@ async function Dashboard() {
               <>
                 <div className="border border-[#444444] rounded-lg  bg-secondary-bg">
                   <h2 className="text-center pt-4">Match Count by Game Mode</h2>
-                  <ModeBarChartComponent data={modeCountData} fill="#ff9900" />
+                  <ModeBarChartComponent
+                    data={modeCountData}
+                    fill={"#ff9900"}
+                  />
                 </div>
                 <div className="border border-[#444444] rounded-lg bg-secondary-bg hidden xs:block">
                   <h2 className="text-center pt-4">Match Count by Map</h2>
@@ -105,11 +108,12 @@ async function Dashboard() {
 
           <RecentMatchesTable matches={lastFifteenMatches} />
 
+          {/* mobile version of table- which are cards not table */}
           <div className="grid grid-cols-1 gap-4 sm:hidden ">
             <div className="px-4 sm:px-6 pt-4">
               <h2 className="text-lg sm:text-xl font-bold">Recent Matches</h2>
             </div>
-            
+
             {lastFifteenMatches.map((match) => (
               <div className=" bg-secondary-bg p-4 rounded-lg" key={match.id}>
                 <div className="flex justify-between items-center mb-2">
@@ -130,7 +134,7 @@ async function Dashboard() {
                   </div>
                 </div>
                 <div className="text-lg font-semibold text-white">
-                {match.gameMode === "SearchAndDestroy"
+                  {match.gameMode === "SearchAndDestroy"
                     ? "Search & Destroy"
                     : match.gameMode}
                 </div>
