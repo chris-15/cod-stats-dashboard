@@ -67,7 +67,7 @@ function KdLineChart({ matches }: KdLineChartProps) {
       return (
         <div className="bg-[#16181c] p-2 rounded-lg border">
           <p>{`${label}`}</p>
-          <p className=" text-[#ff9900]">{`K/D: ${payload[0].value}`}</p>
+          <p className=" text-bo6-theme">{`K/D: ${payload[0].value}`}</p>
           <p className=" text-[#AC4FC6]">{`Win: ${payload[1].value} %`}</p>
         </div>
       );
