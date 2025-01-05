@@ -124,8 +124,6 @@ function KdLineChart({ matches }: KdLineChartProps) {
     winRate: ((obj.win / obj.totalGames) * 100).toFixed(1),
   }));
 
-  console.log(chartData.length - Math.floor(chartData.length/2));
-
   return (
     <ResponsiveContainer minHeight={300} maxHeight={350}>
       <LineChart
@@ -157,7 +155,11 @@ function KdLineChart({ matches }: KdLineChartProps) {
           formatter={renderLegendText}
           iconSize={0}
         />
-        <Brush dataKey="date" startIndex={chartData.length - Math.floor(chartData.length/2)} height={30} />
+        <Brush
+          dataKey="date"
+          startIndex={chartData.length - Math.floor(chartData.length / 2)}
+          height={30}
+        />
         <Line
           type="monotone"
           dataKey="kdRatio"
