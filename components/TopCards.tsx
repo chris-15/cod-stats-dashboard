@@ -3,9 +3,13 @@ import { calcOverallKdRatio, calcOverallWinPercentage } from "@/lib/utils";
 import TopCardGameMode from "./TopCardGameMode";
 import { TMatchQuery } from "@/app/types";
 
-async function TopCards({matches, game}: {matches: TMatchQuery[], game: string}) {
-
-
+async function TopCards({
+  matches,
+  game,
+}: {
+  matches: TMatchQuery[];
+  game: string;
+}) {
   const calcKd = (matches: TMatchQuery[], gameMode: string) => {
     let killSum = 0;
     let deathSum = 0;
@@ -52,10 +56,11 @@ async function TopCards({matches, game}: {matches: TMatchQuery[], game: string})
 
   return (
     <div className="grid gap-4 md:grid-cols-2 md:gap-8 xl:grid-cols-4">
-
       <div className="border border-[#444444] rounded-lg py-2 bg-secondary-bg">
         <div className="">
-          <h2 className="text-center font-bold capitalize text-xl mb-5">Overall</h2>
+          <h2 className="text-center font-bold capitalize text-xl mb-5">
+            Overall
+          </h2>
         </div>
 
         <div className="grid grid-cols-2 divide-x divide-[#444444] text-center">
@@ -68,8 +73,10 @@ async function TopCards({matches, game}: {matches: TMatchQuery[], game: string})
             <p
               className={
                 overallWinPercentage > 50
-                ? "text-[#b0ff34] font-bold text-4xl"
-                : "text-[#ff4d4d] font-bold text-4xl"
+                  ? game === "mw3"
+                    ? "text-[#b0ff34] font-bold text-4xl"
+                    : "text-green-500 font-bold text-4xl"
+                  : "text-[#ff4d4d] font-bold text-4xl"
               }
             >
               {overallWinPercentage}

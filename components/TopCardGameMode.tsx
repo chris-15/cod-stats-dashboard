@@ -44,7 +44,9 @@ function TopCardGameMode({
             <p
               className={
                 winPercentage > 50
-                  ? "text-[#b0ff34] font-bold text-4xl"
+                  ? game === "mw3"
+                    ? "text-[#b0ff34] font-bold text-4xl"
+                    : "text-green-500 font-bold text-4xl"
                   : "text-[#ff4d4d] font-bold text-4xl"
               }
             >
