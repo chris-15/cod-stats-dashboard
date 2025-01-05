@@ -5,6 +5,7 @@ import Link from "next/link";
 import { convertTime } from "@/lib/utils";
 import MatchDeleteButton from "./MatchDeleteButton";
 import { useState } from "react";
+import ViewMoreBtn from "./ViewMoreBtn";
 
 type GameModeStatsProp = {
   gameMode: string;
@@ -67,7 +68,7 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
                     </td>
                     <td>{match.matchMap}</td>
                     {match.win ? (
-                      <td className="text-[#b0ff34]">Win</td>
+                      <td className={game === "mw3" ? "text-[#b0ff34]" : "text-green-500"}>Win</td>
                     ) : (
                       <td className="text-[#ff4d4d]">Loss</td>
                     )}
@@ -107,14 +108,7 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
             </table>
 
             {visbileMatches < matches.length && (
-              <div className="text-center py-4">
-                <button
-                  className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2"
-                  onClick={handleLoadMoreMatches}
-                >
-                  View More!
-                </button>
-              </div>
+              <ViewMoreBtn game={game} onClick={handleLoadMoreMatches} />
             )}
           </div>
         ) : (
@@ -122,6 +116,7 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
         )}
       </section>
 
+      {/* mobile version of table- which are cards not table */}
       <section className="grid grid-cols-1 gap-4 sm:hidden">
         <div className="px-4 sm:px-6 pt-4">
           <h2 className="text-lg sm:text-xl font-bold">Recent Matches</h2>
@@ -159,7 +154,8 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
                 <div className=" text-gray-400">{match.matchMap}</div>
                 <div className="mt-2 flex justify-between items-center">
                   <div className="">
-                    <Link className="group-hover:underline:text-bo5-theme"
+                    <Link
+                      className="group-hover:underline:text-bo5-theme"
                       href={`/dashboard/${
                         game === "mw3" ? "mw3" : "bo6"
                       }/${gameMode.toLowerCase()}/match/${match.id}`}
@@ -182,14 +178,7 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
               </div>
             ))}
             {visbileMatches < matches.length && (
-              <div className="text-center py-4">
-                <button
-                  className="bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2"
-                  onClick={handleLoadMoreMatches}
-                >
-                  View More!
-                </button>
-              </div>
+              <ViewMoreBtn game={game} onClick={handleLoadMoreMatches} />
             )}
           </>
         ) : (

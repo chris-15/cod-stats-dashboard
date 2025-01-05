@@ -47,6 +47,14 @@ input {
   @apply bg-sidebar-active-bo6 hover:bg-sidebar-active-bo6/80 text-[#333333] font-medium py-2 px-4 rounded-md w-full hover:underline hover:underline-offset-2;
 }
 
+.load-more-btn {
+  @apply bg-[#b0ff34] hover:bg-[#8ccc26] text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2
+}
+
+.load-more-btn-bo6 {
+  @apply bg-bo6-theme hover:bg-bo6-theme/80 text-[#333333] font-medium py-2 px-4 rounded-md hover:underline hover:underline-offset-2
+}
+
 .top-ten-item:last-child {
   @apply border-b-0;
 }
