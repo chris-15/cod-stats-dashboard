@@ -13,6 +13,7 @@ import KdBarChart from "@/components/KdBarChart";
 import { getNumberSuffix } from "@/lib/utils";
 import { FaTrophy } from "react-icons/fa";
 import DisplayDate from "@/components/DisplayDate";
+import KdLineChart from "@/components/KdLineChart";
 
 const KdBarChartComponent = dynamic(() => import("@/components/KdBarChart"), {
   ssr: false,
@@ -37,7 +38,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   if (!session) {
     redirect("/sign-in");
   }
-  
+
   //function to make sure params given to props are in the correct format
   function capitalizeGameMode(gameMode: string) {
     if (gameMode === "searchanddestroy") {
@@ -49,8 +50,6 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   const gameMode = capitalizeGameMode(params.gameMode) as TGameMode;
 
   const matches = await getBoSixMatchesByMode(gameMode);
-
-
 
   function calcMapCount(match: TMatchQuery[], gameMode: string) {
     let mapCounts: { [key: string]: number } = {};
@@ -87,9 +86,17 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
 
           <div className=" grid grid-cols-1 space-y-4">
             <GameModeStatsCard gameMode={gameMode} matches={matches} />
-            <GameModeMapStats gameMode={gameMode} matches={matches} game="bo6" />
-
+            <GameModeMapStats
+              gameMode={gameMode}
+              matches={matches}
+              game="bo6"
+            />
+            <div className="border border-[#444444] rounded-lg bg-secondary-bg">
+              <h2 className="text-center pt-4">Daily K/D Ratio vs Win Rate</h2>
+              <KdLineChart matches={matches} />
+            </div>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+              
               <div className="grid grid-cols-2 bg-secondary-bg border border-[#444444] rounded-lg divide-x divide-[#444444] ">
                 <div>
                   <h3 className="text-center pt-4 text-lg sm:text-xl font-bold">
@@ -116,8 +123,12 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
                 </div>
               </div>
             </div>
-
-            <GameModeMatchesTable gameMode={gameMode} matches={matches} game="bo6" />
+            
+            <GameModeMatchesTable
+              gameMode={gameMode}
+              matches={matches}
+              game="bo6"
+            />
           </div>
         </>
       ) : (
@@ -162,8 +173,7 @@ function TopKills({ matches, gameMode }: topTenProps) {
                 Kills: {match.kills}
               </h4>
               <p className=" text-sm text-gray-400  group-hover:text-bo6-theme ">
-                {match.matchMap}:{" "}
-                <DisplayDate match={match} createdAt={true} />
+                {match.matchMap}: <DisplayDate match={match} createdAt={true} />
               </p>
             </div>
 
@@ -208,8 +218,7 @@ function TopDamage({ matches, gameMode }: topTenProps) {
                 Damage: {match.damage}
               </h4>
               <p className=" text-sm text-gray-400  group-hover:text-bo6-theme ">
-                {match.matchMap}:{" "}
-                <DisplayDate match={match} createdAt={true} />
+                {match.matchMap}: <DisplayDate match={match} createdAt={true} />
               </p>
             </div>
 
