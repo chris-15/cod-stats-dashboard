@@ -95,7 +95,7 @@ async function Dashboard() {
                   <h2 className="text-center pt-4">Match Count by Game Mode</h2>
                   <ModeBarChartComponent
                     data={modeCountData}
-                    fill={"#ff9900"}
+                    fill="#ff9900"
                   />
                 </div>
                 <div className="border border-[#444444] rounded-lg bg-secondary-bg hidden xs:block">

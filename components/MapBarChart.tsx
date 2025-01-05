@@ -27,7 +27,7 @@ const CustomTooltip = ({ active, payload, label }:any) => {
     return (
       <div className="bg-[#16181c] p-4 rounded-lg  border">
         <p className="">{`${label}`}</p>
-        <p className="text-[#b0ff34]">{`Count: ${payload[0].value}`}</p>
+        <p className="">{`Count: ${payload[0].value}`}</p>
       </div>
     );
   }
