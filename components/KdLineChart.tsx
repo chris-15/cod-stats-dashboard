@@ -64,11 +64,24 @@ function KdLineChart({ matches }: KdLineChartProps) {
 
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
+      //find the kdRatio and winRate data in the payload
+      const kdData = payload.find(
+        (item: { dataKey: string }) => item.dataKey === "kdRatio"
+      );
+      const winData = payload.find(
+        (item: { dataKey: string }) => item.dataKey === "winRate"
+      );
+
       return (
         <div className="bg-[#16181c] p-2 rounded-lg border">
           <p>{`${label}`}</p>
-          <p className=" text-bo6-theme">{`K/D: ${payload[0].value}`}</p>
-          <p className=" text-[#AC4FC6]">{`Win: ${payload[1].value} %`}</p>
+          {/* if the data exists then render the tooltip  */}
+          {kdData && (
+            <p className=" text-bo6-theme">{`K/D: ${payload[0].value}`}</p>
+          )}
+          {winData && (
+            <p className=" text-[#AC4FC6]">{`Win: ${payload[1].value} %`}</p>
+          )}
         </div>
       );
     }
