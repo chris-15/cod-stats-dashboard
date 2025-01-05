@@ -68,6 +68,9 @@ async function Dashboard() {
 
   const matches = await getMatches();
 
+   //new array that hold last 15 matches
+   const lastFifteenMatches = matches ? matches.slice(0, 15) : [];
+
   const mapCountData = calcMapCount(matches).filter(
     (match) => match.name != "Skidrow" && match.name != "Terminal"
   );
@@ -97,7 +100,7 @@ async function Dashboard() {
               </>
             )}
           </div>
-          <RecentMatchesTable matches={matches} />
+          <RecentMatchesTable matches={lastFifteenMatches} game="mw3" />
         </div>
       </div>
     </Suspense>

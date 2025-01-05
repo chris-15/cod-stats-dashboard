@@ -106,7 +106,7 @@ async function Dashboard() {
             )}
           </div>
 
-          <RecentMatchesTable matches={lastFifteenMatches} />
+          <RecentMatchesTable matches={lastFifteenMatches} game="bo6"/>
 
           {/* mobile version of table- which are cards not table */}
           <div className="grid grid-cols-1 gap-4 sm:hidden ">

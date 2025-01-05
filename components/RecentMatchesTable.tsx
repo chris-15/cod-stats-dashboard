@@ -5,7 +5,13 @@ import { getMatches } from "@/server/queries";
 import { unstable_noStore as noStore } from "next/cache";
 import DisplayDate from "./DisplayDate";
 
-async function RecentMatchesTable({ matches }: { matches: TMatchQuery[] }) {
+async function RecentMatchesTable({
+  matches,
+  game,
+}: {
+  matches: TMatchQuery[];
+  game: string;
+}) {
   const calcWinStreak = (matches: TMatchQuery[]) => {
     let currentWinStreak = 0;
     let currentLossStreak = 0;
@@ -61,7 +67,13 @@ async function RecentMatchesTable({ matches }: { matches: TMatchQuery[] }) {
                   </td>
                   <td className=""> {match.matchMap}</td>
                   {match.win ? (
-                    <td className="text-green-500  ">Win</td>
+                    <td
+                      className={
+                        game === "mw3" ? "text-[#b0ff34] " : "text-green-500"
+                      }
+                    >
+                      Win
+                    </td>
                   ) : (
                     <td className="text-red-500 ">Loss</td>
                   )}
