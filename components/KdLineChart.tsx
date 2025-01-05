@@ -13,6 +13,7 @@ import {
   Legend,
   ResponsiveContainer,
   Line,
+  Brush,
 } from "recharts";
 
 type KdLineChartProps = {
@@ -46,13 +47,13 @@ function KdLineChart({ matches }: KdLineChartProps) {
   function renderLegendText(value: string) {
     const labels: { [key: string]: JSX.Element } = {
       kdRatio: (
-        <p className="flex space-x-1 items-center">
+        <p className="flex space-x-1 items-center hover:cursor-pointer">
           {isEyeOpen.kdRatio ? <FaEye /> : <FaEyeSlash />}{" "}
           <span>K/D Ratio</span>
         </p>
       ),
       winRate: (
-        <p className="flex space-x-1 items-center">
+        <p className="flex space-x-1 items-center hover:cursor-pointer">
           {isEyeOpen.winRate ? <FaEye /> : <FaEyeSlash />} <span>Win Rate</span>
         </p>
       ),
@@ -123,7 +124,7 @@ function KdLineChart({ matches }: KdLineChartProps) {
     winRate: ((obj.win / obj.totalGames) * 100).toFixed(1),
   }));
 
-  //console.log(chartData);
+  console.log(chartData.length - Math.floor(chartData.length/2));
 
   return (
     <ResponsiveContainer minHeight={300} maxHeight={350}>
@@ -156,6 +157,7 @@ function KdLineChart({ matches }: KdLineChartProps) {
           formatter={renderLegendText}
           iconSize={0}
         />
+        <Brush dataKey="date" startIndex={chartData.length - Math.floor(chartData.length/2)} height={30} />
         <Line
           type="monotone"
           dataKey="kdRatio"

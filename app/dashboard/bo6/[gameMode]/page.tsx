@@ -19,7 +19,7 @@ const KdBarChartComponent = dynamic(() => import("@/components/KdBarChart"), {
   ssr: false,
   loading: () => (
     <div className="flex justify-center items-center p-4">
-      <span className="small-loader"></span>
+      <span className="small-loader-bo6"></span>
     </div>
   ),
 });
@@ -28,7 +28,16 @@ const MapBarChartComponent = dynamic(() => import("@/components/MapBarChart"), {
   ssr: false,
   loading: () => (
     <div className="flex justify-center items-center p-4">
-      <span className="small-loader"></span>
+      <span className="small-loader-bo6"></span>
+    </div>
+  ),
+});
+
+const KdLineChartComponent = dynamic(() => import("@/components/KdLineChart"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex justify-center items-center p-4">
+      <span className="small-loader-bo6"></span>
     </div>
   ),
 });
@@ -93,10 +102,9 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
             />
             <div className="border border-[#444444] rounded-lg bg-secondary-bg">
               <h2 className="text-center pt-4">Daily K/D Ratio vs Win Rate</h2>
-              <KdLineChart matches={matches} />
+              <KdLineChartComponent matches={matches} />
             </div>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-              
               <div className="grid grid-cols-2 bg-secondary-bg border border-[#444444] rounded-lg divide-x divide-[#444444] ">
                 <div>
                   <h3 className="text-center pt-4 text-lg sm:text-xl font-bold">
@@ -123,7 +131,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
                 </div>
               </div>
             </div>
-            
+
             <GameModeMatchesTable
               gameMode={gameMode}
               matches={matches}
