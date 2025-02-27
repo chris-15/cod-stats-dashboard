@@ -10,6 +10,7 @@ import { TMatchQuery } from "../../types";
 import { Suspense } from "react";
 import Loading from "./loading";
 import dynamic from "next/dynamic";
+import MatchDistribution from "@/components/MatchDistribution";
 
 // chart components are loaded dynamically, only loaded when needed in the browser rather than server-side
 // provides loading state while component loads
@@ -83,30 +84,39 @@ async function Dashboard() {
     { name: "S&D", value: gameModeCount(matches, "SearchAndDestroy") },
   ];
 
+  const mapData = {
+    mapCountData,
+    modeCountData,
+  };
+
   return (
     <Suspense fallback={<Loading />}>
       <div className="p-4">
         <TopCards matches={matches} game="bo6" />
         <div className="grid gap-4 grid-cols1 mt-4 ">
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-            {matches.length > 0 && (
-              <>
+          {matches.length > 0 && (
+            <>
+              <div className=" hidden xl:grid xl:grid-cols-2 gap-4">
                 <div className="border border-[#444444] rounded-lg  bg-secondary-bg">
                   <h2 className="text-center pt-4">Match Count by Game Mode</h2>
-                  <ModeBarChartComponent
-                    data={modeCountData}
-                    fill="#ff9900"
-                  />
+                  <ModeBarChartComponent data={modeCountData} fill="#ff9900" />
                 </div>
                 <div className="border border-[#444444] rounded-lg bg-secondary-bg hidden xs:block">
                   <h2 className="text-center pt-4">Match Count by Map</h2>
                   <MapBarChartComponent data={mapCountData} fill="#ff9900" />
                 </div>
-              </>
-            )}
-          </div>
+              </div>
 
-          <RecentMatchesTable matches={lastFifteenMatches} game="bo6"/>
+              <div className="xl:hidden">
+                <MatchDistribution
+                  mapChartData={mapData.mapCountData}
+                  modeChartData={mapData.modeCountData}
+                />
+              </div>
+            </>
+          )}
+
+          <RecentMatchesTable matches={lastFifteenMatches} game="bo6" />
 
           {/* mobile version of table- which are cards not table */}
           <div className="grid grid-cols-1 gap-4 sm:hidden ">
