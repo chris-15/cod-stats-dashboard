@@ -3,9 +3,11 @@ import TopCards from "@/components/TopCards";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { getBoSixMatches } from "@/server/queries";
-import ModeBarChart from "@/components/ModeBarChart";
-import MapBarChart from "@/components/MapBarChart";
+import {
+  getBoSixMatches,
+  getFifteenBoSixMatches,
+  getLastFifteenBoSixMatchesByMode,
+} from "@/server/queries";
 import { TMatchQuery } from "../../types";
 import { Suspense } from "react";
 import Loading from "./loading";
@@ -69,10 +71,13 @@ async function Dashboard() {
     redirect("/sign-in");
   }
 
-  const matches = await getBoSixMatches();
-  //console.log(matches)
-  //new array that hold last 15 matches
-  const lastFifteenMatches = matches ? matches.slice(0, 15) : [];
+  const [matches, lastFifteenMatches, modeMatches] = await Promise.all([
+    getBoSixMatches(),
+    getFifteenBoSixMatches(),
+    getLastFifteenBoSixMatchesByMode(),
+  ]);
+
+  const { hpMatches, controlMatches, searchMatches } = modeMatches;
 
   const mapCountData = calcMapCount(matches).filter(
     (match) => match.name != "Skidrow" && match.name != "Terminal"
@@ -116,7 +121,13 @@ async function Dashboard() {
             </>
           )}
 
-          <RecentMatchesTable matches={lastFifteenMatches} game="bo6" />
+          <RecentMatchesTable
+            matches={lastFifteenMatches}
+            hpMatches={hpMatches}
+            controlMatches={controlMatches}
+            sdMatches={searchMatches}
+            game="bo6"
+          />
 
           {/* mobile version of table- which are cards not table */}
           <div className="grid grid-cols-1 gap-4 sm:hidden ">
@@ -124,7 +135,7 @@ async function Dashboard() {
               <h2 className="text-lg sm:text-xl font-bold">Recent Matches</h2>
             </div>
 
-            {lastFifteenMatches.map((match) => (
+            {matches.map((match) => (
               <div className=" bg-secondary-bg p-4 rounded-lg" key={match.id}>
                 <div className="flex justify-between items-center mb-2">
                   <div className=" text-gray-300">
