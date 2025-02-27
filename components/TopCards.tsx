@@ -1,5 +1,5 @@
 import { getMatches } from "@/server/queries";
-import { calcOverallKdRatio, calcOverallWinPercentage } from "@/lib/utils";
+import { calcOverallKdRatio, calcOverallWinPercentage } from "@/lib/stat-utils";
 import TopCardGameMode from "./TopCardGameMode";
 import { TMatchQuery } from "@/app/types";
 

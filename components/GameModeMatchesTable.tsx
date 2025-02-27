@@ -2,7 +2,7 @@
 import { TMatch, TMatchQuery } from "@/app/types";
 
 import Link from "next/link";
-import { convertTime } from "@/lib/utils";
+import { convertTime } from "@/lib/stat-utils";
 import MatchDeleteButton from "./MatchDeleteButton";
 import { useState } from "react";
 import ViewMoreBtn from "./ViewMoreBtn";
@@ -68,7 +68,13 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
                     </td>
                     <td>{match.matchMap}</td>
                     {match.win ? (
-                      <td className={game === "mw3" ? "text-[#b0ff34]" : "text-green-500"}>Win</td>
+                      <td
+                        className={
+                          game === "mw3" ? "text-[#b0ff34]" : "text-green-500"
+                        }
+                      >
+                        Win
+                      </td>
                     ) : (
                       <td className="text-[#ff4d4d]">Loss</td>
                     )}

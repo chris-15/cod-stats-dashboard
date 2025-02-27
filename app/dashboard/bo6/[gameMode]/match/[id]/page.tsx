@@ -1,5 +1,5 @@
 import { authOptions } from "@/lib/auth";
-import { convertTime } from "@/lib/utils";
+import { convertTime } from "@/lib/stat-utils";
 import { deleteBoSixMatch, getBoSixMatchById } from "@/server/queries";
 import { getServerSession } from "next-auth/next";
 import Image from "next/image";
@@ -21,7 +21,8 @@ export default async function GameModeMatchId({
 
   const match = await getBoSixMatchById(matchId);
   const mapImages = {
-    Hacienda: "https://utfs.io/f/g0j2nElFVrusJoKuqlLE4aUcb0vZHKFAnXm3PDhQYuyIlf6T",
+    Hacienda:
+      "https://utfs.io/f/g0j2nElFVrusJoKuqlLE4aUcb0vZHKFAnXm3PDhQYuyIlf6T",
     Protocol:
       "https://utfs.io/f/g0j2nElFVrus8wZCXNDDZXVfb9JnyAaEwWHYLigBkSvetxMO",
     RedCard:

@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 import { Modal } from "./modal";
 import Image from "next/image";
-import { convertTime } from "@/lib/utils";
+import { convertTime } from "@/lib/stat-utils";
 import Link from "next/link";
 import DisplayDateTime from "@/components/DisplayDateTime";
 import DisplayDate from "@/components/DisplayDate";
@@ -23,7 +23,8 @@ export default async function GameModeMatchId({
   const match = await getBoSixMatchById(matchId);
 
   const mapImages = {
-    Hacienda: "https://utfs.io/f/g0j2nElFVrusJoKuqlLE4aUcb0vZHKFAnXm3PDhQYuyIlf6T",
+    Hacienda:
+      "https://utfs.io/f/g0j2nElFVrusJoKuqlLE4aUcb0vZHKFAnXm3PDhQYuyIlf6T",
     Protocol:
       "https://utfs.io/f/g0j2nElFVrus8wZCXNDDZXVfb9JnyAaEwWHYLigBkSvetxMO",
     RedCard:
@@ -225,8 +226,9 @@ export default async function GameModeMatchId({
             </p>
             {match.updatedAt.getTime() !== match.createdAt.getTime() && (
               <p>
-                Match Updated on: <DisplayDate match={match} createdAt={false} />{" "}
-                at <DisplayDateTime match={match} createdAt={true} />
+                Match Updated on:{" "}
+                <DisplayDate match={match} createdAt={false} /> at{" "}
+                <DisplayDateTime match={match} createdAt={true} />
               </p>
             )}
 

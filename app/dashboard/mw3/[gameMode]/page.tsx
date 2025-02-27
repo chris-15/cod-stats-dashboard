@@ -10,7 +10,7 @@ import { TGameMode, TMatchQuery } from "@/app/types";
 import { getMatches, getMatchesByMode } from "@/server/queries";
 import MapBarChart from "@/components/MapBarChart";
 import KdBarChart from "@/components/KdBarChart";
-import { getNumberSuffix } from "@/lib/utils";
+import { getNumberSuffix } from "@/lib/stat-utils";
 import { FaTrophy } from "react-icons/fa";
 
 const KdBarChartComponent = dynamic(() => import("@/components/KdBarChart"), {
@@ -68,8 +68,6 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
 
   const mapCountData = calcMapCount(matches, gameMode);
 
-
-
   return (
     <div className="p-4">
       {matches.length > 0 ? (
@@ -86,7 +84,11 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
 
           <div className=" grid grid-cols-1 space-y-4">
             <GameModeStatsCard gameMode={gameMode} matches={matches} />
-            <GameModeMapStats gameMode={gameMode} matches={matches} game="mw3" />
+            <GameModeMapStats
+              gameMode={gameMode}
+              matches={matches}
+              game="mw3"
+            />
 
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
               <div className="grid grid-cols-2 bg-secondary-bg border border-[#444444] rounded-lg divide-x divide-[#444444] ">
@@ -116,7 +118,11 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
               </div>
             </div>
 
-            <GameModeMatchesTable gameMode={gameMode} matches={matches} game="mw3" />
+            <GameModeMatchesTable
+              gameMode={gameMode}
+              matches={matches}
+              game="mw3"
+            />
           </div>
         </>
       ) : (

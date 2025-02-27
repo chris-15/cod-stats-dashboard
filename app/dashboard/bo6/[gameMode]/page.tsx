@@ -10,7 +10,7 @@ import { TGameMode, TMatchQuery } from "@/app/types";
 import { getMatches, getBoSixMatchesByMode } from "@/server/queries";
 import MapBarChart from "@/components/MapBarChart";
 import KdBarChart from "@/components/KdBarChart";
-import { getNumberSuffix } from "@/lib/utils";
+import { getNumberSuffix } from "@/lib/stat-utils";
 import { FaTrophy } from "react-icons/fa";
 import DisplayDate from "@/components/DisplayDate";
 import KdLineChart from "@/components/KdLineChart";

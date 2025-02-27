@@ -1,6 +1,6 @@
 import { TMatch, TMatchQuery } from "@/app/types";
 //import { useMatches } from "./matchesContext";
-import { convertTime } from "../lib/utils";
+import { convertTime } from "../lib/stat-utils";
 import { getMatches } from "@/server/queries";
 import { unstable_noStore as noStore } from "next/cache";
 import DisplayDate from "./DisplayDate";

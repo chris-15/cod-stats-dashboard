@@ -10,7 +10,7 @@ import {
   calcAvgDefuses,
   calcAvgDamage,
   calcMapScore,
-} from "@/lib/utils";
+} from "@/lib/stat-utils";
 
 type GameModeStatsProp = {
   gameMode: TGameMode;
