@@ -3,29 +3,41 @@
 import ModeBarChart from "./ModeBarChart";
 import MapBarChart from "./MapBarChart";
 import { useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 function MatchDistribution({ mapChartData, modeChartData }: any) {
   const [chart, setChart] = useState("mode");
   return (
     <div className="border border-[#444444] rounded-lg  bg-secondary-bg">
-      <div className="flex items-center justify-between px-8">
+      <div className="flex items-center justify-between p-8">
         <div>
-          <h2 className="text-lg font-bold ">Match Count Distribution</h2>
+          <h2 className="text-xl font-bold ">Match Count Distribution</h2>
           {chart === "mode" ? (
-            <p>Match count by game mode</p>
+            <p className="text-sm text-gray-400">Match count by game mode</p>
           ) : (
-            <p>Match count by map</p>
+            <p className="text-sm text-gray-400">Match count by map</p>
           )}
         </div>
 
-        <select
-          name="chart-select"
-          id="chart-select"
-          onChange={(e) => setChart(e.target.value)}
-        >
-          <option value="mode">Game Mode</option>
-          <option value="map">Map</option>
-        </select>
+        <Select defaultValue="mode" onValueChange={(value) => setChart(value)}>
+          <SelectTrigger  className="w-36 h-8 ">
+            <SelectValue placeholder="Select" />
+          </SelectTrigger>
+          <SelectContent className="">
+            <SelectGroup>
+              <SelectItem value="mode">Game Mode</SelectItem>
+              <SelectItem value="map">Map</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </div>
 
       {chart === "mode" ? (
@@ -37,3 +49,9 @@ function MatchDistribution({ mapChartData, modeChartData }: any) {
   );
 }
 export default MatchDistribution;
+
+/* 
+name="chart-select"
+          id="chart-select"
+          onChange={(e) => setChart(e.target.value)}
+*/
