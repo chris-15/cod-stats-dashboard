@@ -3,7 +3,17 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-
+import {
+  IoGameControllerOutline,
+  IoMapOutline,
+  IoSkullOutline,
+  IoTimeOutline,
+  IoTrophyOutline,
+} from "react-icons/io5";
+import { SlTarget } from "react-icons/sl";
+import { MdOutlineHealthAndSafety } from "react-icons/md";
+import { HiOutlineWrenchScrewdriver } from "react-icons/hi2";
+import { LuBomb } from "react-icons/lu";
 //setting types for the map options
 type MapOption = {
   value: string;
@@ -40,7 +50,7 @@ const mapOptions: GameModeMaps = {
 function AddStatsForm() {
   const [gameMode, setGameMode] = useState<string>("");
   const [matchMap, setMatchMap] = useState<string>("");
-  const [win, setWin] = useState<boolean>(false);
+  const [win, setWin] = useState<boolean | null>(null);
   const [kills, setKills] = useState<number>(0);
   const [deaths, setDeaths] = useState<number>(0);
   const [damage, setDamage] = useState<number>(0);
@@ -64,6 +74,15 @@ function AddStatsForm() {
 
     if (!gameMode) {
       setError("Game Mode is required");
+      return;
+    }
+    if (!matchMap) {
+      setError("Map is required");
+      return;
+    }
+
+    if (win === null) {
+      setError("Outcome is required");
       return;
     }
 
@@ -105,8 +124,9 @@ function AddStatsForm() {
       </h2>
       <form className="space-y-4" onSubmit={handleFormSubmit}>
         <div className="space-y-2">
-          <label htmlFor="gameMode" className="">
-            GameMode:
+          <label htmlFor="gameMode" className="flex items-center gap-2">
+            <IoGameControllerOutline size={24} />
+            <span className="">GameMode</span>
           </label>
           <select
             id="gameMode"
@@ -123,8 +143,9 @@ function AddStatsForm() {
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="matchMap" className="">
-            Map:
+          <label htmlFor="matchMap" className="flex items-center gap-2">
+            <IoMapOutline size={24} />
+            <span className="">Map</span>
           </label>
           <select
             id="matchMap"
@@ -145,10 +166,11 @@ function AddStatsForm() {
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="outcome" className="">
-            Outcome:
+          <label htmlFor="outcome" className=" flex items-center gap-2">
+            <IoTrophyOutline size={24} />
+            <span className="">Outcome</span>
           </label>
-          <select
+          {/*  <select
             id="outcome"
             name="outcome"
             required
@@ -158,13 +180,44 @@ function AddStatsForm() {
             <option value="">Did you Win or Lose?</option>
             <option value="Win">Win</option>
             <option value="Loss">Loss</option>
-          </select>
+          </select> */}
+          <div className="grid grid-cols-2 gap-4">
+            <button
+              type="button"
+              className={`rounded-md py-2 ${
+                win === true
+                  ? "bg-green-500 text-white underline underline-offset-2"
+                  : "bg-white text-black"
+              }`}
+              onClick={() => {
+                setWin(true);
+                setError("");
+              }}
+            >
+              Win
+            </button>
+            <button
+              type="button"
+              className={`rounded-md py-2 ${
+                win === false
+                  ? "bg-red-500 text-white underline underline-offset-2"
+                  : "bg-white text-black"
+              }`}
+              onClick={() => {
+                setWin(false);
+                setError("");
+              }}
+            >
+              Loss
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
-            <label htmlFor="kills" className="">
-              Kills:
+            <label htmlFor="kills" className="flex items-center gap-2">
+              <SlTarget size={24} />
+              <span className="">Kills</span>
             </label>
             <input
               type="number"
@@ -179,8 +232,9 @@ function AddStatsForm() {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="deaths" className="">
-              Deaths:
+            <label htmlFor="deaths" className="flex items-center gap-2">
+              <IoSkullOutline size={24} />
+              <span className="">Deaths</span>
             </label>
             <input
               type="number"
@@ -196,8 +250,9 @@ function AddStatsForm() {
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="damage" className="">
-            Damage:
+          <label htmlFor="damage" className="flex items-center gap-2">
+            <MdOutlineHealthAndSafety size={24} />
+            <span className="">Damage</span>
           </label>
           <input
             type="number"
@@ -212,8 +267,9 @@ function AddStatsForm() {
 
         {gameMode === "Hardpoint" && (
           <div className="space-y-2">
-            <label htmlFor="time" className="">
-              Time:
+            <label htmlFor="time" className="flex items-center gap-2">
+              <IoTimeOutline size={24} />
+              <span className="">Hill Time</span>
             </label>
             <input
               type="number"
@@ -221,7 +277,7 @@ function AddStatsForm() {
               name="time"
               placeholder="Time in Seconds"
               min="0"
-              className="mt-1 p-2 w-full border rounded-md"
+              className="mt-1 p-2 w-full border rounded-md "
               onChange={(e) => setTime(Number(e.target.value))}
             ></input>
           </div>
@@ -229,8 +285,9 @@ function AddStatsForm() {
         {gameMode === "SearchAndDestroy" && (
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label htmlFor="plants" className="">
-                Plants:
+              <label htmlFor="plants" className=" flex items-center gap-2">
+                <LuBomb size={24} />
+                <span className="">Plants</span>
               </label>
               <input
                 type="number"
@@ -244,8 +301,9 @@ function AddStatsForm() {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="defuses" className="">
-                Defuses:
+              <label htmlFor="defuses" className="flex items-center gap-2">
+                <HiOutlineWrenchScrewdriver size={24} />
+                <span className="">Defuses</span>
               </label>
               <input
                 type="number"
