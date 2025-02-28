@@ -155,7 +155,7 @@ const CustomTableBodyComponent = ({ matches }: { matches: TMatchQuery[] }) => {
           <TableHead className="text-zinc-400 font-medium">
             W/L RESULT
           </TableHead>
-          <TableHead className="text-zinc-400 font-medium text-right">
+          <TableHead className="text-zinc-400 font-medium">
             K/D RATIO
           </TableHead>
         </TableRow>
@@ -184,7 +184,7 @@ const CustomTableBodyComponent = ({ matches }: { matches: TMatchQuery[] }) => {
                 <span className="text-red-500">Loss</span>
               )}
             </TableCell>
-            <TableCell className="text-zinc-400 font-medium text-right">
+            <TableCell className="text-zinc-400 font-medium">
               {(match.kills / match.deaths).toFixed(2)}
             </TableCell>
           </TableRow>

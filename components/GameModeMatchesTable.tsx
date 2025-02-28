@@ -6,6 +6,14 @@ import { convertTime } from "@/lib/stat-utils";
 import MatchDeleteButton from "./MatchDeleteButton";
 import { useState } from "react";
 import ViewMoreBtn from "./ViewMoreBtn";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 type GameModeStatsProp = {
   gameMode: string;
@@ -33,65 +41,58 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
           <h2 className="text-lg sm:text-xl font-bold ">All Matches</h2>
         </div>
         {gameModeMatches.length > 0 ? (
-          <div>
-            <table className="w-full">
-              <thead className="">
-                <tr>
-                  <th>Date</th>
-                  {/* <th className="text-center">Game Mode</th> */}
-                  <th>Map</th>
-                  <th>W/L Result</th>
-                  {/*  <th>Kills</th>
-                <th>Deaths</th>
-                <th>Damage</th> */}
-                  {/* {gameMode === "Hardpoint" && <th>Time</th>} */}
-                  {/* {gameMode === "SearchAndDestroy" && (
-                  <>
-                    <th>Plants</th>
-                    <th>Defuses</th>
-                  </>
-                )} */}
-
-                  <th className="text-center">K/D Ratio</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
+          <div className="">
+            <Table>
+              <TableHeader className="bg-zinc-800/50">
+                <TableRow className="hover:bg-zinc-800/50 border-zinc-800 ">
+                  <TableHead className="text-zinc-400 font-medium">
+                    DATE
+                  </TableHead>
+                  <TableHead className="text-zinc-400 font-medium">
+                    MAP
+                  </TableHead>
+                  <TableHead className="text-zinc-400 font-medium">
+                    W/L RESULT
+                  </TableHead>
+                  <TableHead className="text-zinc-400 font-medium">
+                    K/D RATIO
+                  </TableHead>
+                  <TableHead className="text-zinc-400 font-medium">
+                    ACTIONS
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {gameModeMatches.map((match) => (
-                  <tr className="text-center" key={match.id}>
-                    <td>
+                  <TableRow
+                    key={match.id}
+                    className="hover:bg-zinc-800/50 border-zinc-800"
+                  >
+                    <TableCell className="text-zinc-400 font-medium">
                       {new Date(match.createdAt).toLocaleDateString("en-US", {
                         year: "2-digit",
                         month: "2-digit",
                         day: "2-digit",
                       })}
-                    </td>
-                    <td>{match.matchMap}</td>
+                    </TableCell>
+                    <TableCell className="text-zinc-400 font-medium">
+                      {match.matchMap}
+                    </TableCell>
                     {match.win ? (
-                      <td
+                      <TableCell
                         className={
                           game === "mw3" ? "text-[#b0ff34]" : "text-green-500"
                         }
                       >
                         Win
-                      </td>
+                      </TableCell>
                     ) : (
-                      <td className="text-[#ff4d4d]">Loss</td>
+                      <TableCell className="text-[#ff4d4d]">Loss</TableCell>
                     )}
-                    {/* <td>{match.kills}</td>
-                  <td>{match.deaths}</td>
-                  <td>{match.damage ? match.damage : "N/A"}</td>
-                  {match.gameMode === "Hardpoint" && (
-                    <td>{convertTime(match.time)}</td>
-                  )}
-                  {match.gameMode === "SearchAndDestroy" && (
-                    <>
-                      <td>{match.plants}</td>
-                      <td>{match.defuses}</td>
-                    </>
-                  )} */}
-                    <td>{(match.kills / match.deaths).toFixed(2)}</td>
-                    <td className="">
+                    <TableCell>
+                      {(match.kills / match.deaths).toFixed(2)}
+                    </TableCell>
+                    <TableCell>
                       <Link
                         href={`/dashboard/${
                           game === "mw3" ? "mw3" : "bo6"
@@ -107,11 +108,11 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
                           More Details
                         </span>
                       </Link>
-                    </td>
-                  </tr>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
 
             {visbileMatches < matches.length && (
               <ViewMoreBtn game={game} onClick={handleLoadMoreMatches} />
