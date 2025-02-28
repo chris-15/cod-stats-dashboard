@@ -3,7 +3,7 @@ import { calcOverallKdRatio, calcOverallWinPercentage } from "@/lib/stat-utils";
 import TopCardGameMode from "./TopCardGameMode";
 import { TMatchQuery } from "@/app/types";
 
-async function TopCards({
+function TopCards({
   matches,
   game,
 }: {

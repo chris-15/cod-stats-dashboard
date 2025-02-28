@@ -129,45 +129,7 @@ async function Dashboard() {
             game="bo6"
           />
 
-          {/* mobile version of table- which are cards not table */}
-          <div className="grid grid-cols-1 gap-4 sm:hidden ">
-            <div className="px-4 sm:px-6 pt-4">
-              <h2 className="text-lg sm:text-xl font-bold">Recent Matches</h2>
-            </div>
-
-            {matches.map((match) => (
-              <div className=" bg-secondary-bg p-4 rounded-lg" key={match.id}>
-                <div className="flex justify-between items-center mb-2">
-                  <div className=" text-gray-300">
-                    {new Date(match.createdAt).toLocaleDateString("en-us", {
-                      month: "short",
-                      day: "numeric",
-                    })}
-                  </div>
-                  <div
-                    className={`text-sm font-semibold px-2 py-1 rounded ${
-                      match.win
-                        ? "bg-green-500 text-black"
-                        : "bg-[#ff4d4d] text-black"
-                    }`}
-                  >
-                    {match.win ? "WIN" : "LOSS"}
-                  </div>
-                </div>
-                <div className="text-lg font-semibold text-white">
-                  {match.gameMode === "SearchAndDestroy"
-                    ? "Search & Destroy"
-                    : match.gameMode}
-                </div>
-                <div className=" text-gray-400">{match.matchMap}</div>
-                <div className="mt-2 text-right">
-                  <span className="text-white font-mono">
-                    K/D: {(match.kills / match.deaths).toFixed(2)}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+         
         </div>
       </div>
     </Suspense>

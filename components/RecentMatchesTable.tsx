@@ -53,62 +53,7 @@ async function RecentMatchesTable({
 
   const streak = calcWinStreak([...matches].reverse());
   return (
-    /*  <section className="w-full border border-[#444444] rounded-lg bg-secondary-bg p-4 overflow-x-auto hidden sm:block">
-      <div className="px-4 sm:px-6 py-4 sticky left-0">
-        <div className="flex justify-between items-center">
-          <h2 className="text-lg sm:text-xl font-bold">Recent Matches</h2>
-          <p> {calcWinStreak([...matches].reverse())}</p>
-        </div>
-      </div>
-      {matches.length > 0 ? (
-        <div>
-          <table className="w-full">
-            <thead>
-              <tr>
-                <th className="">Date</th>
-                <th className="">Game Mode</th>
-                <th className="">Map</th>
-                <th className="">W/L Result</th>
-               
-                <th className="">K/D Ratio</th>
-              </tr>
-            </thead>
-            <tbody>
-              {matches.map((match) => (
-                <tr className="text-center" key={match.id}>
-                  <td className="">
-                    <DisplayDate match={match} createdAt={true} />
-                  </td>
-                  <td className="">
-                    {match.gameMode === "SearchAndDestroy"
-                      ? "Search & Destroy"
-                      : match.gameMode}
-                  </td>
-                  <td className=""> {match.matchMap}</td>
-                  {match.win ? (
-                    <td
-                      className={
-                        game === "mw3" ? "text-[#b0ff34] " : "text-green-500"
-                      }
-                    >
-                      Win
-                    </td>
-                  ) : (
-                    <td className="text-red-500 ">Loss</td>
-                  )}
-                  <td className="">
-                    {(match.kills / match.deaths).toFixed(2)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        <p className="text-center p-4">No Matches Recorded</p>
-      )}
-    </section> */
-    <section className="w-full border border-[#444444] rounded-lg bg-secondary-bg p-4 overflow-x-auto hidden sm:block">
+    <section className="w-full border border-[#444444] rounded-lg bg-secondary-bg p-4 overflow-x-auto">
       <div className="px-4 sm:px-6 py-4 sticky left-0">
         <div className="flex gap-4 items-center">
           <h2 className="text-lg sm:text-xl font-bold">Recent Matches</h2>
@@ -120,32 +65,78 @@ async function RecentMatchesTable({
         </div>
       </div>
       <Tabs defaultValue="all" className="w-full">
-        <TabsList className="bg-zinc-800 mb-4">
+        <TabsList className="bg-zinc-800 mb-4 w-full xs:w-auto">
           <TabsTrigger value="all">All Modes</TabsTrigger>
           <TabsTrigger value="hardpoint">Hardpoint</TabsTrigger>
           <TabsTrigger value="control">Control</TabsTrigger>
           <TabsTrigger value="search">Search & Destroy</TabsTrigger>
         </TabsList>
         <TabsContent value="all" className="m-0">
-          <div className="rounded-md border border-zinc-800 overflow-hidden">
+          <div className="">
             {matches.length > 0 ? (
-              <CustomTableBodyComponent matches={matches} />
+              <>
+                <div className="hidden xs:block rounded-md border border-zinc-800 overflow-hidden">
+                  <CustomTableBodyComponent matches={matches} />
+                </div>
+                <div className="xs:hidden">
+                  <CustomMobileCardComponent matches={matches} />
+                </div>
+              </>
             ) : (
               <p className="text-center p-4">No Matches Recorded</p>
             )}
           </div>
         </TabsContent>
         <TabsContent value="hardpoint" className="m-0">
-          {/* Hardpoint specific content would go here */}
-          <CustomTableBodyComponent matches={hpMatches} />
+          {/* Hardpoint specific content */}
+          <div className="">
+            {matches.length > 0 ? (
+              <>
+                <div className="hidden xs:block rounded-md border border-zinc-800 overflow-hidden">
+                  <CustomTableBodyComponent matches={hpMatches} />
+                </div>
+                <div className="xs:hidden">
+                  <CustomMobileCardComponent matches={hpMatches} />
+                </div>
+              </>
+            ) : (
+              <p className="text-center p-4">No Matches Recorded</p>
+            )}
+          </div>
         </TabsContent>
         <TabsContent value="control" className="m-0">
-          {/* Control specific content would go here */}
-          <CustomTableBodyComponent matches={controlMatches} />
+          {/* Control specific content */}
+          <div className="">
+            {matches.length > 0 ? (
+              <>
+                <div className="hidden xs:block rounded-md border border-zinc-800 overflow-hidden">
+                  <CustomTableBodyComponent matches={controlMatches} />
+                </div>
+                <div className="xs:hidden">
+                  <CustomMobileCardComponent matches={controlMatches} />
+                </div>
+              </>
+            ) : (
+              <p className="text-center p-4">No Matches Recorded</p>
+            )}
+          </div>
         </TabsContent>
         <TabsContent value="search" className="m-0">
-          {/* Search & Destroy specific content would go here */}
-          <CustomTableBodyComponent matches={sdMatches} />
+          {/* Search & Destroy specific content */}
+          <div className="">
+            {matches.length > 0 ? (
+              <>
+                <div className="hidden xs:block rounded-md border border-zinc-800 overflow-hidden">
+                  <CustomTableBodyComponent matches={sdMatches} />
+                </div>
+                <div className="xs:hidden">
+                  <CustomMobileCardComponent matches={sdMatches} />
+                </div>
+              </>
+            ) : (
+              <p className="text-center p-4">No Matches Recorded</p>
+            )}
+          </div>
         </TabsContent>
       </Tabs>
     </section>
@@ -200,5 +191,44 @@ const CustomTableBodyComponent = ({ matches }: { matches: TMatchQuery[] }) => {
         ))}
       </TableBody>
     </Table>
+  );
+};
+
+const CustomMobileCardComponent = ({ matches }: { matches: TMatchQuery[] }) => {
+  return (
+    <div className=" divide-y-2 divide-[#444444]">
+      {matches.map((match) => (
+        <div className=" bg-secondary-bg p-4" key={match.id}>
+          <div className="flex justify-between items-center mb-2">
+            <div className=" text-gray-300">
+              {new Date(match.createdAt).toLocaleDateString("en-us", {
+                month: "short",
+                day: "numeric",
+              })}
+            </div>
+            <div
+              className={`text-sm font-semibold px-2 py-1 rounded ${
+                match.win
+                  ? "bg-green-500 text-black"
+                  : "bg-[#ff4d4d] text-black"
+              }`}
+            >
+              {match.win ? "WIN" : "LOSS"}
+            </div>
+          </div>
+          <div className="text-lg font-semibold text-white">
+            {match.gameMode === "SearchAndDestroy"
+              ? "Search & Destroy"
+              : match.gameMode}
+          </div>
+          <div className=" text-gray-400">{match.matchMap}</div>
+          <div className="mt-2 text-right">
+            <span className="text-white font-mono">
+              K/D: {(match.kills / match.deaths).toFixed(2)}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
