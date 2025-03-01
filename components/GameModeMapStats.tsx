@@ -35,7 +35,7 @@ type GameModeStatsProp = {
   game: string;
 };
 
-const mapSets: Record<TGameMode, string[]> = {
+const mw3MapSets: Record<TGameMode, string[]> = {
   Hardpoint: [
     "Invasion",
     "Karachi",
@@ -71,6 +71,7 @@ const bo6MapSets: Record<TGameMode, string[]> = {
   ],
 };
 function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
+  // function to get the map mode matches
   const getMapModeMatches = (
     gameMode: string,
     mapSet: string[],
@@ -85,9 +86,9 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
     });
   };
 
-  const mapModeMatches = getMapModeMatches(
+  const mw3MapModeMatches = getMapModeMatches(
     gameMode,
-    mapSets[gameMode],
+    mw3MapSets[gameMode],
     matches
   );
 
@@ -97,8 +98,11 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
     matches
   );
 
-  // calculates the best map based on each gamemode using calcmapscore
-  function calcBestMap(mapsMatchesArr: TMatchQuery[][]) {
+  // calculates the best map based on each gamemode using calcmapscore, takes in mapSets or bo6MapSets
+  function calcBestMap(
+    mapsMatchesArr: TMatchQuery[][],
+    maps: Record<TGameMode, string[]>
+  ) {
     let bestMap = mapsMatchesArr[0];
     let bestScore = calcMapScore(bestMap, gameMode);
 
@@ -109,24 +113,18 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
         bestMap = mapsMatchesArr[i];
       }
     }
-    return mapSets[gameMode][mapsMatchesArr.indexOf(bestMap)];
-  }
 
-  function calcBestBo6Map(mapsMatchesArr: TMatchQuery[][]) {
-    let bestMap = mapsMatchesArr[0];
-    let bestScore = calcMapScore(bestMap, gameMode);
-
-    for (let i = 0; i < mapsMatchesArr.length; i++) {
-      let score = calcMapScore(mapsMatchesArr[i], gameMode);
-      if (score > bestScore) {
-        bestScore = score;
-        bestMap = mapsMatchesArr[i];
-      }
+    if (maps === mw3MapSets) {
+      return mw3MapSets[gameMode][mapsMatchesArr.indexOf(bestMap)];
+    } else {
+      return bo6MapSets[gameMode][mapsMatchesArr.indexOf(bestMap)];
     }
-    return bo6MapSets[gameMode][mapsMatchesArr.indexOf(bestMap)];
   }
 
-  function calcWorstMap(mapsMatchesArr: TMatchQuery[][]) {
+  function calcWorstMap(
+    mapsMatchesArr: TMatchQuery[][],
+    maps: Record<TGameMode, string[]>
+  ) {
     let worstMap = mapsMatchesArr[0];
     let worstScore = calcMapScore(worstMap, gameMode);
 
@@ -137,26 +135,18 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
         worstMap = mapsMatchesArr[i];
       }
     }
-    return mapSets[gameMode][mapsMatchesArr.indexOf(worstMap)];
-  }
 
-  function calcWorstBo6Map(mapsMatchesArr: TMatchQuery[][]) {
-    let worstMap = mapsMatchesArr[0];
-    let worstScore = calcMapScore(worstMap, gameMode);
-
-    for (let i = 0; i < mapsMatchesArr.length; i++) {
-      let score = calcMapScore(mapsMatchesArr[i], gameMode);
-      if (score < worstScore) {
-        worstScore = score;
-        worstMap = mapsMatchesArr[i];
-      }
+    if (maps === mw3MapSets) {
+      return mw3MapSets[gameMode][mapsMatchesArr.indexOf(worstMap)];
+    } else {
+      return bo6MapSets[gameMode][mapsMatchesArr.indexOf(worstMap)];
     }
-    return bo6MapSets[gameMode][mapsMatchesArr.indexOf(worstMap)];
   }
-  let bestMap = calcBestMap(mapModeMatches);
-  let bestBo6Map = calcBestBo6Map(bo6MapModeMatches);
-  let worstMap = calcWorstMap(mapModeMatches);
-  let worstBo6Map = calcWorstBo6Map(bo6MapModeMatches);
+
+  let bestMap = calcBestMap(mw3MapModeMatches, mw3MapSets);
+  let bestBo6Map = calcBestMap(bo6MapModeMatches, bo6MapSets);
+  let worstMap = calcWorstMap(mw3MapModeMatches, mw3MapSets);
+  let worstBo6Map = calcWorstMap(bo6MapModeMatches, bo6MapSets);
 
   return (
     <section className="bg-secondary-bg border border-[#444444] rounded-lg overflow-x-auto">
@@ -248,18 +238,18 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
                   <TableCell>{calcHighestKill(matches)}</TableCell>
                 </TableRow>
               ))
-            : mapModeMatches.map((matches, index) => (
+            : mw3MapModeMatches.map((matches, index) => (
                 <TableRow
                   key={index}
                   className="hover:bg-zinc-800/50 border-zinc-800"
                 >
                   <TableCell className="sticky left-0 bg-secondary-bg">
-                    {mapSets[gameMode][index] === bestMap ? (
+                    {mw3MapSets[gameMode][index] === bestMap ? (
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Badge variant="best">
-                              {mapSets[gameMode][index]}
+                              {mw3MapSets[gameMode][index]}
                             </Badge>
                           </TooltipTrigger>
                           <TooltipContent>
@@ -267,12 +257,12 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>
-                    ) : mapSets[gameMode][index] === worstMap ? (
+                    ) : mw3MapSets[gameMode][index] === worstMap ? (
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <Badge variant="worst">
-                              {mapSets[gameMode][index]}
+                              {mw3MapSets[gameMode][index]}
                             </Badge>
                           </TooltipTrigger>
                           <TooltipContent>
@@ -281,7 +271,7 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
                         </Tooltip>
                       </TooltipProvider>
                     ) : (
-                      <>{mapSets[gameMode][index]}</>
+                      <>{mw3MapSets[gameMode][index]}</>
                     )}
                   </TableCell>
                   <TableCell>{calcWinPercentage(matches)}</TableCell>
