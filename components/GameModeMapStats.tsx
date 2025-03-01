@@ -71,7 +71,7 @@ const bo6MapSets: Record<TGameMode, string[]> = {
   ],
 };
 function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
-  // function to get the map mode matches
+  //Filters matches by game mode and organizes them by map
   const getMapModeMatches = (
     gameMode: string,
     mapSet: string[],
