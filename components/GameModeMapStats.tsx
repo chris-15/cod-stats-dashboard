@@ -29,6 +29,8 @@ import {
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
 
+//TODO: REFACTOR THIS FILE TO BE MORE READABLE AND CLEANER
+
 type GameModeStatsProp = {
   gameMode: TGameMode;
   matches: TMatchQuery[];
