@@ -100,7 +100,7 @@ function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
         </TabsList>
         {tabArr.map((tab) => (
           <TabsContent value={tab} key={tab}>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 xl:grid-cols-4 2xl:flex 2xl:justify-evenly 2xl:flex-wrap mt-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 xl:grid-cols-4 2xl:flex 2xl:justify-evenly 2xl:flex-wrap mt-4 text-center">
               <SingleStat title="K/D" value={activeTab.totalKdRatio} />
               <SingleStat title="Win %" value={activeTab.winPercentage} />
               <SingleStat title="K/D in W" value={activeTab.kdByWin} />
@@ -134,7 +134,7 @@ function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
                 title="Slaying Efficiency"
                 value={activeTab.slayingEfficiency}
                 /* TODO: figure out tooltip on mobile */
-               /*  icon={IoInformationCircleOutline}
+                /*  icon={IoInformationCircleOutline}
                 tooltip="Kill rate as % of total engagements. Higher = better slaying." */
               />
               {tab === "total" || tab === "daily" ? (
@@ -167,9 +167,9 @@ function SingleStat({ title, value, icon: Icon, tooltip }: SingleStatProps) {
       ? "--"
       : value;
   return (
-    <div>
-      <div className="flex items-center gap-1">
-        <p className="">{title}</p>
+    <div className="">
+      <div className="">
+        <p className="text-sm font-light whitespace-nowrap underline">{title}</p>
         <p>
           {Icon && tooltip && (
             <TooltipProvider>
@@ -186,7 +186,7 @@ function SingleStat({ title, value, icon: Icon, tooltip }: SingleStatProps) {
         </p>
       </div>
 
-      <p>{displayValue}</p>
+      <p className="text-base font-semibold tracking-tight">{displayValue}</p>
     </div>
   );
 }
