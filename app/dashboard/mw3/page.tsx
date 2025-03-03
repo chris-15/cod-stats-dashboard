@@ -122,6 +122,7 @@ async function Dashboard() {
                   <MatchDistribution
                     mapChartData={mapData.mapCountData}
                     modeChartData={mapData.modeCountData}
+                    game="mw3"
                   />
                 </div>
               </>

@@ -21,9 +21,14 @@ type chartData = {
 type chartDataProps = {
   mapChartData: chartData[];
   modeChartData: chartData[];
+  game: string;
 };
 
-function MatchDistribution({ mapChartData, modeChartData }: chartDataProps) {
+function MatchDistribution({
+  mapChartData,
+  modeChartData,
+  game,
+}: chartDataProps) {
   const [chart, setChart] = useState("mode");
   return (
     <div className="border border-[#444444] rounded-lg  bg-secondary-bg">
@@ -51,9 +56,15 @@ function MatchDistribution({ mapChartData, modeChartData }: chartDataProps) {
       </div>
 
       {chart === "mode" ? (
-        <ModeBarChart data={modeChartData} fill="#ff9900" />
+        <ModeBarChart
+          data={modeChartData}
+          fill={game === "mw3" ? "#b0ff34" : "#ff9900"}
+        />
       ) : (
-        <MapBarChart data={mapChartData} fill="#ff9900" />
+        <MapBarChart
+          data={mapChartData}
+          fill={game === "mw3" ? "#b0ff34" : "#ff9900"}
+        />
       )}
     </div>
   );
