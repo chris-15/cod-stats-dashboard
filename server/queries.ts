@@ -69,6 +69,91 @@ export async function getMatchesByMode(gameMode: TGameMode) {
   return matches;
 }
 
+//get last 15 matches for all modes mw3 matches
+export async function getFifteenMw3Matches(): Promise<TMatchQuery[]> {
+  const session = await getServerSession(authOptions);
+  //if no session return the next response error
+  if (!session) throw new Error("Unauthorized");
+
+  const userEmail = session?.user?.email as string;
+
+  const matches = await prisma.match.findMany({
+    where: {
+      userEmail: userEmail,
+    },
+    include: {
+      user: { select: { name: true } },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+    take: 15,
+  });
+  if (!matches) throw new Error("Matches not found ");
+
+  return matches;
+}
+
+
+//get last 15 matches by game mode for mw3 matches
+export async function getLastFifteenMw3MatchesByMode() {
+  const session = await getServerSession(authOptions);
+  //if no session return the next response error
+  if (!session) throw new Error("Unauthorized");
+
+  const userEmail = session?.user?.email as string;
+
+  const [hpMatches, controlMatches, searchMatches] = await Promise.all([
+    //last 15 hp matches
+    prisma.match.findMany({
+      where: {
+        userEmail: userEmail,
+        gameMode: "Hardpoint",
+      },
+      include: {
+        user: { select: { name: true } },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 15,
+    }),
+    //last 15 control matches
+    prisma.match.findMany({
+      where: {
+        userEmail: userEmail,
+        gameMode: "Control",
+      },
+      include: {
+        user: { select: { name: true } },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 15,
+    }),
+    //last 15 search matches
+    prisma.match.findMany({
+      where: {
+        userEmail: userEmail,
+        gameMode: "SearchAndDestroy",
+      },
+      include: {
+        user: { select: { name: true } },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 15,
+    }),
+  ]);
+
+  if (!hpMatches || !controlMatches || !searchMatches)
+    throw new Error("Matches not found ");
+
+  return { hpMatches, controlMatches, searchMatches };
+}
+
 //for mw3 matches
 // delete match by id
 export async function deleteMatch(id: string) {

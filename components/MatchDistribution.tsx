@@ -13,7 +13,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-function MatchDistribution({ mapChartData, modeChartData }: any) {
+type chartData = {
+  name: string;
+  value: number;
+};
+
+type chartDataProps = {
+  mapChartData: chartData[];
+  modeChartData: chartData[];
+};
+
+function MatchDistribution({ mapChartData, modeChartData }: chartDataProps) {
   const [chart, setChart] = useState("mode");
   return (
     <div className="border border-[#444444] rounded-lg  bg-secondary-bg">
@@ -28,7 +38,7 @@ function MatchDistribution({ mapChartData, modeChartData }: any) {
         </div>
 
         <Select defaultValue="mode" onValueChange={(value) => setChart(value)}>
-          <SelectTrigger  className="w-36 h-8 ">
+          <SelectTrigger className="w-36 h-8 ">
             <SelectValue placeholder="Select" />
           </SelectTrigger>
           <SelectContent className="">
