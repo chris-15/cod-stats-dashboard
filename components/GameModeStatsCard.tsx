@@ -15,7 +15,14 @@ import {
 } from "@/lib/stat-utils";
 import { TMatch, TMatchQuery } from "@/app/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { time } from "console";
+import { IoInformationCircleOutline } from "react-icons/io5";
+import { IconType } from "react-icons";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 type GameModeStatsProps = {
   gameMode: string;
@@ -86,14 +93,14 @@ function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
   return (
     <section className="bg-secondary-bg border border-[#444444] rounded-lg p-4">
       <Tabs defaultValue="total" onValueChange={(newTab) => setTab(newTab)}>
-        <TabsList className="bg-zinc-800 mb-4">
+        <TabsList className="bg-zinc-800 inline-flex">
           <TabsTrigger value="total">Total</TabsTrigger>
           <TabsTrigger value="lastTen">Last 10</TabsTrigger>
           <TabsTrigger value="daily">Daily</TabsTrigger>
         </TabsList>
         {tabArr.map((tab) => (
           <TabsContent value={tab} key={tab}>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 xl:grid-cols-4 2xl:flex 2xl:justify-evenly 2xl:flex-wrap mt-12">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 xl:grid-cols-4 2xl:flex 2xl:justify-evenly 2xl:flex-wrap mt-4">
               <SingleStat title="K/D" value={activeTab.totalKdRatio} />
               <SingleStat title="Win %" value={activeTab.winPercentage} />
               <SingleStat title="K/D in W" value={activeTab.kdByWin} />
@@ -126,6 +133,9 @@ function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
               <SingleStat
                 title="Slaying Efficiency"
                 value={activeTab.slayingEfficiency}
+                /* TODO: figure out tooltip on mobile */
+               /*  icon={IoInformationCircleOutline}
+                tooltip="Kill rate as % of total engagements. Higher = better slaying." */
               />
               {tab === "total" || tab === "daily" ? (
                 <SingleStat title="Map Count" value={activeTab.mapCount} />
@@ -144,17 +154,38 @@ export default GameModeStatsCard;
 type SingleStatProps = {
   title: string;
   value: number | string;
+  icon?: IconType;
+  tooltip?: string;
 };
 
 //TODO: style this
-function SingleStat({ title, value }: SingleStatProps) {
+function SingleStat({ title, value, icon: Icon, tooltip }: SingleStatProps) {
   const displayValue =
-    (typeof value === "number" && isNaN(value)) || value === "NaN"
+    (typeof value === "number" && isNaN(value)) ||
+    value === "NaN" ||
+    value === "NaN:NaN"
       ? "--"
       : value;
   return (
     <div>
-      <p>{title}</p>
+      <div className="flex items-center gap-1">
+        <p className="">{title}</p>
+        <p>
+          {Icon && tooltip && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span>
+                    <Icon />
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent className="">{tooltip}</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
+        </p>
+      </div>
+
       <p>{displayValue}</p>
     </div>
   );
