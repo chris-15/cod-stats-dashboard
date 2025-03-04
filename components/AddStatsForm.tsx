@@ -118,7 +118,7 @@ function AddStatsForm() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-8 shadow-md bg-sidebar border border-[#444444] rounded-lg ">
+    <div className="max-w-md mx-auto p-8 shadow-md bg-sidebar border rounded-lg ">
       <h2 className="text-2xl font-bold mb-4 text-center">
         Add Your Match Statistics
       </h2>

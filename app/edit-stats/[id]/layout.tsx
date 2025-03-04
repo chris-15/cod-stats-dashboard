@@ -19,16 +19,16 @@ export default function EditStatsLayout({
         <NewSidebar game="bo6" />
       </div>
 
-      <div className="flex flex-1 flex-col gap-4">
+      <div className="flex flex-1 flex-col">
         <div className="md:hidden">
           <Navbar game="bo6" />
         </div>
         <div className="">{children}</div>
       </div>
 
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50">
+      {/* <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50">
         <MobileNav game="bo6" />
-      </div>
+      </div> */}
 
       <Toaster />
     </SidebarProvider>

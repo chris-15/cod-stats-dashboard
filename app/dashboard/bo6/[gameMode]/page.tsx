@@ -87,7 +87,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
             href={"/dashboard/bo6"}
             className="flex md:hidden font-bold text-xl hover:underline"
           >
-            <p className=""> {`<- Dashboard`}</p>
+            <p className=""> {`<- Home`}</p>
           </Link>
           <h2 className="text-center font-bold text-4xl mt-4 mb-6">
             {gameMode === "SearchAndDestroy" ? "Search And Destroy" : gameMode}
