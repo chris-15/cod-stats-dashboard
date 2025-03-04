@@ -161,7 +161,7 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
       <Table>
         <TableHeader className="">
           <TableRow className=" hover:bg-zinc-800/50 border-zinc-800 ">
-            <TableHead className="sticky left-0 bg-secondary-bg">Map</TableHead>
+            <TableHead className="sticky left-0 bg-sidebar">Map</TableHead>
             <TableHead>Win %</TableHead>
             <TableHead>K/D RATIO</TableHead>
             {gameMode === "Hardpoint" && <TableHead>AVG TIME</TableHead>}
