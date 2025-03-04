@@ -132,7 +132,7 @@ function Navbar({ game = "bo6" }: NavBarProps) {
         /*  if the user session status is authenticated then render navbar for logged in user otherwise show sigin button */
         <>
           <div
-            className={`absolute z-30 right-12 top-14 bg-[#212529] text-white border-2 p-6 shadow-lg rounded-md  flex-col gap-2 text-right min-w-[160px] ${
+            className={`absolute z-30 right-12 top-14 bg-black text-white border-4 p-6 shadow-lg rounded-md  flex-col gap-2 text-right min-w-[160px] ${
               showMenu ? "flex" : "hidden"
             } `}
             ref={menuRef}

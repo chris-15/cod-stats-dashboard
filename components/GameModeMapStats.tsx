@@ -151,7 +151,7 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
   let worstBo6Map = calcWorstMap(bo6MapModeMatches, bo6MapSets);
 
   return (
-    <section className="bg-sidebar border border-[#444444] rounded-lg overflow-x-auto">
+    <section className="bg-sidebar border rounded-lg overflow-x-auto">
       <div className="px-4 sm:px-6 py-4 sticky left-0">
         <h2 className="text-xl font-bold">Map Statistics</h2>
         <p className="text-sm text-gray-400">

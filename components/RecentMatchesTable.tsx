@@ -53,7 +53,7 @@ async function RecentMatchesTable({
 
   const streak = calcWinStreak([...matches].reverse());
   return (
-    <section className="w-full border border-[#444444] rounded-lg bg-sidebar p-4 overflow-x-auto">
+    <section className="w-full border rounded-lg bg-sidebar p-4 overflow-x-auto">
       <div className="px-4 sm:px-6 py-4 sticky left-0">
         <div className="flex gap-4 items-center">
           <h2 className="text-lg sm:text-xl font-bold">Recent Matches</h2>

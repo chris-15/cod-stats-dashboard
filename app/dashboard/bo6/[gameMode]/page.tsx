@@ -100,12 +100,12 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
               matches={matches}
               game="bo6"
             />
-            <div className="border border-[#444444] rounded-lg bg-sidebar">
+            <div className="border rounded-lg bg-sidebar">
               <h2 className="text-center pt-4">Daily K/D Ratio vs Win Rate</h2>
               <KdLineChartComponent matches={matches} />
             </div>
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-              <div className="grid grid-cols-2 bg-sidebar border border-[#444444] rounded-lg divide-x divide-[#444444] ">
+              <div className="grid grid-cols-2 bg-sidebar border rounded-lg divide-x divide-[#444444] ">
                 <div>
                   <h3 className="text-center pt-4 text-lg sm:text-xl font-bold">
                     Top 10 Kills
@@ -121,11 +121,11 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
               </div>
 
               <div className="hidden xs:flex flex-col justify-between space-y-4 xl:space-y-2">
-                <div className="border border-[#444444] rounded-lg bg-sidebar hidden xs:block">
+                <div className="border rounded-lg bg-sidebar hidden xs:block">
                   <h2 className="text-center pt-4">Match Count by Map</h2>
                   <MapBarChartComponent data={mapCountData} fill="#ff9900" />
                 </div>
-                <div className="bg-sidebar border border-[#444444] rounded-lg">
+                <div className="bg-sidebar border rounded-lg">
                   <h2 className="text-center pt-4">KD by Result by Map</h2>
                   <KdBarChartComponent matches={matches} />
                 </div>

@@ -102,11 +102,11 @@ async function Dashboard() {
         {matches.length > 0 && (
           <>
             <div className=" hidden xl:grid xl:grid-cols-2 gap-4 sm:gap-8">
-              <div className="bg-sidebar">
+              <div className="bg-sidebar border rounded-lg">
                 <h2 className="text-center pt-4">Match Count by Game Mode</h2>
                 <ModeBarChartComponent data={modeCountData} fill="#ff9900" />
               </div>
-              <div className="bg-sidebar">
+              <div className="bg-sidebar border rounded-lg">
                 <h2 className="text-center pt-4">Match Count by Map</h2>
                 <MapBarChartComponent data={mapCountData} fill="#ff9900" />
               </div>

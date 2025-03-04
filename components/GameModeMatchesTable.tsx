@@ -36,7 +36,7 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
 
   return (
     <>
-      <section className="hidden sm:table bg-sidebar border border-[#444444] rounded-lg overflow-x-auto">
+      <section className="hidden sm:table bg-sidebar border rounded-lg overflow-x-auto">
         <div className="px-4 sm:px-6 py-4 sticky left-0">
           <h2 className="text-lg sm:text-xl font-bold ">All Matches</h2>
         </div>
@@ -133,7 +133,7 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
           <>
             {gameModeMatches.map((match) => (
               <div
-                className="bg-secondary-bg p-4 rounded-lg sm:hidden gap-4 group transiton-transform transform ease-out duration-300  hover:scale-105"
+                className="bg-sidebar border p-4 rounded-lg sm:hidden gap-4 group transiton-transform transform ease-out duration-300  hover:scale-105"
                 key={match.id}
               >
                 <div className="flex justify-between items-center mb-2">
