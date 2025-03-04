@@ -96,40 +96,39 @@ async function Dashboard() {
 
   return (
     <Suspense fallback={<Loading />}>
-      <div className="">
+      <div className="grid grid-cols-1 gap-4 sm:gap-8">
         <TopCards matches={matches} game="bo6" />
-        <div className="grid gap-4 grid-cols1 mt-4 ">
-          {matches.length > 0 && (
-            <>
-              <div className=" hidden xl:grid xl:grid-cols-2 gap-4">
-                <div className="bg-sidebar">
-                  <h2 className="text-center pt-4">Match Count by Game Mode</h2>
-                  <ModeBarChartComponent data={modeCountData} fill="#ff9900" />
-                </div>
-                <div className="bg-sidebar">
-                  <h2 className="text-center pt-4">Match Count by Map</h2>
-                  <MapBarChartComponent data={mapCountData} fill="#ff9900" />
-                </div>
-              </div>
 
-              <div className="xl:hidden ">
-                <MatchDistribution
-                  mapChartData={mapData.mapCountData}
-                  modeChartData={mapData.modeCountData}
-                  game="bo6"
-                />
+        {matches.length > 0 && (
+          <>
+            <div className=" hidden xl:grid xl:grid-cols-2 gap-4 sm:gap-8">
+              <div className="bg-sidebar">
+                <h2 className="text-center pt-4">Match Count by Game Mode</h2>
+                <ModeBarChartComponent data={modeCountData} fill="#ff9900" />
               </div>
-            </>
-          )}
+              <div className="bg-sidebar">
+                <h2 className="text-center pt-4">Match Count by Map</h2>
+                <MapBarChartComponent data={mapCountData} fill="#ff9900" />
+              </div>
+            </div>
 
-          <RecentMatchesTable
-            matches={lastFifteenMatches}
-            hpMatches={hpMatches}
-            controlMatches={controlMatches}
-            sdMatches={searchMatches}
-            game="bo6"
-          />
-        </div>
+            <div className="xl:hidden ">
+              <MatchDistribution
+                mapChartData={mapData.mapCountData}
+                modeChartData={mapData.modeCountData}
+                game="bo6"
+              />
+            </div>
+          </>
+        )}
+
+        <RecentMatchesTable
+          matches={lastFifteenMatches}
+          hpMatches={hpMatches}
+          controlMatches={controlMatches}
+          sdMatches={searchMatches}
+          game="bo6"
+        />
       </div>
     </Suspense>
   );

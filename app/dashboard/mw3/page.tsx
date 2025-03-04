@@ -96,46 +96,39 @@ async function Dashboard() {
 
   return (
     <Suspense fallback={<Loading />}>
-      <div className="">
+      <div className="grid grid-cols-1 gap-4 sm:gap-8">
         <TopCards matches={matches} game="mw3" />
-        <div className="grid gap-4 grid-cols1 mt-4 ">
-          <div className="grid gap-4 grid-cols-1">
-            {matches.length > 0 && (
-              <>
-                <div className="hidden xl:grid xl:grid-cols-2 gap-4">
-                  <div className="border border-[#444444] rounded-lg  bg-secondary-bg">
-                    <h2 className="text-center pt-4">
-                      Match Count by Game Mode
-                    </h2>
-                    <ModeBarChartComponent
-                      data={modeCountData}
-                      fill="#b0ff34"
-                    />
-                  </div>
-                  <div className="border border-[#444444] rounded-lg bg-secondary-bg hidden xs:block">
-                    <h2 className="text-center pt-4">Match Count by Map</h2>
-                    <MapBarChartComponent data={mapCountData} fill="#b0ff34" />
-                  </div>
-                </div>
 
-                <div className="xl:hidden">
-                  <MatchDistribution
-                    mapChartData={mapData.mapCountData}
-                    modeChartData={mapData.modeCountData}
-                    game="mw3"
-                  />
-                </div>
-              </>
-            )}
-          </div>
-          <RecentMatchesTable
-            matches={lastFifteenMatches}
-            hpMatches={hpMatches}
-            controlMatches={controlMatches}
-            sdMatches={searchMatches}
-            game="mw3"
-          />
-        </div>
+        {matches.length > 0 && (
+          <>
+            <div className="hidden xl:grid xl:grid-cols-2 gap-4">
+              <div className="border border-[#444444] rounded-lg  bg-sidebar">
+                <h2 className="text-center pt-4">Match Count by Game Mode</h2>
+                <ModeBarChartComponent data={modeCountData} fill="#b0ff34" />
+              </div>
+              <div className="border border-[#444444] rounded-lg bg-sidebar hidden xs:block">
+                <h2 className="text-center pt-4">Match Count by Map</h2>
+                <MapBarChartComponent data={mapCountData} fill="#b0ff34" />
+              </div>
+            </div>
+
+            <div className="xl:hidden">
+              <MatchDistribution
+                mapChartData={mapData.mapCountData}
+                modeChartData={mapData.modeCountData}
+                game="mw3"
+              />
+            </div>
+          </>
+        )}
+
+        <RecentMatchesTable
+          matches={lastFifteenMatches}
+          hpMatches={hpMatches}
+          controlMatches={controlMatches}
+          sdMatches={searchMatches}
+          game="mw3"
+        />
       </div>
     </Suspense>
   );
