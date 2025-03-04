@@ -71,8 +71,3 @@ function MatchDistribution({
 }
 export default MatchDistribution;
 
-/* 
-name="chart-select"
-          id="chart-select"
-          onChange={(e) => setChart(e.target.value)}
-*/

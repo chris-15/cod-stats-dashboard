@@ -3,6 +3,8 @@ import { NextAuthProvider } from "@/components/Providers";
 import { Toaster } from "react-hot-toast";
 import { SideBar } from "@/components/SideBar";
 import { MobileNav } from "@/components/MobileNav";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { NewSidebar } from "@/components/NewSidebar";
 
 export default function DashboardLayout({
   children, // will be a page or nested layout
@@ -11,11 +13,14 @@ export default function DashboardLayout({
 }) {
   return (
     <NextAuthProvider>
+      {/* <SidebarProvider> */}
+
      <div className="flex flex-col min-h-screen">
         <div className="flex flex-1">
           <div className="hidden md:block">
             <SideBar game="bo6" />
           </div>
+          {/* <NewSidebar game="bo6"/> */}
           <div className="flex flex-col flex-1">
             <div className="md:hidden">
               <Navbar game="bo6" />
@@ -28,6 +33,7 @@ export default function DashboardLayout({
         </div>
       </div>
       <Toaster />
+      {/* </SidebarProvider> */}
     </NextAuthProvider>
   );
 }
