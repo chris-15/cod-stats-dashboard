@@ -170,17 +170,7 @@ function AddStatsForm() {
             <IoTrophyOutline size={24} />
             <span className="">Outcome</span>
           </label>
-          {/*  <select
-            id="outcome"
-            name="outcome"
-            required
-            className="mt-1 p-2 w-full border rounded-md text-center"
-            onChange={(e) => setWin(e.target.value === "Win")}
-          >
-            <option value="">Did you Win or Lose?</option>
-            <option value="Win">Win</option>
-            <option value="Loss">Loss</option>
-          </select> */}
+        
           <div className="grid grid-cols-2 gap-4">
             <button
               type="button"

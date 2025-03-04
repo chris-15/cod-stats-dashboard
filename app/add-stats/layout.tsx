@@ -17,7 +17,6 @@ export default function AddStatsLayout({
     <NextAuthProvider>
     <SidebarProvider>
       <div className="hidden md:block">
-        {/* <SideBar game="bo6" /> */}
         <NewSidebar game="bo6" />
       </div>
 
