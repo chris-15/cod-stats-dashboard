@@ -15,7 +15,6 @@ export default function DashboardLayout({
     <NextAuthProvider>
       <SidebarProvider>
         <div className="hidden md:block">
-          {/* <SideBar game="bo6" /> */}
           <NewSidebar game="bo6" />
         </div>
 
@@ -23,7 +22,7 @@ export default function DashboardLayout({
           <div className="md:hidden">
             <Navbar game="bo6" />
           </div>
-          <div className="">{children}</div>
+          <div className="px-4 sm:px-6 md:px-8 py-6 md:py-8">{children}</div>
         </div>
 
         <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 ">
@@ -36,30 +35,3 @@ export default function DashboardLayout({
   );
 }
 
-/* 
-  <NextAuthProvider>
-      <SidebarProvider>
-
-      <div className="flex flex-col min-h-screen">
-      <div className="flex flex-1">
-        <div className="hidden md:block">
-          <SideBar game="bo6" />
-        </div>
-        <NewSidebar game="bo6"/> 
-        <div className="flex flex-col flex-1">
-          <div className="md:hidden">
-            <Navbar game="bo6" />
-          </div>
-          <div className="flex-1 pb-16 sm:pb-0">{children}</div>
-        </div>
-      </div>
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 ">
-        <MobileNav game="bo6" />
-      </div>
-    </div>
-    <Toaster />
-    </SidebarProvider>
-  </NextAuthProvider>
-
-
-*/

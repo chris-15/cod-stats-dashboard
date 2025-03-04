@@ -96,7 +96,7 @@ async function Dashboard() {
 
   return (
     <Suspense fallback={<Loading />}>
-      <div className="p-4">
+      <div className="">
         <TopCards matches={matches} game="bo6" />
         <div className="grid gap-4 grid-cols1 mt-4 ">
           {matches.length > 0 && (
