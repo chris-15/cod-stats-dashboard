@@ -140,9 +140,9 @@ export default async function GameModeMatchId({
 
   return (
     <Modal>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl max-h-screen mx-auto py-6 px-4 sm:px-6 lg:px-8 bg-[#212529] rounded-lg overflow-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl max-h-screen mx-auto py-6 px-4 sm:px-6 lg:px-8 bg-sidebar rounded-lg overflow-auto ">
         <div className="space-y-6">
-          <div className="bg-secondary-bg rounded-lg shadow-lg p-6">
+          <div className="bg-background rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-bold mb-4">Match Stats</h2>
             <div className="mt-6">
               <div className="text-[#AAAAAA]">
@@ -195,7 +195,7 @@ export default async function GameModeMatchId({
               </div>
             </div>
           </div>
-          <div className="bg-secondary-bg rounded-lg shadow-lg p-6">
+          <div className="bg-background rounded-lg shadow-lg p-6">
             <p className="mb-2">Match Summary</p>
             <h3 className="text-2xl font-bold mb-2">{title}</h3>
             <p className="text-[#AAAAAA]">{performance}</p>
@@ -213,7 +213,7 @@ export default async function GameModeMatchId({
             }}
             width={800}
           />
-          <div className="bg-secondary-bg rounded-lg shadow-lg p-6 space-y-1 text-[#AAAAAA]">
+          <div className="bg-background rounded-lg shadow-lg p-6 space-y-1 text-[#AAAAAA]">
             <p>
               Map: <span className="text-white">{match.matchMap}</span>
             </p>

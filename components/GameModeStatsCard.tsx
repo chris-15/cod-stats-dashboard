@@ -91,7 +91,7 @@ function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
   const tabArr = ["total", "lastTen", "daily"];
 
   return (
-    <section className="bg-secondary-bg border border-[#444444] rounded-lg p-4">
+    <section className="bg-sidebar border border-[#444444] rounded-lg p-4">
       <Tabs defaultValue="total" onValueChange={(newTab) => setTab(newTab)}>
         <TabsList className="bg-zinc-800 inline-flex">
           <TabsTrigger value="total">Total</TabsTrigger>

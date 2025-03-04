@@ -100,86 +100,84 @@ export function NewSidebar({ game = "bo6" }: SideBarProps) {
   const activeItems = navConfigs[game];
 
   return (
-    <div className="dark">
-      <Sidebar className="">
-        <SidebarHeader className="px-6 py-4">
-          <div className="space-y-1">
-            <Link
-              href={status === "authenticated" ? `/dashboard/${game}` : "/"}
+    <Sidebar className="">
+      <SidebarHeader className="px-6 py-4">
+        <div className="space-y-1">
+          <Link
+            href={status === "authenticated" ? `/dashboard/${game}` : "/"}
+            className="flex items-center gap-2"
+          >
+            <h1 className="text-2xl font-bold tracking-tight text-white">
+              CoD{" "}
+              <span
+                className={`${
+                  game === "mw3"
+                    ? "bg-gradient-to-r from-[#B0FF34] via-[#C5FF6A] to-[#8FD400]"
+                    : "bg-gradient-to-r from-[#FF9900] via-[#FFAC38] to-[#FF7700]"
+                } bg-clip-text text-transparent`}
+              >
+                Dashboard
+              </span>
+            </h1>
+          </Link>
+          <p className="text-xs">Your Call of Duty Ranked Stats Hub </p>
+        </div>
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupLabel>
+            {game === "mw3" ? "Modern Warfare 3" : "Black Ops 6"}
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {activeItems?.map((item) => (
+                <SidebarMenuItem key={item.path}>
+                  <SidebarMenuButton asChild>
+                    <Link
+                      href={item.path}
+                      className={
+                        pathname === item.path
+                          ? game === "mw3"
+                            ? "bg-sidebar-active-mw3 text-black"
+                            : "bg-sidebar-active-bo6 text-black"
+                          : ""
+                      }
+                    >
+                      <item.icon />
+                      <span>{item.name}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+      <SidebarFooter className="border-t border-zinc-800 p-4">
+        {status === "authenticated" && (
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              <Image
+                src={session?.user?.image || ""}
+                width={36}
+                height={36}
+                alt="Profile-picture"
+                className="rounded-full"
+              />
+              <div className="flex flex-col">
+                <span>{session?.user?.name?.split(" ")[0] || ""}</span>
+              </div>
+            </div>
+            <button
+              onClick={() => signOut()}
               className="flex items-center gap-2"
             >
-              <h1 className="text-2xl font-bold tracking-tight text-white">
-                CoD{" "}
-                <span
-                  className={`${
-                    game === "mw3"
-                      ? "bg-gradient-to-r from-[#B0FF34] via-[#C5FF6A] to-[#8FD400]"
-                      : "bg-gradient-to-r from-[#FF9900] via-[#FFAC38] to-[#FF7700]"
-                  } bg-clip-text text-transparent`}
-                >
-                  Dashboard
-                </span>
-              </h1>
-            </Link>
-            <p className="text-xs">Your Call of Duty Ranked Stats Hub </p>
+              <IoLogOutSharp className="h-5 w-5" />
+              <span className="underline underrline-offset-2">Sign Out</span>
+            </button>
           </div>
-        </SidebarHeader>
-        <SidebarContent>
-          <SidebarGroup>
-            <SidebarGroupLabel>
-              {game === "mw3" ? "Modern Warfare 3" : "Black Ops 6"}
-            </SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                {activeItems?.map((item) => (
-                  <SidebarMenuItem key={item.path}>
-                    <SidebarMenuButton asChild>
-                      <Link
-                        href={item.path}
-                        className={
-                          pathname === item.path
-                            ? game === "mw3"
-                              ? "bg-sidebar-active-mw3 text-black"
-                              : "bg-sidebar-active-bo6 text-black"
-                            : ""
-                        }
-                      >
-                        <item.icon />
-                        <span>{item.name}</span>
-                      </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        </SidebarContent>
-        <SidebarFooter className="border-t border-zinc-800 p-4">
-          {status === "authenticated" && (
-            <div className="flex justify-between items-center">
-              <div className="flex items-center gap-2">
-                <Image
-                  src={session?.user?.image || ""}
-                  width={36}
-                  height={36}
-                  alt="Profile-picture"
-                  className="rounded-full"
-                />
-                <div className="flex flex-col">
-                  <span>{session?.user?.name?.split(" ")[0] || ""}</span>
-                </div>
-              </div>
-              <button
-                onClick={() => signOut()}
-                className="flex items-center gap-2"
-              >
-                <IoLogOutSharp className="h-5 w-5" />
-                <span className="underline underrline-offset-2">Sign Out</span>
-              </button>
-            </div>
-          )}
-        </SidebarFooter>
-      </Sidebar>
-    </div>
+        )}
+      </SidebarFooter>
+    </Sidebar>
   );
 }

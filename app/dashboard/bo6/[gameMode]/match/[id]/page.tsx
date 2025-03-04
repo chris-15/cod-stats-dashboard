@@ -210,7 +210,7 @@ export default async function GameModeMatchId({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* match stats */}
           <div>
-            <div className="bg-secondary-bg rounded-lg shadow-lg p-6">
+            <div className="bg-sidebar rounded-lg shadow-lg p-6">
               <h2 className="text-2xl font-bold mb-4">Match Stats</h2>
               <div className="mt-6">
                 <div className="text-[#AAAAAA]">
@@ -275,7 +275,7 @@ export default async function GameModeMatchId({
           </div>
 
           {/* match summary */}
-          <div className="bg-secondary-bg rounded-lg shadow-lg p-6 lg:order-first">
+          <div className="bg-sidebar rounded-lg shadow-lg p-6 lg:order-first">
             <p className="text-[#AAAAAA] mb-2">Match Summary</p>
             <h3 className="text-2xl font-bold mb-2">{title}</h3>
             <p className="text-[#AAAAAA]">{performance}</p>

@@ -151,7 +151,7 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
   let worstBo6Map = calcWorstMap(bo6MapModeMatches, bo6MapSets);
 
   return (
-    <section className="bg-secondary-bg border border-[#444444] rounded-lg overflow-x-auto">
+    <section className="bg-sidebar border border-[#444444] rounded-lg overflow-x-auto">
       <div className="px-4 sm:px-6 py-4 sticky left-0">
         <h2 className="text-xl font-bold">Map Statistics</h2>
         <p className="text-sm text-gray-400">
@@ -182,7 +182,7 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
                   key={index}
                   className="hover:bg-zinc-800/50 border-zinc-800"
                 >
-                  <TableCell className="sticky left-0 bg-secondary-bg">
+                  <TableCell className="sticky left-0 bg-sidebar">
                     {bo6MapSets[gameMode][index] === bestBo6Map ? (
                       <TooltipProvider>
                         <Tooltip>

@@ -36,7 +36,7 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
 
   return (
     <>
-      <section className="hidden sm:table bg-secondary-bg border border-[#444444] rounded-lg overflow-x-auto">
+      <section className="hidden sm:table bg-sidebar border border-[#444444] rounded-lg overflow-x-auto">
         <div className="px-4 sm:px-6 py-4 sticky left-0">
           <h2 className="text-lg sm:text-xl font-bold ">All Matches</h2>
         </div>

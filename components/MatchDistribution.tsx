@@ -31,7 +31,7 @@ function MatchDistribution({
 }: chartDataProps) {
   const [chart, setChart] = useState("mode");
   return (
-    <div className="border border-[#444444] rounded-lg  bg-secondary-bg">
+    <div className="border border-[#444444] rounded-lg bg-[hsl(var(--sidebar-background))]">
       <div className="flex items-center justify-between p-8">
         <div>
           <h2 className="text-xl font-bold ">Match Count Distribution</h2>

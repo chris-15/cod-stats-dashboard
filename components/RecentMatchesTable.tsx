@@ -53,7 +53,7 @@ async function RecentMatchesTable({
 
   const streak = calcWinStreak([...matches].reverse());
   return (
-    <section className="w-full border border-[#444444] rounded-lg bg-secondary-bg p-4 overflow-x-auto">
+    <section className="w-full border border-[#444444] rounded-lg bg-sidebar p-4 overflow-x-auto">
       <div className="px-4 sm:px-6 py-4 sticky left-0">
         <div className="flex gap-4 items-center">
           <h2 className="text-lg sm:text-xl font-bold">Recent Matches</h2>
@@ -155,9 +155,7 @@ const CustomTableBodyComponent = ({ matches }: { matches: TMatchQuery[] }) => {
           <TableHead className="text-zinc-400 font-medium">
             W/L RESULT
           </TableHead>
-          <TableHead className="text-zinc-400 font-medium">
-            K/D RATIO
-          </TableHead>
+          <TableHead className="text-zinc-400 font-medium">K/D RATIO</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -198,7 +196,10 @@ const CustomMobileCardComponent = ({ matches }: { matches: TMatchQuery[] }) => {
   return (
     <div className=" divide-y-2 divide-[#444444]">
       {matches.map((match) => (
-        <div className=" bg-secondary-bg p-4" key={match.id}>
+        <div
+          className="bg-sidebar p-4"
+          key={match.id}
+        >
           <div className="flex justify-between items-center mb-2">
             <div className=" text-gray-300">
               {new Date(match.createdAt).toLocaleDateString("en-us", {

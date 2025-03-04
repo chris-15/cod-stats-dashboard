@@ -56,7 +56,7 @@ function TopCards({
 
   return (
     <div className="grid gap-4 sm:grid-cols-2 sm:gap-8 xl:grid-cols-4">
-      <div className="border border-[#444444] rounded-lg py-2 bg-secondary-bg">
+      <div className="border  rounded-lg py-2 bg-sidebar">
         <div className="">
           <h2 className="text-center font-bold capitalize text-xl mb-5">
             Overall
@@ -65,11 +65,11 @@ function TopCards({
 
         <div className="grid grid-cols-2 divide-x divide-[#444444] text-center">
           <div>
-            <p className="text-lg font-semibold text-gray-300">K/D Ratio</p>
+            <p className="text-lg font-semibold ">K/D Ratio</p>
             <p className="font-bold text-4xl  ">{overallKdRatio}</p>
           </div>
           <div>
-            <p className="text-lg font-semibold text-gray-300 ">Win %</p>
+            <p className="text-lg font-semibold  ">Win %</p>
             <p
               className={
                 overallWinPercentage > 50
