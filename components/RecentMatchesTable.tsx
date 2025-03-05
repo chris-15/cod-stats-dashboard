@@ -161,7 +161,7 @@ const CustomTableBodyComponent = ({ matches }: { matches: TMatchQuery[] }) => {
       <TableBody>
         {matches.map((match) => (
           <TableRow
-            key={match.id}
+            key={match.id} 
             className="hover:bg-zinc-800/50 border-zinc-800"
           >
             <TableCell className="text-zinc-400 font-medium">

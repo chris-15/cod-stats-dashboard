@@ -43,7 +43,7 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
         {gameModeMatches.length > 0 ? (
           <div className="">
             <Table>
-              <TableHeader className="bg-zinc-800/50">
+              <TableHeader className="">
                 <TableRow className="hover:bg-zinc-800/50 border-zinc-800 ">
                   <TableHead className="text-zinc-400 font-medium">
                     DATE
