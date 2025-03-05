@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import {
   LuBarChart2,
   LuCrosshair,
@@ -21,19 +22,20 @@ export default function Home() {
         >
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
             Elevate Your Game with{" "}
-            <span className="text-bo6-theme">CoD Dashboard</span>
+            <span className="bg-gradient-to-r from-[#FF9900] via-[#FFAC38] to-[#FF7700] bg-clip-text text-transparent">
+              CoD Dashboard
+            </span>
           </h1>
           <p className="text-xl text-gray-300 mb-8">
             Your personal performance tracker for Call of Duty. Analyze your
             stats, improve your gameplay, and dominate the competiton.
           </p>
-          <Link
-            href="/dashboard"
-            className="inline-flex items-center bg-bo6-theme hover:bg-bo6-theme/80 text-[#333333] font-medium py-3 px-8 rounded-lg text-lg transition duration-300 hover:underline hover:underline-offset-2"
-          >
-            View My Stats
-            <LuChevronRight className=" ml-1"></LuChevronRight>
-          </Link>
+          <Button variant="bo6" size="lg" asChild>
+            <Link href="/dashboard" className="">
+              View My Stats
+              <LuChevronRight className=" ml-1"></LuChevronRight>
+            </Link>
+          </Button>
         </motion.div>
 
         <motion.div
@@ -44,7 +46,7 @@ export default function Home() {
         ></motion.div>
       </div>
 
-      <section className="bg-[#2c3237] py-16">
+      <section className=" py-16">
         <div className="container mx-auto px-6">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -87,7 +89,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-[#343a40] p-6 rounded-lg"
+                className="bg-sidebar p-6 rounded-lg"
               >
                 <feature.icon className="w-12 h-12 mb-4 text-bo6-theme" />
                 <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
@@ -100,7 +102,7 @@ export default function Home() {
 
       <section className="py-16">
         <div className="container mx-auto px-6">
-          <div className="bg-[#343a40] rounded-lg p-8 md:p-12 flex flex-col md:flex-row items-center justify-between">
+          <div className="bg-sidebar rounded-lg p-8 md:p-12 flex flex-col md:flex-row items-center justify-between">
             <div className="mb-6 md:mb-0 md:mr-8">
               <h2 className="text-3xl sm:text-4xl font-bold mb-4">
                 Ready to Improve Your Game?
@@ -110,13 +112,12 @@ export default function Home() {
                 difference it makes in your gameplay.
               </p>
             </div>
-            <Link
-              href="/sign-in"
-              className="inline-flex items-center bg-bo6-theme hover:bg-bo6-theme/80  text-[#333333] font-medium py-3 px-8 rounded-lg text-lg transition duration-300 hover:underline hover:underline-offset-2"
-            >
-              Sign Up Now
-              <LuChevronRight className="ml-1" />
-            </Link>
+            <Button variant="bo6" size="lg" asChild>
+              <Link href="/sign-in" className="">
+                Sign Up Now
+                <LuChevronRight className="ml-1" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

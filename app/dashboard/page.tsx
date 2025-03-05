@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth/next";
 import Link from "next/link";
@@ -18,7 +19,8 @@ async function ChooseDashboard() {
             Choose Your <span className="text-[#ff9900]">Dashboard</span>
           </h1>
           <p className="text-xl text-gray-300 mb-8">
-          Track live stats in the Black Ops 6 or view past data in the legacy Modern Warfare 3 dashboard.
+            Track live stats in the Black Ops 6 or view past data in the legacy
+            Modern Warfare 3 dashboard.
           </p>
         </div>
 
@@ -39,13 +41,15 @@ async function ChooseDashboard() {
                   <p className="text-gray-300 mb-6 text-lg">
                     Track and analyze your BO6 performance.
                   </p>
-                  <Link
-                    href="/dashboard/bo6"
-                    className="inline-flex items-center bg-[#ff9900] hover:bg-[#ff5500] text-black font-bold py-4 px-8 rounded-lg text-xl transition duration-300 hover:shadow-lg"
-                  >
-                    View My BO6 Stats
-                    <LuChevronRight className="ml-2 text-2xl" />
-                  </Link>
+                  <Button variant="bo6" size="lg" asChild>
+                    <Link
+                      href="/dashboard/bo6"
+                      className="inline-flex items-center bg-[#ff9900] hover:bg-[#ff5500] text-black font-bold py-4 px-8 rounded-lg text-xl transition duration-300 hover:shadow-lg"
+                    >
+                      View My BO6 Stats
+                      <LuChevronRight className="ml-2 text-2xl" />
+                    </Link>
+                  </Button>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out" />
               </div>
@@ -63,13 +67,15 @@ async function ChooseDashboard() {
                   <p className="text-gray-300 mb-4">
                     View your legacy MW3 statistics.
                   </p>
-                  <Link
-                    href="/dashboard/mw3"
-                    className="inline-flex items-center bg-[#b0ff34] hover:bg-[#8ccc26] text-black font-medium py-3 px-8 rounded-lg text-lg transition duration-300 hover:shadow-md"
-                  >
-                    View My MW3 Stats
-                    <LuChevronRight className="ml-1" />
-                  </Link>
+                  <Button variant="mw3" size="lg" asChild>
+                    <Link
+                      href="/dashboard/mw3"
+                      className=""
+                    >
+                      View My MW3 Stats
+                      <LuChevronRight className="ml-1" />
+                    </Link>
+                  </Button>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out" />
               </div>
