@@ -132,19 +132,19 @@ export function NewSidebar({ game = "bo6" }: SideBarProps) {
             <SidebarMenu>
               {activeItems?.map((item) => (
                 <SidebarMenuItem key={item.path}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton  asChild>
                     <Link
                       href={item.path}
                       className={
-                        pathname === item.path
+                        ` ${pathname === item.path
                           ? game === "mw3"
                             ? "bg-sidebar-active-mw3 text-black"
                             : "bg-sidebar-active-bo6 text-black"
-                          : ""
+                          : ""}`
                       }
                     >
-                      <item.icon />
-                      <span>{item.name}</span>
+                      <item.icon className="text-lg" />
+                      <span className=" ">{item.name}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -170,10 +170,10 @@ export function NewSidebar({ game = "bo6" }: SideBarProps) {
             </div>
             <button
               onClick={() => signOut()}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 hover:bg-sidebar-accent p-2 rounded-lg"
             >
               <IoLogOutSharp className="h-5 w-5" />
-              <span className="underline underrline-offset-2">Sign Out</span>
+              <span className="">Sign Out</span>
             </button>
           </div>
         )}
