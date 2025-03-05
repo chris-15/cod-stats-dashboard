@@ -1,5 +1,5 @@
 import { authOptions } from "@/lib/auth";
-import { convertTime } from "@/lib/utils";
+import { convertTime } from "@/lib/stat-utils";
 import { deleteMatch, getMatchById } from "@/server/queries";
 import { getServerSession } from "next-auth/next";
 import Image from "next/image";
@@ -166,8 +166,9 @@ export default async function GameModeMatchId({
                 Updated:
                 <span className="text-white">
                   {" "}
-                  {new Date(match.updatedAt).toLocaleDateString("en-us")} at{" "}
-                  {new Date(match.updatedAt).toLocaleTimeString("en-us")}
+                  {new Date(match.updatedAt).toLocaleDateString(
+                    "en-us"
+                  )} at {new Date(match.updatedAt).toLocaleTimeString("en-us")}
                 </span>
               </p>
             )}

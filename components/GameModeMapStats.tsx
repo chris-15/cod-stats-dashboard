@@ -10,7 +10,26 @@ import {
   calcAvgDefuses,
   calcAvgDamage,
   calcMapScore,
-} from "@/lib/utils";
+} from "@/lib/stat-utils";
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Badge } from "@/components/ui/badge";
+
+//TODO: REFACTOR THIS FILE TO BE MORE READABLE AND CLEANER
 
 type GameModeStatsProp = {
   gameMode: TGameMode;
@@ -18,7 +37,7 @@ type GameModeStatsProp = {
   game: string;
 };
 
-const mapSets: Record<TGameMode, string[]> = {
+const mw3MapSets: Record<TGameMode, string[]> = {
   Hardpoint: [
     "Invasion",
     "Karachi",
@@ -54,6 +73,7 @@ const bo6MapSets: Record<TGameMode, string[]> = {
   ],
 };
 function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
+  //Filters matches by game mode and organizes them by map
   const getMapModeMatches = (
     gameMode: string,
     mapSet: string[],
@@ -68,9 +88,9 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
     });
   };
 
-  const mapModeMatches = getMapModeMatches(
+  const mw3MapModeMatches = getMapModeMatches(
     gameMode,
-    mapSets[gameMode],
+    mw3MapSets[gameMode],
     matches
   );
 
@@ -80,8 +100,11 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
     matches
   );
 
-  // calculates the best map based on each gamemode using calcmapscore
-  function calcBestMap(mapsMatchesArr: TMatchQuery[][]) {
+  // calculates the best map based on each gamemode using calcmapscore, takes in mapSets or bo6MapSets
+  function calcBestMap(
+    mapsMatchesArr: TMatchQuery[][],
+    maps: Record<TGameMode, string[]>
+  ) {
     let bestMap = mapsMatchesArr[0];
     let bestScore = calcMapScore(bestMap, gameMode);
 
@@ -92,157 +115,196 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
         bestMap = mapsMatchesArr[i];
       }
     }
-    return mapSets[gameMode][mapsMatchesArr.indexOf(bestMap)];
+
+    if (maps === mw3MapSets) {
+      return mw3MapSets[gameMode][mapsMatchesArr.indexOf(bestMap)];
+    } else {
+      return bo6MapSets[gameMode][mapsMatchesArr.indexOf(bestMap)];
+    }
   }
 
-  let bestMap = calcBestMap(mapModeMatches);
+  function calcWorstMap(
+    mapsMatchesArr: TMatchQuery[][],
+    maps: Record<TGameMode, string[]>
+  ) {
+    let worstMap = mapsMatchesArr[0];
+    let worstScore = calcMapScore(worstMap, gameMode);
+
+    for (let i = 0; i < mapsMatchesArr.length; i++) {
+      let score = calcMapScore(mapsMatchesArr[i], gameMode);
+      if (score < worstScore) {
+        worstScore = score;
+        worstMap = mapsMatchesArr[i];
+      }
+    }
+
+    if (maps === mw3MapSets) {
+      return mw3MapSets[gameMode][mapsMatchesArr.indexOf(worstMap)];
+    } else {
+      return bo6MapSets[gameMode][mapsMatchesArr.indexOf(worstMap)];
+    }
+  }
+
+  let bestMap = calcBestMap(mw3MapModeMatches, mw3MapSets);
+  let bestBo6Map = calcBestMap(bo6MapModeMatches, bo6MapSets);
+  let worstMap = calcWorstMap(mw3MapModeMatches, mw3MapSets);
+  let worstBo6Map = calcWorstMap(bo6MapModeMatches, bo6MapSets);
 
   return (
-    <section className="w-full bg-secondary-bg border border-[#444444] rounded-lg overflow-auto">
-      <div className=" px-4 sm:px-6 py-4 sticky left-0">
-        <h2 className="text-lg sm:text-xl font-bold ">Map Stats</h2>
+    <section className="bg-sidebar border rounded-lg overflow-x-auto">
+      <div className="px-4 sm:px-6 py-4 sticky left-0">
+        <h2 className="text-xl font-bold">Map Statistics</h2>
+        <p className="text-sm text-gray-400">
+          Performance across different maps
+        </p>
       </div>
-      <div className="">
-        <table className="w-full">
-          <thead>
-            <tr>
-              {/* <th></th> */}
-              <th className="sticky left-0 bg-secondary-bg">Map</th>
-
-              <th>Win %</th>
-              <th>K/D Ratio</th>
-
-              <th className="xs:hidden">K/D in W</th>
-              <th className="xs:hidden">K/D in L</th>
-              {gameMode === "Hardpoint" && <th>Avg Time</th>}
-              {gameMode === "SearchAndDestroy" && (
-                <>
-                  <th>Avg Plants</th>
-                  <th>Avg Defuses</th>
-                </>
-              )}
-              {gameMode === "Control" && <th>Avg Damage</th>}
-
-              <th>Avg Kills</th>
-              <th>Kill Record</th>
-              <th className="xs:hidden">Map Count</th>
-            </tr>
-          </thead>
-          <tbody>
-            {game === "bo6"
-              ? bo6MapModeMatches.map((matches, index) => (
-                  <tr className="text-center" key={index}>
-                    {/* {mapSets[gameMode][index] === bestMap ? (
-              <td
-                data-tooltip-id="mapstats-tooltip-id"
-                data-tooltip-content="This is your best map for this game mode!"
-                className=""
-              >
-                ⭐️
-              </td>
-            ) : (
-              <td className=""></td>
-            )} */}
-                    <td className="sticky left-0 bg-secondary-bg">
-                      {bo6MapSets[gameMode][index]}
-                    </td>
-
-                    <td>{calcWinPercentage(matches)}</td>
-                    <td>{calcModeKdRatio(matches)}</td>
-
-                    <td className="xs:hidden">
-                      {calcModeKdRatio(matches, true)}
-                    </td>
-                    <td className="xs:hidden">
-                      {calcModeKdRatio(matches, false)}
-                    </td>
-                    {gameMode === "Hardpoint" && (
-                      <td>
-                        {calcAvgTime(matches) === "NaN:NaN"
+      <Table>
+        <TableHeader className="">
+          <TableRow className=" hover:bg-zinc-800/50 border-zinc-800 ">
+            <TableHead className="sticky left-0 bg-sidebar">Map</TableHead>
+            <TableHead>Win %</TableHead>
+            <TableHead>K/D RATIO</TableHead>
+            {gameMode === "Hardpoint" && <TableHead>AVG TIME</TableHead>}
+            {gameMode === "SearchAndDestroy" && (
+              <>
+                <TableHead>Avg Plants</TableHead>
+                <TableHead>Avg Defuses</TableHead>
+              </>
+            )}
+            <TableHead>AVG KILLS</TableHead>
+            <TableHead>KILL RECORD</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {game === "bo6"
+            ? bo6MapModeMatches.map((matches, index) => (
+                <TableRow
+                  key={index}
+                  className="hover:bg-zinc-800/50 border-zinc-800"
+                >
+                  <TableCell className="sticky left-0 bg-sidebar">
+                    {bo6MapSets[gameMode][index] === bestBo6Map ? (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Badge variant="best">
+                              {bo6MapSets[gameMode][index]}
+                            </Badge>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>This is your best performing map!</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    ) : bo6MapSets[gameMode][index] === worstBo6Map ? (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Badge variant="worst">
+                              {bo6MapSets[gameMode][index]}
+                            </Badge>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>This is your worst performing map!</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    ) : (
+                      <>{bo6MapSets[gameMode][index]}</>
+                    )}
+                  </TableCell>
+                  <TableCell>{calcWinPercentage(matches)}</TableCell>
+                  <TableCell>{calcModeKdRatio(matches)}</TableCell>
+                  {gameMode === "Hardpoint" && (
+                    <TableCell>
+                      {calcAvgTime(matches) === "NaN:NaN"
+                        ? "--"
+                        : calcAvgTime(matches)}
+                    </TableCell>
+                  )}
+                  {gameMode === "SearchAndDestroy" && (
+                    <>
+                      <TableCell>
+                        {!calcAvgPlants(matches)
                           ? "--"
-                          : calcAvgTime(matches)}
-                      </td>
-                    )}
-                    {gameMode === "SearchAndDestroy" && (
-                      <>
-                        <td>
-                          {!calcAvgPlants(matches)
-                            ? "--"
-                            : calcAvgPlants(matches)}
-                        </td>
-                        <td>
-                          {!calcAvgDefuses(matches)
-                            ? "--"
-                            : calcAvgDefuses(matches)}
-                        </td>
-                      </>
-                    )}
-                    {gameMode === "Control" && (
-                      <td>{calcAvgDamage(matches)}</td>
-                    )}
-                    <td>{calcAvgKills(matches)}</td>
-                    <td>{calcHighestKill(matches)}</td>
-                    <td className="xs:hidden">{matches.length}</td>
-                  </tr>
-                ))
-              : mapModeMatches.map((matches, index) => (
-                  <tr className="text-center" key={index}>
-                    {/* {mapSets[gameMode][index] === bestMap ? (
-                  <td
-                    data-tooltip-id="mapstats-tooltip-id"
-                    data-tooltip-content="This is your best map for this game mode!"
-                    className=""
-                  >
-                    ⭐️
-                  </td>
-                ) : (
-                  <td className=""></td>
-                )} */}
-                    <td className="sticky left-0 bg-secondary-bg">
-                      {mapSets[gameMode][index]}
-                    </td>
-
-                    <td>{calcWinPercentage(matches)}</td>
-                    <td>{calcModeKdRatio(matches)}</td>
-
-                    <td className="xs:hidden">
-                      {calcModeKdRatio(matches, true)}
-                    </td>
-                    <td className="xs:hidden">
-                      {calcModeKdRatio(matches, false)}
-                    </td>
-                    {gameMode === "Hardpoint" && (
-                      <td>
-                        {calcAvgTime(matches) === "NaN:NaN"
+                          : calcAvgPlants(matches)}
+                      </TableCell>
+                      <TableCell>
+                        {!calcAvgDefuses(matches)
                           ? "--"
-                          : calcAvgTime(matches)}
-                      </td>
+                          : calcAvgDefuses(matches)}
+                      </TableCell>
+                    </>
+                  )}
+                  <TableCell>{calcAvgKills(matches)}</TableCell>
+                  <TableCell>{calcHighestKill(matches)}</TableCell>
+                </TableRow>
+              ))
+            : mw3MapModeMatches.map((matches, index) => (
+                <TableRow
+                  key={index}
+                  className="hover:bg-zinc-800/50 border-zinc-800"
+                >
+                  <TableCell className="sticky left-0 bg-secondary-bg">
+                    {mw3MapSets[gameMode][index] === bestMap ? (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Badge variant="best">
+                              {mw3MapSets[gameMode][index]}
+                            </Badge>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>This is your best performing map!</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    ) : mw3MapSets[gameMode][index] === worstMap ? (
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Badge variant="worst">
+                              {mw3MapSets[gameMode][index]}
+                            </Badge>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>This is your worst performing map!</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
+                    ) : (
+                      <>{mw3MapSets[gameMode][index]}</>
                     )}
-                    {gameMode === "SearchAndDestroy" && (
-                      <>
-                        <td>
-                          {!calcAvgPlants(matches)
-                            ? "--"
-                            : calcAvgPlants(matches)}
-                        </td>
-                        <td>
-                          {!calcAvgDefuses(matches)
-                            ? "--"
-                            : calcAvgDefuses(matches)}
-                        </td>
-                      </>
-                    )}
-                    {gameMode === "Control" && (
-                      <td>{calcAvgDamage(matches)}</td>
-                    )}
-                    <td>{calcAvgKills(matches)}</td>
-                    <td>{calcHighestKill(matches)}</td>
-                    <td className="xs:hidden">{matches.length}</td>
-                  </tr>
-                ))}
-          </tbody>
-        </table>
-      </div>
+                  </TableCell>
+                  <TableCell>{calcWinPercentage(matches)}</TableCell>
+                  <TableCell>{calcModeKdRatio(matches)}</TableCell>
+                  {gameMode === "Hardpoint" && (
+                    <TableCell>
+                      {calcAvgTime(matches) === "NaN:NaN"
+                        ? "--"
+                        : calcAvgTime(matches)}
+                    </TableCell>
+                  )}
+                  {gameMode === "SearchAndDestroy" && (
+                    <>
+                      <TableCell>
+                        {!calcAvgPlants(matches)
+                          ? "--"
+                          : calcAvgPlants(matches)}
+                      </TableCell>
+                      <TableCell>
+                        {!calcAvgDefuses(matches)
+                          ? "--"
+                          : calcAvgDefuses(matches)}
+                      </TableCell>
+                    </>
+                  )}
+                  <TableCell>{calcAvgKills(matches)}</TableCell>
+                  <TableCell>{calcHighestKill(matches)}</TableCell>
+                </TableRow>
+              ))}
+        </TableBody>
+      </Table>
     </section>
   );
 }

@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { Modal } from "./modal";
 import Image from "next/image";
 import { MatchMap } from "@prisma/client";
-import { convertTime } from "@/lib/utils";
+import { convertTime } from "@/lib/stat-utils";
 import Link from "next/link";
 
 export default async function GameModeMatchId({
@@ -230,8 +230,9 @@ export default async function GameModeMatchId({
             </p>
             {match.updatedAt.getTime() !== match.createdAt.getTime() && (
               <p>
-                Match Updated on: {new Date(match.updatedAt).toLocaleDateString("en-us")}{" "}
-                at {new Date(match.updatedAt).toLocaleTimeString("en-us")}
+                Match Updated on:{" "}
+                {new Date(match.updatedAt).toLocaleDateString("en-us")} at{" "}
+                {new Date(match.updatedAt).toLocaleTimeString("en-us")}
               </p>
             )}
 

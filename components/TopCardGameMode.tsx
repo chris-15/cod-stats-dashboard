@@ -27,20 +27,20 @@ function TopCardGameMode({
           : `/dashboard/bo6/${gameMode}`
       }
     >
-      <div className="group transition-transform transform hover:scale-105 border border-[#444444] rounded-lg py-2 bg-secondary-bg">
+      <div className="group transition-transform transform hover:scale-105 border rounded-lg py-2 bg-sidebar">
         <div className="">
           <h2 className="group-hover:underline text-center font-bold capitalize text-xl mb-5 ">
             {gameMode === "searchanddestroy" ? "Search & Destroy" : gameMode}
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 divide-x divide-[#444444] text-center">
+        <div className="grid grid-cols-2 divide-x divide-[#444444] text-center ">
           <div>
-            <p className="text-lg font-semibold text-gray-300 ">K/D Ratio</p>
+            <p className="text-lg font-semibold  ">K/D Ratio</p>
             <p className="font-bold text-4xl ">{kdRatio}</p>
           </div>
           <div>
-            <p className="text-lg font-semibold text-gray-300 ">Win %</p>
+            <p className="text-lg font-semibold ">Win %</p>
             <p
               className={
                 winPercentage > 50

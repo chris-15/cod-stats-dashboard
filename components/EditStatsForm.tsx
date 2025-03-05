@@ -3,7 +3,19 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { TMatch, TMatchQuery } from "@/app/types";
-import toast from "react-hot-toast";
+import { toast } from "sonner"
+import {
+  IoGameControllerOutline,
+  IoMapOutline,
+  IoSkullOutline,
+  IoTimeOutline,
+  IoTrophyOutline,
+} from "react-icons/io5";
+import { SlTarget } from "react-icons/sl";
+import { MdOutlineHealthAndSafety } from "react-icons/md";
+import { LuBomb } from "react-icons/lu";
+import { HiOutlineWrenchScrewdriver } from "react-icons/hi2";
+
 
 //setting types for the map options
 type MapOption = {
@@ -47,10 +59,11 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
   const [kills, setKills] = useState<number>(match.kills);
   const [deaths, setDeaths] = useState<number>(match.deaths);
   const [damage, setDamage] = useState<number>(match.damage ?? 0);
-  const [time, setTime] = useState<number>(match.time ?? 0 );
+  const [time, setTime] = useState<number>(match.time ?? 0);
   const [plants, setPlants] = useState<number>(match.plants ?? 0);
   const [defuses, setDefuses] = useState<number>(match.defuses ?? 0);
   const [error, setError] = useState<string>("");
+  const [isUpdating, setIsUpdataing] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -67,6 +80,9 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
       setError("Game Mode is required");
       return;
     }
+
+    setIsUpdataing(true);
+
     try {
       const res = await fetch(`/api/matches/${match.id}`, {
         method: "PUT",
@@ -86,8 +102,7 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
         }),
       });
       if (res.ok) {
-        //console.log(res.json());
-        console.log("Match Updated!");
+        
         toast.success("Successfully updated match stats!");
         router.push(`/dashboard/bo6/${gameMode.toLowerCase()}`);
         router.refresh();
@@ -98,14 +113,15 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
   };
 
   return (
-    <div className="max-w-md mx-auto p-8 shadow-md bg-secondary-bg border border-[#444444] rounded-lg ">
+    <div className="max-w-md mx-auto p-8 shadow-md bg-sidebar border rounded-lg ">
       <h2 className="text-2xl font-bold mb-4 text-center">
         Edit Your Match Statistics
       </h2>
       <form className="space-y-4" onSubmit={handleFormSubmit}>
         <div className="space-y-2">
-          <label htmlFor="gameMode" className="">
-            GameMode:
+          <label htmlFor="gameMode" className="flex items-center gap-2">
+            <IoGameControllerOutline size={24} />
+            <span className="">GameMode</span>
           </label>
           <select
             id="gameMode"
@@ -123,8 +139,9 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="matchMap" className="">
-            Map:
+          <label htmlFor="matchMap" className="flex items-center gap-2">
+            <IoMapOutline size={24} />
+            <span className="">Map</span>
           </label>
           <select
             id="matchMap"
@@ -146,27 +163,47 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="outcome" className="">
-            Outcome:
+          <label htmlFor="outcome" className=" flex items-center gap-2">
+            <IoTrophyOutline size={24} />
+            <span className="">Outcome</span>
           </label>
-          <select
-            id="outcome"
-            name="outcome"
-            required
-            className="mt-1 p-2 w-full border rounded-md text-center"
-            value={win ? "Win" : "Loss"}
-            onChange={(e) => setWin(e.target.value === "Win")}
-          >
-            <option value="">Did you Win or Lose?</option>
-            <option value="Win">Win</option>
-            <option value="Loss">Loss</option>
-          </select>
+          <div className="grid grid-cols-2 gap-4">
+            <button
+              type="button"
+              className={`rounded-md py-2 ${
+                win === true
+                  ? "bg-green-500 text-white underline underline-offset-2"
+                  : "bg-white text-black"
+              }`}
+              onClick={() => {
+                setWin(true);
+                setError("");
+              }}
+            >
+              Win
+            </button>
+            <button
+              type="button"
+              className={`rounded-md py-2 ${
+                win === false
+                  ? "bg-red-500 text-white underline underline-offset-2"
+                  : "bg-white text-black"
+              }`}
+              onClick={() => {
+                setWin(false);
+                setError("");
+              }}
+            >
+              Loss
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
-            <label htmlFor="kills" className="">
-              Kills:
+            <label htmlFor="kills" className="flex items-center gap-2">
+              <SlTarget size={24} />
+              <span className="">Kills</span>
             </label>
             <input
               type="number"
@@ -182,8 +219,9 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="deaths" className="">
-              Deaths:
+            <label htmlFor="deaths" className="flex items-center gap-2">
+              <IoSkullOutline size={24} />
+              <span className="">Deaths</span>
             </label>
             <input
               type="number"
@@ -200,8 +238,9 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="damage" className="">
-            Damage:
+          <label htmlFor="damage" className="flex items-center gap-2">
+            <MdOutlineHealthAndSafety size={24} />
+            <span className="">Damage</span>
           </label>
           <input
             type="number"
@@ -217,8 +256,9 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
 
         {gameMode === "Hardpoint" && (
           <div className="space-y-2">
-            <label htmlFor="time" className="">
-              Time:
+            <label htmlFor="time" className="flex items-center gap-2">
+              <IoTimeOutline size={24} />
+              <span className="">Hill Time</span>
             </label>
             <input
               type="number"
@@ -235,8 +275,9 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
         {gameMode === "SearchAndDestroy" && (
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label htmlFor="plants" className="">
-                Plants:
+              <label htmlFor="plants" className=" flex items-center gap-2">
+                <LuBomb size={24} />
+                <span className="">Plants</span>
               </label>
               <input
                 type="number"
@@ -251,8 +292,9 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="defuses" className="">
-                Defuses:
+              <label htmlFor="defuses" className="flex items-center gap-2">
+                <HiOutlineWrenchScrewdriver size={24} />
+                <span className="">Defuses</span>
               </label>
               <input
                 type="number"
@@ -269,8 +311,8 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
         )}
 
         <div className="flex justify-end">
-          <button type="submit" className="mt-6 btn">
-            Update
+          <button type="submit" className="mt-6 btn-bo6" disabled={isUpdating}>
+            {isUpdating ? "Updating..." : "Update"}
           </button>
         </div>
         {error && <div className="p-2 text-red-500 font-bold">{error}</div>}
