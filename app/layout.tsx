@@ -9,6 +9,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "CoD Dashboard",
   description: "Your Call of Duty Ranked Stats Hub",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
