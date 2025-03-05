@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import { NextAuthProvider } from "@/components/Providers";
-import { Toaster } from "react-hot-toast";
+
 import { SideBar } from "@/components/SideBar";
 import { MobileNav } from "@/components/MobileNav";
 import { SidebarProvider } from "@/components/ui/sidebar";
@@ -30,7 +30,7 @@ export default function DashboardLayout({
         <MobileNav game="mw3" />
       </div>
 
-      <Toaster />
+    
     </SidebarProvider>
   </NextAuthProvider>
   );
