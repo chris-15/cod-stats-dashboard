@@ -66,11 +66,6 @@ function gameModeCount(match: TMatchQuery[], gameMode: string) {
 }
 
 async function Dashboard() {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    redirect("/sign-in");
-  }
-
   const [matches, lastFifteenMatches, modeMatches] = await Promise.all([
     getBoSixMatches(),
     getFifteenBoSixMatches(),
@@ -134,4 +129,3 @@ async function Dashboard() {
   );
 }
 export default Dashboard;
-
