@@ -68,14 +68,14 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
                     key={match.id}
                     className="hover:bg-zinc-800/50 border-zinc-800"
                   >
-                    <TableCell className="text-zinc-400 font-medium">
+                    <TableCell className=" font-medium">
                       {new Date(match.createdAt).toLocaleDateString("en-US", {
                         year: "2-digit",
                         month: "2-digit",
                         day: "2-digit",
                       })}
                     </TableCell>
-                    <TableCell className="text-zinc-400 font-medium">
+                    <TableCell className=" font-medium">
                       {match.matchMap}
                     </TableCell>
                     {match.win ? (

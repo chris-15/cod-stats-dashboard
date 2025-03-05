@@ -164,25 +164,25 @@ const CustomTableBodyComponent = ({ matches }: { matches: TMatchQuery[] }) => {
             key={match.id} 
             className="hover:bg-zinc-800/50 border-zinc-800"
           >
-            <TableCell className="text-zinc-400 font-medium">
+            <TableCell className=" font-medium">
               <DisplayDate match={match} createdAt={true} />
             </TableCell>
-            <TableCell className="text-zinc-400 font-medium">
+            <TableCell className=" font-medium">
               {match.gameMode === "SearchAndDestroy"
                 ? "Search & Destroy"
                 : match.gameMode}
             </TableCell>
-            <TableCell className="text-zinc-400 font-medium">
+            <TableCell className=" font-medium">
               {match.matchMap}
             </TableCell>
-            <TableCell className="text-zinc-400 font-medium">
+            <TableCell className=" font-medium">
               {match.win ? (
                 <span className="text-green-500">Win</span>
               ) : (
                 <span className="text-red-500">Loss</span>
               )}
             </TableCell>
-            <TableCell className="text-zinc-400 font-medium">
+            <TableCell className=" font-medium">
               {(match.kills / match.deaths).toFixed(2)}
             </TableCell>
           </TableRow>
