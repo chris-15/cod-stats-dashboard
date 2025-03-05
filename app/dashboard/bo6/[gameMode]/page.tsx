@@ -80,7 +80,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   const mapCountData = calcMapCount(matches, gameMode);
 
   return (
-    <div className="p-4">
+    <div>
       {matches.length > 0 ? (
         <>
           <Link
