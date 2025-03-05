@@ -146,7 +146,7 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
                   <div
                     className={`text-sm font-semibold px-2 py-1 rounded ${
                       match.win
-                        ? "bg-[#b0ff34] text-black"
+                        ? "bg-green-500 text-black"
                         : "bg-[#ff4d4d] text-black"
                     }`}
                   >
