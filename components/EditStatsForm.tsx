@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { TMatch, TMatchQuery } from "@/app/types";
-import toast from "react-hot-toast";
+import { toast } from "sonner"
 import {
   IoGameControllerOutline,
   IoMapOutline,
@@ -15,7 +15,7 @@ import { SlTarget } from "react-icons/sl";
 import { MdOutlineHealthAndSafety } from "react-icons/md";
 import { LuBomb } from "react-icons/lu";
 import { HiOutlineWrenchScrewdriver } from "react-icons/hi2";
-//TODO: refactor to match addstatsform
+
 
 //setting types for the map options
 type MapOption = {
@@ -102,8 +102,7 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
         }),
       });
       if (res.ok) {
-        //console.log(res.json());
-        console.log("Match Updated!");
+        
         toast.success("Successfully updated match stats!");
         router.push(`/dashboard/bo6/${gameMode.toLowerCase()}`);
         router.refresh();
