@@ -1,16 +1,23 @@
 import Navbar from "@/components/Navbar";
 import { NextAuthProvider } from "@/components/Providers";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-import { SideBar } from "@/components/SideBar";
 import { MobileNav } from "@/components/MobileNav";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { NewSidebar } from "@/components/NewSidebar";
 
-export default function DashboardLayout({
+
+export default async function DashboardLayout({
   children, // will be a page or nested layout
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    redirect("/sign-in");
+  }
   return (
     <NextAuthProvider>
       <SidebarProvider>
@@ -28,10 +35,7 @@ export default function DashboardLayout({
         <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 ">
           <MobileNav game="bo6" />
         </div>
-
-
       </SidebarProvider>
     </NextAuthProvider>
   );
 }
-
