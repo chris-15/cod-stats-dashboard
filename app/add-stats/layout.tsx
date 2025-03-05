@@ -26,9 +26,9 @@ export default function AddStatsLayout({
         <div className="">{children}</div>
       </div>
 
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 ">
+     {/*  <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 ">
         <MobileNav game="bo6" />
-      </div>
+      </div> */}
 
    
     </SidebarProvider>
