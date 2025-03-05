@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import { toast } from "sonner"
 import {
   IoGameControllerOutline,
   IoMapOutline,
@@ -107,7 +107,6 @@ function AddStatsForm() {
         }),
       });
       if (res.ok) {
-        //console.log(res.json());
         toast.success("Successfully added match stats!");
         router.push("/dashboard/bo6");
         router.refresh();
