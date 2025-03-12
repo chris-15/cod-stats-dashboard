@@ -141,7 +141,7 @@ export default async function GameModeMatchId({
 
   return (
     <Modal>
-      <div className="bg-sidebar rounded-lg w-full max-w-5xl max-h-[80vh] overflow-y-auto">
+      <div className="bg-sidebar rounded-lg w-full max-h-[80vh] overflow-y-auto">
         <div className="grid grid-cols-1 gap-6">
           {/* Map Image */}
           <div className="relative overflow-hidden rounded-t-lg">

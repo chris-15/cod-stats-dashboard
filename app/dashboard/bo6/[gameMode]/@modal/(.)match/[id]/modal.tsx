@@ -18,6 +18,14 @@ export function Modal({ children }: { children: React.ReactNode }) {
     if (!dialogRef.current?.open) {
       dialogRef.current?.showModal();
     }
+
+    // Disable scrolling on mount
+    document.body.style.overflow = "hidden";
+
+    // Re-enable scrolling on unmount
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, []);
 
   function onDismiss() {
@@ -30,13 +38,15 @@ export function Modal({ children }: { children: React.ReactNode }) {
       className="fixed inset-0 h-screen w-full flex items-center justify-center p-4 bg-black bg-opacity-75 text-white"
       onClose={onDismiss}
     >
-      <button
-        onClick={onDismiss}
-        className="close-button absolute top-8 right-8  bg-white p-2 rounded-full text-black w-8 h-8 md:w-16 md:h-16 flex items-center justify-center"
-      >
-        <span className="sm:text-xl">X</span>
-      </button>
-      {children}
+      <div className="relative w-full max-w-5xl">
+        <button
+          onClick={onDismiss}
+          className="absolute top-2 right-2 z-50 p-2 rounded-full bg-black/30 hover:bg-black/50 w-8 h-8 flex items-center justify-center"
+        >
+          <span className="">X</span>
+        </button>
+        {children}
+      </div>
     </dialog>,
     document.getElementById("modal-root")!
   );
