@@ -16,7 +16,7 @@ type TNavBarItems = {
 const navConfigs: Record<string, TNavBarItems[]> = {
   mw3: [
     {
-      name: "Dashboard",
+      name: "Home",
       path: "/dashboard/mw3",
     },
     {
@@ -42,7 +42,7 @@ const navConfigs: Record<string, TNavBarItems[]> = {
   ],
   bo6: [
     {
-      name: "Dashboard",
+      name: "Home",
       path: "/dashboard/bo6",
     },
     {
