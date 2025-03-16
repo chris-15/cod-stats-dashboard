@@ -42,13 +42,13 @@ async function ChooseDashboard() {
                     Track and analyze your BO6 performance.
                   </p>
                   <Button variant="bo6" size="lg" asChild>
-                    <Link
+                    <a
                       href="/dashboard/bo6"
                       className="inline-flex items-center bg-[#ff9900] hover:bg-[#ff5500] text-black font-bold py-4 px-8 rounded-lg text-xl transition duration-300 hover:shadow-lg"
                     >
                       View My BO6 Stats
                       <LuChevronRight className="ml-2 text-2xl" />
-                    </Link>
+                    </a>
                   </Button>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out" />
@@ -68,13 +68,13 @@ async function ChooseDashboard() {
                     View your legacy MW3 statistics.
                   </p>
                   <Button variant="mw3" size="lg" asChild>
-                    <Link
+                    <a
                       href="/dashboard/mw3"
                       className=""
                     >
                       View My MW3 Stats
                       <LuChevronRight className="ml-1" />
-                    </Link>
+                    </a>
                   </Button>
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out" />
