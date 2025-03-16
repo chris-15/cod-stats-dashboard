@@ -16,7 +16,7 @@ type TNavBarItems = {
 const navConfigs: Record<string, TNavBarItems[]> = {
   mw3: [
     {
-      name: "Dashboard",
+      name: "Home",
       path: "/dashboard/mw3",
     },
     {
@@ -42,7 +42,7 @@ const navConfigs: Record<string, TNavBarItems[]> = {
   ],
   bo6: [
     {
-      name: "Dashboard",
+      name: "Home",
       path: "/dashboard/bo6",
     },
     {
@@ -108,87 +108,73 @@ function Navbar({ game = "bo6" }: NavBarProps) {
   return (
     <div className="flex justify-between p-4 relative ">
       <div className="space-y-1">
-          <Link
-            href={status === "authenticated" ? `/dashboard/${game}` : "/"}
-            className="flex items-center gap-2"
-          >
-            <h1 className="text-2xl font-bold tracking-tight text-white">
-              CoD{" "}
-              <span
-                className={`${
-                  game === "mw3"
-                    ? "bg-gradient-to-r from-[#B0FF34] via-[#C5FF6A] to-[#8FD400]"
-                    : "bg-gradient-to-r from-[#FF9900] via-[#FFAC38] to-[#FF7700]"
-                } bg-clip-text text-transparent`}
-              >
-                Dashboard
-              </span>
-            </h1>
-          </Link>
-          <p className="text-xs">Your Call of Duty Ranked Stats Hub </p>
-        </div>
-
-      {status === "authenticated" ? (
-        /*  if the user session status is authenticated then render navbar for logged in user otherwise show sigin button */
-        <>
-          <div
-            className={`absolute z-30 right-12 top-14 bg-black text-white border-4 p-6 shadow-lg rounded-md  flex-col gap-2 text-right min-w-[160px] ${
-              showMenu ? "flex" : "hidden"
-            } `}
-            ref={menuRef}
-          >
-            <div className="font-bold">{session?.user?.email}</div>
-            {activeItems.map((item) => {
-              return (
-                <Link
-                  key={item.path}
-                  href={item.path}
-                  className={`hover:underline ${
-                    pathname === item.path
-                      ? game === "mw3"
-                        ? "underline text-[#b0ff34]"
-                        : "underline text-[#ff9900]"
-                      : game === "mw3"
-                      ? ""
-                      : ""
-                  } `}
-                  onClick={() => setshowMenu(false)}
-                >
-                  <p>{item.name}</p>
-                </Link>
-              );
-            })}
-
-            <button
-              className={game === "mw3" ? `btn` : `btn-bo6`}
-              onClick={() => signOut()}
+        <Link href={`/dashboard/${game}`} className="flex items-center gap-2">
+          <h1 className="text-2xl font-bold tracking-tight text-white">
+            CoD{" "}
+            <span
+              className={`${
+                game === "mw3"
+                  ? "bg-gradient-to-r from-[#B0FF34] via-[#C5FF6A] to-[#8FD400]"
+                  : "bg-gradient-to-r from-[#FF9900] via-[#FFAC38] to-[#FF7700]"
+              } bg-clip-text text-transparent`}
             >
-              Sign Out
-            </button>
-          </div>
+              Dashboard
+            </span>
+          </h1>
+        </Link>
+        <p className="text-xs">Your Call of Duty Ranked Stats Hub </p>
+      </div>
 
-          <div className="flex gap-2 items-center">
-            {showMenu ? (
-              <LuX
-                size={30}
-                className="rounded-full cursor-pointer hover:scale-110 transition"
-              />
-            ) : (
-              <LuMenu
-                size={30}
-                className="rounded-full cursor-pointer hover:scale-110 transition"
-                onClick={() => setshowMenu((prev) => !prev)}
-              />
-            )}
-          </div>
-        </>
-      ) : (
-        <div className="flex items-center">
-          <Link href={"/sign-in"} className="btn">
-            Sign In
-          </Link>
-        </div>
-      )}
+      <div
+        className={`absolute z-30 right-12 top-14 bg-black text-white border-4 p-6 shadow-lg rounded-md  flex-col gap-2 text-right min-w-[160px] ${
+          showMenu ? "flex" : "hidden"
+        } `}
+        ref={menuRef}
+      >
+        <div className="font-bold">{session?.user?.email}</div>
+        {activeItems.map((item) => {
+          return (
+            <Link
+              key={item.path}
+              href={item.path}
+              className={`hover:underline ${
+                pathname === item.path
+                  ? game === "mw3"
+                    ? "underline text-[#b0ff34]"
+                    : "underline text-[#ff9900]"
+                  : game === "mw3"
+                  ? ""
+                  : ""
+              } `}
+              onClick={() => setshowMenu(false)}
+            >
+              <p>{item.name}</p>
+            </Link>
+          );
+        })}
+
+        <button
+          className={game === "mw3" ? `btn` : `btn-bo6`}
+          onClick={() => signOut()}
+        >
+          Sign Out
+        </button>
+      </div>
+
+      <div className="flex gap-2 items-center">
+        {showMenu ? (
+          <LuX
+            size={30}
+            className="rounded-full cursor-pointer hover:scale-110 transition"
+          />
+        ) : (
+          <LuMenu
+            size={30}
+            className="rounded-full cursor-pointer hover:scale-110 transition"
+            onClick={() => setshowMenu((prev) => !prev)}
+          />
+        )}
+      </div>
     </div>
   );
 }

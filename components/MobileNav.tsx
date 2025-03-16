@@ -13,7 +13,7 @@ type TMobileNavItems = {
 const navConfigs: Record<string, TMobileNavItems[]> = {
   mw3: [
     {
-      name: "Dashboard",
+      name: "Home",
       path: "/dashboard/mw3",
     },
     {
@@ -35,7 +35,7 @@ const navConfigs: Record<string, TMobileNavItems[]> = {
   ],
   bo6: [
     {
-      name: "Dashboard",
+      name: "Home",
       path: "/dashboard/bo6",
     },
     {

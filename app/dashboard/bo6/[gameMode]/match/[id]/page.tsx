@@ -7,6 +7,116 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import DisplayDateTime from "@/components/DisplayDateTime";
 import DisplayDate from "@/components/DisplayDate";
+import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+import { Calendar, Clock, Edit, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const mapImages = {
+  Hacienda:
+    "https://utfs.io/f/g0j2nElFVrusJoKuqlLE4aUcb0vZHKFAnXm3PDhQYuyIlf6T",
+  Protocol:
+    "https://utfs.io/f/g0j2nElFVrus8wZCXNDDZXVfb9JnyAaEwWHYLigBkSvetxMO",
+  RedCard: "https://utfs.io/f/g0j2nElFVrusl8crIkTv4NcXE3wFjT1gHVZSQz59oOrnG2Pa",
+  Rewind: "https://utfs.io/f/g0j2nElFVrusZR73l0cqTvVfrciOM8GgNbsy2x7o30DPtemR",
+  Skyline: "https://utfs.io/f/g0j2nElFVruswHLllWOfO9o1egZTj52BNhktAH0bDSqWRsvQ",
+  Vault: "https://utfs.io/f/g0j2nElFVrusyqrQlPL1zm7ZQcS8jf2DOXueAJwVlrbLgCM0",
+};
+
+const performanceDescriptions = {
+  win: {
+    goodKd: {
+      highDamage:
+        "You were the star of the match, delivering both high kills and damage. Your performance was instrumental in securing the victory.",
+      lowDamage:
+        "You demonstrated a strategic playstyle, securing key kills even with low overall damage. Your precision played a crucial role in the team's victory.",
+    },
+    badKd: {
+      highDamage:
+        "Despite a lower kill count, your high damage output disrupted the enemy team and contributed to the win. Your aggressive playstyle created opportunities for your team.",
+      lowDamage:
+        "You won the match, but there's potential for you to contribute more in terms of kills and damage. Remember, every bit of damage counts towards the team's success.",
+    },
+    evenKd: {
+      highDamage:
+        "You had a balanced kill-death ratio and high damage, contributing to the team's victory. Your balanced playstyle was effective.",
+      lowDamage:
+        "You won the match with a balanced kill-death ratio, but your damage was on the lower side. A bit more aggression could enhance your impact.",
+    },
+  },
+  loss: {
+    goodKd: {
+      highDamage:
+        "Even in defeat, your performance stood out with high kills and damage. You fought hard, and your efforts kept the team in the game.",
+      lowDamage:
+        "Despite the loss, your kill count was impressive. However, increasing your damage output could turn future games in your favor.",
+    },
+    badKd: {
+      highDamage:
+        "You dealt a lot of damage but couldn't secure enough kills. Converting that damage into eliminations could change the outcome of the match.",
+      lowDamage:
+        "The match didn't go as planned, and there's room for improvement in both kills and damage. Keep practicing, and you'll see better results.",
+    },
+    evenKd: {
+      highDamage:
+        "Despite the loss, your balanced kill-death ratio and high damage show potential. Keep up the pressure in future matches.",
+      lowDamage:
+        "You maintained a balanced kill-death ratio, but the low damage output couldn't turn the tide. Try to focus on dealing more damage in the next match.",
+    },
+  },
+};
+
+const titles = {
+  win: {
+    goodKd: {
+      highDamage: "Outstanding Victory!",
+      lowDamage: "Tactical Victory!",
+    },
+    badKd: {
+      highDamage: "Strategic Victory!",
+      lowDamage: "Hard-fought Victory!",
+    },
+    evenKd: {
+      highDamage: "Balanced Powerhouse!",
+      lowDamage: "Steady Winner!",
+    },
+  },
+  loss: {
+    goodKd: {
+      highDamage: "Valiant Effort!",
+      lowDamage: "Unlucky!",
+    },
+    badKd: {
+      highDamage: "So Close!",
+      lowDamage: "Better Luck Next Time!",
+    },
+    evenKd: {
+      highDamage: "Close Call!",
+      lowDamage: "Steady Struggle!",
+    },
+  },
+};
+
+function evaluatePerformance(
+  kills: number,
+  deaths: number,
+  damage: number | null,
+  matchResult: boolean
+) {
+  const kdRating =
+    kills / deaths > 1 ? "goodKd" : kills / deaths < 1 ? "badKd" : "evenKd";
+
+  //bo6 health points are 100 per life
+  const damageRating =
+    damage !== null && damage >= kills * 100 ? "highDamage" : "lowDamage";
+
+  const result = matchResult ? "win" : "loss";
+
+  const performance = performanceDescriptions[result][kdRating][damageRating];
+  const title = titles[result][kdRating][damageRating];
+
+  return { performance, title };
+}
 
 export default async function GameModeMatchId({
   params: { id: id },
@@ -20,114 +130,6 @@ export default async function GameModeMatchId({
   const matchId = id;
 
   const match = await getBoSixMatchById(matchId);
-  const mapImages = {
-    Hacienda:
-      "https://utfs.io/f/g0j2nElFVrusJoKuqlLE4aUcb0vZHKFAnXm3PDhQYuyIlf6T",
-    Protocol:
-      "https://utfs.io/f/g0j2nElFVrus8wZCXNDDZXVfb9JnyAaEwWHYLigBkSvetxMO",
-    RedCard:
-      "https://utfs.io/f/g0j2nElFVrusl8crIkTv4NcXE3wFjT1gHVZSQz59oOrnG2Pa",
-    Rewind:
-      "https://utfs.io/f/g0j2nElFVrusZR73l0cqTvVfrciOM8GgNbsy2x7o30DPtemR",
-    Skyline:
-      "https://utfs.io/f/g0j2nElFVruswHLllWOfO9o1egZTj52BNhktAH0bDSqWRsvQ",
-    Vault: "https://utfs.io/f/g0j2nElFVrusyqrQlPL1zm7ZQcS8jf2DOXueAJwVlrbLgCM0",
-  };
-
-  const performanceDescriptions = {
-    win: {
-      goodKd: {
-        highDamage:
-          "You were the star of the match, delivering both high kills and damage. Your performance was instrumental in securing the victory.",
-        lowDamage:
-          "You demonstrated a strategic playstyle, securing key kills even with low overall damage. Your precision played a crucial role in the team's victory.",
-      },
-      badKd: {
-        highDamage:
-          "Despite a lower kill count, your high damage output disrupted the enemy team and contributed to the win. Your aggressive playstyle created opportunities for your team.",
-        lowDamage:
-          "You won the match, but there's potential for you to contribute more in terms of kills and damage. Remember, every bit of damage counts towards the team's success.",
-      },
-      evenKd: {
-        highDamage:
-          "You had a balanced kill-death ratio and high damage, contributing to the team's victory. Your balanced playstyle was effective.",
-        lowDamage:
-          "You won the match with a balanced kill-death ratio, but your damage was on the lower side. A bit more aggression could enhance your impact.",
-      },
-    },
-    loss: {
-      goodKd: {
-        highDamage:
-          "Even in defeat, your performance stood out with high kills and damage. You fought hard, and your efforts kept the team in the game.",
-        lowDamage:
-          "Despite the loss, your kill count was impressive. However, increasing your damage output could turn future games in your favor.",
-      },
-      badKd: {
-        highDamage:
-          "You dealt a lot of damage but couldn't secure enough kills. Converting that damage into eliminations could change the outcome of the match.",
-        lowDamage:
-          "The match didn't go as planned, and there's room for improvement in both kills and damage. Keep practicing, and you'll see better results.",
-      },
-      evenKd: {
-        highDamage:
-          "Despite the loss, your balanced kill-death ratio and high damage show potential. Keep up the pressure in future matches.",
-        lowDamage:
-          "You maintained a balanced kill-death ratio, but the low damage output couldn't turn the tide. Try to focus on dealing more damage in the next match.",
-      },
-    },
-  };
-
-  const titles = {
-    win: {
-      goodKd: {
-        highDamage: "Outstanding Victory!",
-        lowDamage: "Tactical Victory!",
-      },
-      badKd: {
-        highDamage: "Strategic Victory!",
-        lowDamage: "Hard-fought Victory!",
-      },
-      evenKd: {
-        highDamage: "Balanced Powerhouse!",
-        lowDamage: "Steady Winner!",
-      },
-    },
-    loss: {
-      goodKd: {
-        highDamage: "Valiant Effort!",
-        lowDamage: "Unlucky!",
-      },
-      badKd: {
-        highDamage: "So Close!",
-        lowDamage: "Better Luck Next Time!",
-      },
-      evenKd: {
-        highDamage: "Close Call!",
-        lowDamage: "Steady Struggle!",
-      },
-    },
-  };
-
-  function evaluatePerformance(
-    kills: number,
-    deaths: number,
-    damage: number | null,
-    matchResult: boolean
-  ) {
-    const kdRating =
-      kills / deaths > 1 ? "goodKd" : kills / deaths < 1 ? "badKd" : "evenKd";
-
-    //bo6 health points are 100 per life
-    const damageRating =
-      damage !== null && damage >= kills * 100 ? "highDamage" : "lowDamage";
-
-    const result = matchResult ? "win" : "loss";
-
-    const performance = performanceDescriptions[result][kdRating][damageRating];
-    const title = titles[result][kdRating][damageRating];
-
-    return { performance, title };
-  }
 
   const { title, performance } = evaluatePerformance(
     match.kills,
@@ -137,151 +139,219 @@ export default async function GameModeMatchId({
   );
 
   return (
-    <>
+    <div className="mx-auto py-4 px-4 max-w-6xl">
       <Link
         href={`/dashboard/bo6/${match.gameMode.toLowerCase()}`}
-        className="flex md:hidden font-bold text-xl hover:underline px-4"
+        className="flex font-bold text-xl hover:underline mb-4"
       >
-        <p className=""> {`<- ${match.gameMode}`}</p>
+        <p className="">
+          {" "}
+          {`<- ${
+            match.gameMode === "SearchAndDestroy"
+              ? "Search And Destroy"
+              : match.gameMode
+          }`}
+        </p>
       </Link>
 
-      <div className="grid grid-cols-1 gap-4 max-w-4xl  mx-auto py-6 px-4 sm:px-6 lg:px-8 rounded-lg">
-        {/* map time details */}
-        <div className=" text-[#AAAAAA] space-y-2">
-          <h2 className="text-white text-4xl text-center font-bold">
-            {match.matchMap}
-          </h2>
+      <div className="grid grid-cols-1 gap-6">
+        {/* Map Image */}
+        <div className="relative overflow-hidden rounded-t-lg">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-black/0 z-10" />
+          <Image
+            alt={`${match.matchMap} Map`}
+            className="w-full object-cover h-[300px] md:h-[400px]"
+            height={500}
+            src={mapImages[match.matchMap as keyof typeof mapImages]}
+            width={1200}
+            priority
+          />
 
-          <div className="flex justify-between items-center ">
-            <p>
-              <span className="text-white">
-                <DisplayDate match={match} createdAt={true} /> at{" "}
-                <DisplayDateTime match={match} createdAt={true} />
-              </span>
-            </p>
-            {match.updatedAt.getTime() !== match.createdAt.getTime() && (
-              <p className="">
-                Updated:
-                <span className="text-white">
-                  {" "}
-                  <DisplayDate match={match} createdAt={false} /> at{" "}
-                  <DisplayDateTime match={match} createdAt={false} />
-                </span>
-              </p>
-            )}
-
-            <div className="flex space-x-4 items-center">
-              <Link href={`/edit-stats/${match.id}`}>
-                <span className=" text-[#58a6FF] hover:underline">Edit</span>
-              </Link>
-
-              <form
-                action={async () => {
-                  "use server";
-
-                  await deleteBoSixMatch(match.id);
-                }}
-              >
-                <button
-                  type="submit"
-                  className=" text-white bg-[#ff4d4d] p-2 rounded-lg hover:underline hover:font-bold"
+          <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+              <div>
+                <Badge
+                  className={cn(
+                    "mb-2 text-sm px-3 py-1",
+                    match.win
+                      ? "bg-green-500/20 text-green-400 hover:bg-green-500/20"
+                      : "bg-red-500/20 text-red-400 hover:bg-red-500/20"
+                  )}
                 >
-                  Delete
-                </button>
-              </form>
+                  {match.win ? "Victory" : "Defeat"}
+                </Badge>
+                <h1 className="text-3xl md:text-5xl font-bold text-white mb-1">
+                  {match.matchMap}
+                </h1>
+                <div className="flex items-center text-gray-300 text-sm">
+                  <Calendar className="h-4 w-4 mr-1" />
+                  <span>
+                    {" "}
+                    <DisplayDate match={match} createdAt={true} />
+                  </span>
+                  <span className="mx-2">•</span>
+                  <Clock className="h-4 w-4 mr-1" />
+                  <span>
+                    <DisplayDateTime match={match} createdAt={true} />
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex gap-2">
+                <Link href={`/edit-stats/${match.id}`}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="gap-1 border-gray-700 bg-gray-800/80 hover:bg-gray-700/80"
+                  >
+                    <Edit className="h-4 w-4" />
+                    <span>Edit</span>
+                  </Button>
+                </Link>
+                <form
+                  action={async () => {
+                    "use server";
+
+                    await deleteBoSixMatch(match.id);
+                  }}
+                >
+                  <Button variant="destructive" size="sm" className="gap-1">
+                    <Trash2 className="h-4 w-4" />
+                    <span>Delete</span>
+                  </Button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* image */}
-        <div className="">
-          <Image
-            alt="Match Image"
-            className="rounded-lg shadow-lg"
-            height={500}
-            src={mapImages[match.matchMap as keyof typeof mapImages]}
-            style={{
-              objectFit: "contain",
-            }}
-            width={896}
-          />
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {/* match stats */}
-          <div>
-            <div className="bg-sidebar rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-bold mb-4">Match Stats</h2>
-              <div className="mt-6">
-                <div className="text-[#AAAAAA]">
-                  <p className=" mb-1">
-                    Game Mode:{" "}
-                    <span className="text-white">
-                      {match.gameMode === "SearchAndDestroy"
-                        ? "S&D"
-                        : match.gameMode}
-                    </span>
+        {/* Match Analysis and Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+          {/* Match Analysis */}
+          <div className="overflow-hidden bg-sidebar rounded-xl p-4 ">
+            <div className="pb-2">
+              <div className="text-gray-400">Match Analysis</div>
+              <div className="text-xl md:text-2xl font-bold text-white">
+                {title}
+              </div>
+            </div>
+            <div>
+              <p className="text-gray-400 leading-relaxed text-sm md:text-base">
+                {performance}
+              </p>
+            </div>
+            <div className="bg-[hsl(240,5.9%,13%)] pt-4 pb-4 px-6 mt-2 rounded-lg">
+              <div className="grid grid-cols-3 w-full gap-4 text-center">
+                <div>
+                  <p className="text-gray-400 text-xs md:text-sm">K/D Ratio</p>
+                  <p
+                    className={cn(
+                      "text-lg md:text-xl font-semibold",
+                      match.kills / match.deaths > 1
+                        ? "text-green-400"
+                        : match.kills / match.deaths < 1
+                        ? "text-red-400"
+                        : "text-yellow-400"
+                    )}
+                  >
+                    {(match.kills / match.deaths).toFixed(2)}
                   </p>
-                  <p className=" mb-1">
-                    Match Result:{" "}
-                    <span className="text-white">
-                      {match.win ? "Win" : "Loss"}
-                    </span>
+                </div>
+                <div>
+                  <p className="text-gray-400 text-xs md:text-sm">Kills</p>
+                  <p className="text-lg md:text-xl font-semibold text-white">
+                    {match.kills}
                   </p>
-                  <p className=" mb-1">
-                    Kills: <span className="text-white">{match.kills}</span>
+                </div>
+                <div>
+                  <p className="text-gray-400 text-xs md:text-sm">Deaths</p>
+                  <p className="text-lg md:text-xl font-semibold text-white">
+                    {match.deaths}
                   </p>
-                  <p className=" mb-1">
-                    Deaths: <span className="text-white">{match.deaths}</span>
-                  </p>
-                  <p className=" mb-1">
-                    Damage: <span className="text-white">{match.damage}</span>
-                  </p>
-                  <p className=" mb-1">
-                    Avg Damage per Kill:{" "}
-                    <span className="text-white">
-                      {match.damage && (match.damage / match.kills).toFixed(2)}
-                    </span>
-                  </p>
-                  {match.gameMode === "Hardpoint" && (
-                    <p className=" mb-1">
-                      Time:{" "}
-                      <span className="text-white">
-                        {convertTime(match.time)}
-                      </span>
-                    </p>
-                  )}
-                  <p className=" mb-1">
-                    KD Ratio:{" "}
-                    <span className="text-white">
-                      {(match.kills / match.deaths).toFixed(2)}
-                    </span>
-                  </p>
-                  {match.gameMode === "SearchAndDestroy" && (
-                    <>
-                      <p className=" mb-1">
-                        Plants:{" "}
-                        <span className="text-white">{match.plants}</span>
-                      </p>
-                      <p className=" mb-1">
-                        Defuses:{" "}
-                        <span className="text-white">{match.defuses}</span>
-                      </p>
-                    </>
-                  )}
                 </div>
               </div>
             </div>
           </div>
 
-          {/* match summary */}
-          <div className="bg-sidebar rounded-lg shadow-lg p-6 lg:order-first">
-            <p className="text-[#AAAAAA] mb-2">Match Summary</p>
-            <h3 className="text-2xl font-bold mb-2">{title}</h3>
-            <p className="text-[#AAAAAA]">{performance}</p>
+          {/* Match Detials */}
+          <div className="overflow-hidden bg-sidebar rounded-xl p-4">
+            <div className="pb-2">
+              <div className="text-gray-400">Match Details</div>
+              <div className="text-xl md:text-2xl font-bold text-white">
+                Stats Overview
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+                <div>
+                  <p className="text-gray-400 text-xs md:text-sm">Game Mode</p>
+                  <p className="font-medium text-white text-sm md:text-base">
+                    {match.gameMode === "SearchAndDestroy"
+                      ? "Search And Destroy"
+                      : match.gameMode}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-gray-400 text-xs md:text-sm">Damage</p>
+                  <p className="font-medium text-white text-sm md:text-base">
+                    {match.damage}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-gray-400 text-xs md:text-sm">
+                    Avg Damage/Kill
+                  </p>
+                  <p className="font-medium text-white text-sm md:text-base">
+                    {match.damage && (match.damage / match.kills).toFixed(2)}
+                  </p>
+                </div>
+                {match.gameMode === "Hardpoint" && (
+                  <div>
+                    <p className="text-gray-400 text-xs md:text-sm">
+                      Hill Time
+                    </p>
+                    <p className="font-medium text-white text-sm md:text-base">
+                      {convertTime(match.time)}
+                    </p>
+                  </div>
+                )}
+                {match.gameMode === "SearchAndDestroy" && (
+                  <>
+                    <div>
+                      <p className="text-gray-400 text-xs md:text-sm">Plants</p>
+                      <p className="font-medium text-white text-sm md:text-base">
+                        {match.plants}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-gray-400 text-xs md:text-sm">
+                        Defuses
+                      </p>
+                      <p className="font-medium text-white text-sm md:text-base">
+                        {match.defuses}
+                      </p>
+                    </div>
+                  </>
+                )}
+              </div>
+
+              {match.updatedAt.getTime() !== match.createdAt.getTime() && (
+                <div className="pt-2 mt-2 border-t border-[#444444]">
+                  <p className="text-xs text-gray-500">
+                    Last updated:{" "}
+                    {
+                      <>
+                        <DisplayDate match={match} createdAt={false} /> {"at "}
+                        <DisplayDateTime match={match} createdAt={false} />
+                      </>
+                    }
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
