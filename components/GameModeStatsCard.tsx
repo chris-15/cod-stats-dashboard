@@ -158,7 +158,7 @@ type SingleStatProps = {
   tooltip?: string;
 };
 
-//TODO: style this
+
 function SingleStat({ title, value, icon: Icon, tooltip }: SingleStatProps) {
   const displayValue =
     (typeof value === "number" && isNaN(value)) ||
