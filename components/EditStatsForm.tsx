@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { TMatch, TMatchQuery } from "@/app/types";
-import { toast } from "sonner"
+import { toast } from "sonner";
 import {
   IoGameControllerOutline,
   IoMapOutline,
@@ -13,9 +13,8 @@ import {
 } from "react-icons/io5";
 import { SlTarget } from "react-icons/sl";
 import { MdOutlineHealthAndSafety } from "react-icons/md";
-import { LuBomb } from "react-icons/lu";
+import { LuBomb, LuCrown, LuSwords } from "react-icons/lu";
 import { HiOutlineWrenchScrewdriver } from "react-icons/hi2";
-
 
 //setting types for the map options
 type MapOption = {
@@ -62,6 +61,8 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
   const [time, setTime] = useState<number>(match.time ?? 0);
   const [plants, setPlants] = useState<number>(match.plants ?? 0);
   const [defuses, setDefuses] = useState<number>(match.defuses ?? 0);
+  const [teamScore, setTeamScore] = useState<number>(match.teamScore ?? 0);
+  const [enemyScore, setEnemyScore] = useState<number>(match.enemyScore ?? 0);
   const [error, setError] = useState<string>("");
   const [isUpdating, setIsUpdataing] = useState<boolean>(false);
 
@@ -99,10 +100,11 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
           time,
           plants,
           defuses,
+          teamScore,
+          enemyScore,
         }),
       });
       if (res.ok) {
-        
         toast.success("Successfully updated match stats!");
         router.push(`/dashboard/bo6/${gameMode.toLowerCase()}`);
         router.refresh();
@@ -196,6 +198,43 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
             >
               Loss
             </button>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <label htmlFor="kills" className="flex items-center gap-2">
+              <LuCrown size={24} />
+              <span className="">Team Score</span>
+            </label>
+            <input
+              type="number"
+              id="teamScore"
+              name="teamScore"
+              required
+              placeholder="0"
+              min="0"
+              className="mt-1 p-2 w-full border rounded-md"
+              value={teamScore}
+              onChange={(e) => setTeamScore(Number(e.target.value))}
+            ></input>
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="deaths" className="flex items-center gap-2">
+              <LuSwords size={24} />
+              <span className="">Enemy Score</span>
+            </label>
+            <input
+              type="number"
+              id="enemyScore"
+              name="enemyScore"
+              required
+              placeholder="0"
+              min="0"
+              className="mt-1 p-2 w-full border rounded-md"
+              value={enemyScore}
+              onChange={(e) => setEnemyScore(Number(e.target.value))}
+            ></input>
           </div>
         </div>
 
