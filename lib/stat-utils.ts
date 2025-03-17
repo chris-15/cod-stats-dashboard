@@ -1,4 +1,4 @@
-import { TMatch, TMatchQuery } from "@/app/types";
+import { TMatch, TMatchQuery } from "@/types";
 
 //function to convert seconds to min:secs string to display on table
 export const convertTime = (seconds: number | null) => {
@@ -220,7 +220,6 @@ export const calcMapScore = (matches: TMatchQuery[], gameMode: string) => {
   );
 };
 
-
 export const getNumberSuffix = (i: number) => {
   const j = i % 10;
   const k = i % 100;
@@ -234,4 +233,4 @@ export const getNumberSuffix = (i: number) => {
     return i + "rd";
   }
   return i + "th";
-}
+};

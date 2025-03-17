@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChartProps, TMatchQuery } from "@/app/types";
+import { BarChartProps, TMatchQuery } from "@/types";
 
 import {
   BarChart,
@@ -22,7 +22,7 @@ type TData = {
 
 type MapBarChartProps = {
   data: TData[];
-  fill: string
+  fill: string;
 };
 
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -40,28 +40,19 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 function ModeBarChart({ data, fill }: MapBarChartProps) {
   return (
-  
-      <ResponsiveContainer minHeight={300} maxHeight={300}>
-        <BarChart
-          data={data}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
-          <CartesianGrid
-            strokeDasharray="2"
-            stroke="#D1D5DB"
-            vertical={false}
-          />
-          <XAxis dataKey="name" stroke="white" />
-          <YAxis stroke="white" />
-          <Tooltip content={<CustomTooltip />} />
-          <Bar
-            dataKey="value"
-            fill={fill}
-            activeBar={<Rectangle stroke="black" />}
-          />
-        </BarChart>
-      </ResponsiveContainer>
-    
+    <ResponsiveContainer minHeight={300} maxHeight={300}>
+      <BarChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+        <CartesianGrid strokeDasharray="2" stroke="#D1D5DB" vertical={false} />
+        <XAxis dataKey="name" stroke="white" />
+        <YAxis stroke="white" />
+        <Tooltip content={<CustomTooltip />} />
+        <Bar
+          dataKey="value"
+          fill={fill}
+          activeBar={<Rectangle stroke="black" />}
+        />
+      </BarChart>
+    </ResponsiveContainer>
   );
 }
 export default ModeBarChart;

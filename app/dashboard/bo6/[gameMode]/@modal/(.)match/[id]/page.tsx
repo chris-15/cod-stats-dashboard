@@ -124,10 +124,7 @@ export default async function GameModeMatchId({
 }: {
   params: { id: string };
 }) {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    redirect("/sign-in");
-  }
+
   const matchId = id;
 
   const match = await getBoSixMatchById(matchId);

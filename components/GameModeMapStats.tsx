@@ -1,4 +1,4 @@
-import { TMatch, TGameMode, TMatchQuery } from "@/app/types";
+import { TMatch, TGameMode, TMatchQuery } from "@/types";
 
 import {
   calcModeKdRatio,
@@ -28,8 +28,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
-
-
 
 type GameModeStatsProp = {
   gameMode: TGameMode;

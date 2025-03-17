@@ -13,7 +13,7 @@ import {
   calcAvgDefuses,
   calcAvgDamage,
 } from "@/lib/stat-utils";
-import { TMatch, TMatchQuery } from "@/app/types";
+import { TMatch, TMatchQuery } from "@/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { IconType } from "react-icons";
@@ -158,7 +158,6 @@ type SingleStatProps = {
   tooltip?: string;
 };
 
-
 function SingleStat({ title, value, icon: Icon, tooltip }: SingleStatProps) {
   const displayValue =
     (typeof value === "number" && isNaN(value)) ||
@@ -169,7 +168,9 @@ function SingleStat({ title, value, icon: Icon, tooltip }: SingleStatProps) {
   return (
     <div className="">
       <div className="">
-        <p className="text-sm font-light whitespace-nowrap underline">{title}</p>
+        <p className="text-sm font-light whitespace-nowrap underline">
+          {title}
+        </p>
         <p>
           {Icon && tooltip && (
             <TooltipProvider>

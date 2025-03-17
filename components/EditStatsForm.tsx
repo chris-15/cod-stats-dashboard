@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { TMatch, TMatchQuery } from "@/app/types";
+import { TMatch, TMatchQuery } from "@/types";
 import { toast } from "sonner";
 import {
   IoGameControllerOutline,

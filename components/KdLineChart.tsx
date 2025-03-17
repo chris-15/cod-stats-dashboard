@@ -1,6 +1,6 @@
 "use client";
 
-import { TMatch, TMatchQuery } from "@/app/types";
+import { TMatch, TMatchQuery } from "@/types";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
