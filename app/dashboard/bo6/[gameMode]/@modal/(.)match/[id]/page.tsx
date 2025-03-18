@@ -124,7 +124,6 @@ export default async function GameModeMatchId({
 }: {
   params: { id: string };
 }) {
-
   const matchId = id;
 
   const match = await getBoSixMatchById(matchId);
@@ -163,7 +162,9 @@ export default async function GameModeMatchId({
                         : "bg-red-500/20 text-red-400 hover:bg-red-500/20"
                     )}
                   >
-                    {match.win ? "Victory" : "Defeat"}
+                    {match.win ? "Victory" : "Defeat"}{" "}
+                    {match.teamScore &&
+                      `${match.teamScore} - ${match.enemyScore}`}
                   </Badge>
                   <h1 className="text-2xl md:text-4xl font-bold text-white mb-1">
                     {match.matchMap}

@@ -106,7 +106,7 @@ function EditStatsForm({ match }: { match: TMatchQuery }) {
       });
       if (res.ok) {
         toast.success("Successfully updated match stats!");
-        router.push(`/dashboard/bo6/${gameMode.toLowerCase()}`);
+        router.push(`/dashboard/bo6/${gameMode.toLowerCase()}/match/${match.id}`);
         router.refresh();
       }
     } catch (error) {
