@@ -219,6 +219,9 @@ function AddStatsForm() {
               required
               placeholder="0"
               min="0"
+              max={
+                gameMode === "Hardpoint" ? 250 : gameMode === "Control" ? 3 : 6
+              }
               className="mt-1 p-2 w-full border rounded-md"
               onChange={(e) => setTeamScore(Number(e.target.value))}
             ></input>
@@ -236,6 +239,9 @@ function AddStatsForm() {
               required
               placeholder="0"
               min="0"
+              max={
+                gameMode === "Hardpoint" ? 250 : gameMode === "Control" ? 3 : 6
+              }
               className="mt-1 p-2 w-full border rounded-md"
               onChange={(e) => setEnemyScore(Number(e.target.value))}
             ></input>

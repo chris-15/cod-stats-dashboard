@@ -1,4 +1,3 @@
-import { authOptions } from "@/lib/auth";
 import { convertTime } from "@/lib/stat-utils";
 import { deleteBoSixMatch, getBoSixMatchById } from "@/server/queries";
 import Image from "next/image";

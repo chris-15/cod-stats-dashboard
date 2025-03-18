@@ -1,7 +1,4 @@
-import { authOptions } from "@/lib/auth";
 import { deleteBoSixMatch, getBoSixMatchById } from "@/server/queries";
-import { getServerSession } from "next-auth/next";
-import { redirect } from "next/navigation";
 import { Modal } from "./modal";
 import Image from "next/image";
 import { convertTime } from "@/lib/stat-utils";
