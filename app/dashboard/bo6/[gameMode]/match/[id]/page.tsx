@@ -1,10 +1,8 @@
 import { authOptions } from "@/lib/auth";
 import { convertTime } from "@/lib/stat-utils";
 import { deleteBoSixMatch, getBoSixMatchById } from "@/server/queries";
-import { getServerSession } from "next-auth/next";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import DisplayDateTime from "@/components/DisplayDateTime";
 import DisplayDate from "@/components/DisplayDate";
 import { cn } from "@/lib/utils";
@@ -123,10 +121,6 @@ export default async function GameModeMatchId({
 }: {
   params: { id: string };
 }) {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    redirect("/sign-in");
-  }
   const matchId = id;
 
   const match = await getBoSixMatchById(matchId);
@@ -178,7 +172,9 @@ export default async function GameModeMatchId({
                       : "bg-red-500/20 text-red-400 hover:bg-red-500/20"
                   )}
                 >
-                  {match.win ? "Victory" : "Defeat"}
+                  {match.win ? "Victory" : "Defeat"}{" "}
+                  {match.teamScore &&
+                    `${match.teamScore} - ${match.enemyScore}`}
                 </Badge>
                 <h1 className="text-3xl md:text-5xl font-bold text-white mb-1">
                   {match.matchMap}
