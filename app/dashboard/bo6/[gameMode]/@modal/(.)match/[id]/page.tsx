@@ -293,14 +293,26 @@ export default async function GameModeMatchId({
                     </p>
                   </div>
                   {match.gameMode === "Hardpoint" && (
-                    <div>
-                      <p className="text-gray-400 text-xs md:text-sm">
-                        Hill Time
-                      </p>
-                      <p className="font-medium text-white text-sm md:text-base">
-                        {convertTime(match.time)}
-                      </p>
-                    </div>
+                    <>
+                      <div>
+                        <p className="text-gray-400 text-xs md:text-sm">
+                          Hill Time
+                        </p>
+                        <p className="font-medium text-white text-sm md:text-base">
+                          {convertTime(match.time)}
+                        </p>
+                      </div>
+                      {match.teamScore && match.time && (
+                        <div>
+                          <p className="text-gray-400 text-xs md:text-sm">
+                            Hill Time Contribution
+                          </p>
+                          <p className="font-medium text-white text-sm md:text-base">
+                            {((match.time / match.teamScore) * 100).toFixed(2)}%
+                          </p>
+                        </div>
+                      )}
+                    </>
                   )}
                   {match.gameMode === "SearchAndDestroy" && (
                     <>
