@@ -234,3 +234,43 @@ export const getNumberSuffix = (i: number) => {
   }
   return i + "th";
 };
+
+export const calcAvgTeamScore = (matches: TMatchQuery[]) => {
+  // Filter matches to include only those with a valid teamScore because started tracking this stat later than rest
+  const validMatches = matches.filter((match) => match.teamScore !== null);
+
+  // Calculate total team score
+  const totalTeamScore = validMatches.reduce(
+    (sum, match) => sum + (match.teamScore || 0),
+    0
+  );
+
+  // Calculate average team score
+  const avgTeamScore =
+    validMatches.length > 0 ? totalTeamScore / validMatches.length : 0;
+
+  return avgTeamScore;
+};
+
+export const calcAvgHillContribution = (matches: TMatchQuery[]) => {
+  // Filter matches to include only those with valid teamScore and time because started tracking this stat later than rest
+  const validMatches = matches.filter(
+    (match) => match.teamScore !== null && match.time !== null
+  );
+
+  // Calculate totals
+  const totalHillTime = validMatches.reduce(
+    (sum, match) => sum + (match.time || 0),
+    0
+  );
+  const totalTeamScore = validMatches.reduce(
+    (sum, match) => sum + (match.teamScore || 0),
+    0
+  );
+
+  // Calculate average hill contribution
+  const avgHillContribution =
+    totalTeamScore > 0 ? totalHillTime / totalTeamScore : 0;
+
+  return avgHillContribution * 100;
+};

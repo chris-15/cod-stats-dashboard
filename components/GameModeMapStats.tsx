@@ -10,6 +10,8 @@ import {
   calcAvgDefuses,
   calcAvgDamage,
   calcMapScore,
+  calcAvgTeamScore,
+  calcAvgHillContribution,
 } from "@/lib/stat-utils";
 
 import {
@@ -160,16 +162,59 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
         <TableHeader className="">
           <TableRow className=" hover:bg-zinc-800/50 border-zinc-800 ">
             <TableHead className="sticky left-0 bg-sidebar">Map</TableHead>
-            <TableHead>Win %</TableHead>
+            <TableHead>WIN %</TableHead>
             <TableHead>K/D RATIO</TableHead>
-            {gameMode === "Hardpoint" && <TableHead>AVG TIME</TableHead>}
+
             {gameMode === "SearchAndDestroy" && (
               <>
-                <TableHead>Avg Plants</TableHead>
-                <TableHead>Avg Defuses</TableHead>
+                <TableHead>AVG PLANTS</TableHead>
+                <TableHead>AVG DEFUSES</TableHead>
               </>
             )}
             <TableHead>AVG KILLS</TableHead>
+            {game === "bo6" && (
+              <TableHead>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span>AVG TEAM SCORE</span>
+                    </TooltipTrigger>
+                    <TooltipContent className="max-w-[250px]">
+                      <p>
+                        Average team's match score,{" "}
+                        {gameMode === "Hardpoint" ? (
+                          <span>in hill time seconds</span>
+                        ) : (
+                          <span>rounds won</span>
+                        )}
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </TableHead>
+            )}
+            {gameMode === "Hardpoint" && (
+              <>
+                <TableHead>AVG TIME</TableHead>
+                {game === "bo6" && (
+                  <TableHead>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <span>AVG TIME %</span>
+                        </TooltipTrigger>
+                        <TooltipContent className="max-w-[250px]">
+                          <p>
+                            Average % of the team's total hill time contributed
+                            by the player.
+                          </p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </TableHead>
+                )}
+              </>
+            )}
             <TableHead>KILL RECORD</TableHead>
           </TableRow>
         </TableHeader>
@@ -213,13 +258,7 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
                   </TableCell>
                   <TableCell>{calcWinPercentage(matches)}</TableCell>
                   <TableCell>{calcModeKdRatio(matches)}</TableCell>
-                  {gameMode === "Hardpoint" && (
-                    <TableCell>
-                      {calcAvgTime(matches) === "NaN:NaN"
-                        ? "--"
-                        : calcAvgTime(matches)}
-                    </TableCell>
-                  )}
+
                   {gameMode === "SearchAndDestroy" && (
                     <>
                       <TableCell>
@@ -235,6 +274,19 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
                     </>
                   )}
                   <TableCell>{calcAvgKills(matches)}</TableCell>
+                  <TableCell>{calcAvgTeamScore(matches)}</TableCell>
+                  {gameMode === "Hardpoint" && (
+                    <>
+                      <TableCell>
+                        {calcAvgTime(matches) === "NaN:NaN"
+                          ? "--"
+                          : calcAvgTime(matches)}
+                      </TableCell>
+                      <TableCell>
+                        {calcAvgHillContribution(matches).toFixed(2)}
+                      </TableCell>
+                    </>
+                  )}
                   <TableCell>{calcHighestKill(matches)}</TableCell>
                 </TableRow>
               ))
@@ -276,13 +328,7 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
                   </TableCell>
                   <TableCell>{calcWinPercentage(matches)}</TableCell>
                   <TableCell>{calcModeKdRatio(matches)}</TableCell>
-                  {gameMode === "Hardpoint" && (
-                    <TableCell>
-                      {calcAvgTime(matches) === "NaN:NaN"
-                        ? "--"
-                        : calcAvgTime(matches)}
-                    </TableCell>
-                  )}
+
                   {gameMode === "SearchAndDestroy" && (
                     <>
                       <TableCell>
@@ -298,11 +344,24 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
                     </>
                   )}
                   <TableCell>{calcAvgKills(matches)}</TableCell>
+                  {gameMode === "Hardpoint" && (
+                    <TableCell>
+                      {calcAvgTime(matches) === "NaN:NaN"
+                        ? "--"
+                        : calcAvgTime(matches)}
+                    </TableCell>
+                  )}
                   <TableCell>{calcHighestKill(matches)}</TableCell>
                 </TableRow>
               ))}
         </TableBody>
       </Table>
+      {game === "bo6" && (
+        <p className="text-sm px-4 py-4 italic font-light">
+          Note: Team Score {gameMode === "Hardpoint" ? `and Time % are` : `is`}{" "}
+          only available for matches tracked after 03/18/2025
+        </p>
+      )}
     </section>
   );
 }
