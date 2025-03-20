@@ -30,6 +30,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Badge } from "@/components/ui/badge";
+import useMapStats from "@/hooks/useMapStats";
+import { bo6MapSets, mw3MapSets } from "@/lib/mapSets";
 
 type GameModeStatsProp = {
   gameMode: TGameMode;
@@ -37,118 +39,15 @@ type GameModeStatsProp = {
   game: string;
 };
 
-const mw3MapSets: Record<TGameMode, string[]> = {
-  Hardpoint: [
-    "Invasion",
-    "Karachi",
-    "Rio",
-    "Skidrow",
-    "SixStar",
-    "SubBase",
-    "Terminal",
-    "Vista",
-  ],
-  Control: ["Highrise", "Invasion", "Karachi"],
-  SearchAndDestroy: [
-    "Highrise",
-    "Invasion",
-    "Karachi",
-    "Rio",
-    "SixStar",
-    "Skidrow",
-    "Terminal",
-  ],
-};
-
-const bo6MapSets: Record<TGameMode, string[]> = {
-  Hardpoint: ["Hacienda", "Protocol", "RedCard", "Rewind", "Skyline", "Vault"],
-  Control: ["Hacienda", "Protocol", "Rewind", "Vault"],
-  SearchAndDestroy: [
-    "Hacienda",
-    "Protocol",
-    "RedCard",
-    "Rewind",
-    "Skyline",
-    "Vault",
-  ],
-};
 function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
-  //Filters matches by game mode and organizes them by map
-  const getMapModeMatches = (
-    gameMode: string,
-    mapSet: string[],
-    matches: TMatchQuery[]
-  ) => {
-    const gameModeMatches = matches.filter(
-      (match) => match.gameMode === gameMode
-    );
-
-    return mapSet.map((map) => {
-      return gameModeMatches.filter((match) => match.matchMap === map);
-    });
-  };
-
-  const mw3MapModeMatches = getMapModeMatches(
-    gameMode,
-    mw3MapSets[gameMode],
-    matches
-  );
-
-  const bo6MapModeMatches = getMapModeMatches(
-    gameMode,
-    bo6MapSets[gameMode],
-    matches
-  );
-
-  // calculates the best map based on each gamemode using calcmapscore, takes in mapSets or bo6MapSets
-  function calcBestMap(
-    mapsMatchesArr: TMatchQuery[][],
-    maps: Record<TGameMode, string[]>
-  ) {
-    let bestMap = mapsMatchesArr[0];
-    let bestScore = calcMapScore(bestMap, gameMode);
-
-    for (let i = 0; i < mapsMatchesArr.length; i++) {
-      let score = calcMapScore(mapsMatchesArr[i], gameMode);
-      if (score > bestScore) {
-        bestScore = score;
-        bestMap = mapsMatchesArr[i];
-      }
-    }
-
-    if (maps === mw3MapSets) {
-      return mw3MapSets[gameMode][mapsMatchesArr.indexOf(bestMap)];
-    } else {
-      return bo6MapSets[gameMode][mapsMatchesArr.indexOf(bestMap)];
-    }
-  }
-
-  function calcWorstMap(
-    mapsMatchesArr: TMatchQuery[][],
-    maps: Record<TGameMode, string[]>
-  ) {
-    let worstMap = mapsMatchesArr[0];
-    let worstScore = calcMapScore(worstMap, gameMode);
-
-    for (let i = 0; i < mapsMatchesArr.length; i++) {
-      let score = calcMapScore(mapsMatchesArr[i], gameMode);
-      if (score < worstScore) {
-        worstScore = score;
-        worstMap = mapsMatchesArr[i];
-      }
-    }
-
-    if (maps === mw3MapSets) {
-      return mw3MapSets[gameMode][mapsMatchesArr.indexOf(worstMap)];
-    } else {
-      return bo6MapSets[gameMode][mapsMatchesArr.indexOf(worstMap)];
-    }
-  }
-
-  let bestMap = calcBestMap(mw3MapModeMatches, mw3MapSets);
-  let bestBo6Map = calcBestMap(bo6MapModeMatches, bo6MapSets);
-  let worstMap = calcWorstMap(mw3MapModeMatches, mw3MapSets);
-  let worstBo6Map = calcWorstMap(bo6MapModeMatches, bo6MapSets);
+  const {
+    mw3MapModeMatches,
+    bo6MapModeMatches,
+    bestMw3Map,
+    worstMw3Map,
+    bestBo6Map,
+    worstBo6Map,
+  } = useMapStats(gameMode, matches, game);
 
   return (
     <section className="bg-sidebar border rounded-lg overflow-x-auto">
@@ -224,8 +123,8 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
             game === "bo6" ? bo6MapModeMatches : mw3MapModeMatches
           }
           gameMapSets={game === "bo6" ? bo6MapSets : mw3MapSets}
-          gameBestMap={game === "bo6" ? bestBo6Map : bestMap}
-          gameWorstMap={game === "bo6" ? worstBo6Map : worstMap}
+          gameBestMap={game === "bo6" ? bestBo6Map : bestMw3Map}
+          gameWorstMap={game === "bo6" ? worstBo6Map : worstMw3Map}
           gameMode={gameMode}
           game={game}
         />
