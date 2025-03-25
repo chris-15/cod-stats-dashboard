@@ -249,7 +249,7 @@ export const calcAvgTeamScore = (matches: TMatchQuery[]) => {
   const avgTeamScore =
     validMatches.length > 0 ? totalTeamScore / validMatches.length : 0;
 
-  return avgTeamScore;
+  return validMatches.length > 0 ?avgTeamScore : "--";
 };
 
 export const calcAvgHillContribution = (matches: TMatchQuery[]) => {
@@ -272,5 +272,57 @@ export const calcAvgHillContribution = (matches: TMatchQuery[]) => {
   const avgHillContribution =
     totalTeamScore > 0 ? totalHillTime / totalTeamScore : 0;
 
-  return avgHillContribution * 100;
+  return  avgHillContribution * 100 
+};
+
+//calculate win percentage when the match goes to the max rounds
+//control is 5 rounds
+//search and destory is 11 rounds
+export const calcMaxRoundsWin = (matches: TMatchQuery[], gameMode: string) => {
+  let winSum = 0;
+  let totalGames = 0;
+
+  const maxRounds = gameMode === "Control" ? 5 : 11;
+
+  matches.forEach((obj) => {
+    if (
+      obj.teamScore !== null &&
+      obj.enemyScore !== null &&
+      obj.teamScore + obj.enemyScore === maxRounds
+    ) {
+      winSum += +obj.win;
+      totalGames++;
+    }
+  });
+
+  const winPercentage = +((winSum / totalGames) * 100).toFixed(1);
+
+  return totalGames > 0 ? winPercentage : "--";
+};
+
+export const calcMaxRoundKdRatio = (
+  matches: TMatchQuery[],
+  gameMode: string
+) => {
+  let killSum = 0;
+  let deathSum = 0;
+  let totalGames = 0;
+
+  const maxRounds = gameMode === "Control" ? 5 : 11;
+
+  matches.forEach((obj) => {
+    if (
+      obj.teamScore !== null &&
+      obj.enemyScore !== null &&
+      obj.teamScore + obj.enemyScore === maxRounds
+    ) {
+      killSum += obj.kills;
+      deathSum += obj.deaths;
+      totalGames++;
+    }
+  });
+
+  const kdRatio = deathSum !== 0 ? +(killSum / deathSum) : +(killSum / 1);
+
+  return totalGames > 0 ? kdRatio.toFixed(2) : "--";
 };

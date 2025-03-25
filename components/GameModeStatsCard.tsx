@@ -12,6 +12,8 @@ import {
   calcAvgPlants,
   calcAvgDefuses,
   calcAvgDamage,
+  calcMaxRoundsWin,
+  calcMaxRoundKdRatio,
 } from "@/lib/stat-utils";
 import { TMatch, TMatchQuery } from "@/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
@@ -30,6 +32,7 @@ type GameModeStatsProps = {
 };
 
 function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
+  console.log(gameMode);
   //sets state for tab for the card
   const [tab, setTab] = useState("total");
 
@@ -69,6 +72,10 @@ function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
         totalAvgDamage: calcAvgDamage(data),
         avgDamageW: calcAvgDamage(data, true),
         avgDamageL: calcAvgDamage(data, false),
+        roundFiveWinPercentage: calcMaxRoundsWin(data, "Control"),
+        roundElevenWinPercentage: calcMaxRoundsWin(data, "SearchAndDestroy"),
+        roundFiveKdRatio: calcMaxRoundKdRatio(data, "Control"),
+        roundElevenKdRatio: calcMaxRoundKdRatio(data, "SearchAndDestroy"),
       };
     };
 
@@ -120,12 +127,32 @@ function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
                   />
                 </>
               )}
+              {gameMode === "Control" && (
+                <>
+                  <SingleStat
+                    title="Round 5 Win %"
+                    value={activeTab.roundFiveWinPercentage}
+                  />
+                  <SingleStat
+                    title="Round 5 K/D"
+                    value={activeTab.roundFiveKdRatio}
+                  />
+                </>
+              )}
               {gameMode === "SearchAndDestroy" && (
                 <>
                   <SingleStat title="Avg Plants" value={activeTab.avgPlants} />
                   <SingleStat
                     title="Avg Defuses"
                     value={activeTab.avgDefuses}
+                  />
+                  <SingleStat
+                    title="Round 11 Win %"
+                    value={activeTab.roundElevenWinPercentage}
+                  />
+                  <SingleStat
+                    title="Round 11 K/D"
+                    value={activeTab.roundElevenKdRatio}
                   />
                 </>
               )}
@@ -168,7 +195,7 @@ function SingleStat({ title, value, icon: Icon, tooltip }: SingleStatProps) {
   return (
     <div className="">
       <div className="">
-        <p className="text-sm font-light whitespace-nowrap underline">
+        <p className="text-sm whitespace-nowrap text-muted-foreground">
           {title}
         </p>
         <p>
