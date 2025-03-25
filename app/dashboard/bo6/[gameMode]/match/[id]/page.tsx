@@ -10,6 +10,8 @@ import { Calendar, Clock, Edit, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const mapImages = {
+  Dealership:
+    "https://wgcm16ax0j.ufs.sh/f/g0j2nElFVruscXYTEACzZeNJySoDumPqkMEdWG0R9T38XpIn",
   Hacienda:
     "https://utfs.io/f/g0j2nElFVrusJoKuqlLE4aUcb0vZHKFAnXm3PDhQYuyIlf6T",
   Protocol:
