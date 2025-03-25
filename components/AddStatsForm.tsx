@@ -39,11 +39,11 @@ const mapOptions: GameModeMaps = {
     { value: "Vault", label: "Vault" },
   ],
   SearchAndDestroy: [
+    { value: "Dealership", label: "Dealership" },
     { value: "Hacienda", label: "Hacienda" },
     { value: "Protocol", label: "Protocol" },
     { value: "RedCard", label: "RedCard" },
     { value: "Rewind", label: "Rewind" },
-    { value: "Dealership", label: "Dealership" },
   ],
 };
 function AddStatsForm() {
