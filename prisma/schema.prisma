@@ -103,6 +103,7 @@ enum MatchMap {
   SixStar
   SubBase
   Vista
+  Dealership
   Hacienda
   Protocol
   RedCard

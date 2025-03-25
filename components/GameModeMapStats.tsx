@@ -132,7 +132,7 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
       {game === "bo6" && (
         <p className="text-sm px-4 py-4 italic font-light">
           Note: Team Score {gameMode === "Hardpoint" ? `and Time % are` : `is`}{" "}
-          only available for matches tracked after 03/18/2025
+          only available for matches tracked after 03/24/2025
         </p>
       )}
     </section>
@@ -212,7 +212,7 @@ function MapsTableBody({
 
               {game === "bo6" && (
                 <TableCell>
-                  {calcAvgHillContribution(matches).toFixed(2)}
+                  {calcAvgHillContribution(matches) !== 0 ?calcAvgHillContribution(matches).toFixed(2) : "--"}
                 </TableCell>
               )}
             </>

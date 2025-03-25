@@ -43,8 +43,7 @@ const mapOptions: GameModeMaps = {
     { value: "Protocol", label: "Protocol" },
     { value: "RedCard", label: "RedCard" },
     { value: "Rewind", label: "Rewind" },
-    { value: "Skyline", label: "Skyline" },
-    { value: "Vault", label: "Vault" },
+    { value: "Dealership", label: "Dealership" },
   ],
 };
 function AddStatsForm() {
