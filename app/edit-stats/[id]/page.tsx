@@ -1,4 +1,4 @@
-import { TMatch, TMatchQuery } from "@/app/types";
+import { TMatch, TMatchQuery } from "@/types";
 import EditStatsForm from "@/components/EditStatsForm";
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";

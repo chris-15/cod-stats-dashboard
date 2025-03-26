@@ -1,6 +1,6 @@
 import "server-only";
 import prisma from "@/lib/prismadb";
-import { TMatchQuery, TMatch, TGameMode } from "@/app/types";
+import { TMatchQuery, TMatch, TGameMode } from "@/types";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
@@ -93,7 +93,6 @@ export async function getFifteenMw3Matches(): Promise<TMatchQuery[]> {
 
   return matches;
 }
-
 
 //get last 15 matches by game mode for mw3 matches
 export async function getLastFifteenMw3MatchesByMode() {

@@ -1,4 +1,4 @@
-import { TMatch, TMatchQuery } from "@/app/types";
+import { TMatch, TMatchQuery } from "@/types";
 
 //function to convert seconds to min:secs string to display on table
 export const convertTime = (seconds: number | null) => {
@@ -220,7 +220,6 @@ export const calcMapScore = (matches: TMatchQuery[], gameMode: string) => {
   );
 };
 
-
 export const getNumberSuffix = (i: number) => {
   const j = i % 10;
   const k = i % 100;
@@ -234,4 +233,96 @@ export const getNumberSuffix = (i: number) => {
     return i + "rd";
   }
   return i + "th";
-}
+};
+
+export const calcAvgTeamScore = (matches: TMatchQuery[]) => {
+  // Filter matches to include only those with a valid teamScore because started tracking this stat later than rest
+  const validMatches = matches.filter((match) => match.teamScore !== null);
+
+  // Calculate total team score
+  const totalTeamScore = validMatches.reduce(
+    (sum, match) => sum + (match.teamScore || 0),
+    0
+  );
+
+  // Calculate average team score
+  const avgTeamScore =
+    validMatches.length > 0 ? totalTeamScore / validMatches.length : 0;
+
+  return validMatches.length > 0 ?avgTeamScore : "--";
+};
+
+export const calcAvgHillContribution = (matches: TMatchQuery[]) => {
+  // Filter matches to include only those with valid teamScore and time because started tracking this stat later than rest
+  const validMatches = matches.filter(
+    (match) => match.teamScore !== null && match.time !== null
+  );
+
+  // Calculate totals
+  const totalHillTime = validMatches.reduce(
+    (sum, match) => sum + (match.time || 0),
+    0
+  );
+  const totalTeamScore = validMatches.reduce(
+    (sum, match) => sum + (match.teamScore || 0),
+    0
+  );
+
+  // Calculate average hill contribution
+  const avgHillContribution =
+    totalTeamScore > 0 ? totalHillTime / totalTeamScore : 0;
+
+  return  avgHillContribution * 100 
+};
+
+//calculate win percentage when the match goes to the max rounds
+//control is 5 rounds
+//search and destory is 11 rounds
+export const calcMaxRoundsWin = (matches: TMatchQuery[], gameMode: string) => {
+  let winSum = 0;
+  let totalGames = 0;
+
+  const maxRounds = gameMode === "Control" ? 5 : 11;
+
+  matches.forEach((obj) => {
+    if (
+      obj.teamScore !== null &&
+      obj.enemyScore !== null &&
+      obj.teamScore + obj.enemyScore === maxRounds
+    ) {
+      winSum += +obj.win;
+      totalGames++;
+    }
+  });
+
+  const winPercentage = +((winSum / totalGames) * 100).toFixed(1);
+
+  return totalGames > 0 ? winPercentage : "--";
+};
+
+export const calcMaxRoundKdRatio = (
+  matches: TMatchQuery[],
+  gameMode: string
+) => {
+  let killSum = 0;
+  let deathSum = 0;
+  let totalGames = 0;
+
+  const maxRounds = gameMode === "Control" ? 5 : 11;
+
+  matches.forEach((obj) => {
+    if (
+      obj.teamScore !== null &&
+      obj.enemyScore !== null &&
+      obj.teamScore + obj.enemyScore === maxRounds
+    ) {
+      killSum += obj.kills;
+      deathSum += obj.deaths;
+      totalGames++;
+    }
+  });
+
+  const kdRatio = deathSum !== 0 ? +(killSum / deathSum) : +(killSum / 1);
+
+  return totalGames > 0 ? kdRatio.toFixed(2) : "--";
+};

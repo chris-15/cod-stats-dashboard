@@ -1,15 +1,9 @@
 import { getMatches } from "@/server/queries";
 import { calcOverallKdRatio, calcOverallWinPercentage } from "@/lib/stat-utils";
 import TopCardGameMode from "./TopCardGameMode";
-import { TMatchQuery } from "@/app/types";
+import { TMatchQuery } from "@/types";
 
-function TopCards({
-  matches,
-  game,
-}: {
-  matches: TMatchQuery[];
-  game: string;
-}) {
+function TopCards({ matches, game }: { matches: TMatchQuery[]; game: string }) {
   const calcKd = (matches: TMatchQuery[], gameMode: string) => {
     let killSum = 0;
     let deathSum = 0;

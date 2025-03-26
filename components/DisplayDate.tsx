@@ -1,6 +1,6 @@
 "use client";
 
-import { TMatchQuery } from "@/app/types";
+import { TMatchQuery } from "@/types";
 
 function DisplayDate({
   match,

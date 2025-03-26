@@ -11,6 +11,8 @@ export type TMatch = {
   time: number;
   plants: number;
   defuses: number;
+  teamScore: number;
+  enemyScore: number;
   userEmail: string;
   user: {
     name: string;
@@ -30,6 +32,8 @@ export type TMatchQuery = {
   time: number | null;
   plants: number | null;
   defuses: number | null;
+  teamScore: number | null;
+  enemyScore: number | null;
   userEmail: string;
   user: {
     name: string | null;

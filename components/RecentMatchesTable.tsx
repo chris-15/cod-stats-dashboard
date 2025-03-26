@@ -1,4 +1,4 @@
-import { TMatch, TMatchQuery } from "@/app/types";
+import { TMatch, TMatchQuery } from "@/types";
 //import { useMatches } from "./matchesContext";
 import { convertTime } from "../lib/stat-utils";
 import { getMatches } from "@/server/queries";
@@ -161,7 +161,7 @@ const CustomTableBodyComponent = ({ matches }: { matches: TMatchQuery[] }) => {
       <TableBody>
         {matches.map((match) => (
           <TableRow
-            key={match.id} 
+            key={match.id}
             className="hover:bg-zinc-800/50 border-zinc-800"
           >
             <TableCell className=" font-medium">
@@ -172,9 +172,7 @@ const CustomTableBodyComponent = ({ matches }: { matches: TMatchQuery[] }) => {
                 ? "Search & Destroy"
                 : match.gameMode}
             </TableCell>
-            <TableCell className=" font-medium">
-              {match.matchMap}
-            </TableCell>
+            <TableCell className=" font-medium">{match.matchMap}</TableCell>
             <TableCell className=" font-medium">
               {match.win ? (
                 <span className="text-green-500">Win</span>
@@ -196,10 +194,7 @@ const CustomMobileCardComponent = ({ matches }: { matches: TMatchQuery[] }) => {
   return (
     <div className=" divide-y-2 divide-[#444444]">
       {matches.map((match) => (
-        <div
-          className="bg-sidebar p-4"
-          key={match.id}
-        >
+        <div className="bg-sidebar p-4" key={match.id}>
           <div className="flex justify-between items-center mb-2">
             <div className=" text-gray-300">
               {new Date(match.createdAt).toLocaleDateString("en-us", {

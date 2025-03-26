@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner"
+import { toast } from "sonner";
 import {
   IoGameControllerOutline,
   IoMapOutline,
@@ -13,7 +13,7 @@ import {
 import { SlTarget } from "react-icons/sl";
 import { MdOutlineHealthAndSafety } from "react-icons/md";
 import { HiOutlineWrenchScrewdriver } from "react-icons/hi2";
-import { LuBomb } from "react-icons/lu";
+import { LuBomb, LuCrown, LuSwords } from "react-icons/lu";
 //setting types for the map options
 type MapOption = {
   value: string;
@@ -39,12 +39,11 @@ const mapOptions: GameModeMaps = {
     { value: "Vault", label: "Vault" },
   ],
   SearchAndDestroy: [
+    { value: "Dealership", label: "Dealership" },
     { value: "Hacienda", label: "Hacienda" },
     { value: "Protocol", label: "Protocol" },
     { value: "RedCard", label: "RedCard" },
     { value: "Rewind", label: "Rewind" },
-    { value: "Skyline", label: "Skyline" },
-    { value: "Vault", label: "Vault" },
   ],
 };
 function AddStatsForm() {
@@ -57,6 +56,8 @@ function AddStatsForm() {
   const [time, setTime] = useState<number>(0);
   const [plants, setPlants] = useState<number>(0);
   const [defuses, setDefuses] = useState<number>(0);
+  const [teamScore, setTeamScore] = useState<number>(0);
+  const [enemyScore, setEnemyScore] = useState<number>(0);
   const [error, setError] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
@@ -104,6 +105,8 @@ function AddStatsForm() {
           time,
           plants,
           defuses,
+          teamScore,
+          enemyScore,
         }),
       });
       if (res.ok) {
@@ -169,7 +172,7 @@ function AddStatsForm() {
             <IoTrophyOutline size={24} />
             <span className="">Outcome</span>
           </label>
-        
+
           <div className="grid grid-cols-2 gap-4">
             <button
               type="button"
@@ -199,6 +202,48 @@ function AddStatsForm() {
             >
               Loss
             </button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <label htmlFor="kills" className="flex items-center gap-2">
+              <LuCrown size={24} />
+              <span className="">Team Score</span>
+            </label>
+            <input
+              type="number"
+              id="teamScore"
+              name="teamScore"
+              required
+              placeholder="0"
+              min="0"
+              max={
+                gameMode === "Hardpoint" ? 250 : gameMode === "Control" ? 3 : 6
+              }
+              className="mt-1 p-2 w-full border rounded-md"
+              onChange={(e) => setTeamScore(Number(e.target.value))}
+            ></input>
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="deaths" className="flex items-center gap-2">
+              <LuSwords size={24} />
+              <span className="">Enemy Score</span>
+            </label>
+            <input
+              type="number"
+              id="enemyScore"
+              name="enemyScore"
+              required
+              placeholder="0"
+              min="0"
+              max={
+                gameMode === "Hardpoint" ? 250 : gameMode === "Control" ? 3 : 6
+              }
+              className="mt-1 p-2 w-full border rounded-md"
+              onChange={(e) => setEnemyScore(Number(e.target.value))}
+            ></input>
           </div>
         </div>
 

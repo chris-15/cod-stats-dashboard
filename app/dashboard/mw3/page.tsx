@@ -10,7 +10,7 @@ import {
 } from "@/server/queries";
 import ModeBarChart from "@/components/ModeBarChart";
 import MapBarChart from "@/components/MapBarChart";
-import { TMatchQuery } from "../../types";
+import { TMatchQuery } from "../../../types";
 import { Suspense } from "react";
 import Loading from "./loading";
 import dynamic from "next/dynamic";

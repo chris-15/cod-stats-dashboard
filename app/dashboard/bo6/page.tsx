@@ -8,7 +8,7 @@ import {
   getFifteenBoSixMatches,
   getLastFifteenBoSixMatchesByMode,
 } from "@/server/queries";
-import { TMatchQuery } from "../../types";
+import { TMatchQuery } from "../../../types";
 import { Suspense } from "react";
 import Loading from "./loading";
 import dynamic from "next/dynamic";

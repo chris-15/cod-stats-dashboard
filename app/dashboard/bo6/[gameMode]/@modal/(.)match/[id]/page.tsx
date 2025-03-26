@@ -1,7 +1,4 @@
-import { authOptions } from "@/lib/auth";
 import { deleteBoSixMatch, getBoSixMatchById } from "@/server/queries";
-import { getServerSession } from "next-auth/next";
-import { redirect } from "next/navigation";
 import { Modal } from "./modal";
 import Image from "next/image";
 import { convertTime } from "@/lib/stat-utils";
@@ -14,6 +11,8 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Clock, Edit, Trash2 } from "lucide-react";
 
 const mapImages = {
+  Dealership:
+    "https://wgcm16ax0j.ufs.sh/f/g0j2nElFVruscXYTEACzZeNJySoDumPqkMEdWG0R9T38XpIn",
   Hacienda:
     "https://utfs.io/f/g0j2nElFVrusJoKuqlLE4aUcb0vZHKFAnXm3PDhQYuyIlf6T",
   Protocol:
@@ -124,10 +123,6 @@ export default async function GameModeMatchId({
 }: {
   params: { id: string };
 }) {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    redirect("/sign-in");
-  }
   const matchId = id;
 
   const match = await getBoSixMatchById(matchId);
@@ -166,7 +161,9 @@ export default async function GameModeMatchId({
                         : "bg-red-500/20 text-red-400 hover:bg-red-500/20"
                     )}
                   >
-                    {match.win ? "Victory" : "Defeat"}
+                    {match.win ? "Victory" : "Defeat"}{" "}
+                    {match.teamScore &&
+                      `${match.teamScore} - ${match.enemyScore}`}
                   </Badge>
                   <h1 className="text-2xl md:text-4xl font-bold text-white mb-1">
                     {match.matchMap}
@@ -298,14 +295,26 @@ export default async function GameModeMatchId({
                     </p>
                   </div>
                   {match.gameMode === "Hardpoint" && (
-                    <div>
-                      <p className="text-gray-400 text-xs md:text-sm">
-                        Hill Time
-                      </p>
-                      <p className="font-medium text-white text-sm md:text-base">
-                        {convertTime(match.time)}
-                      </p>
-                    </div>
+                    <>
+                      <div>
+                        <p className="text-gray-400 text-xs md:text-sm">
+                          Hill Time
+                        </p>
+                        <p className="font-medium text-white text-sm md:text-base">
+                          {convertTime(match.time)}
+                        </p>
+                      </div>
+                      {match.teamScore && match.time && (
+                        <div>
+                          <p className="text-gray-400 text-xs md:text-sm">
+                            Hill Time Contribution
+                          </p>
+                          <p className="font-medium text-white text-sm md:text-base">
+                            {((match.time / match.teamScore) * 100).toFixed(2)}%
+                          </p>
+                        </div>
+                      )}
+                    </>
                   )}
                   {match.gameMode === "SearchAndDestroy" && (
                     <>

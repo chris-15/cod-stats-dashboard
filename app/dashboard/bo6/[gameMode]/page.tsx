@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import GameModeStatsCard from "@/components/GameModeStatsCard";
 import GameModeMatchesTable from "@/components/GameModeMatchesTable";
 import GameModeMapStats from "@/components/GameModeMapStats";
-import { TGameMode, TMatchQuery } from "@/app/types";
+import { TGameMode, TMatchQuery } from "@/types";
 import { getMatches, getBoSixMatchesByMode } from "@/server/queries";
 import MapBarChart from "@/components/MapBarChart";
 import KdBarChart from "@/components/KdBarChart";

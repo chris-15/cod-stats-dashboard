@@ -1,5 +1,5 @@
 "use client";
-import { TMatch, TMatchQuery } from "@/app/types";
+import { TMatch, TMatchQuery } from "@/types";
 
 import Link from "next/link";
 import { convertTime } from "@/lib/stat-utils";
