@@ -27,6 +27,7 @@ export const bo6MapSets: Record<TGameMode, string[]> = {
   Hardpoint: ["Hacienda", "Protocol", "RedCard", "Rewind", "Skyline", "Vault"],
   Control: ["Hacienda", "Protocol", "Rewind", "Vault"],
   SearchAndDestroy: [
+    "Dealership",
     "Hacienda",
     "Protocol",
     "RedCard",
