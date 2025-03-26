@@ -80,7 +80,7 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
                     </TooltipTrigger>
                     <TooltipContent className="max-w-[250px]">
                       <p>
-                        Average team's match score,{" "}
+                        Average team&apos;s match score,{" "}
                         {gameMode === "Hardpoint" ? (
                           <span>in hill time seconds</span>
                         ) : (
@@ -104,7 +104,7 @@ function GameModeMapStats({ gameMode, matches, game }: GameModeStatsProp) {
                         </TooltipTrigger>
                         <TooltipContent className="max-w-[250px]">
                           <p>
-                            Average % of the team's total hill time contributed
+                            Average % of the team&apos;s total hill time contributed
                             by the player.
                           </p>
                         </TooltipContent>
