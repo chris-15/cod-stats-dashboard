@@ -62,6 +62,10 @@ const navConfigs: Record<string, TNavBarItems[]> = {
       path: "/dashboard/bo6/searchanddestroy",
     },
     {
+      name: "Maps",
+      path: "/dashboard/bo6/maps",
+    },
+    {
       name: "Modern Warfare 3",
       path: "/dashboard/mw3",
     },

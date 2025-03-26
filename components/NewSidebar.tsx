@@ -13,7 +13,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { HiChartSquareBar, HiHome, HiPlusCircle } from "react-icons/hi";
-import { IoGameController, IoLogInSharp, IoLogOutSharp } from "react-icons/io5";
+import { IoGameController, IoLogInSharp, IoLogOutSharp, IoMap } from "react-icons/io5";
 import { IconType } from "react-icons";
 import { useSession, signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
@@ -79,6 +79,11 @@ const navConfigs: Record<string, TSidebarItem[]> = {
       name: "S&D",
       path: "/dashboard/bo6/searchanddestroy",
       icon: HiChartSquareBar,
+    },
+    {
+      name: "Maps",
+      path: "/dashboard/bo6/maps",
+      icon:IoMap,
     },
     {
       name: "Modern Warfare 3",

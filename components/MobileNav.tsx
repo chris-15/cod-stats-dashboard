@@ -54,6 +54,10 @@ const navConfigs: Record<string, TMobileNavItems[]> = {
       name: "S&D",
       path: "/dashboard/bo6/searchanddestroy",
     },
+    {
+      name: "Maps",
+      path: "/dashboard/bo6/maps",
+    },
   ],
 };
 
