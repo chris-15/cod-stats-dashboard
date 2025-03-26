@@ -112,11 +112,11 @@ function page() {
                   <CardContent>
                     <div className="relative aspect-square">
                       <Image
-                        layout="fill"
-                        objectFit="cover"
+                        fill
                         src={tacMap.image}
                         alt={tacMap.name}
-                        className="rounded-md"
+                        className="rounded-md object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
                     </div>
                   </CardContent>
