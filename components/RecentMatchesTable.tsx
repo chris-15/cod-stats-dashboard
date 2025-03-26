@@ -14,6 +14,7 @@ import {
   TableRow,
 } from "./ui/table";
 import { Badge } from "./ui/badge";
+import DisplayDateShortened from "./DisplayDateShortened";
 
 async function RecentMatchesTable({
   matches,
@@ -197,10 +198,7 @@ const CustomMobileCardComponent = ({ matches }: { matches: TMatchQuery[] }) => {
         <div className="bg-sidebar p-4" key={match.id}>
           <div className="flex justify-between items-center mb-2">
             <div className=" text-gray-300">
-              {new Date(match.createdAt).toLocaleDateString("en-us", {
-                month: "short",
-                day: "numeric",
-              })}
+             <DisplayDateShortened match={match} createdAt={true} />
             </div>
             <div
               className={`text-sm font-semibold px-2 py-1 rounded ${
