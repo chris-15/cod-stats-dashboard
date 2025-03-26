@@ -89,7 +89,7 @@ function page() {
   return (
     <div className="">
       <h1 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold mb-6 ">
-        Map Objective Points
+        Map Objective Locations
       </h1>
       <Tabs defaultValue="Hardpoint" className="w-full max-w-6xl mx-auto">
         <TabsList className="grid grid-cols-3 mb-4">
