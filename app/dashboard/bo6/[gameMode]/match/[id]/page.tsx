@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, Edit, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { mapImages } from "@/lib/mapImages";
+import { newEvalPerformance } from "@/lib/matchEval";
 
 const performanceDescriptions = {
   win: {
@@ -74,6 +75,9 @@ export default async function GameModeMatchId({
     match.win
   );
 
+  //for matches that have match scores, using xWin rating
+  const { newMatchTitle, newMatchSummary } = newEvalPerformance(match);
+
   return (
     <div className="mx-auto py-4 px-4 max-w-6xl">
       <Link
@@ -115,8 +119,9 @@ export default async function GameModeMatchId({
                   )}
                 >
                   {match.win ? "Victory" : "Defeat"}{" "}
-                  {match.teamScore &&
-                    `${match.teamScore} - ${match.enemyScore}`}
+                  {match.teamScore !== null && match.teamScore !== undefined
+                    ? `${match.teamScore} - ${match.enemyScore}`
+                    : ""}
                 </Badge>
                 <h1 className="text-3xl md:text-5xl font-bold text-white mb-1">
                   {match.matchMap}
@@ -170,12 +175,12 @@ export default async function GameModeMatchId({
             <div className="pb-2">
               <div className="text-gray-400">Match Analysis</div>
               <div className="text-xl md:text-2xl font-bold text-white">
-                {title}
+                {match.teamScore ? newMatchTitle : title}
               </div>
             </div>
             <div>
               <p className="text-gray-400 leading-relaxed text-sm md:text-base">
-                {performance}
+                {match.teamScore ? newMatchSummary : performance}
               </p>
             </div>
             <div className="bg-[hsl(240,5.9%,13%)] pt-4 pb-4 px-6 mt-2 rounded-lg">
