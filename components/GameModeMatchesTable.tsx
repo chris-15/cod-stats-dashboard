@@ -84,10 +84,12 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
                           game === "mw3" ? "text-[#b0ff34]" : "text-green-500"
                         }
                       >
-                        Win
+                        <span>{`${match.teamScore} - ${match.enemyScore} W`}</span>
                       </TableCell>
                     ) : (
-                      <TableCell className="text-[#ff4d4d]">Loss</TableCell>
+                      <TableCell className="text-[#ff4d4d]">
+                        <span>{`${match.teamScore} - ${match.enemyScore} L`}</span>
+                      </TableCell>
                     )}
                     <TableCell>
                       {(match.kills / match.deaths).toFixed(2)}
@@ -150,15 +152,19 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
                         : "bg-[#ff4d4d] text-black"
                     }`}
                   >
-                    {match.win ? "WIN" : "LOSS"}
+                    {match.win
+                      ? `${match.teamScore} - ${match.enemyScore} W`
+                      : `${match.teamScore} - ${match.enemyScore} L`}
                   </div>
                 </div>
                 <div className="text-lg font-semibold text-white">
+                  {match.matchMap}
+                </div>
+                <div className=" text-gray-400">
                   {match.gameMode === "SearchAndDestroy"
                     ? "Search & Destroy"
                     : match.gameMode}
                 </div>
-                <div className=" text-gray-400">{match.matchMap}</div>
                 <div className="mt-2 flex justify-between items-center">
                   <div className="">
                     <Link
