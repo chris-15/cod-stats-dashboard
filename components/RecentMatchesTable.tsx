@@ -176,9 +176,9 @@ const CustomTableBodyComponent = ({ matches }: { matches: TMatchQuery[] }) => {
             <TableCell className=" font-medium">{match.matchMap}</TableCell>
             <TableCell className=" font-medium">
               {match.win ? (
-                <span className="text-green-500">Win</span>
+                <span className="text-green-500">{`${match.teamScore} - ${match.enemyScore} W`}</span>
               ) : (
-                <span className="text-red-500">Loss</span>
+                <span className="text-red-500">{`${match.teamScore} - ${match.enemyScore} L`}</span>
               )}
             </TableCell>
             <TableCell className=" font-medium">
@@ -198,7 +198,7 @@ const CustomMobileCardComponent = ({ matches }: { matches: TMatchQuery[] }) => {
         <div className="bg-sidebar p-4" key={match.id}>
           <div className="flex justify-between items-center mb-2">
             <div className=" text-gray-300">
-             <DisplayDateShortened match={match} createdAt={true} />
+              <DisplayDateShortened match={match} createdAt={true} />
             </div>
             <div
               className={`text-sm font-semibold px-2 py-1 rounded ${
@@ -207,7 +207,9 @@ const CustomMobileCardComponent = ({ matches }: { matches: TMatchQuery[] }) => {
                   : "bg-[#ff4d4d] text-black"
               }`}
             >
-              {match.win ? "WIN" : "LOSS"}
+              {match.win
+                ? `${match.teamScore} - ${match.enemyScore} W`
+                : `${match.teamScore} - ${match.enemyScore} L`}
             </div>
           </div>
           <div className="text-lg font-semibold text-white">
