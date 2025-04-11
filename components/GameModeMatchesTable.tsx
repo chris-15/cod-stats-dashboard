@@ -22,16 +22,16 @@ type GameModeStatsProp = {
 };
 
 function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
-  const [visbileMatches, setVisibleMatches] = useState<number>(15);
+  const [visibleMatches, setVisibleMatches] = useState<number>(15);
 
   //filter matches on gamemode and slice to show 15 matches at a time
   const gameModeMatches = matches
     .filter((match) => match.gameMode === gameMode)
-    .slice(0, visbileMatches);
+    .slice(0, visibleMatches);
 
   //hanlder to load 15 more matches
   const handleLoadMoreMatches = () => {
-    setVisibleMatches(visbileMatches + 15);
+    setVisibleMatches(visibleMatches + 15);
   };
 
   return (
@@ -84,10 +84,20 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
                           game === "mw3" ? "text-[#b0ff34]" : "text-green-500"
                         }
                       >
-                        Win
+                        <span>
+                          {match.teamScore !== null && match.enemyScore !== null
+                            ? `${match.teamScore} - ${match.enemyScore} W`
+                            : "Win"}
+                        </span>
                       </TableCell>
                     ) : (
-                      <TableCell className="text-[#ff4d4d]">Loss</TableCell>
+                      <TableCell className="text-[#ff4d4d]">
+                        <span>
+                          {match.teamScore !== null && match.enemyScore !== null
+                            ? `${match.teamScore} - ${match.enemyScore} W`
+                            : "Loss"}
+                        </span>
+                      </TableCell>
                     )}
                     <TableCell>
                       {(match.kills / match.deaths).toFixed(2)}
@@ -114,7 +124,7 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
               </TableBody>
             </Table>
 
-            {visbileMatches < matches.length && (
+            {visibleMatches < matches.length && (
               <ViewMoreBtn game={game} onClick={handleLoadMoreMatches} />
             )}
           </div>
@@ -130,7 +140,7 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
         </div>
 
         {gameModeMatches.length > 0 ? (
-          <>
+          <div className="space-y-4">
             {gameModeMatches.map((match) => (
               <div
                 className="bg-sidebar border p-4 rounded-lg sm:hidden gap-4 group transiton-transform transform ease-out duration-300  hover:scale-105"
@@ -150,15 +160,23 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
                         : "bg-[#ff4d4d] text-black"
                     }`}
                   >
-                    {match.win ? "WIN" : "LOSS"}
+                    {match.win
+                      ? match.teamScore !== null && match.enemyScore !== null
+                        ? `${match.teamScore} - ${match.enemyScore} W`
+                        : "Win"
+                      : match.teamScore !== null && match.enemyScore !== null
+                      ? `${match.teamScore} - ${match.enemyScore} L`
+                      : "Loss"}
                   </div>
                 </div>
                 <div className="text-lg font-semibold text-white">
+                  {match.matchMap}
+                </div>
+                <div className=" text-gray-400">
                   {match.gameMode === "SearchAndDestroy"
                     ? "Search & Destroy"
                     : match.gameMode}
                 </div>
-                <div className=" text-gray-400">{match.matchMap}</div>
                 <div className="mt-2 flex justify-between items-center">
                   <div className="">
                     <Link
@@ -184,10 +202,10 @@ function GameModeMatchesTable({ gameMode, matches, game }: GameModeStatsProp) {
                 </div>
               </div>
             ))}
-            {visbileMatches < matches.length && (
+            {visibleMatches < matches.length && (
               <ViewMoreBtn game={game} onClick={handleLoadMoreMatches} />
             )}
-          </>
+          </div>
         ) : (
           <p className="text-center p-4">No Matches Recorded</p>
         )}

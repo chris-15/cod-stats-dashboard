@@ -9,111 +9,54 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Calendar, Clock, Edit, Trash2 } from "lucide-react";
-
-const mapImages = {
-  Dealership:
-    "https://wgcm16ax0j.ufs.sh/f/g0j2nElFVruscXYTEACzZeNJySoDumPqkMEdWG0R9T38XpIn",
-  Hacienda:
-    "https://utfs.io/f/g0j2nElFVrusJoKuqlLE4aUcb0vZHKFAnXm3PDhQYuyIlf6T",
-  Protocol:
-    "https://utfs.io/f/g0j2nElFVrus8wZCXNDDZXVfb9JnyAaEwWHYLigBkSvetxMO",
-  RedCard: "https://utfs.io/f/g0j2nElFVrusl8crIkTv4NcXE3wFjT1gHVZSQz59oOrnG2Pa",
-  Rewind: "https://utfs.io/f/g0j2nElFVrusZR73l0cqTvVfrciOM8GgNbsy2x7o30DPtemR",
-  Skyline: "https://utfs.io/f/g0j2nElFVruswHLllWOfO9o1egZTj52BNhktAH0bDSqWRsvQ",
-  Vault: "https://utfs.io/f/g0j2nElFVrusyqrQlPL1zm7ZQcS8jf2DOXueAJwVlrbLgCM0",
-};
+import { mapImages } from "@/lib/mapImages";
+import { calcXWin, newEvalPerformance } from "@/lib/matchEval";
 
 const performanceDescriptions = {
   win: {
-    goodKd: {
-      highDamage:
-        "You were the star of the match, delivering both high kills and damage. Your performance was instrumental in securing the victory.",
-      lowDamage:
-        "You demonstrated a strategic playstyle, securing key kills even with low overall damage. Your precision played a crucial role in the team's victory.",
-    },
-    badKd: {
-      highDamage:
-        "Despite a lower kill count, your high damage output disrupted the enemy team and contributed to the win. Your aggressive playstyle created opportunities for your team.",
-      lowDamage:
-        "You won the match, but there's potential for you to contribute more in terms of kills and damage. Remember, every bit of damage counts towards the team's success.",
-    },
-    evenKd: {
-      highDamage:
-        "You had a balanced kill-death ratio and high damage, contributing to the team's victory. Your balanced playstyle was effective.",
-      lowDamage:
-        "You won the match with a balanced kill-death ratio, but your damage was on the lower side. A bit more aggression could enhance your impact.",
-    },
+    goodKd:
+      "You had a strong kill-death ratio and played a key role in securing the victory. Great job leading the team to success!",
+    badKd:
+      "You won the match, but your kill-death ratio was on the lower side. Focus on staying alive longer and securing more kills in future games.",
+    evenKd:
+      "You had a balanced kill-death ratio and contributed to the team's victory. Consistency like this is always valuable!",
   },
   loss: {
-    goodKd: {
-      highDamage:
-        "Even in defeat, your performance stood out with high kills and damage. You fought hard, and your efforts kept the team in the game.",
-      lowDamage:
-        "Despite the loss, your kill count was impressive. However, increasing your damage output could turn future games in your favor.",
-    },
-    badKd: {
-      highDamage:
-        "You dealt a lot of damage but couldn't secure enough kills. Converting that damage into eliminations could change the outcome of the match.",
-      lowDamage:
-        "The match didn't go as planned, and there's room for improvement in both kills and damage. Keep practicing, and you'll see better results.",
-    },
-    evenKd: {
-      highDamage:
-        "Despite the loss, your balanced kill-death ratio and high damage show potential. Keep up the pressure in future matches.",
-      lowDamage:
-        "You maintained a balanced kill-death ratio, but the low damage output couldn't turn the tide. Try to focus on dealing more damage in the next match.",
-    },
+    goodKd:
+      "Even in defeat, your kill-death ratio was impressive. You fought hard and kept your team in the game. Keep up the good work!",
+    badKd:
+      "The match didn’t go as planned, and your kill-death ratio was low. Focus on improving survivability and securing more kills to turn future matches in your favor.",
+    evenKd:
+      "Despite the loss, your kill-death ratio was balanced. Keep working on improving your gameplay, and the wins will come.",
   },
 };
 
 const titles = {
   win: {
-    goodKd: {
-      highDamage: "Outstanding Victory!",
-      lowDamage: "Tactical Victory!",
-    },
-    badKd: {
-      highDamage: "Strategic Victory!",
-      lowDamage: "Hard-fought Victory!",
-    },
-    evenKd: {
-      highDamage: "Balanced Powerhouse!",
-      lowDamage: "Steady Winner!",
-    },
+    goodKd: "Outstanding Victory!",
+    badKd: "Hard-fought Victory!",
+    evenKd: "Steady Winner!",
   },
   loss: {
-    goodKd: {
-      highDamage: "Valiant Effort!",
-      lowDamage: "Unlucky!",
-    },
-    badKd: {
-      highDamage: "So Close!",
-      lowDamage: "Better Luck Next Time!",
-    },
-    evenKd: {
-      highDamage: "Close Call!",
-      lowDamage: "Steady Struggle!",
-    },
+    goodKd: "Valiant Effort!",
+    badKd: "Better Luck Next Time!",
+    evenKd: "Close Call!",
   },
 };
 
 function evaluatePerformance(
   kills: number,
   deaths: number,
-  damage: number | null,
   matchResult: boolean
 ) {
   /* 1.1 kd considered good?  possibly?*/
   const kdRating =
-    kills / deaths >= 1 ? "goodKd" : kills / deaths < 1 ? "badKd" : "evenKd";
-
-  const damageRating =
-    damage !== null && damage >= kills * 100 ? "highDamage" : "lowDamage";
+    kills / deaths > 1 ? "goodKd" : kills / deaths < 1 ? "badKd" : "evenKd";
 
   const result = matchResult ? "win" : "loss";
 
-  const performance = performanceDescriptions[result][kdRating][damageRating];
-  const title = titles[result][kdRating][damageRating];
+  const performance = performanceDescriptions[result][kdRating];
+  const title = titles[result][kdRating];
 
   return { performance, title };
 }
@@ -130,9 +73,12 @@ export default async function GameModeMatchId({
   const { title, performance } = evaluatePerformance(
     match.kills,
     match.deaths,
-    match.damage,
     match.win
   );
+
+  //for matches that have match scores, using xWin rating
+  const { newMatchTitle, newMatchSummary } = newEvalPerformance(match);
+ 
 
   return (
     <Modal>
@@ -162,8 +108,9 @@ export default async function GameModeMatchId({
                     )}
                   >
                     {match.win ? "Victory" : "Defeat"}{" "}
-                    {match.teamScore &&
-                      `${match.teamScore} - ${match.enemyScore}`}
+                    {match.teamScore !== null && match.teamScore !== undefined
+                      ? `${match.teamScore} - ${match.enemyScore}`
+                      : ""}
                   </Badge>
                   <h1 className="text-2xl md:text-4xl font-bold text-white mb-1">
                     {match.matchMap}
@@ -217,12 +164,12 @@ export default async function GameModeMatchId({
               <div className="pb-2">
                 <div className="text-gray-400">Match Analysis</div>
                 <div className="text-xl md:text-2xl font-bold text-white">
-                  {title}
+                  {match.teamScore ? newMatchTitle : title}
                 </div>
               </div>
               <div>
                 <p className="text-gray-400 leading-relaxed text-sm md:text-base">
-                  {performance}
+                  {match.teamScore ? newMatchSummary : performance}
                 </p>
               </div>
               <div className="bg-[hsl(240,5.9%,13%)] pt-4 pb-4 px-6 mt-2 rounded-lg">

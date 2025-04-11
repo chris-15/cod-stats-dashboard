@@ -72,7 +72,6 @@ export function MobileNav({ game: game = "bo6" }: MobileNavProps) {
 
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-
   useEffect(() => {
     const controlNavbar = () => {
       if (window.scrollY > lastScrollY) {
@@ -91,9 +90,9 @@ export function MobileNav({ game: game = "bo6" }: MobileNavProps) {
 
   return status === "authenticated" ? (
     <nav
-      className={`h-20 px-4 pt-4 text-gray-400 bg-background transition-all duration-300 ${
-        isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
-      }`}
+    className={`h-20 px-4 pt-4 text-gray-400 bg-background transition-all duration-300 ${
+      isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+    }`}
     >
       <div className="flex justify-around items-center bg-sidebar border h-12 rounded-lg">
         {activeItmes.map((item) => (

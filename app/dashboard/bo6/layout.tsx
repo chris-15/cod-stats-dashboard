@@ -29,10 +29,10 @@ export default async function DashboardLayout({
           <div className="md:hidden">
             <Navbar game="bo6" />
           </div>
-          <div className="px-4 sm:px-6 md:px-8 py-6 md:py-8">{children}</div>
+          <div className="px-4 sm:px-6 md:px-8 pt-6 md:py-8 pb-16">{children}</div>
         </div>
 
-        <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 ">
+        <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50">
           <MobileNav game="bo6" />
         </div>
       </SidebarProvider>

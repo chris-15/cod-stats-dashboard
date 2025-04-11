@@ -249,7 +249,7 @@ export const calcAvgTeamScore = (matches: TMatchQuery[]) => {
   const avgTeamScore =
     validMatches.length > 0 ? totalTeamScore / validMatches.length : 0;
 
-  return validMatches.length > 0 ?avgTeamScore : "--";
+  return validMatches.length > 0 ? avgTeamScore.toFixed(2) : "--";
 };
 
 export const calcAvgHillContribution = (matches: TMatchQuery[]) => {
@@ -272,7 +272,7 @@ export const calcAvgHillContribution = (matches: TMatchQuery[]) => {
   const avgHillContribution =
     totalTeamScore > 0 ? totalHillTime / totalTeamScore : 0;
 
-  return  avgHillContribution * 100 
+  return avgHillContribution * 100;
 };
 
 //calculate win percentage when the match goes to the max rounds
