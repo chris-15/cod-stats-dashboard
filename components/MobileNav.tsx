@@ -74,33 +74,24 @@ export function MobileNav({ game: game = "bo6" }: MobileNavProps) {
   const [lastScrollY, setLastScrollY] = useState(0);
   useEffect(() => {
     const controlNavbar = () => {
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollPosition = window.scrollY;
-      const bottomThreshold = documentHeight - windowHeight - 100; // 100px from bottom
-
-      if (scrollPosition > bottomThreshold) {
-      setIsVisible(false);
-      } else if (scrollPosition > lastScrollY) {
-      setIsVisible(false);
+      if (window.scrollY > lastScrollY) {
+        setIsVisible(false);
       } else {
-      setIsVisible(true);
+        setIsVisible(true);
       }
-      setLastScrollY(scrollPosition);
+      setLastScrollY(window.scrollY);
     };
 
     window.addEventListener("scroll", controlNavbar);
     return () => window.removeEventListener("scroll", controlNavbar);
-    }, [lastScrollY]);
+  }, [lastScrollY]);
 
   const activeItmes = navConfigs[game];
 
   return status === "authenticated" ? (
     <nav
     className={`h-20 px-4 pt-4 text-gray-400 bg-background transition-all duration-300 ${
-      isVisible 
-        ? "translate-y-0 opacity-100 z-50" 
-        : "translate-y-full opacity-0 -z-10"
+      isVisible ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
     }`}
     >
       <div className="flex justify-around items-center bg-sidebar border h-12 rounded-lg">
