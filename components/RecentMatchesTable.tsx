@@ -208,8 +208,12 @@ const CustomMobileCardComponent = ({ matches }: { matches: TMatchQuery[] }) => {
               }`}
             >
               {match.win
-                ? `${match.teamScore} - ${match.enemyScore} W`
-                : `${match.teamScore} - ${match.enemyScore} L`}
+                ? match.teamScore !== null && match.enemyScore !== null
+                  ? `${match.teamScore} - ${match.enemyScore} W`
+                  : "Win"
+                : match.teamScore !== null && match.enemyScore !== null
+                ? `${match.teamScore} - ${match.enemyScore} L`
+                : "Loss"}
             </div>
           </div>
           <div className="text-lg font-semibold text-white">
