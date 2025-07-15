@@ -13,7 +13,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import Loading from "@/app/dashboard/mw3/loading";
+
 
 type TData = {
   name: string;
