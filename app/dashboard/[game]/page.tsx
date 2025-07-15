@@ -86,6 +86,11 @@ function gameModeCount(match: TMatchQuery[], gameMode: string) {
 async function Dashboard({ params }: { params: { game: string } }) {
   const game = params.game as TGameType;
 
+  // Validate game parameter
+  if (!["bo6", "mw3"].includes(game)) {
+    redirect("/dashboard/mw3"); // Redirect to a default game if invalid
+  }
+
   // Map game type to the correct set of query functions
   const gameQueries: Record<TGameType, GameQueries> = {
     bo6: {

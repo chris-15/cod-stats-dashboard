@@ -32,7 +32,7 @@ type GameModeStatsProps = {
 };
 
 function GameModeStatsCard({ gameMode, matches }: GameModeStatsProps) {
-  console.log(gameMode);
+  //console.log(gameMode);
   //sets state for tab for the card
   const [tab, setTab] = useState("total");
 

@@ -47,6 +47,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
   if (!session) {
     redirect("/sign-in");
   }
+  console.log(params);
 
   //function to make sure params given to props are in the correct format
   function capitalizeGameMode(gameMode: string) {
