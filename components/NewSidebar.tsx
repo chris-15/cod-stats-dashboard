@@ -26,6 +26,7 @@ type TSidebarItem = {
   icon: IconType;
 };
 
+//update this config when new game drops
 const navConfigs: Record<string, TSidebarItem[]> = {
   mw3: [
     {
