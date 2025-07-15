@@ -1,16 +1,21 @@
-import { deleteBoSixMatch, getBoSixMatchById } from "@/server/queries";
-import { Modal } from "./modal";
-import Image from "next/image";
 import { convertTime } from "@/lib/stat-utils";
+import {
+  deleteBoSixMatch,
+  deleteMatch,
+  getBoSixMatchById,
+  getMatchById,
+} from "@/server/queries";
+import Image from "next/image";
 import Link from "next/link";
 import DisplayDateTime from "@/components/DisplayDateTime";
 import DisplayDate from "@/components/DisplayDate";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Calendar, Clock, Edit, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { mapImages } from "@/lib/mapImages";
-import { calcXWin, newEvalPerformance } from "@/lib/matchEval";
+import { newEvalPerformance } from "@/lib/matchEval";
+import { Modal } from "./modal";
 
 const performanceDescriptions = {
   win: {
@@ -62,13 +67,20 @@ function evaluatePerformance(
 }
 
 export default async function GameModeMatchId({
-  params: { id: id },
+  params: { game, gameMode, id: id },
 }: {
-  params: { id: string };
+  params: { game: string; gameMode: string; id: string };
 }) {
+  console.log(game, gameMode, id);
   const matchId = id;
 
-  const match = await getBoSixMatchById(matchId);
+  const match =
+    game === "bo6"
+      ? await getBoSixMatchById(matchId)
+      : await getMatchById(matchId);
+
+  // Determine which performance evaluation to use based on whether match scores exist
+  const hasMatchScores = match.teamScore !== null && match.enemyScore !== null;
 
   const { title, performance } = evaluatePerformance(
     match.kills,
@@ -76,9 +88,10 @@ export default async function GameModeMatchId({
     match.win
   );
 
-  //for matches that have match scores, using xWin rating
-  const { newMatchTitle, newMatchSummary } = newEvalPerformance(match);
- 
+  // Only evaluate with xWin rating if match scores exist
+  const { newMatchTitle, newMatchSummary } = hasMatchScores
+    ? newEvalPerformance(match)
+    : { newMatchTitle: title, newMatchSummary: performance };
 
   return (
     <Modal>
@@ -89,7 +102,7 @@ export default async function GameModeMatchId({
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-black/0 z-10" />
             <Image
               alt={`${match.matchMap} Map`}
-              className="w-full object-cover h-[200px] md:h-[300px]"
+              className="w-full object-cover h-[300px] md:h-[400px]"
               height={500}
               src={mapImages[match.matchMap as keyof typeof mapImages]}
               width={1200}
@@ -112,7 +125,7 @@ export default async function GameModeMatchId({
                       ? `${match.teamScore} - ${match.enemyScore}`
                       : ""}
                   </Badge>
-                  <h1 className="text-2xl md:text-4xl font-bold text-white mb-1">
+                  <h1 className="text-3xl md:text-5xl font-bold text-white mb-1">
                     {match.matchMap}
                   </h1>
                   <div className="flex items-center text-gray-300 text-sm">
@@ -143,8 +156,9 @@ export default async function GameModeMatchId({
                   <form
                     action={async () => {
                       "use server";
-
-                      await deleteBoSixMatch(match.id);
+                      game === "bo6"
+                        ? await deleteBoSixMatch(matchId)
+                        : await deleteMatch(matchId);
                     }}
                   >
                     <Button variant="destructive" size="sm" className="gap-1">
@@ -158,18 +172,18 @@ export default async function GameModeMatchId({
           </div>
 
           {/* Match Analysis and Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
             {/* Match Analysis */}
-            <div className="overflow-hidden ">
+            <div className="overflow-hidden bg-sidebar rounded-xl p-4 ">
               <div className="pb-2">
                 <div className="text-gray-400">Match Analysis</div>
                 <div className="text-xl md:text-2xl font-bold text-white">
-                  {match.teamScore ? newMatchTitle : title}
+                  {hasMatchScores ? newMatchTitle : title}
                 </div>
               </div>
               <div>
                 <p className="text-gray-400 leading-relaxed text-sm md:text-base">
-                  {match.teamScore ? newMatchSummary : performance}
+                  {hasMatchScores ? newMatchSummary : performance}
                 </p>
               </div>
               <div className="bg-[hsl(240,5.9%,13%)] pt-4 pb-4 px-6 mt-2 rounded-lg">
@@ -208,7 +222,7 @@ export default async function GameModeMatchId({
             </div>
 
             {/* Match Detials */}
-            <div className="overflow-hidden">
+            <div className="overflow-hidden bg-sidebar rounded-xl p-4">
               <div className="pb-2">
                 <div className="text-gray-400">Match Details</div>
                 <div className="text-xl md:text-2xl font-bold text-white">

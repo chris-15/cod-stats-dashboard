@@ -1,13 +1,17 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import GameModeStatsCard from "@/components/GameModeStatsCard";
 import GameModeMatchesTable from "@/components/GameModeMatchesTable";
 import GameModeMapStats from "@/components/GameModeMapStats";
 import { TGameMode, TMatchQuery } from "@/types";
-import { getMatches, getBoSixMatchesByMode } from "@/server/queries";
+import {
+  getMatches,
+  getBoSixMatchesByMode,
+  getMatchesByMode,
+} from "@/server/queries";
 import MapBarChart from "@/components/MapBarChart";
 import KdBarChart from "@/components/KdBarChart";
 import { getNumberSuffix } from "@/lib/stat-utils";
@@ -42,10 +46,26 @@ const KdLineChartComponent = dynamic(() => import("@/components/KdLineChart"), {
   ),
 });
 
-async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
+async function GameModeStatsPage({
+  params,
+}: {
+  params: { game: string; gameMode: string };
+}) {
   const session = await getServerSession(authOptions);
   if (!session) {
     redirect("/sign-in");
+  }
+
+  // Validate game parameter first
+  const validGames = ["bo6", "mw3"];
+  if (!validGames.includes(params.game)) {
+    redirect("/dashboard/mw3");
+  }
+
+  // Validate gameMode parameter
+  const validGameModes = ["hardpoint", "control", "searchanddestroy"];
+  if (!validGameModes.includes(params.gameMode.toLowerCase())) {
+    redirect(`/dashboard/${params.game}`);
   }
 
   //function to make sure params given to props are in the correct format
@@ -58,7 +78,10 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
 
   const gameMode = capitalizeGameMode(params.gameMode) as TGameMode;
 
-  const matches = await getBoSixMatchesByMode(gameMode);
+  const matches =
+    params.game === "bo6"
+      ? await getBoSixMatchesByMode(gameMode)
+      : await getMatchesByMode(gameMode);
 
   function calcMapCount(match: TMatchQuery[], gameMode: string) {
     let mapCounts: { [key: string]: number } = {};
@@ -98,7 +121,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
             <GameModeMapStats
               gameMode={gameMode}
               matches={matches}
-              game="bo6"
+              game={params.game}
             />
             <div className="border rounded-lg bg-sidebar">
               <h2 className="text-center pt-4">Daily K/D Ratio vs Win Rate</h2>
@@ -110,13 +133,21 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
                   <h3 className="text-center pt-4 text-lg sm:text-xl font-bold">
                     Top 10 Kills
                   </h3>
-                  <TopKills matches={matches} gameMode={gameMode} />
+                  <TopKills
+                    matches={matches}
+                    gameMode={gameMode}
+                    game={params.game}
+                  />
                 </div>
                 <div>
                   <h3 className="text-center pt-4 text-lg sm:text-xl font-bold">
                     Top 10 Damage
                   </h3>
-                  <TopDamage matches={matches} gameMode={gameMode} />
+                  <TopDamage
+                    matches={matches}
+                    gameMode={gameMode}
+                    game={params.game}
+                  />
                 </div>
               </div>
 
@@ -135,7 +166,7 @@ async function GameModeStatsPage({ params }: { params: { gameMode: string } }) {
             <GameModeMatchesTable
               gameMode={gameMode}
               matches={matches}
-              game="bo6"
+              game={params.game}
             />
           </div>
         </>
@@ -161,9 +192,10 @@ export default GameModeStatsPage;
 type topTenProps = {
   gameMode: string;
   matches: TMatchQuery[];
+  game: string;
 };
 
-function TopKills({ matches, gameMode }: topTenProps) {
+function TopKills({ matches, gameMode, game }: topTenProps) {
   const sortedMatches = [...matches].sort((a, b) => b.kills - a.kills);
 
   const topTenMatches = sortedMatches.slice(0, 10);
@@ -173,7 +205,9 @@ function TopKills({ matches, gameMode }: topTenProps) {
       {topTenMatches.map((match, index) => (
         <div key={match.id} className="top-ten-item border-b border-[#444444]">
           <Link
-            href={`/dashboard/bo6/${gameMode.toLowerCase()}/match/${match.id}`}
+            href={`/dashboard/${game}/${gameMode.toLowerCase()}/match/${
+              match.id
+            }`}
             className="flex items-center justify-between px-4 py-3 rounded-lg group transition-transform transform hover:scale-105 h-28 xs:h-auto"
           >
             <div>
@@ -206,7 +240,7 @@ function TopKills({ matches, gameMode }: topTenProps) {
   );
 }
 
-function TopDamage({ matches, gameMode }: topTenProps) {
+function TopDamage({ matches, gameMode, game }: topTenProps) {
   const sortedMatches = [...matches].sort(
     (a, b) => (b.damage || 0) - (a.damage || 0)
   );
@@ -218,7 +252,9 @@ function TopDamage({ matches, gameMode }: topTenProps) {
       {topTenMatches.map((match, index) => (
         <div key={match.id} className="top-ten-item border-b border-[#444444]">
           <Link
-            href={`/dashboard/bo6/${gameMode.toLowerCase()}/match/${match.id}`}
+            href={`/dashboard/${game}/${gameMode.toLowerCase()}/match/${
+              match.id
+            }`}
             className="flex items-center justify-between px-4 py-3 rounded-lg group transition-transform transform hover:scale-105 h-28 xs:h-auto"
           >
             <div>

@@ -13,6 +13,7 @@ type TNavBarItems = {
   path: string;
 };
 
+//update this when new game drops
 const navConfigs: Record<string, TNavBarItems[]> = {
   mw3: [
     {

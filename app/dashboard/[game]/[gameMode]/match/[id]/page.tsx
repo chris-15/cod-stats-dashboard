@@ -1,5 +1,10 @@
 import { convertTime } from "@/lib/stat-utils";
-import { deleteBoSixMatch, getBoSixMatchById } from "@/server/queries";
+import {
+  deleteBoSixMatch,
+  deleteMatch,
+  getBoSixMatchById,
+  getMatchById,
+} from "@/server/queries";
 import Image from "next/image";
 import Link from "next/link";
 import DisplayDateTime from "@/components/DisplayDateTime";
@@ -61,13 +66,20 @@ function evaluatePerformance(
 }
 
 export default async function GameModeMatchId({
-  params: { id: id },
+  params: { game, gameMode, id: id },
 }: {
-  params: { id: string };
+  params: { game: string; gameMode: string; id: string };
 }) {
+  console.log(game, gameMode, id);
   const matchId = id;
 
-  const match = await getBoSixMatchById(matchId);
+  const match =
+    game === "bo6"
+      ? await getBoSixMatchById(matchId)
+      : await getMatchById(matchId);
+
+  // Determine which performance evaluation to use based on whether match scores exist
+  const hasMatchScores = match.teamScore !== null && match.enemyScore !== null;
 
   const { title, performance } = evaluatePerformance(
     match.kills,
@@ -75,13 +87,15 @@ export default async function GameModeMatchId({
     match.win
   );
 
-  //for matches that have match scores, using xWin rating
-  const { newMatchTitle, newMatchSummary } = newEvalPerformance(match);
+  // Only evaluate with xWin rating if match scores exist
+  const { newMatchTitle, newMatchSummary } = hasMatchScores
+    ? newEvalPerformance(match)
+    : { newMatchTitle: title, newMatchSummary: performance };
 
   return (
     <div className="mx-auto py-4 px-4 max-w-6xl">
       <Link
-        href={`/dashboard/bo6/${match.gameMode.toLowerCase()}`}
+        href={`/dashboard/${game}/${match.gameMode.toLowerCase()}`}
         className="flex font-bold text-xl hover:underline mb-4"
       >
         <p className="">
@@ -154,8 +168,9 @@ export default async function GameModeMatchId({
                 <form
                   action={async () => {
                     "use server";
-
-                    await deleteBoSixMatch(match.id);
+                    game === "bo6"
+                      ? await deleteBoSixMatch(matchId)
+                      : await deleteMatch(matchId);
                   }}
                 >
                   <Button variant="destructive" size="sm" className="gap-1">
@@ -175,12 +190,12 @@ export default async function GameModeMatchId({
             <div className="pb-2">
               <div className="text-gray-400">Match Analysis</div>
               <div className="text-xl md:text-2xl font-bold text-white">
-                {match.teamScore ? newMatchTitle : title}
+                {hasMatchScores ? newMatchTitle : title}
               </div>
             </div>
             <div>
               <p className="text-gray-400 leading-relaxed text-sm md:text-base">
-                {match.teamScore ? newMatchSummary : performance}
+                {hasMatchScores ? newMatchSummary : performance}
               </p>
             </div>
             <div className="bg-[hsl(240,5.9%,13%)] pt-4 pb-4 px-6 mt-2 rounded-lg">

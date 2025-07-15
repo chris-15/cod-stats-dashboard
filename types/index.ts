@@ -35,7 +35,7 @@ export type TMatchQuery = {
   teamScore: number | null;
   enemyScore: number | null;
   userEmail: string;
-  user: {
+  user?: {
     name: string | null;
   };
 };
