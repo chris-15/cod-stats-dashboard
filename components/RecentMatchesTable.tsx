@@ -176,9 +176,17 @@ const CustomTableBodyComponent = ({ matches }: { matches: TMatchQuery[] }) => {
             <TableCell className=" font-medium">{match.matchMap}</TableCell>
             <TableCell className=" font-medium">
               {match.win ? (
-                <span className="text-green-500">{`${match.teamScore} - ${match.enemyScore} W`}</span>
+                <span className="text-green-500">
+                  {match.teamScore
+                    ? `${match.teamScore} - ${match.enemyScore} W`
+                    : "Win"}
+                </span>
               ) : (
-                <span className="text-red-500">{`${match.teamScore} - ${match.enemyScore} L`}</span>
+                <span className="text-red-500">
+                  {match.teamScore
+                    ? `${match.teamScore} - ${match.enemyScore} L`
+                    : "Loss"}
+                </span>
               )}
             </TableCell>
             <TableCell className=" font-medium">
