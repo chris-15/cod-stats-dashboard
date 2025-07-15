@@ -1,6 +1,7 @@
 import { convertTime } from "@/lib/stat-utils";
 import {
   deleteBoSixMatch,
+  deleteMatch,
   getBoSixMatchById,
   getMatchById,
 } from "@/server/queries";
@@ -77,14 +78,19 @@ export default async function GameModeMatchId({
       ? await getBoSixMatchById(matchId)
       : await getMatchById(matchId);
 
+  // Determine which performance evaluation to use based on whether match scores exist
+  const hasMatchScores = match.teamScore !== null && match.enemyScore !== null;
+
   const { title, performance } = evaluatePerformance(
     match.kills,
     match.deaths,
     match.win
   );
 
-  //for matches that have match scores, using xWin rating
-  const { newMatchTitle, newMatchSummary } = newEvalPerformance(match);
+  // Only evaluate with xWin rating if match scores exist
+  const { newMatchTitle, newMatchSummary } = hasMatchScores
+    ? newEvalPerformance(match)
+    : { newMatchTitle: title, newMatchSummary: performance };
 
   return (
     <div className="mx-auto py-4 px-4 max-w-6xl">
@@ -162,8 +168,9 @@ export default async function GameModeMatchId({
                 <form
                   action={async () => {
                     "use server";
-
-                    await deleteBoSixMatch(match.id);
+                    game === "bo6"
+                      ? await deleteBoSixMatch(matchId)
+                      : await deleteMatch(matchId);
                   }}
                 >
                   <Button variant="destructive" size="sm" className="gap-1">
@@ -183,12 +190,12 @@ export default async function GameModeMatchId({
             <div className="pb-2">
               <div className="text-gray-400">Match Analysis</div>
               <div className="text-xl md:text-2xl font-bold text-white">
-                {match.teamScore ? newMatchTitle : title}
+                {hasMatchScores ? newMatchTitle : title}
               </div>
             </div>
             <div>
               <p className="text-gray-400 leading-relaxed text-sm md:text-base">
-                {match.teamScore ? newMatchSummary : performance}
+                {hasMatchScores ? newMatchSummary : performance}
               </p>
             </div>
             <div className="bg-[hsl(240,5.9%,13%)] pt-4 pb-4 px-6 mt-2 rounded-lg">

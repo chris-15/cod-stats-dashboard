@@ -56,7 +56,6 @@ async function GameModeStatsPage({
     redirect("/sign-in");
   }
 
-
   // Validate game parameter first
   const validGames = ["bo6", "mw3"];
   if (!validGames.includes(params.game)) {
